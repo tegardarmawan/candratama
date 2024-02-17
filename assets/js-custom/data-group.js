@@ -2,9 +2,9 @@ get_data();
 
 $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
-	var id = button.data("id");
+	var kode = button.data("kodeg");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + id + ")"); 
+	modalButton.attr("onclick", "delete_data(" + kode + ")"); 
 });
 
 function showAlertifySuccess(message) {
@@ -28,36 +28,38 @@ function delete_error() {
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + _controller + "/get_data",
+		url: base_url + "Data_group/get_data_group",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-			var table = $("#example").DataTable({
+			console.log(data);
+			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				scrollY: 320,
 				data: data,
 				responsive: true,
 				columns: [
+					{ data: null,
+						render: function(data,type,row,meta){
+							return meta.row + 1;
+						},
+					},
 					{ data: "kodeg" },
 					{ data: "namag" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-info" data-toggle="modal" data-target=".bs-example-modal-lg" title="edit" onclick="submit(' +
-								row.id +
+								'<button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" title="edit" onclick="submit(' +
+								row.kodeg +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-warning waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-center" title="hapus" data-id="' +
-								row.id +
+								'<button class="btn btn-outline-warning waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#exampleModal" title="hapus" data-id="' +
+								row.kodeg +
 								'"><i class="ion-trash-b"></i></button> '
 							);
 						},
 					},
 				],
-				initComplete: function () {
-					$("th").css("text-align", "center");
-					$("td").css("text-align", "center");
-				},
 			});
 		},
 		error: function (xhr, textStatus, errorThrown) {
@@ -82,8 +84,8 @@ function submit(x) {
 			url: base_url + "/" + _controller + "/get_data_kodeg",
 			dataType: "json",
 			success: function (hasil) {
-				$("[name='kodeg']").val(hasil[0].kodeg);
-				$("[name='namag']").val(hasil[0].namag);
+				$("[name='kode']").val(hasil[0].kodeg);
+				$("[name='nama']").val(hasil[0].namag);
 			},
 		});
 	}
@@ -93,8 +95,8 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("nama", $("[name='nama']").val());
-	formData.append("keterangan", $("[name='keterangan']").val());
+	formData.append("kodeg", $("[name='kode']").val());
+	formData.append("kode", $("[name='namag']").val());
 
 	$.ajax({
 		type: "POST",
@@ -124,9 +126,8 @@ function insert_data() {
 
 function edit_data() {
 	var formData = new FormData();
-	formData.append("id", $("[name='id']").val());
-	formData.append("nama", $("[name='nama']").val());
-	formData.append("keterangan", $("[name='keterangan']").val());
+	formData.append("kodeg", $("[name='kode']").val());
+	formData.append("namag", $("[name='nama']").val());
 
 	$.ajax({
 		type: "POST",
@@ -143,7 +144,7 @@ function edit_data() {
 					$("#error-" + fieldName).html(response.errors[fieldName]);
 				}
 			} else if (response.success) {
-				$(".bs-example-modal-lg").modal("hide");
+				$("#modalHapus").modal("hide");
 				showAlertifySuccess(response.success);
 				get_data();
 			}
@@ -157,7 +158,7 @@ function edit_data() {
 function delete_data(x) {
 	$.ajax({
 		type: "POST",
-		data: "id=" + x,
+		data: "kodeg=" + x,
 		dataType: "json",
 		url: base_url + _controller + "/delete_data",
 		success: function (response) {

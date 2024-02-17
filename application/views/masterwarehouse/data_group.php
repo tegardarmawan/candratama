@@ -16,29 +16,30 @@
 
         <div class="card m-b-30">
             <div class="card-body">
-                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th width="5%">No</th>
-                            <th>Kode Group</th>
-                            <th>Nama Group</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                </table>
-
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insert" onclick="submit('tambah')">
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
+                <hr>
+                <!-- tabel data -->
+                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="10%">No</th>
+                            <th width="40%">Kode Group</th>
+                            <th width="40%">Nama Group</th>
+                            <th width="10%">Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
 
             </div>
 
 
 
-            <!-- Modal tambah data -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal tambah/edit data -->
+            <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -64,8 +65,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Tambah Data</button>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-primary" id="btn-insert" onclick="insert_data()">Tambah Data</button>
+                            <button type="button" class="btn btn-outline-primary" id="btn-update" onclick="insert_data()">Simpan</button>
                         </div>
                     </div>
                 </div>
