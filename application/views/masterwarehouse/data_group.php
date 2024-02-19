@@ -17,7 +17,7 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insert" onclick="submit('tambah')">
+                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
@@ -43,31 +43,31 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Group</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode Group</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="kode" name="kode" placeholder="Masukkan kode group">
-                                    <small class="text-danger pl-1" id="error-kode"></small>
+                                    <input type="hidden" name="id" class="form-control" value="">
+                                    <input class="form-control" type="text" id="kodeg" name="kodeg" placeholder="Masukkan kode group">
+                                    <small class="text-danger pl-1" id="error-kodeg"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Nama Group</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Nama</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="nama" name="nama" placeholder="Masukkan nama group">
-                                    <small class="text-danger pl-1" id="error-nomor"></small>
+                                    <input class="form-control" type="text" id="namag" name="namag" placeholder="Masukkan nama group">
+                                    <small class="text-danger pl-1" id="error-namag"></small>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-outline-primary" id="btn-insert" onclick="insert_data()">Tambah Data</button>
-                            <button type="button" class="btn btn-outline-primary" id="btn-update" onclick="insert_data()">Simpan</button>
+                            <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary" >Tambah Data</button>
+                            <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary">Simpan</button>
                         </div>
                     </div>
                 </div>

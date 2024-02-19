@@ -22,7 +22,7 @@ class Data_model extends CI_Model
         return $this->db->update($table, $data, $where);
     }
 
-    public function delete(string $table,$where)
+    public function delete(string $table, $where)
     {
         return $this->db->delete($table, $where);
     }
@@ -33,6 +33,32 @@ class Data_model extends CI_Model
         return $query;
     }
 
+    public function get_file_name($table, $where, $field)
+    {
+        $this->db->select($field);
+        $this->db->where($where);
+        $query = $this->db->get($table);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->file_name;
+        } else {
+            return null;
+        }
+    }
+
+    public function count($table)
+    {
+        $query = $this->db->query("SELECT COUNT(*) as count FROM $table");
+        return $query->row()->count;
+    }
+
+    public function count_where($table, $column, $id)
+    {
+        $query = $this->db->query("SELECT COUNT(*) as count FROM $table where $column = $id");
+        return $query->row()->count;
+    }
+
     public function find(string $table, $where)
     {
         $query = $this->db->where($where);
@@ -41,7 +67,8 @@ class Data_model extends CI_Model
         return $query;
     }
 
-    public function get(array $data) {
+    public function get(array $data)
+    {
         //decleare select
         if (isset($data['select'])) {
             $this->db->select($data['select']);
@@ -55,20 +82,20 @@ class Data_model extends CI_Model
             foreach ($data['join'] as $item_join) {
                 $explode_item_join = explode(',', $item_join);
                 //param 1
-                isset($explode_item_join[0])  ? $param_1 = $explode_item_join[0] : $param_1 = '';
+                isset($explode_item_join[0]) ? $param_1 = $explode_item_join[0] : $param_1 = '';
                 //param 2
-                isset($explode_item_join[1])  ? $param_2 = $explode_item_join[1] : $param_2 = '';
+                isset($explode_item_join[1]) ? $param_2 = $explode_item_join[1] : $param_2 = '';
                 //param 3
-                isset($explode_item_join[2])  ? $param_3 = $explode_item_join[2] : $param_3 = '';
+                isset($explode_item_join[2]) ? $param_3 = $explode_item_join[2] : $param_3 = '';
 
                 $this->db->join($param_1, $param_2, $param_3);
             }
         }
         if (isset($data['join_custom'])) {
-            foreach ($data['join_custom'] as $table_name =>  $item_join) {
+            foreach ($data['join_custom'] as $table_name => $item_join) {
                 $explode_item_join = explode(',', $item_join);
-                $last_param     =  end($explode_item_join);
-                $value_param    = str_replace(',' . $last_param, ' ', $item_join);
+                $last_param = end($explode_item_join);
+                $value_param = str_replace(',' . $last_param, ' ', $item_join);
                 $this->db->join($table_name, $value_param, $last_param);
             }
         }

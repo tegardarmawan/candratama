@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined("BASEPATH") OR exit("No direct script access allowed");
 
 class Data_group extends CI_Controller {
 
@@ -29,28 +29,27 @@ class Data_group extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function get_data_kodeg(){
-		$kode = $this->input->post('kode');
-		$where = array('kodeg' => $kode);
+	public function get_data_id(){
+		$id = $this->input->post('id');
+		$where = array('id' => $id);
 		$result = $this->data->find('tgroup', $where)->result();
 		echo json_encode($result);
 	}
 
 	public function insert_data(){
-		$this->form_validation->set_rules('kode', 'Kode', 'required|required|is_unique[tgroup.kodeg]');
-		$this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-		
-		
+		$this->form_validation->set_rules('kodeg', 'Kode', 'required|trim');
+		$this->form_validation->set_rules('namag', 'Nama', 'required|trim');
+				
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
+			$kode = $this->input->post('kodeg');
+			$nama = $this->input->post('namag');
 			$data = array(
 				'kodeg' => $kode,
 				'namag' => $nama,
 			);
-			$this->data-insert('tgroup', $data);
+			$this->data->insert('tgroup', $data);
 
 			$response['success'] = "Data Ditambahkan";
 		}
@@ -58,15 +57,15 @@ class Data_group extends CI_Controller {
 	}
 
 	public function edit_data(){
-		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tgroup.kodeg]');
-		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+		$this->form_validation->set_rules('kodeg', 'Kode', 'trim|required|is_unique[tgroup.kodeg]');
+		$this->form_validation->set_rules('namag', 'Nama', 'trim|required');
 		
 		
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
+			$kode = $this->input->post('kodeg');
+			$nama = $this->input->post('namag');
 
 			$data = array(
 				'kodeg' => $kode,

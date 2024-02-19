@@ -2,9 +2,9 @@ get_data();
 
 $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
-	var kode = button.data("kodeg");
+	var id = button.data("id");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + kode + ")"); 
+	modalButton.attr("onclick", "delete_data(" + id + ")"); 
 });
 
 function showAlertifySuccess(message) {
@@ -16,23 +16,22 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kode']").val("");
-	$("[name='nama']").val("");
+	$("[name='kodeg']").val("");
+	$("[name='namag']").val("");
 }
 
 function delete_error() {
-	$("#error-kode").hide();
-	$("#error-nama").hide();
+	$("#error-kodeg").hide();
+	$("#error-namag").hide();
 }
 
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + "Data_group/get_data_group",
+		url: base_url + _controller +  "/get_data_group",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-			console.log(data);
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				scrollY: 320,
@@ -50,11 +49,11 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" title="edit" onclick="submit(' +
-								row.kodeg +
+								'<button class="btn btn-outline-info" data-toggle="modal" data-target="bs-example-modal-lg" title="edit" onclick="submit(' +
+								row.id +
 								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-warning waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#exampleModal" title="hapus" data-id="' +
-								row.kodeg +
+								row.id +
 								'"><i class="ion-trash-b"></i></button> '
 							);
 						},
@@ -80,12 +79,12 @@ function submit(x) {
 
 		$.ajax({
 			type: "POST",
-			data: "kodeg=" + x,
-			url: base_url + "/" + _controller + "/get_data_kodeg",
+			data: "id=" + x,
+			url: base_url + _controller +  "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
-				$("[name='kode']").val(hasil[0].kodeg);
-				$("[name='nama']").val(hasil[0].namag);
+				$("[name='kodeg']").val(hasil[0].kodeg);
+				$("[name='namag']").val(hasil[0].namag);
 			},
 		});
 	}
@@ -95,12 +94,12 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("kodeg", $("[name='kode']").val());
-	formData.append("kode", $("[name='namag']").val());
+	formData.append("kodeg", $("[name='kodeg']").val());
+	formData.append("namag", $("[name='namag']").val());
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller + "/insert_data",
+		url: base_url +  _controller +"/insert_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -126,12 +125,12 @@ function insert_data() {
 
 function edit_data() {
 	var formData = new FormData();
-	formData.append("kodeg", $("[name='kode']").val());
-	formData.append("namag", $("[name='nama']").val());
+	formData.append("kodeg", $("[name='kodeg']").val());
+	formData.append("namag", $("[name='namag']").val());
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller + "/edit_data",
+		url: base_url + "Data_group/edit_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -158,9 +157,9 @@ function edit_data() {
 function delete_data(x) {
 	$.ajax({
 		type: "POST",
-		data: "kodeg=" + x,
+		data: "id=" + x,
 		dataType: "json",
-		url: base_url + _controller + "/delete_data",
+		url: base_url  + "Data_group/delete_data",
 		success: function (response) {
 			if (response.success) {
 				$(".bs-example-modal-center").modal("hide");
