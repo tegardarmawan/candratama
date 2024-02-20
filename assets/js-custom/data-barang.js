@@ -4,7 +4,7 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + id + ")"); 
+	modalButton.attr("onclick", "delete_data(" + id + ")");
 });
 
 function showAlertifySuccess(message) {
@@ -17,34 +17,64 @@ function showAlertifyError(message) {
 
 function delete_form() {
 	$("[name='kodeg']").val("");
-	$("[name='namag']").val("");
+	$("[name='nama']").val("");
+	$("[name='stock']").val("");
+	$("[name='kodest']").val("");
+	$("[name='hargabeli']").val("");
+	$("[name='hargapokok']").val("");
+	$("[name='hargajual']").val("");
+	$("[name='status1']").val("");
+	$("[name='stockmin']").val("");
+	$("[name='namat']").val("");
+	$("[name='project']").val("");
 }
 
 function delete_error() {
-	$("#error-kodeg").hide();
-	$("#error-namag").hide();
+	$("#error-kodeg").val("");
+	$("#error-nama").val("");
+	$("#error-stock").val("");
+	$("#error-kodest").val("");
+	$("#error-hargabeli").val("");
+	$("#error-hargapokok").val("");
+	$("#error-hargajual").val("");
+	$("#error-status1").val("");
+	$("#error-stockmin").val("");
+	$("#error-namat").val("");
+	$("#error-project").val("");
 }
 
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + _controller +  "/get_data",
+		url: base_url + _controller + "/get_data",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-			var table = $("#datatable-buttons").DataTable({
+            var table = $("#datatable-buttons").DataTable({
 				destroy: true,
-				scrollY: 320,
 				data: data,
+                scrollY:320,
+				scrollX:320,
 				responsive: true,
 				columns: [
-					{ data: null,
-						render: function(data,type,row,meta){
+					{
+						data: null,
+						render: function (data, type, row, meta) {
 							return meta.row + 1;
 						},
 					},
 					{ data: "kodeg" },
-					{ data: "namag" },
+					{ data: "kodeb" },
+					{ data: "namab" },
+					{ data: "stock" },
+					{ data: "namast" },
+					{ data: "hbeli" },
+					{ data: "hpokok" },
+					{ data: "hjual" },
+					{ data: "status" },
+					{ data: "stockmin" },
+					{ data: "namat" },
+					{ data: "projectt" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -80,7 +110,7 @@ function submit(x) {
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
-			url: base_url + "/" + _controller +  "/get_data_id",
+			url: base_url + "/" + _controller + "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
@@ -100,7 +130,7 @@ function insert_data() {
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller +"/insert_data",
+		url: base_url + _controller + "/insert_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -161,7 +191,7 @@ function delete_data(x) {
 		type: "POST",
 		data: "id=" + x,
 		dataType: "json",
-		url: base_url  + "/" + _controller + "/delete_data",
+		url: base_url + "/" + _controller + "/delete_data",
 		success: function (response) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");

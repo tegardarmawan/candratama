@@ -16,45 +16,128 @@
 
         <div class="card m-b-30">
             <div class="card-body">
-                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                </table>
-
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
-
+                <hr>
+                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="5%" >No</th>
+                            <th width="10%" >Kode Group</th>
+                            <th width="10%" >Kode Barang</th>
+                            <th width="5%" >Nama Barang</th>
+                            <th width="5%">Stock Barang</th>
+                            <th width="5%">Satuan Barang</th>
+                            <th width="10%">Harga Beli</th>
+                            <th width="10%" >Harga Pokok</th>
+                            <th width="10%" >Harga Jual</th>
+                            <th width="5%" >Status</th>
+                            <th width="5%" >Stock Minimal</th>
+                            <th width="5%" >Nama Terang</th>
+                            <th width="5%">Project</th>
+                            <th width="10%" >Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
 
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <!-- Modal tambah/edit data-->
+            <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Barang</h5>
+                            <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="<?= base_url('Data_group/insert_data') ?>"></form>
+                            <div class="form-group row">
+                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="id" class="form-control" value="">
+                                    <select name="kodeg" id="kodeg" class="select2 form-control mb-3 custom-select">
+                                        <option value="">Pilih Kode Group</option>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-kodeg"></small>
+                                </div>
+                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Barang</label>
+                                <div class="col-sm-9">
+                                    <select name="kodeb" id="kodeb" class="select2 form-control mb-3 custom-select">
+                                        <input required class="form-control" name="kodeb" id="kodeb" placeholder="Masukkan Kode Barang" type="number">
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-kodeb"></small>
+                                </div>
+                                <label for="nama" class="col-sm-3 col-form-label">Nama Barang</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan Nama Barang">
+                                    <small class="text-danger pl-1" id="error-nama"></small>
+                                </div>
+                                <label for="stock" class="col-sm-3 col-form-label">Jumlah Stock</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Masukkan Stock Barang">
+                                    <small class="text-danger pl-1" id="error-stock"></small>
+                                </div>
+                                <label for="kodest" class="col-sm-3 col-form-label">Kode Satuan Barang</label>
+                                <div class="col-sm-9">
+                                    <select name="kodest" id="kodest" class="select2 form-control mb-3 custom-select">
+                                        <option value="">Pilih Kode Satuan</option>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-kodest"></small>
+                                </div>
+                                <label for="hargab" class="col-sm-3 col-form-label">Harga Beli</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="hargabeli" id="hargabeli" pattern="^Rp\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Rp1.000.000,00">
+                                    <small class="text-danger pl-1" id="error-hargabeli"></small>
+                                </div>
+                                <label for="hargap" class="col-sm-3 col-form-label">Harga Pokok</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="hargapokok" id="hargapokok" pattern="^Rp\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Rp1.000.000,00">
+                                    <small class="text-danger pl-1" id="error-hargapokok"></small>
+                                </div>
+                                <label for="hargaj" class="col-sm-3 col-form-label">Harga Jual</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="hargajual" id="hargajual" pattern="^Rp\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Rp1.000.000,00">
+                                    <small class="text-danger pl-1" id="error-hargajual"></small>
+                                </div>
+                                <label for="status" class="col-sm-3 col-form-label">Status Barang</label>
+                                <div class="col-sm-9">
+                                    <select name="status1" id="status1" class="select2 form-control mb-3 custom-select">
+                                        <option value="">Pilih Status</option>
+                                        <option value="">1</option>
+                                        <option value="">2</option>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-project"></small>
+                                </div>
+                                <label for="stockmin" class="col-sm-3 col-form-label">Stock Minimal</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" name="stockmin" id="stockmin" class="form-control" placeholder="Masukkan Stock Minimal Barang">
+                                    <small class="text-danger pl-1" id="error-stockmin"></small>
+                                </div>
+                                <label for="namat" class="col-sm-3 col-form-label">Nama Terang</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" name="namat" id="namat" class="form-control" placeholder="Masukkan Nama Terang">
+                                    <small class="text-danger pl-1" id="error-namat"></small>
+                                </div>
+                                <label for="project" class="col-sm-3 col-form-label">Project</label>
+                                <div class="col-sm-9">
+                                    <select name="project" id="project" class="select2 form-control mb-3 custom-select">
+                                        <option value="">Pilih Project</option>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-project"></small>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Tambah Data</button>
+                        <div class="modal-footer d-flex justify-content-start">
+                            <div class="col-lg-2">
+                                <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary btn-block">Simpan</button>
+                                <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary btn-block">Simpan</button>
+                            </div>
                         </div>
                     </div>
                 </div>

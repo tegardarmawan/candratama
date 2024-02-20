@@ -5,7 +5,7 @@
                 <div class="page-title-box">
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="#">Candratama</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>">Candratama</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary" >Tambah Data</button>
+                            <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary">Tambah Data</button>
                             <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary">Simpan</button>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
             </div>
 
             <!-- Modal hapus data -->
-            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal fade bs-example-modal-center" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">

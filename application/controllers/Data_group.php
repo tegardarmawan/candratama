@@ -1,8 +1,8 @@
 <?php
-defined("BASEPATH") OR exit("No direct script access allowed");
+// defined("BASEPATH") OR exit("No direct script access allowed");
 
-class Data_group extends CI_Controller {
-
+class Data_group extends CI_Controller
+{
 	var $module_js = ['data-group'];
 	var $app_data = [];
 
@@ -12,7 +12,8 @@ class Data_group extends CI_Controller {
 		$this->_init();
 	}
 
-	private function _init(){
+	private function _init()
+	{
 		$this->app_data['module_js'] = $this->module_js;
 	}
 	public function index()
@@ -23,23 +24,26 @@ class Data_group extends CI_Controller {
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
-	
-	public function get_data_group(){
+
+	public function get_data()
+	{
 		$result = $this->data->get_all('tgroup')->result();
 		echo json_encode($result);
 	}
 
-	public function get_data_id(){
+	public function get_data_id()
+	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
 		$result = $this->data->find('tgroup', $where)->result();
 		echo json_encode($result);
 	}
 
-	public function insert_data(){
-		$this->form_validation->set_rules('kodeg', 'Kode', 'required|trim');
-		$this->form_validation->set_rules('namag', 'Nama', 'required|trim');
-				
+	public function insert_data()
+	{
+		$this->form_validation->set_rules('kodeg', 'Kode', 'required|trim|is_unique[tgroup.kodeg]|max_length[6]');
+		$this->form_validation->set_rules('namag', 'Nama', 'required|trim|is_unique[tgroup.namag]');
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
@@ -56,14 +60,16 @@ class Data_group extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function edit_data(){
-		$this->form_validation->set_rules('kodeg', 'Kode', 'trim|required|is_unique[tgroup.kodeg]');
+	public function edit_data()
+	{
+		$this->form_validation->set_rules('kodeg', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('namag', 'Nama', 'trim|required');
-		
-		
+
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
+			$id = $this->input->post('id');
 			$kode = $this->input->post('kodeg');
 			$nama = $this->input->post('namag');
 
@@ -71,27 +77,26 @@ class Data_group extends CI_Controller {
 				'kodeg' => $kode,
 				'namag' => $nama,
 			);
-			$where = array('kodeg' => $kode);
+			$where = array('id' => $id);
 			$this->data->update('tgroup', $where, $data);
 
 			$response['success'] = "Data Berhasil Diperbarui";
 		}
-		echo json_encode($response);		
+		echo json_encode($response);
 	}
 
-	public function delete_data(){
-		$kode = $this->input->post('kodeg');
-		$where = array('kodeg' => $kode);
+	public function delete_data()
+	{
+		$id = $this->input->post('id');
+		$where = array('id' => $id);
 
 		$deleted = $this->data->delete('tgroup', $where);
-		if($deleted){
+		if ($deleted) {
 			$response['success'] = "Data Berhasil Dihapus";
-		} else{
+		} else {
 			$response['error'] = "Gagal Menghapus Data";
 		}
 
 		echo json_encode($response);
-
 	}
-
 }

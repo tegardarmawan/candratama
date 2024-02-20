@@ -16,19 +16,19 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodeg']").val("");
-	$("[name='namag']").val("");
+	$("[name='kode']").val("");
+	$("[name='nama']").val("");
 }
 
 function delete_error() {
-	$("#error-kodeg").hide();
-	$("#error-namag").hide();
+	$("#error-kode").hide();
+	$("#error-nama").hide();
 }
 
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + _controller +  "/get_data",
+		url: base_url + _controller + "/get_data",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
@@ -43,8 +43,8 @@ function get_data() {
 							return meta.row + 1;
 						},
 					},
-					{ data: "kodeg" },
-					{ data: "namag" },
+					{ data: "kodest" },
+					{ data: "namast" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -71,11 +71,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Data Satuan");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Edit Data Satuan");
 
 		$.ajax({
 			type: "POST",
@@ -83,9 +83,9 @@ function submit(x) {
 			url: base_url + "/" + _controller +  "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
-				$("[name= 'id']").val(hasil[0].id);
-				$("[name='kodeg']").val(hasil[0].kodeg);
-				$("[name='namag']").val(hasil[0].namag);
+				$("[name='id']").val(hasil[0].id);
+				$("[name='kode']").val(hasil[0].kodest);
+				$("[name='nama']").val(hasil[0].namast);
 			},
 		});
 	}
@@ -95,8 +95,8 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("kodeg", $("[name='kodeg']").val());
-	formData.append("namag", $("[name='namag']").val());
+	formData.append("kode", $("[name='kode']").val());
+	formData.append("nama", $("[name='nama']").val());
 
 	$.ajax({
 		type: "POST",
@@ -127,8 +127,8 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("kodeg", $("[name='kodeg']").val());
-	formData.append("namag", $("[name='namag']").val());
+	formData.append("kode", $("[name='kode']").val());
+	formData.append("nama", $("[name='nama']").val());
 
 	$.ajax({
 		type: "POST",
