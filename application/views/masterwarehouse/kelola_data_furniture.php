@@ -26,7 +26,7 @@
                     <thead>
                         <tr>
                             <th width="5%">No</th>
-                            <th width="5%">Kode Satuan</th>
+                            <th width="5%">Kode Furniture</th>
                             <th width="20%">Nama Furniture</th>
                             <th width="5%">Satuan</th>
                             <th width="25%">Keterangan</th>
@@ -51,6 +51,7 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="kode" class="col-sm-3 col-form-label">Kode Furniture</label>
+                                <input type="hidden" class="form-control" name="id" id="id" >
                                 <div class="col-sm-9">
                                     <input required class="form-control" name="kode" id="kode" placeholder="Masukkan Kode Furniture" type="text">
                                     <small class="text-danger pl-1" id="error-kode"></small>
@@ -72,6 +73,7 @@
                                             <option value="<?= $satuan->namast; ?>"><?= $satuan->namast; ?></option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <small class="text-danger pl-1" id="error-satuan" ></small>
                                 </div>
                             </div>
                             <div class="form-group row">

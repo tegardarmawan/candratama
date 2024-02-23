@@ -94,7 +94,7 @@ class Kelola_data_barang extends CI_Controller
 			$kodeb = $this->input->post('kodeb');
 			$nama = $this->input->post('nama');
 			$stock = $this->input->post('stock');
-			$kodest = $this->input->post('namast');
+			$kodest = $this->input->post('kodest');
 			$hargab = $this->input->post('hargabeli');
 			$hargap = $this->input->post('hargapokok');
 			$hargaj = $this->input->post('hargajual');
@@ -146,7 +146,18 @@ class Kelola_data_barang extends CI_Controller
 		$this->form_validation->set_rules('hargajual', 'Harga Jual', 'trim|required');
 		$this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
 		$this->form_validation->set_rules('namat', 'Nama Terang', 'trim|required');
-
+		if (empty($this->input->post('kodeg'))) {
+			$response['errors']['kodeg'] = "Kode group harus dipilih";
+		}
+		if (empty($this->input->post('kodest'))) {
+			$response['errors']['kodest'] = "Kode satuan harus dipilih";
+		}
+		if (empty($this->input->post('status1'))) {
+			$response['errors']['status1'] = "Kode satuan harus dipilih";
+		}
+		if (empty($this->input->post('project'))) {
+			$response['errors']['project'] = "Kode satuan harus dipilih";
+		}
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();

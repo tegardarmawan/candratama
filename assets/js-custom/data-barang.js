@@ -31,18 +31,18 @@ function delete_form() {
 }
 
 function delete_error() {
-	$("#error-kodeg").val("");
-	$("#error-kodeb").val("");
-	$("#error-nama").val("");
-	$("#error-stock").val("");
-	$("#error-kodest").val("");
-	$("#error-hargabeli").val("");
-	$("#error-hargapokok").val("");
-	$("#error-hargajual").val("");
-	$("#error-status1").val("");
-	$("#error-stockmin").val("");
-	$("#error-namat").val("");
-	$("#error-project").val("");
+	$("#error-kodeg").hide();
+	$("#error-kodeb").hide();
+	$("#error-nama").hide();
+	$("#error-stock").hide();
+	$("#error-kodest").hide();
+	$("#error-hargabeli").hide();
+	$("#error-hargapokok").hide();
+	$("#error-hargajual").hide();
+	$("#error-status1").hide();
+	$("#error-stockmin").hide();
+	$("#error-namat").hide();
+	$("#error-project").hide();
 }
 
 function get_data() {

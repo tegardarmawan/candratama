@@ -20,6 +20,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
+                    <!-- id kodek no_induk namak tempat tgl alamat kota telp status jabatan -->
                 </button>
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">

@@ -56,6 +56,9 @@ class Kelola_data_furniture extends CI_Controller {
 		
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
+			if(empty($this->input->post('satuan'))){
+				$response['errors']['satuan'] = 'Satuan barang harus dipilih';
+			}
 		} else {
 			$kode = $this->input->post('kode');
 			$nama = $this->input->post('nama');
@@ -64,7 +67,7 @@ class Kelola_data_furniture extends CI_Controller {
 			$hjual = $this->input->post('hjual');
 
 			if(empty($this->input->post('satuan'))){
-				$response['errors']['satuan'] = 'Satuan barang harus dipilih';
+				$response['errors']['satuan'] = 'Satuan harus dipilih';
 			}else{
 				$data = array(
 					'kodef' => $kode,
@@ -80,34 +83,41 @@ class Kelola_data_furniture extends CI_Controller {
 		echo json_encode($response);
 	}
 	public function edit_data(){
-		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|');
+		$this->form_validation->set_rules('kode', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+		$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required');
 		$this->form_validation->set_rules('ket', 'Keterangan', 'trim|required');
-		$this->form_validation->set_rules('hjual', 'Harga', 'trim|required');
-		
+		$this->form_validation->set_rules('hjual', 'Harga Jual', 'trim|required');
+		if(empty($this->input->post('satuan'))){
+			$response['errors']['satuan'] = 'Satuan harus dipilih';
+		}
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-		} else {
+			if(empty($this->input->post('satuan'))){
+				$response['errors']['satuan'] = 'Satuan harus dipilih';
+			}
+			} else {
 			$id = $this->input->post('id');
 			$kode = $this->input->post('kode');
 			$nama = $this->input->post('nama');
 			$satuan = $this->input->post('satuan');
-			$keterangan = $this->input->post('ket');
+			$ket = $this->input->post('ket');
 			$hjual = $this->input->post('hjual');
-
-			if(empty($this->input->post('satuan'))){
-				$response['errors']['satuan'] = 'Satuan barang harus dipilih';
-			}else{
+//id kodef namaf satuan ket hjual => database
+			if (empty($satuan)) {
+				$response['errors']['satuan'] = "Satuan harus dipilih";
+			}else {
 				$data = array(
 					'kodef' => $kode,
 					'namaf' => $nama,
 					'satuan' => $satuan,
-					'ket' => $keterangan,
+					'ket' => $ket,
 					'hjual' => $hjual,
 				);
 				$where = array('id' => $id);
 				$this->data->update('tfurniture', $where, $data);
-				$response['success'] = "Data berhasil ditambahkan";
+				$response['success'] = "Data berhasil diperbarui";
 			}
 		}
 		echo json_encode($response);
