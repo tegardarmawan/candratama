@@ -12,6 +12,7 @@ class Kelola_karyawan extends CI_Controller {
 	private function _init(){
 		$this->app_data['module_js'] = $this->module_js;
 	}
+	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
 	public function index()
 	{
 		$this->load->view('templates/sidebar');

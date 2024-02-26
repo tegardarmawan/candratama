@@ -43,7 +43,7 @@
                 </table>
             </div>
         </div>
-
+        <!-- // id no kodeal namaal merk stock satuan tglbeli hbeli ket namak kodek -->
         <!-- Modal tambah/edit data -->
         <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
