@@ -12,12 +12,22 @@ class Kelola_karyawan extends CI_Controller {
 	private function _init(){
 		$this->app_data['module_js'] = $this->module_js;
 	}
-	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
+	
 	public function index()
 	{
+		// Ambil data karyawan dari model
+		$data['karyawan'] = $this->data->get_all('tkaryawan')->result();
+		$this->session->set_userdata('data_karyawan', $data['karyawan']);
+
+		// // Simpan data karyawan ke dalam session
+		// $this->session->set_userdata('data_karyawan', $data_karyawan);
+	
+		// // Simpan data karyawan ke dalam $this->app_data
+		// $this->app_data['karyawan'] = $data_karyawan;
+
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/header');
-		$this->load->view('kelola_karyawan', $this->app_data);
+		$this->load->view('kelola_karyawan', $data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
@@ -31,6 +41,7 @@ class Kelola_karyawan extends CI_Controller {
 		$result = $this->data->find('tkaryawan', $where)->result();
 		echo json_encode($result);
 	}
+	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
 	public function insert_data(){
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tkaryawan.kodek]');
 		$this->form_validation->set_rules('induk', 'Induk', 'trim|is_unique[tkaryawan.no_induk]');

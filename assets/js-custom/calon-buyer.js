@@ -4,7 +4,7 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + id + ")");
+	modalButton.attr("onclick", "delete_data(" + id + ")"); 
 });
 
 function showAlertifySuccess(message) {
@@ -16,61 +16,43 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='no']").val("");
-	$("[name='kodeal']").val("");
-	$("[name='namaal']").val("");
-	$("[name='merk']").val("");
-	$("[name='stock']").val("");
-	$("[name='satuan']").val("");
-	$("[name='tglbeli']").val("");
-	$("[name='hbeli']").val("");
-	$("[name='ket']").val("");
-	$("[name='kodek']").val("");
-	$("[name='namak']").val("");
-	
+	$("[name='kodep']").val("");
+	$("[name='namap']").val("");
+	$("[name='alamat']").val("");
+	$("[name='kota']").val("");
+	$("[name='telp']").val("");
+	$("[name='tglp']").val("");
 }
 
 function delete_error() {
-	$("#error-no").hide();
-	$("#error-kodeal").hide();
-	$("#error-namaal").hide();
-	$("#error-merk").hide();
-	$("#error-stock").hide();
-	$("#error-satuan").hide();
-	$("#error-tglbeli").hide();
-	$("#error-hbeli").hide();
-	$("#error-ket").hide();
-	$("#error-kodek").hide();
-	$("#error-namak").hide();
-	
+	$("#error-kodep").hide();
+	$("#error-namap").hide();
+	$("#error-alamat").hide();
+	$("#error-kota").hide();
+	$("#error-telp").hide();
+	$("#error-tglp").hide();
 }
 
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + _controller + "/get_data",
+		url: base_url + _controller +  "/get_data",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-            var table = $("#datatable-buttons").DataTable({
+			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
+				scrollY: 320,
+                scrollX: 320,
 				data: data,
-                scrollY:320,
-				scrollX:320,
 				responsive: true,
 				columns: [
-					{ data: "no" },
-					{ data: "kodeal" },
-					{ data: "namaal" },
-					{ data: "merk" },
-					{ data: "stock" },
-					{ data: "namast" },
-					{ data: "tglbeli" },
-					{ data: "hbeli" },
-					{ data: "ket" },
-					{ data: "kodek" },
-					{ data: "namak" },
-					
+					{ data: "kodep" },
+					{ data: "namap" },
+					{ data: "alamat" },
+					{ data: "kota" },
+					{ data: "telp" },
+					{ data: "tglp" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -87,8 +69,8 @@ function get_data() {
 				],
 			});
 		},
-		error: function (xhr, textStatus, errorThrown, error) {
-			console.error("AJAX Error: " + error);
+		error: function (xhr, textStatus, errorThrown) {
+			console.log(xhr.statusText);
 		},
 	});
 }
@@ -97,30 +79,25 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Data Calon Buyer");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Edit Data Calon Buyer");
 
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
-			url: base_url + "/" + _controller + "/get_data_id",
+			url: base_url + "/" + _controller +  "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name= 'no']").val(hasil[0].no);
-				$("[name='kodeal']").val(hasil[0].kodeal);
-				$("[name='namaal']").val(hasil[0].namaal);
-				$("[name='merk']").val(hasil[0].merk);
-				$("[name='stock']").val(hasil[0].stock);
-				$("[name='satuan']").val(hasil[0].satuan);
-				$("[name='hbeli']").val(hasil[0].hbeli);
-				$("[name='tglbeli']").val(hasil[0].tglbeli);
-				$("[name='ket']").val(hasil[0].ket);
-				$("[name='kodek']").val(hasil[0].kodek);
-				$("[name='namak']").val(hasil[0].namak);
+				$("[name='kodep']").val(hasil[0].kodep);
+				$("[name='namap']").val(hasil[0].namap);
+				$("[name='alamat']").val(hasil[0].alamat);
+				$("[name='kota']").val(hasil[0].kota);
+				$("[name='telp']").val(hasil[0].telp);
+				$("[name='tglp']").val(hasil[0].tglp);
 			},
 		});
 	}
@@ -130,22 +107,16 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("no", $("[name='no']").val());
-	formData.append("kodeal", $("[name='kodeal']").val());
-	formData.append("namaal", $("[name='namaal']").val());
-	formData.append("merk", $("[name='merk']").val());
-	formData.append("stock", $("[name='stock']").val());
-	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
-	formData.append("ket", $("[name='ket']").val());
-	formData.append("kodek", $("[name='kodek']").val());
-	formData.append("namak", $("[name='namak']").val());
-	
+	formData.append("kodep", $("[name='kodep']").val());
+	formData.append("namap", $("[name='namap']").val());
+	formData.append("alamat", $("[name='alamat']").val());
+	formData.append("kota", $("[name='kota']").val());
+	formData.append("telp", $("[name='telp']").val());
+	formData.append("tglp", $("[name='tglp']").val());
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller + "/insert_data",
+		url: base_url + _controller +"/insert_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -172,17 +143,12 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("no", $("[name='no']").val());
-	formData.append("kodeal", $("[name='kodeal']").val());
-	formData.append("namaal", $("[name='namaal']").val());
-	formData.append("merk", $("[name='merk']").val());
-	formData.append("stock", $("[name='stock']").val());
-	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
-	formData.append("ket", $("[name='ket']").val());
-	formData.append("kodek", $("[name='kodek']").val());
-	formData.append("namak", $("[name='namak']").val());
+	formData.append("kodep", $("[name='kodep']").val());
+	formData.append("namap", $("[name='namap']").val());
+	formData.append("alamat", $("[name='alamat']").val());
+	formData.append("kota", $("[name='kota']").val());
+	formData.append("telp", $("[name='telp']").val());
+	formData.append("tglp", $("[name='tglp']").val());
 
 	$.ajax({
 		type: "POST",
@@ -215,7 +181,7 @@ function delete_data(x) {
 		type: "POST",
 		data: "id=" + x,
 		dataType: "json",
-		url: base_url + "/" + _controller + "/delete_data",
+		url: base_url  + "/" + _controller + "/delete_data",
 		success: function (response) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");

@@ -16,33 +16,36 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='no']").val("");
-	$("[name='kodeal']").val("");
-	$("[name='namaal']").val("");
-	$("[name='merk']").val("");
+	$("[name='kodeg']").val("");
+	$("[name='kodeh']").val("");
+	$("[name='namah']").val("");
 	$("[name='stock']").val("");
 	$("[name='satuan']").val("");
-	$("[name='tglbeli']").val("");
-	$("[name='hbeli']").val("");
 	$("[name='ket']").val("");
-	$("[name='kodek']").val("");
-	$("[name='namak']").val("");
+	$("[name='hbeli']").val("");
+	$("[name='hpokok']").val("");
+	$("[name='hjual']").val("");
+	$("[name='status']").val("");
+	$("[name='stockmin']").val("");
+	$("[name='namat']").val("");
+	$("[name='projectt']").val("");
 	
 }
-
 function delete_error() {
-	$("#error-no").hide();
-	$("#error-kodeal").hide();
-	$("#error-namaal").hide();
-	$("#error-merk").hide();
+	$("#error-kodeh").hide();
+	$("#error-kodeg").hide();
+	$("#error-namah").hide();
 	$("#error-stock").hide();
 	$("#error-satuan").hide();
-	$("#error-tglbeli").hide();
-	$("#error-hbeli").hide();
 	$("#error-ket").hide();
-	$("#error-kodek").hide();
-	$("#error-namak").hide();
-	
+	$("#error-hbeli").hide();
+	$("#error-hpokok").hide();
+	$("#error-hjual").hide();
+	$("#error-status1").hide();
+	$("#error-stockmin").hide();
+	$("#error-namat").hide();
+	$("#error-projectt").hide();
+		
 }
 
 function get_data() {
@@ -59,18 +62,19 @@ function get_data() {
 				scrollX:320,
 				responsive: true,
 				columns: [
-					{ data: "no" },
-					{ data: "kodeal" },
-					{ data: "namaal" },
-					{ data: "merk" },
-					{ data: "stock" },
-					{ data: "namast" },
-					{ data: "tglbeli" },
-					{ data: "hbeli" },
-					{ data: "ket" },
-					{ data: "kodek" },
-					{ data: "namak" },
-					
+					{data: 'kodeg'},
+					{data: "kodeh"},
+					{data: "namah"},
+					{data: "stock"},
+					{data: "namast"},
+					{data: "ket"},
+					{data: "hbeli"},
+					{data: "hpokok"},
+					{data: "hjual"},
+					{data: "status"},
+					{data: "stockmin"},
+					{data: "namat"},
+					{data: "projectt"},
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -97,12 +101,12 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Data Granite&HPL");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
-
+		$("[name='title']").text("Edit Data Granit&HPL");
+//id kodef namaf satuan ket hjual => database
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
@@ -110,17 +114,20 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name= 'no']").val(hasil[0].no);
-				$("[name='kodeal']").val(hasil[0].kodeal);
-				$("[name='namaal']").val(hasil[0].namaal);
-				$("[name='merk']").val(hasil[0].merk);
-				$("[name='stock']").val(hasil[0].stock);
-				$("[name='satuan']").val(hasil[0].satuan);
-				$("[name='hbeli']").val(hasil[0].hbeli);
-				$("[name='tglbeli']").val(hasil[0].tglbeli);
-				$("[name='ket']").val(hasil[0].ket);
-				$("[name='kodek']").val(hasil[0].kodek);
-				$("[name='namak']").val(hasil[0].namak);
+				$("[name= 'kodeg']").val(hasil[0].kodeg);
+				$("[name= 'kodeh']").val(hasil[0].kodeh);
+				$("[name= 'namah']").val(hasil[0].namah);
+				$("[name= 'stock']").val(hasil[0].stock);
+				$("[name= 'satuan']").val(hasil[0].namast);
+				$("[name= 'ket']").val(hasil[0].ket);
+				$("[name= 'hbeli']").val(hasil[0].hbeli);
+				$("[name= 'hpokok']").val(hasil[0].hpokok);
+				$("[name= 'hjual']").val(hasil[0].hjual);
+				$("[name= 'status1']").val(hasil[0].status);
+				$("[name= 'stockmin']").val(hasil[0].stockmin);
+				$("[name= 'namat']").val(hasil[0].namat);
+				$("[name= 'projectt']").val(hasil[0].projectt);
+				
 			},
 		});
 	}
@@ -130,19 +137,20 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("no", $("[name='no']").val());
-	formData.append("kodeal", $("[name='kodeal']").val());
-	formData.append("namaal", $("[name='namaal']").val());
-	formData.append("merk", $("[name='merk']").val());
+	formData.append("kodeg", $("[name='kodeg']").val());
+	formData.append("kodeh", $("[name='kodeh']").val());
+	formData.append("namah", $("[name='namah']").val());
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
 	formData.append("ket", $("[name='ket']").val());
-	formData.append("kodek", $("[name='kodek']").val());
-	formData.append("namak", $("[name='namak']").val());
-	
-
+	formData.append("hbeli", $("[name='hbeli']").val());
+	formData.append("hpokok", $("[name='hpokok']").val());
+	formData.append("hjual", $("[name='hjual']").val());
+	formData.append("status1", $("[name='status1']").val());
+	formData.append("stockmin", $("[name='stockmin']").val());
+	formData.append("namat", $("[name='namat']").val());
+	formData.append("projectt", $("[name='projectt']").val());
+		
 	$.ajax({
 		type: "POST",
 		url: base_url + _controller + "/insert_data",
@@ -172,17 +180,19 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("no", $("[name='no']").val());
-	formData.append("kodeal", $("[name='kodeal']").val());
-	formData.append("namaal", $("[name='namaal']").val());
-	formData.append("merk", $("[name='merk']").val());
+	formData.append("kodeg", $("[name='kodeg']").val());
+	formData.append("kodeh", $("[name='kodeh']").val());
+	formData.append("namah", $("[name='namah']").val());
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
 	formData.append("ket", $("[name='ket']").val());
-	formData.append("kodek", $("[name='kodek']").val());
-	formData.append("namak", $("[name='namak']").val());
+	formData.append("hbeli", $("[name='hbeli']").val());
+	formData.append("hpokok", $("[name='hpokok']").val());
+	formData.append("hjual", $("[name='hjual']").val());
+	formData.append("status1", $("[name='status1']").val());
+	formData.append("stockmin", $("[name='stockmin']").val());
+	formData.append("namat", $("[name='namat']").val());
+	formData.append("projectt", $("[name='projectt']").val());
 
 	$.ajax({
 		type: "POST",

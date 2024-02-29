@@ -16,13 +16,16 @@
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <!-- DataTables -->
     <link href="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url()?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="<?= base_url()?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- sweetAlert -->
+    <link href="<?= base_url()?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     
 </head>
 
@@ -64,7 +67,7 @@
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-monitor"></i> <span> Master Warehouse </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-tv"></i> <span> Master Warehouse </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= base_url('Data_group') ?>">Data Group</a></li>
                                 <li><a href="<?= base_url('Data_satuan_barang') ?>">Data Satuan Barang</a></li>
@@ -77,7 +80,7 @@
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i> <span> Project Interior </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-layer-group"></i> <span> Project Interior </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= base_url('data_prospek') ?>">Data Prospek</a></li>
                                 <li><a href="<?= base_url('calon_buyer') ?>">Daftar Calon Buyer</a></li>
@@ -91,7 +94,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="<?= base_url('Kelola_karyawan') ?>" class="waves-effect"><i class="mdi mdi-account"></i> <span> Data Karyawan </span> </a>
+                            <a href="<?= base_url('Kelola_karyawan') ?>" class="waves-effect"><i class="fas fa-people-group"></i> <span> Data Karyawan </span> </a>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-book"></i> <span> Menu Inventaris </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -101,13 +104,13 @@
                             </ul>
                         </li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i> <span> Menu Fasilitas </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-layer-group"></i> <span> Menu Fasilitas </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= base_url('Backup_data') ?>">Backup Data</a></li>
                                 <li><a href="<?= base_url('log_user') ?>">Data Log User</a></li>
                                 <li><a href="<?= base_url('Kelola_user') ?>">Kelola User</a></li>
                                 <li><a href="<?= base_url('Kelola_penjualan') ?>">Password Edit Penjualan</a></li>
-                                <li><a href="<?= base_url() ?>">Help</a></li>
+                                <li><a href="<?= base_url('Help') ?>">Help</a></li>
                             </ul>
                         </li>
                     </ul>

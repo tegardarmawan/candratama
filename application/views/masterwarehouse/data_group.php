@@ -26,10 +26,10 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="10%">No</th>
-                            <th width="40%">Kode Group</th>
-                            <th width="40%">Nama Group</th>
-                            <th width="10%">Aksi</th>
+                            <th>No</th>
+                            <th>Kode Group</th>
+                            <th>Nama Group</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>

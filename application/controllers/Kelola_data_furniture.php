@@ -126,7 +126,7 @@ class Kelola_data_furniture extends CI_Controller {
 	public function delete_data(){
 		$id = $this->input->post("id");
 		$where = array("id"=> $id);
-		$deleted = $this->data->delete("tfurniture", $data, $where);
+		$deleted = $this->data->delete("tfurniture", $where);
 		if(!$deleted){
 			$response["error"] = "Gagal menghapus data";
 		}else{

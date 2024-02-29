@@ -8,6 +8,8 @@
 </div>
 <!-- END wrapper -->
 
+<!-- fontawesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- jQuery  -->
 <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
@@ -22,7 +24,7 @@
 <script src="<?= base_url() ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.scrollTo.min.js"></script>
 
-<script src="<?= base_url()?>assets/plugins/alertify/js/alertify.js"></script>
+<script src="<?= base_url() ?>assets/plugins/alertify/js/alertify.js"></script>
 <script src="<?= base_url() ?>assets/pages/dashborad.js"></script>
 
 <!-- App js -->
@@ -35,11 +37,7 @@
 
 <!-- Responsive examples -->
 <script src="<?= base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
-<script src="<?= base_url()?>assets/plugins/RWD-Table-Patterns/dist/js/rwd-table.min.js" type="text/javascript"></script>
-<script>
-    var base_url = '<?php echo base_url() ?>';
-    var _controller = '<?= $this->router->fetch_class() ?>';
-</script>
+<script src="<?= base_url() ?>assets/plugins/RWD-Table-Patterns/dist/js/rwd-table.min.js" type="text/javascript"></script>
 
 <script>
     $('#datatable-buttons').DataTable({
@@ -47,10 +45,20 @@
         "buttons": [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
-        scrollX:true
+        scrollY:270,
+        scrollX:320,
+        responsive:true,
     });
 </script>
 
+<!-- Sweet-Alert  -->
+<script src="<?= base_url()?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="<?= base_url()?>assets/pages/sweet-alert.init.js"></script>
+
+<script>
+    var base_url = '<?php echo base_url() ?>';
+    var _controller = '<?= $this->router->fetch_class() ?>';
+</script>
 </body>
 
 </html>

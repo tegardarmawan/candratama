@@ -31,6 +31,7 @@ class Kelola_data_barang extends CI_Controller
 
 	public function get_data()
 	{
+		// <!-- id, no, kodeal, namaal, merk, stock, satuan, tglbeli, hbeli, ket, kodek, namak -->
 		$query = [
 			'select' => 'a.id, b.kodeg, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
