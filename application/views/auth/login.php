@@ -16,8 +16,8 @@
                   <?= $this->session->flashdata('message'); ?>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example17">Username</label>
-                    <input type="username" id="username" name="username" class="form-control form-control-lg" style="border-radius: 2rem;" value="<?= set_value('username'); ?>" />
+                    <label class="form-label" for="">Username</label>
+                    <input type="text" id="username" name="username" class="form-control form-control-lg" style="border-radius: 2rem;" value="<?= set_value('username'); ?>" />
                     <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
                   </div>
 

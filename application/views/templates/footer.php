@@ -45,15 +45,15 @@
         "buttons": [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
-        scrollY:270,
-        scrollX:320,
-        responsive:true,
+        scrollY: 270,
+        scrollX: 320,
+        responsive: true,
     });
 </script>
 
 <!-- Sweet-Alert  -->
-<script src="<?= base_url()?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-<script src="<?= base_url()?>assets/pages/sweet-alert.init.js"></script>
+<script src="<?= base_url() ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="<?= base_url() ?>assets/pages/sweet-alert.init.js"></script>
 
 <script>
     var base_url = '<?php echo base_url() ?>';

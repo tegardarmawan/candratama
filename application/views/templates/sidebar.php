@@ -11,22 +11,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <link href="<?= base_url() ?>assets/plugins/alertify/css/alertify.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets/plugins/alertify/js/alertify.js">
-    <link href="<?= base_url() ?>assets/plugins/alertify/js/ngAlertify.js">
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" type="text/css">
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
     <!-- DataTables -->
-    <link href="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?= base_url()?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- Responsive datatable examples -->
-    <link href="<?= base_url()?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- sweetAlert -->
-    <link href="<?= base_url()?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
-    
+    <link href="<?= base_url() ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
 </head>
 
 
@@ -63,7 +61,7 @@
                         <li class="menu-title">Main</li>
 
                         <li>
-                            <a href="<?= base_url('Admin')?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="has_sub">
