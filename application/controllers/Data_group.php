@@ -1,4 +1,4 @@
-<?php defined("BASEPATH") OR exit("No direct script access allowed");
+<?php defined("BASEPATH") or exit("No direct script access allowed");
 
 class Data_group extends CI_Controller
 {
@@ -9,6 +9,14 @@ class Data_group extends CI_Controller
 	{
 		parent::__construct();
 		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
+	}
+
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
 	}
 
 	private function _init()
@@ -17,7 +25,8 @@ class Data_group extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('templates/sidebar');
+		$data['title'] = 'Data Group Barang';
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/data_group');
 		$this->load->view('templates/footer');

@@ -1,30 +1,43 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kelola_data_furniture extends CI_Controller {
+class Kelola_data_furniture extends CI_Controller
+{
 
 	var $module_js = ['data-furniture'];
 
 	var $app_data = [];
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-		$this->init();
+		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
 	}
 
-	private function init(){
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
+	}
+
+	private function _init()
+	{
 		$this->app_data['module_js'] = $this->module_js;
 	}
 	public function index()
 	{
+		$data['title'] = 'Data Furniture';
 		$this->app_data['namast'] = $this->data->get_all('tsatuan')->result();
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/kelola_data_furniture', $this->app_data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
-	public function get_data(){
+	public function get_data()
+	{
 		$query = [
 			'select' => 'a.id, a.kodef, a.namaf, b.namast, a.ket, a.hjual',
 			'from' => 'tfurniture a',
@@ -35,8 +48,9 @@ class Kelola_data_furniture extends CI_Controller {
 		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
-	
-	public function get_data_id(){
+
+	public function get_data_id()
+	{
 		$id = $this->input->post('id');
 		$query = [
 			'select' => 'a.id, a.kodef, a.namaf, b.namast, a.ket, a.hjual',
@@ -48,15 +62,16 @@ class Kelola_data_furniture extends CI_Controller {
 		echo json_encode($result);
 	}
 	//id kodef namaf satuan ket hjual => database
-	public function insert_data(){
+	public function insert_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tfurniture.kodef]');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('ket', 'Keterangan', 'trim|required');
 		$this->form_validation->set_rules('hjual', 'Harga', 'trim|required');
-		
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if(empty($this->input->post('satuan'))){
+			if (empty($this->input->post('satuan'))) {
 				$response['errors']['satuan'] = 'Satuan barang harus dipilih';
 			}
 		} else {
@@ -66,9 +81,9 @@ class Kelola_data_furniture extends CI_Controller {
 			$keterangan = $this->input->post('ket');
 			$hjual = $this->input->post('hjual');
 
-			if(empty($this->input->post('satuan'))){
+			if (empty($this->input->post('satuan'))) {
 				$response['errors']['satuan'] = 'Satuan harus dipilih';
-			}else{
+			} else {
 				$data = array(
 					'kodef' => $kode,
 					'namaf' => $nama,
@@ -82,32 +97,33 @@ class Kelola_data_furniture extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
-	public function edit_data(){
+	public function edit_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('satuan', 'Satuan', 'trim|required');
 		$this->form_validation->set_rules('ket', 'Keterangan', 'trim|required');
 		$this->form_validation->set_rules('hjual', 'Harga Jual', 'trim|required');
-		if(empty($this->input->post('satuan'))){
+		if (empty($this->input->post('satuan'))) {
 			$response['errors']['satuan'] = 'Satuan harus dipilih';
 		}
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if(empty($this->input->post('satuan'))){
+			if (empty($this->input->post('satuan'))) {
 				$response['errors']['satuan'] = 'Satuan harus dipilih';
 			}
-			} else {
+		} else {
 			$id = $this->input->post('id');
 			$kode = $this->input->post('kode');
 			$nama = $this->input->post('nama');
 			$satuan = $this->input->post('satuan');
 			$ket = $this->input->post('ket');
 			$hjual = $this->input->post('hjual');
-//id kodef namaf satuan ket hjual => database
+			//id kodef namaf satuan ket hjual => database
 			if (empty($satuan)) {
 				$response['errors']['satuan'] = "Satuan harus dipilih";
-			}else {
+			} else {
 				$data = array(
 					'kodef' => $kode,
 					'namaf' => $nama,
@@ -123,13 +139,14 @@ class Kelola_data_furniture extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function delete_data(){
+	public function delete_data()
+	{
 		$id = $this->input->post("id");
-		$where = array("id"=> $id);
+		$where = array("id" => $id);
 		$deleted = $this->data->delete("tfurniture", $where);
-		if(!$deleted){
+		if (!$deleted) {
 			$response["error"] = "Gagal menghapus data";
-		}else{
+		} else {
 			$response["success"] = "Berhasil menghapus data";
 		}
 		echo json_encode($response);

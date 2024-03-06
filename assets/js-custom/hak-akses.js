@@ -16,13 +16,11 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodeg']").val("");
-	$("[name='namag']").val("");
+	$("[name='nama']").val("");
 }
 
 function delete_error() {
-	$("#error-kodeg").hide();
-	$("#error-namag").hide();
+	$("#error-nama").hide();
 }
 
 function get_data() {
@@ -39,13 +37,9 @@ function get_data() {
 				responsive: true,
 				columns: [
 					{
-						data: null,
-						render: function (data, type, row, meta) {
-							return meta.row + 1;
-						},
+						data: "id",
 					},
-					{ data: "kodeg" },
-					{ data: "namag" },
+					{ data: "name" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -72,11 +66,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Jenis Hak Akses");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Edit Jenis Hak Akses");
 
 		$.ajax({
 			type: "POST",
@@ -85,8 +79,7 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name='kodeg']").val(hasil[0].kodeg);
-				$("[name='namag']").val(hasil[0].namag);
+				$("[name='nama']").val(hasil[0].name);
 			},
 		});
 	}
@@ -96,8 +89,7 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("kodeg", $("[name='kodeg']").val());
-	formData.append("namag", $("[name='namag']").val());
+	formData.append("nama", $("[name='nama']").val());
 
 	$.ajax({
 		type: "POST",
@@ -128,8 +120,7 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("kodeg", $("[name='kodeg']").val());
-	formData.append("namag", $("[name='namag']").val());
+	formData.append("nama", $("[name='nama']").val());
 
 	$.ajax({
 		type: "POST",

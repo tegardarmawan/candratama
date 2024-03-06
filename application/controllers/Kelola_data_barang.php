@@ -12,6 +12,14 @@ class Kelola_data_barang extends CI_Controller
 	{
 		parent::__construct();
 		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
+	}
+
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
 	}
 
 	private function _init()
@@ -20,9 +28,10 @@ class Kelola_data_barang extends CI_Controller
 	}
 	public function index()
 	{
+		$data['title'] = 'Kelola Data Barang';
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();
-		$this->load->view('templates/sidebar');
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/kelola_data_barang', $this->app_data);
 		$this->load->view('templates/footer');
@@ -137,7 +146,8 @@ class Kelola_data_barang extends CI_Controller
 		echo json_encode($response);
 	}
 
-	public function edit_data(){
+	public function edit_data()
+	{
 		// kodeg kodest status1 project => form select
 		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
@@ -211,14 +221,15 @@ class Kelola_data_barang extends CI_Controller
 		echo json_encode($response);
 	}
 
-	public function delete_data(){
+	public function delete_data()
+	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
-		
+
 		$deleted = $this->data->delete('tbarang', $where);
-		if(!$deleted){
-			$response['error'] = "Gagal menghapus data"; 
-		}else{
+		if (!$deleted) {
+			$response['error'] = "Gagal menghapus data";
+		} else {
 			$response['success'] = "Berhasil Menghapus Data";
 		}
 		echo json_encode($response);

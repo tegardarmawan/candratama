@@ -23,9 +23,18 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
+function showAlertifySuccess(message) {
+	$("body").append(alertify.success(message));
+}
+
+function showAlertifyError(message) {
+	$("body").append(alertify.error(message));
+}
+
 function delete_form() {
 	$("[name='kode']").val("");
 	$("[name='nama']").val("");
+	$("[name='credential']").val("");
 	$("[name='username']").val("");
 	$("[name='password']").val("");
 	$("[name='password1']").val("");
@@ -34,6 +43,7 @@ function delete_form() {
 function delete_error() {
 	$("#error-kode").hide();
 	$("#error-nama").hide();
+	$("#error-credential").hide();
 	$("#error-username").hide();
 	$("#error-password").hide();
 	$("#error-password1").hide();
@@ -60,7 +70,7 @@ function get_data() {
 					{ data: "kode" },
 					{ data: "nama" },
 					{ data: "username" },
-					{ data: "password" },
+					{ data: "credential" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -109,11 +119,12 @@ function submit(x) {
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
-			url: base_url + "/" + "Kelola_user" + "/get_data_id",
+			url: base_url + "/" + _controller + "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
 				$("[name='id']").val(hasil[0].id);
 				$("[name='kode']").val(hasil[0].kode);
+				$("[name='credential']").val(hasil[0].id_credential);
 				$("[name='nama']").val(hasil[0].nama);
 				$("[name='username']").val(hasil[0].username);
 				$("[name='password']").val(hasil[0].password);
@@ -128,6 +139,7 @@ function insert_data() {
 	var formData = new FormData();
 	formData.append("kode", $("[name='kode']").val());
 	formData.append("nama", $("[name='nama']").val());
+	formData.append("credential", $("[name='credential']").val());
 	formData.append("username", $("[name='username']").val());
 	formData.append("password", $("[name='password']").val());
 	formData.append("password1", $("[name='password1']").val());
@@ -162,6 +174,7 @@ function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
 	formData.append("kode", $("[name='kode']").val());
+	formData.append("credential", $("[name='credential']").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("username", $("[name='username']").val());
 	formData.append("password1", $("[name='password1']").val());
@@ -196,13 +209,16 @@ function delete_data(x) {
 	$.ajax({
 		type: "POST",
 		data: "id=" + x,
+		dataType: "json",
 		url: base_url + "/" + _controller + "/delete_data",
 		success: function (response) {
 			if (response.success) {
-				$(".bs-example-modal-center").modal("hide");
+				$("#modalHapus").modal("hide");
+				showAlertifySuccess(response.success);
 				get_data();
 			} else if (response.error) {
-				$(".bs-example-modal-center").modal("hide");
+				$("#modalHapus").modal("hide");
+				showAlertifyError(response.error);
 				get_data();
 			}
 		},

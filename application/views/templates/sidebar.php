@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Candratama</title>
+    <title><?= $title ?></title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -106,7 +106,10 @@
                             <ul class="list-unstyled">
                                 <li><a href="<?= base_url('Backup_data') ?>">Backup Data</a></li>
                                 <li><a href="<?= base_url('log_user') ?>">Data Log User</a></li>
-                                <li><a href="<?= base_url('Kelola_user') ?>">Kelola User</a></li>
+                                <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2') : ?>
+                                    <li><a href="<?= base_url('Hak_akses') ?>">Kelola Hak Akses</a></li>
+                                    <li><a href="<?= base_url('Kelola_user') ?>">Kelola User</a></li>
+                                <?php endif; ?>
                                 <li><a href="<?= base_url('Kelola_penjualan') ?>">Password Edit Penjualan</a></li>
                                 <li><a href="<?= base_url('Help') ?>">Help</a></li>
                             </ul>

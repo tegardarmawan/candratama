@@ -3,7 +3,7 @@
 class Auth extends CI_Controller
 {
     var $module_js = ['auth'];
-    var $app_data = [''];
+    var $app_data = [];
     public function __construct()
     {
         parent::__construct();
@@ -16,26 +16,39 @@ class Auth extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('username')) {
+            redirect('Admin');
+        }
         $this->form_validation->set_rules('username', 'Username', 'trim|required', ['required' => 'Username harus diisi']);
         $this->form_validation->set_rules('password', 'Password', 'trim|required', ['required' => 'Password harus diisi']);
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('header');
+            $data['title'] = 'Login Admin';
+            $this->load->view('header', $data);
             $this->load->view('auth/login', $this->app_data);
-            $this->load->view('footer');
+            $this->load->view('footer', $this->app_data);
             $this->load->view('js-costum', $this->app_data);
         } else {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
+            $hash = hash("sha256", $password . config_item('encryption_key'));
 
-            $user = $this->db->get_where('tuser', ['nama' => $username])->row_array();
+            $user = $this->db->where(['username' => $username])->get('tuser')->row_array();
 
 
             //jika usernya ada
             if ($user) {
                 //verify password
-                if ($password == $user['pass']) {
-                    // Jika verifikasi kata sandi berhasil, lanjutkan ke halaman Admin
+                if ($hash == $user['password']) {
+                    $data = [
+                        'id' => $user['id'],
+                        'username' => $user['username'],
+                        'nama' => $user['nama'],
+                        'id_credential' => $user['id_credential'],
+                    ];
+                    //simpan $data pada session
+                    $this->session->set_userdata($data);
+                    $this->session->set_userdata('logged_in', TRUE);
                     redirect('Admin');
                 } else {
                     // Jika verifikasi kata sandi gagal, tampilkan pesan kesalahan
@@ -55,10 +68,10 @@ class Auth extends CI_Controller
     }
     public function logout()
     {
-        $data['user'] = $this->db->get_where('tuser', ['email' => $this->session->userdata('email')])->row_array();
 
+        $this->session->unset_userdata('id');
         $this->session->unset_userdata('nama');
-        $this->session->unset_userdata('password');
+        $this->session->unset_userdata('username');
         $this->session->unset_userdata('logged_in');
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Anda telah logout,  </strong>Terima kasih sudah menggunakan sistem ini

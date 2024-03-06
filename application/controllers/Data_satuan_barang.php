@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Data_satuan_barang extends CI_Controller {
+class Data_satuan_barang extends CI_Controller
+{
 
 	var $module_js = ['data-satuan'];
 
@@ -11,37 +12,50 @@ class Data_satuan_barang extends CI_Controller {
 	{
 		parent::__construct();
 		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
 	}
 
-	private function _init(){
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
+	}
+
+	private function _init()
+	{
 		$this->app_data['module_js'] = $this->module_js;
 	}
 	public function index()
 	{
-		$this->load->view('templates/sidebar');
+		$data['title'] = 'Data Satuan Barang';
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/data_satuan_barang');
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
 
-	public function get_data(){
+	public function get_data()
+	{
 		$result = $this->data->get_all('tsatuan')->result();
 		echo json_encode($result);
 	}
 
-	public function get_data_id(){
+	public function get_data_id()
+	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
 		$result = $this->data->find('tsatuan', $where)->result();
 		echo json_encode($result);
 	}
-	
-	public function insert_data(){
+
+	public function insert_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|max_length[6]|is_unique[tsatuan.kodest]');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required|is_unique[tsatuan.namast]');
-		
-		
+
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
@@ -57,11 +71,12 @@ class Data_satuan_barang extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function edit_data(){
+	public function edit_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-		
-		
+
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
@@ -81,14 +96,15 @@ class Data_satuan_barang extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function delete_data(){
+	public function delete_data()
+	{
 		$id = $this->input->post("id");
-		$where = array("id"=> $id);
+		$where = array("id" => $id);
 
 		$deleted = $this->data->delete('tsatuan', $where);
-		if($deleted){
+		if ($deleted) {
 			$response['success'] = "Data Berhasil Dihapus";
-		}else{
+		} else {
 			$response['error'] = "Gagal menghapus Data";
 		}
 		echo json_encode($response);

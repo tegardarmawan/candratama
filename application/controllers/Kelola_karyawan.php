@@ -1,48 +1,55 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kelola_karyawan extends CI_Controller {
+class Kelola_karyawan extends CI_Controller
+{
+
 	var $module_js = ['data-karyawan'];
 	var $app_data = [''];
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
 	}
-	private function _init(){
+
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
+	}
+	private function _init()
+	{
 		$this->app_data['module_js'] = $this->module_js;
 	}
-	
+
 	public function index()
 	{
 		// Ambil data karyawan dari model
-		$data['karyawan'] = $this->data->get_all('tkaryawan')->result();
-		$this->session->set_userdata('data_karyawan', $data['karyawan']);
-
-		// // Simpan data karyawan ke dalam session
-		// $this->session->set_userdata('data_karyawan', $data_karyawan);
-	
-		// // Simpan data karyawan ke dalam $this->app_data
-		// $this->app_data['karyawan'] = $data_karyawan;
-
-		$this->load->view('templates/sidebar');
+		$data['title'] = 'Data Karyawan';
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('kelola_karyawan', $data);
+		$this->load->view('kelola_karyawan');
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
-	public function get_data(){
+	public function get_data()
+	{
 		$result = $this->data->get_all('tkaryawan')->result();
 		echo json_encode($result);
 	}
-	public function get_data_id(){
+	public function get_data_id()
+	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
 		$result = $this->data->find('tkaryawan', $where)->result();
 		echo json_encode($result);
 	}
 	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
-	public function insert_data(){
+	public function insert_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tkaryawan.kodek]');
 		$this->form_validation->set_rules('induk', 'Induk', 'trim|is_unique[tkaryawan.no_induk]');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
@@ -53,11 +60,11 @@ class Kelola_karyawan extends CI_Controller {
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
 		$this->form_validation->set_rules('status1', 'Status', 'trim|required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
-		
-		
+
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if(empty($this->input->post('status1'))){
+			if (empty($this->input->post('status1'))) {
 				$response['errors']['status1'] = 'Status karyawan harus dipilih';
 			}
 		} else {
@@ -71,7 +78,7 @@ class Kelola_karyawan extends CI_Controller {
 			$telp = $this->input->post('telp');
 			$status = $this->input->post('status1');
 			$jabatan = $this->input->post('jabatan');
-			if(empty($status)){
+			if (empty($status)) {
 				$response['errors']['status'] = 'Status jabatan harus dipilih';
 			}
 			$data = array(
@@ -92,7 +99,8 @@ class Kelola_karyawan extends CI_Controller {
 		echo json_encode($response);
 	}
 
-	public function edit_data(){
+	public function edit_data()
+	{
 		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tkaryawan.kodek]');
 		$this->form_validation->set_rules('induk', 'Induk', 'trim|is_unique[tkaryawan.no_induk]');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
@@ -103,11 +111,11 @@ class Kelola_karyawan extends CI_Controller {
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
 		$this->form_validation->set_rules('status1', 'Status', 'trim|required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
-		
-		
+
+
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if(empty($this->post->input('status1'))){
+			if (empty($this->post->input('status1'))) {
 				$response['errors']['status1'] = 'Status karyawan harus dipilih';
 			}
 		} else {
@@ -122,7 +130,7 @@ class Kelola_karyawan extends CI_Controller {
 			$telp = $this->input->post('telp');
 			$status = $this->input->post('status1');
 			$jabatan = $this->input->post('jabatan');
-			if(empty($status)){
+			if (empty($status)) {
 				$response['errors']['status'] = 'Status jabatan harus dipilih';
 			}
 			$data = array(
@@ -143,14 +151,15 @@ class Kelola_karyawan extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
-	public function delete_data(){
+	public function delete_data()
+	{
 		$id = $this->input->post("id");
 		$where = array('id' => $id);
 
 		$deleted = $this->data->delete('tkaryawan', $where);
-		if($deleted){
+		if ($deleted) {
 			$response['success'] = 'Data dihapus';
-		}else{
+		} else {
 			$response['error'] = 'Gagal menghapus data';
 		}
 		echo json_encode($response);

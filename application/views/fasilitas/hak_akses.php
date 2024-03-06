@@ -26,10 +26,8 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Kode User</th>
-                            <th>Nama</th>
-                            <th>Username</th>
-                            <th>Hak Akses</th>
+                            <th>Id</th>
+                            <th>Nama Hak Akses</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -51,61 +49,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Nama Hak Akses</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input class="form-control" type="text" id="kode" name="kode" placeholder="Masukkan kode user">
-                                    <small class="text-danger pl-1" id="error-kode"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Nama</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="nama" name="nama" placeholder="Masukkan nama user">
+                                    <input class="form-control" type="text" id="nama" name="nama" placeholder="Masukkan nama hak akses">
                                     <small class="text-danger pl-1" id="error-nama"></small>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label">Username</label>
-                                <div class="col-sm-9">
-                                    <input type="text" placeholder="Masukkan username" class="form-control" name="username" id="username">
-                                    <small class="text-danger pl-1" id="error-username"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label">Hak Akses</label>
-                                <div class="col-sm-9">
-                                    <select name="credential" id="credential" class="select2 custom-select form-control">
-                                        <option value="">Pilih Hak Akses User</option>
-                                        <?php foreach ($credential as $row) : ?>
-                                            <option value="<?= $row->id ?>"><?= $row->name ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <small class="text-danger pl-1" id="error-username"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6 md-6">
-                                    <label for="password" class="form-label" id="passwordLabel">Password</label>
-                                    <div class="">
-                                        <input type="password" placeholder="Masukkan password" class="form-control" name="password" id="password">
-                                        <small class="text-danger pl-1" id="error-password"></small>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 md-6">
-                                    <label for="password1" class="form-label" id="passwordLabel1">Ulangi</label>
-                                    <div class="">
-                                        <input type="password" placeholder="Ulangi password" class="form-control" name="password1" id="password1">
-                                        <small class="text-danger pl-1" id="error-password1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
-                                <label class="form-check-label" for="showPasswordCheckbox">
-                                    Show
-                                    Password
-                                </label>
                             </div>
                         </div>
                         <div class="modal-footer">

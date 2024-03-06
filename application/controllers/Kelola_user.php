@@ -9,6 +9,14 @@ class Kelola_user extends CI_Controller
 	{
 		parent::__construct();
 		$this->_init();
+		if (!$this->is_logged_in()) {
+			redirect('Auth');
+		}
+	}
+
+	public function is_logged_in()
+	{
+		return $this->session->userdata('logged_in') === TRUE;
 	}
 	private function _init()
 	{
@@ -16,22 +24,40 @@ class Kelola_user extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('templates/sidebar');
+		$this->app_data['credential'] = $this->data->get_all('app_credential')->result();
+		$data['title'] = 'User';
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('fasilitas/kelola_user');
+		$this->load->view('fasilitas/kelola_user', $this->app_data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
 	public function get_data()
 	{
-		$result = $this->data->get_all('tuser')->result();
+		$query = [
+			'select' => 'a.id, a.id_credential, a.kode, a.nama, a.username, a.password, b.name as credential',
+			'from' => 'tuser a',
+			'join' => [
+				'app_credential b, b.id = a.id_credential'
+			],
+		];
+		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
 	public function get_data_id()
 	{
 		$id = $this->input->post('id');
-		$where = array('id' => $id);
-		$result = $this->data->find('tuser', $where)->result();
+		$query = [
+			'select' => 'a.id, a.id_credential, a.kode, a.nama, a.username, a.password, b.name as credential',
+			'from' => 'tuser a',
+			'join' => [
+				'app_credential b, b.id = a.id_credential'
+			],
+			'where' => [
+				'a.id' => $id
+			]
+		];
+		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
 	public function insert_data()
@@ -39,27 +65,40 @@ class Kelola_user extends CI_Controller
 		$this->form_validation->set_rules('kode', 'Kode User', 'trim|required|is_unique[tuser.kode]');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|alpha_numeric');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|alpha_numeric|matches[password1]');
 		$this->form_validation->set_rules('password1', 'Ulangi', 'trim|required|matches[password]', ['matches' => 'Password do not match!']);
-
 
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
+			if (empty($this->input->post('credential'))) {
+				$response['errors']['credential'] = 'Hak akses harus dipilih';
+			}
 		} else {
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
-			$username = $this->input->post('username');
-			$password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+			$where = array('username' => $this->session->userdata('username'));
+			$data['user'] = $this->data->find('tuser', $where)->row_array();
 
-			$data = array(
-				'kode' => $kode,
-				'nama' => $nama,
-				'username' => $username,
-				'password' => $password,
-			);
-			$this->data->insert('tuser', $data);
-			$response['success'] = 'Data user ditambahkan';
+			$kode = $this->input->post('kode', true);
+			$nama = $this->input->post('nama', true);
+			$username = $this->input->post('username', true);
+			$password = $this->input->post('password1');
+			$credential = $this->input->post('credential', true);
+			$hash = hash("sha256", $password . config_item('encryption_key'));
+
+			if (empty($credential)) {
+				$response['errors']['credential'] = 'Hak akses harus dipilih';
+			} else {
+				$data = array(
+					'kode' => $kode,
+					'id_credential' => $credential,
+					'nama' => $nama,
+					'username' => $username,
+					'password' => $hash,
+					'created_by' => $data['user']['id'],
+				);
+				$this->data->insert('tuser', $data);
+				$response['success'] = 'Data user ditambahkan';
+			}
 		}
 		echo json_encode($response);
 	}
@@ -70,25 +109,44 @@ class Kelola_user extends CI_Controller
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password1', 'Password Baru', 'trim|min_length[8]|alpha_numeric');
 
-
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
+			if (empty($this->input->post('credential'))) {
+				$response['errors']['credendial'] = 'Hak akses harus dipilih';
+			}
 		} else {
+			$where = array('username' => $this->session->userdata('username'));
+			$data['user'] = $this->data->find('tuser', $where)->row_array();
+
 			$id = $this->input->post('id');
 			$kode = $this->input->post('kode');
+			$credential = $this->input->post('credential');
 			$nama = $this->input->post('nama');
 			$username = $this->input->post('username');
-			$password = $this->input->post('password');
+			$password = $this->input->post('password1');
+			$hash = hash("sha256", $password . config_item('encryption_key'));
+			$timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
 
-			$data = array(
-				'kode' => $kode,
-				'nama' => $nama,
-				'username' => $username,
-				'password' => $password,
-			);
-			$where = array('id' => $id);
-			$this->data->update('tuser', $where, $data);
-			$response['success'] = 'Data user ditambahkan';
+			if (empty($credential)) {
+				$response['errors']['credential'] = 'Hak akses harus dipilih';
+			} else {
+				$data = array(
+					'kode' => $kode,
+					'nama' => $nama,
+					'id_credential' => $credential,
+					'username' => $username,
+					'updated_date' => $timestamp,
+					'updated_by' => $data['user']['id'],
+				);
+				if (!empty($password)) {
+					$data1 = array('password' => $hash);
+					$where = array('id' => $id);
+					$this->data->update('tuser', $where, $data1);
+				}
+				$where = array('id' => $id);
+				$this->data->update('tuser', $where, $data);
+				$response['success'] = 'Data user diubah';
+			}
 		}
 		echo json_encode($response);
 	}
