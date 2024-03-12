@@ -27,6 +27,9 @@ class Kelola_karyawan extends CI_Controller
 
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
 		// Ambil data karyawan dari model
 		$data['title'] = 'Data Karyawan';
 		$this->load->view('templates/sidebar', $data);

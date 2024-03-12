@@ -49,74 +49,44 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Candratama</a>
-                    <!-- <a href="index.html" class="logo"><img src="<?= base_url() ?>assets/logo.png" height="24" alt="logo"></a> -->
+                    <a href="<?= base_url('Admin') ?>" class="logo"><i class="mdi mdi-assistant"></i> Candratama</a>
+
                 </div>
             </div>
 
             <div class="sidebar-inner slimscrollleft">
-
                 <div id="sidebar-menu">
                     <ul>
                         <li class="menu-title">Main</li>
-
-                        <li>
-                            <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-tv"></i> <span> Master Warehouse </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= base_url('Data_group') ?>">Data Group</a></li>
-                                <li><a href="<?= base_url('Data_satuan_barang') ?>">Data Satuan Barang</a></li>
-                                <li><a href="<?= base_url('kelola_data_barang') ?>">Kelola Data Barang</a></li>
-                                <li><a href="<?= base_url('Kelola_data_furniture') ?>">Kelola Data Furniture</a></li>
-                                <li><a href="<?= base_url('Kelola_data_meubel') ?>">Kelola Data Meubel</a></li>
-                                <li><a href="<?= base_url('Kelola_data_granit_hpl') ?>">Kelola Data Granit & HPL</a></li>
-                                <li><a href="<?= base_url('Laporan_warehouse') ?>">Laporan</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-layer-group"></i> <span> Project Interior </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= base_url('data_prospek') ?>">Data Prospek</a></li>
-                                <li><a href="<?= base_url('calon_buyer') ?>">Daftar Calon Buyer</a></li>
-                                <li><a href="<?= base_url('follup') ?>">Daftar Followup Prospek</a></li>
-                                <li><a href="<?= base_url('Kelola_surat_presentasi') ?>">Surat Presentasi Project</a></li>
-                                <li><a href="<?= base_url('buyer') ?>">Data Buyer</a></li>
-                                <li><a href="<?= base_url('buyer_RO') ?>">Data Buyer RO</a></li>
-                                <li><a href="<?= base_url('transaksi') ?>">Transaksi Kontrak</a></li>
-                                <li><a href="<?= base_url('bahan_project') ?>">Input Bahan Project</a></li>
-                                <li><a href="<?= base_url('Laporan_interior') ?>">Laporan</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('Kelola_karyawan') ?>" class="waves-effect"><i class="fas fa-people-group"></i> <span> Data Karyawan </span> </a>
-                        </li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-book"></i> <span> Menu Inventaris </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= base_url('Kelola_alat_tukang') ?>">Alat Tukang</a></li>
-                                <li><a href="<?= base_url('Kelola_alat_kantor') ?>">Alat Kantor</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-layer-group"></i> <span> Menu Fasilitas </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= base_url('Backup_data') ?>">Backup Data</a></li>
-                                <li><a href="<?= base_url('log_user') ?>">Data Log User</a></li>
-                                <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2') : ?>
-                                    <li><a href="<?= base_url('Hak_akses') ?>">Kelola Hak Akses</a></li>
-                                    <li><a href="<?= base_url('Kelola_user') ?>">Kelola User</a></li>
-                                <?php endif; ?>
-                                <li><a href="<?= base_url('Kelola_penjualan') ?>">Password Edit Penjualan</a></li>
-                                <li><a href="<?= base_url('Help') ?>">Help</a></li>
-                            </ul>
-                        </li>
+                        <?php foreach ($menus as $menu) : ?>
+                            <?php if ($menu['is_devider'] == '2') : ?>
+                                <li>
+                                    <a href="<?= base_url($menu['link']) ?>"> <i><?= $menu['icon'] ?></i> <span><?= $menu['name'] ?></span> </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if ($menu['is_devider'] == '1') : ?>
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect">
+                                        <i><?= $menu['icon'] ?> </i>
+                                        <span><?= $menu['name'] ?></span>
+                                        <span class="float-right"><i class="mdi mdi-chevron-right"></i></span>
+                                    </a>
+                                    <ul class="list-unstyled">
+                                        <?php foreach ($menus as $sub_menu) : ?>
+                                            <li>
+                                                <?php if ($sub_menu['type'] == '2' && $sub_menu['id_parent'] == $menu['id_parent']) : ?>
+                                                    <a href="<?= base_url($sub_menu['link']) ?>"><?= $sub_menu['name'] ?></a>
+                                                <?php endif; ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class="clearfix"></div>
-            </div> <!-- end sidebarinner -->
+            </div>
+            <!-- end sidebarinner -->
         </div>
         <!-- Left Sidebar End -->

@@ -25,6 +25,10 @@ class Hak_akses extends CI_Controller
     }
     public function index()
     {
+        //load menu helper
+        $this->load->helper('menu_helper');
+        $data['menus'] = generate_sidebar_menu();
+
         $data['title'] = 'Hak Akses';
         // Load view hak akses
         $this->load->view('templates/sidebar', $data);

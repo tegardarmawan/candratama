@@ -28,6 +28,10 @@ class Data_satuan_barang extends CI_Controller
 	}
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$data['title'] = 'Data Satuan Barang';
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');

@@ -28,6 +28,10 @@ class Kelola_data_barang extends CI_Controller
 	}
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$data['title'] = 'Kelola Data Barang';
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();

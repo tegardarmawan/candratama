@@ -19,12 +19,16 @@ class Data_group extends CI_Controller
 		return $this->session->userdata('logged_in') === TRUE;
 	}
 
+
 	private function _init()
 	{
 		$this->app_data['module_js'] = $this->module_js;
 	}
 	public function index()
-	{
+	{ //load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$data['title'] = 'Data Group Barang';
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
@@ -63,6 +67,12 @@ class Data_group extends CI_Controller
 			);
 			$this->data->insert('tgroup', $data);
 
+			//logging
+			$username = $this->session->userdata('username');
+			$action = "Simpan";
+			$menu = "Data Group";
+			$desc = "Menambahkan data group dengan kode: " . $kode . " dan nama: " . $nama;
+			$this->_log_action($username, $action, $menu, $desc);
 			$response['success'] = "Data Ditambahkan";
 		}
 		echo json_encode($response);
@@ -88,6 +98,13 @@ class Data_group extends CI_Controller
 			$where = array('id' => $id);
 			$this->data->update('tgroup', $where, $data);
 
+			//logging
+			$username = $this->session->userdata('username');
+			$menu = "Data Group";
+			$action = "Ubah";
+			$desc = "Melakukan edit data group dengan kode: " . $kode;
+			$this->_log_action($username, $action, $menu, $desc);
+
 			$response['success'] = "Data Berhasil Diperbarui";
 		}
 		echo json_encode($response);
@@ -100,11 +117,29 @@ class Data_group extends CI_Controller
 
 		$deleted = $this->data->delete('tgroup', $where);
 		if ($deleted) {
+			//logging
+			$username = $this->session->userdata('username');
+			$action = "Hapus";
+			$menu = "Data Group";
+			$desc = "Melakukan hapus data group dengan Kode Group: " . $id;
+			$this->_log_action($username, $action, $menu, $desc);
 			$response['success'] = "Data Berhasil Dihapus";
 		} else {
 			$response['error'] = "Gagal Menghapus Data";
 		}
 
 		echo json_encode($response);
+	}
+	//function untuk melakukan penyimpanan aktivitas user pada log
+	private function _log_action($username, $action, $menu, $desc)
+	{
+		$log_data = array(
+			'user' => $username,
+			'aksi' => $action,
+			'nform' => $menu,
+			'ket' => $desc,
+			'waktu' => date('Y-m-d H:i:s')
+		);
+		$this->data->insert('tlog', $log_data);
 	}
 }

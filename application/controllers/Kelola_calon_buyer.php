@@ -24,6 +24,10 @@ class Kelola_calon_buyer extends CI_Controller
 	}
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$data['title'] = 'Calon Buyer';
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');

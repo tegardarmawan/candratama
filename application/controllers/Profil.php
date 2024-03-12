@@ -15,7 +15,7 @@ class Profil extends CI_Controller
     }
     public function is_logged_in()
     {
-        $this->session->userdata('logged_in') === TRUE;
+        return $this->session->userdata('logged_in') === TRUE;
     }
     private function _init()
     {
@@ -23,6 +23,9 @@ class Profil extends CI_Controller
     }
     public function index()
     {
+        $this->load->helper('menu_helper');
+        $data['menus'] = generate_sidebar_menu();
+
         $data['title'] = 'Profil';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
@@ -44,5 +47,49 @@ class Profil extends CI_Controller
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
+    }
+    // controller edit profil
+    public function edit_profil()
+    {
+        $this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('password1', 'Password Baru', 'trim|alpha_numeric|min_length[8]');
+
+        if ($this->form_validation->run() == false) {
+            $response['errors'] = $this->form_validation->error_array();
+        } else {
+            $where = array('username' => $this->session->userdata('username'));
+            $user = $this->data->find('tuser', $where)->row_array();
+
+            $id = $this->input->post('id');
+            $nama = $this->input->post('nama');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password1');
+
+            // Hash password if provided
+            $hash = '';
+            if (!empty($password)) {
+                $hash = hash("sha256", $password . config_item('encryption_key'));
+            }
+
+            $timestamp = date('Y-m-d H:i:s');
+
+            $dataToUpdate = array(
+                'nama' => $nama,
+                'username' => $username,
+                'updated_date' => $timestamp,
+                'updated_by' => $user['id'],
+            );
+
+            // Update password if provided
+            if (!empty($hash)) {
+                $dataToUpdate['password'] = $hash;
+            }
+
+            $where = array('id' => $id);
+            $this->data->update('tuser', $where, $dataToUpdate);
+            $response['success'] = 'Data user diubah';
+        }
+        echo json_encode($response);
     }
 }

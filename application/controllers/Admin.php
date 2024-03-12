@@ -33,6 +33,9 @@ class Admin extends CI_Controller
 			$data['karyawan'] = $this->data->get_all('tkaryawan')->result();
 			$this->session->set_userdata('data_karyawan', $data['karyawan']);
 		}
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
 
 		// Load data untuk tampilan dashboard
 		$data['title'] = 'Dashboard';

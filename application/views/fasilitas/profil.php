@@ -3,19 +3,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Profil</h1>
+                    <h3 class="m-0">Data Profil</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>" class="text-black">Home</a>
-                        </li>
                         <li class="breadcrumb-item">Profil admin</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- html edit profil -->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -31,42 +29,6 @@
                                     <input type="hidden" class="form-control" id="id" name="id">
                                     <input type="text" class="form-control" id="nama" name="nama">
                                     <small class="text-danger pl-1" id="error-nama"></small>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="email" name="email">
-                                    <small class="text-danger pl-1" id="error-email"></small>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="telepon" class="col-sm-2 col-form-label">No HP</label>
-                                <div class="col-sm-6">
-                                    <input type="number" class="form-control" id="telepon" name="telepon">
-                                    <small class="text-danger pl-1" id="error-telepon"></small>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="akses" class="col-sm-2 col-form-label">Role Akses</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="akses" name="akses" readonly>
-                                    <small class="text-danger pl-1" id="error-akses"></small>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="alamat" name="alamat">
-                                    <small class="text-danger pl-1" id="error-alamat"></small>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="image" class="col-sm-2 col-form-label">Foto</label>
-                                <div class="col-sm-6">
-                                    <input type="file" name="image" id="image" class="form-control" onchange="previewImage(event)">
-                                    <small class="text-danger pl-1" id="error-image"></small>
-                                    <div id="imagePreview"></div><br>
                                 </div>
                             </div>
                             <div class="row mb-1">
@@ -98,7 +60,7 @@
                             </div>
                             <div class="row mb-1">
                                 <div class="col-sm-6">
-                                    <button type=" button" id="btn-ubah" onclick="edit_profil()" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+                                    <button type=" button" id="btn-edit" onclick="edit_profil()" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
                                 </div>
                             </div>
                         </div>

@@ -24,6 +24,10 @@ class Kelola_user extends CI_Controller
 	}
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$this->app_data['credential'] = $this->data->get_all('app_credential')->result();
 		$data['title'] = 'User';
 		$this->load->view('templates/sidebar', $data);

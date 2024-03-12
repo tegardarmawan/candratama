@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -60,4 +60,5 @@ $route['buyer'] = 'Kelola_data_buyer';
 $route['buyer_RO'] = 'Kelola_data_buyer_RO';
 $route['transaksi'] = 'Kelola_transaksi_kontrak';
 $route['bahan_project'] = 'Kelola_bahan_project';
-
+$route['alat_tukang'] = 'Kelola_alat_tukang';
+$route['log_user'] = 'Data_log_user';

@@ -26,6 +26,10 @@ class Kelola_alat_tukang extends CI_Controller
 	}
 	public function index()
 	{
+		//load menu helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+
 		$data['title'] = 'Alat Tukang';
 		$this->app_data['st'] = $this->data->get_all('tsatuan')->result();
 		$this->app_data['kr'] = $this->data->get_all('tkaryawan')->result();
