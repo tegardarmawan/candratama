@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" class="btn btn-danger">Hapus Data</button>
+                        <button type="button" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" class="btn btn-danger" data-id="id">Hapus Data</button>
                     </div>
                 </div>
             </div>

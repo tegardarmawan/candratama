@@ -4,7 +4,7 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
 
-	// Menetapkan ID data ke tombol hapus di dalam modal
+	// Mengatur data-id pada tombol hapus di dalam modal
 	$("#btn-hapus").data("id", id);
 });
 
