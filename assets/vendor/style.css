@@ -1,16 +1,7 @@
-/**
-* Template Name: BizLand
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   color: #444444;
 }
 
@@ -30,7 +21,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 /*--------------------------------------------------------------
@@ -52,7 +45,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #106eea;
+  border: 6px solid #ae1e2d;
   border-top-color: #e2eefd;
   border-radius: 50%;
   width: 60px;
@@ -116,7 +109,7 @@ h6 {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-  background: #106eea;
+  background: #ae1e2d;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -187,7 +180,7 @@ h6 {
 }
 
 #header .logo a span {
-  color: #106eea;
+  color: #ae1e2d;
 }
 
 #header .logo img {
@@ -222,7 +215,7 @@ h6 {
 
 .navbar>ul>li {
   white-space: nowrap;
-  padding: 10px 0 10px 28px;
+  padding: 10px 10px 10px 10px;
 }
 
 .navbar a,
@@ -233,7 +226,7 @@ h6 {
   padding: 0 3px;
   font-size: 15px;
   font-weight: 600;
-  color: #222222;
+  color: #080808;
   white-space: nowrap;
   transition: 0.3s;
   position: relative;
@@ -245,7 +238,7 @@ h6 {
   line-height: 0;
   margin-left: 5px;
 }
-
+/*  */
 .navbar>ul>li>a:before {
   content: "";
   position: absolute;
@@ -253,24 +246,25 @@ h6 {
   height: 2px;
   bottom: -6px;
   left: 0;
-  background-color: #106eea;
+  background-color: #2a2929;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
 }
 
-.navbar a:hover:before,
-.navbar li:hover>a:before,
+
 .navbar .active:before {
   visibility: visible;
   width: 100%;
 }
 
-.navbar a:hover,
-.navbar .active,
-.navbar .active:focus,
-.navbar li:hover>a {
-  color: #106eea;
+
+
+.navbar li:hover {
+  background-color: #dfdfdf;
+  border-radius: 50px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .navbar .dropdown ul {
@@ -304,7 +298,7 @@ h6 {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #106eea;
+  color: #ae1e2d;
 }
 
 .navbar .dropdown:hover>ul {
@@ -490,7 +484,7 @@ h6 {
 }
 
 #hero h1 span {
-  color: #106eea;
+  color: #ae1e2d;
 }
 
 #hero h2 {
@@ -529,7 +523,7 @@ h6 {
 }
 
 #hero .btn-watch-video i {
-  color: #106eea;
+  color: #ff4848;
   font-size: 32px;
   transition: 0.3s;
   line-height: 0;
@@ -537,11 +531,11 @@ h6 {
 }
 
 #hero .btn-watch-video:hover {
-  color: #106eea;
+  color: #ae1e2d;
 }
 
 #hero .btn-watch-video:hover i {
-  color: #3b8af2;
+  color: #ae1e2d;
 }
 
 @media (min-width: 1024px) {
@@ -577,6 +571,48 @@ h6 {
     height: 120vh;
   }
 }
+/* Card Content */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card{
+  box-shadow: 0 4px 4px 0 rgba(103, 103, 103, 0.2), 0 6px 5px 0 rgba(150, 150, 150, 0.19);
+  cursor: pointer;
+}
+.card:hover{
+  box-shadow: 0 4px 10px 0 rgba(103, 103, 103, 0.2), 0 6px 20px 0 rgba(150, 150, 150, 0.19);
+}
+.card-title{
+  text-align: center;
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+  display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+  
+  .carousel-inner .carousel-item-right.active,
+  .carousel-inner .carousel-item-next {
+    transform: translateX(33.333%);
+  }
+  
+  .carousel-inner .carousel-item-left.active, 
+  .carousel-inner .carousel-item-prev {
+    transform: translateX(-33.333%);
+  }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+transform: translateX(0);
+}
+
+
 
 /*--------------------------------------------------------------
 # Sections General
@@ -711,7 +747,7 @@ section {
 }
 
 .featured-services .icon-box:hover::before {
-  background: #106eea;
+  background: #ae1e2d;
   top: 0;
   border-radius: 0px;
 }
@@ -723,7 +759,7 @@ section {
 .featured-services .icon i {
   font-size: 48px;
   line-height: 1;
-  color: #106eea;
+  color: #ae1e2d;
   transition: all 0.3s ease-in-out;
 }
 

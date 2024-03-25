@@ -1,59 +1,68 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
-        <h1>Welcome to <span>BizLand</span></h1>
-        <h2>We are team of talented designers making websites with Bootstrap</h2>
+        <h1>Welcome to <span>Candratama Granites</span></h1>
+        <h2>We are team of talented designers making your interior design</h2>
         <div class="d-flex">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="https://youtu.be/QqLOI9BZsxU" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
         </div>
     </div>
-</section><!-- End Hero -->
+</section>
+<!-- End Hero -->
 
 <main id="main">
 
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
         <div class="container" data-aos="fade-up">
-
-            <div class="row">
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4 class="title"><a href="">Magni Dolores</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4 class="title"><a href="">Nemo Enim</a></h4>
-                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
+            <div>
+                <h2>Project Yang Kami Kerjakan</h2>
             </div>
-
+            <div class="row">
+                <div class=" col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section><!-- End Featured Services Section -->
-
+    </section>
+    <!-- End Featured Services Section -->
     <!-- ======= About Section ======= -->
     <section id="about" class="about section-bg">
         <div class="container" data-aos="fade-up">
@@ -78,14 +87,14 @@
                         <li>
                             <i class="bx bx-store-alt"></i>
                             <div>
-                                <h5>Ullamco laboris nisi ut aliquip consequat</h5>
+                                <h6>Ullamco laboris nisi ut aliquip consequat</h6>
                                 <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
                             </div>
                         </li>
                         <li>
                             <i class="bx bx-images"></i>
                             <div>
-                                <h5>Magnam soluta odio exercitationem reprehenderi</h5>
+                                <h6>Magnam soluta odio exercitationem reprehenderi</h6>
                                 <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi</p>
                             </div>
                         </li>
@@ -254,7 +263,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
+                        <h6><a href="">Lorem Ipsum</a></h6>
                         <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>
                 </div>
@@ -262,7 +271,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
+                        <h6><a href="">Sed ut perspiciatis</a></h6>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
                     </div>
                 </div>
@@ -270,7 +279,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
+                        <h6><a href="">Magni Dolores</a></h6>
                         <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
                     </div>
                 </div>
@@ -278,7 +287,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
+                        <h6><a href="">Nemo Enim</a></h6>
                         <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
                     </div>
                 </div>
@@ -286,7 +295,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-slideshow"></i></div>
-                        <h4><a href="">Dele cardo</a></h4>
+                        <h6><a href="">Dele cardo</a></h6>
                         <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
                     </div>
                 </div>
@@ -294,7 +303,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
                     <div class="icon-box">
                         <div class="icon"><i class="bx bx-arch"></i></div>
-                        <h4><a href="">Divera don</a></h4>
+                        <h6><a href="">Divera don</a></h6>
                         <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
                     </div>
                 </div>
@@ -315,7 +324,7 @@
                         <div class="testimonial-item">
                             <img src="<?= base_url() ?>assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
                             <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
+                            <h6>Ceo &amp; Founder</h6>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
@@ -328,7 +337,7 @@
                         <div class="testimonial-item">
                             <img src="<?= base_url() ?>assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
                             <h3>Sara Wilsson</h3>
-                            <h4>Designer</h4>
+                            <h6>Designer</h6>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
@@ -341,7 +350,7 @@
                         <div class="testimonial-item">
                             <img src="<?= base_url() ?>assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                             <h3>Jena Karlis</h3>
-                            <h4>Store Owner</h4>
+                            <h6>Store Owner</h6>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
@@ -354,7 +363,7 @@
                         <div class="testimonial-item">
                             <img src="<?= base_url() ?>assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
                             <h3>Matt Brandon</h3>
-                            <h4>Freelancer</h4>
+                            <h6>Freelancer</h6>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
@@ -367,7 +376,7 @@
                         <div class="testimonial-item">
                             <img src="<?= base_url() ?>assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
                             <h3>John Larson</h3>
-                            <h4>Entrepreneur</h4>
+                            <h6>Entrepreneur</h6>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                 Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
@@ -409,7 +418,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 1</h4>
+                        <h6>App 1</h6>
                         <p>App</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -419,7 +428,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Web 3</h4>
+                        <h6>Web 3</h6>
                         <p>Web</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -429,7 +438,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 2</h4>
+                        <h6>App 2</h6>
                         <p>App</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -439,7 +448,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Card 2</h4>
+                        <h6>Card 2</h6>
                         <p>Card</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -449,7 +458,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Web 2</h4>
+                        <h6>Web 2</h6>
                         <p>Web</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -459,7 +468,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>App 3</h4>
+                        <h6>App 3</h6>
                         <p>App</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -469,7 +478,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Card 1</h4>
+                        <h6>Card 1</h6>
                         <p>Card</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -479,7 +488,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Card 3</h4>
+                        <h6>Card 3</h6>
                         <p>Card</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -489,7 +498,7 @@
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <img src="<?= base_url() ?>assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>Web 3</h4>
+                        <h6>Web 3</h6>
                         <p>Web</p>
                         <a href="<?= base_url() ?>assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
                         <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
@@ -525,7 +534,7 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <h4>Walter White</h4>
+                            <h6>Walter White</h6>
                             <span>Chief Executive Officer</span>
                         </div>
                     </div>
@@ -543,7 +552,7 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
+                            <h6>Sarah Jhonson</h6>
                             <span>Product Manager</span>
                         </div>
                     </div>
@@ -561,7 +570,7 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <h4>William Anderson</h4>
+                            <h6>William Anderson</h6>
                             <span>CTO</span>
                         </div>
                     </div>
@@ -579,7 +588,7 @@
                             </div>
                         </div>
                         <div class="member-info">
-                            <h4>Amanda Jepson</h4>
+                            <h6>Amanda Jepson</h6>
                             <span>Accountant</span>
                         </div>
                     </div>
@@ -605,7 +614,7 @@
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="box">
                         <h3>Free</h3>
-                        <h4><sup>$</sup>0<span> / month</span></h4>
+                        <h6><sup>$</sup>0<span> / month</span></h6>
                         <ul>
                             <li>Aida dere</li>
                             <li>Nec feugiat nisl</li>
@@ -622,7 +631,7 @@
                 <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
                     <div class="box featured">
                         <h3>Business</h3>
-                        <h4><sup>$</sup>19<span> / month</span></h4>
+                        <h6><sup>$</sup>19<span> / month</span></h6>
                         <ul>
                             <li>Aida dere</li>
                             <li>Nec feugiat nisl</li>
@@ -639,7 +648,7 @@
                 <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <div class="box">
                         <h3>Developer</h3>
-                        <h4><sup>$</sup>29<span> / month</span></h4>
+                        <h6><sup>$</sup>29<span> / month</span></h6>
                         <ul>
                             <li>Aida dere</li>
                             <li>Nec feugiat nisl</li>
@@ -657,7 +666,7 @@
                     <div class="box">
                         <span class="advanced">Advanced</span>
                         <h3>Ultimate</h3>
-                        <h4><sup>$</sup>49<span> / month</span></h4>
+                        <h6><sup>$</sup>49<span> / month</span></h6>
                         <ul>
                             <li>Aida dere</li>
                             <li>Nec feugiat nisl</li>

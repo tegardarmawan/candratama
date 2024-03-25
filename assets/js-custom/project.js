@@ -14,21 +14,51 @@ function showAlertifySuccess(message) {
 function showAlertifyError(message) {
 	$("body").append(alertify.error(message));
 }
-//id kodef namaf satuan ket hjual => database
+
 function delete_form() {
-	$("[name='kode']").val("");
-	$("[name='nama']").val("");
-	$("[name='satuan']").val("");
-	$("[name='ket']").val("");
-	$("[name='hjual']").val("");
+	$("[name='nota']").val("");
+	$("[name='kodec']").val("");
+	$("[name='namac']").val("");
+	$("[name='project']").val("");
+	$("[name='kontrak']").val("");
+	$("[name='user']").val("");
 }
+
 function delete_error() {
-	$("#error-kode").hide();
-	$("#error-nama").hide();
-	$("#error-satuan").hide();
-	$("#error-ket").hide();
-	$("#error-hjual").hide();
+	$("#error-nota").hide();
+	$("#error-kodec").hide();
+	$("#error-namac").hide();
+	$("#error-project").hide();
+	$("#error-kontrak").hide();
+	$("#error-user").hide();
 }
+$(document).ready(function () {
+	// Inisialisasi select2
+	$("#kodec").select2({
+		placeholder: "Pilih kode customer",
+	});
+
+	// Event change pada select2
+	$("#kodec").on("change", function () {
+		var selectedKodeCustomer = $(this).val(); // Ambil nilai kode customer yang dipilih
+
+		// Lakukan request AJAX untuk mendapatkan data nama customer
+		$.ajax({
+			type: "POST",
+			data: "kodec=" + selectedKodeCustomer,
+			url: base_url + "/" + _controller + "/get_data_customer",
+			dataType: "json",
+			success: function (response) {
+				// Set nilai form nama customer sesuai dengan data yang diperoleh dari AJAX
+				$("[name='namac']").val(response.namac);
+			},
+			error: function () {
+				// Handle error jika terjadi
+				console.error("Error fetching customer data");
+			},
+		});
+	});
+});
 
 function get_data() {
 	delete_error();
@@ -44,17 +74,9 @@ function get_data() {
 				scrollX: 320,
 				responsive: true,
 				columns: [
-					{
-						data: null,
-						render: function (data, type, row, meta) {
-							return meta.row + 1;
-						},
-					},
-					{ data: "kodef" },
-					{ data: "namaf" },
-					{ data: "namast" },
-					{ data: "ket" },
-					{ data: "hjual" },
+					{ data: "id" },
+					{ data: "namac" },
+					{ data: "project" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -62,9 +84,12 @@ function get_data() {
 								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
+								'<button class="btn btn-outline-danger" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="fas fa-trash"></i></button> '
+								'"><i class="fas fa-trash"></i></button> ' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="detail" onclick="submit(' +
+								row.id +
+								')"><i class="ion-eye"></i></button>'
 							);
 						},
 					},
@@ -81,12 +106,12 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Data Project");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
-		//id kodef namaf satuan ket hjual => database
+		$("[name='title']").text("Edit Data Project");
+
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
@@ -94,11 +119,11 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name= 'kode']").val(hasil[0].kodef);
-				$("[name= 'nama']").val(hasil[0].namaf);
-				$("[name= 'satuan']").val(hasil[0].satuan);
-				$("[name= 'ket']").val(hasil[0].ket);
-				$("[name= 'hjual']").val(hasil[0].hjual);
+				$("[name= 'nota']").val(hasil[0].nota);
+				$("[name='kodec']").val(hasil[0].kodec).trigger("change");
+				$("[name= 'namac']").val(hasil[0].namac);
+				$("[name= 'project']").val(hasil[0].project);
+				$("[name= 'kontrak']").val(hasil[0].kontrak);
 			},
 		});
 	}
@@ -108,11 +133,11 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("kode", $("[name='kode']").val());
-	formData.append("nama", $("[name='nama']").val());
-	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("ket", $("[name='ket']").val());
-	formData.append("hjual", $("[name='hjual']").val());
+	formData.append("nota", $("[name='nota']").val());
+	formData.append("kodec", $("[name='kodec']").val());
+	formData.append("namac", $("[name='namac']").val());
+	formData.append("project", $("[name='project']").val());
+	formData.append("kontrak", $("[name='kontrak']").val());
 
 	$.ajax({
 		type: "POST",
@@ -143,11 +168,11 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("kode", $("[name='kode']").val());
-	formData.append("nama", $("[name='nama']").val());
-	formData.append("satuan", $("[name='satuan']").val());
-	formData.append("ket", $("[name='ket']").val());
-	formData.append("hjual", $("[name='hjual']").val());
+	formData.append("nota", $("[name='nota']").val());
+	formData.append("kodec", $("[name='kodec']").val());
+	formData.append("namac", $("[name='namac']").val());
+	formData.append("project", $("[name='project']").val());
+	formData.append("kontrak", $("[name='kontrak']").val());
 
 	$.ajax({
 		type: "POST",

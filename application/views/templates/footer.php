@@ -13,6 +13,7 @@
 
 <!-- jQuery  -->
 <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
 <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>assets/js/modernizr.min.js"></script>
@@ -25,7 +26,6 @@
 <script src="<?= base_url() ?>assets/js/jquery.scrollTo.min.js"></script>
 
 <script src="<?= base_url() ?>assets/plugins/alertify/js/alertify.js"></script>
-<script src="<?= base_url() ?>assets/pages/dashborad.js"></script>
 
 <!-- App js -->
 <script src="<?= base_url() ?>assets/js/app.js"></script>

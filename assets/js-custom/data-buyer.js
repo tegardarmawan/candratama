@@ -16,21 +16,35 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodep']").val("");
-	$("[name='namap']").val("");
+	$("[name='kodec']").val("");
+	$("[name='kodec1']").val("");
+	$("[name='namac']").val("");
+	$("[name='ktp']").val("");
 	$("[name='alamat']").val("");
 	$("[name='kota']").val("");
 	$("[name='telp']").val("");
-	$("[name='tglp']").val("");
+	$("[name='tgl']").val("");
+	$("[name='pekerjaan']").val("");
+	$("[name='perusahaan']").val("");
+	$("[name='saldo']").val("");
+	$("[name='jenis']").val("");
+	$("[name='kodep']").val("");
 }
 
 function delete_error() {
-	$("#error-kodep").hide();
-	$("#error-namap").hide();
+	$("#error-kodec").hide();
+	$("#error-kodec1").hide();
+	$("#error-namac").hide();
+	$("#error-ktp").hide();
 	$("#error-alamat").hide();
 	$("#error-kota").hide();
 	$("#error-telp").hide();
-	$("#error-tglp").hide();
+	$("#error-tgl").hide();
+	$("#error-pekerjaan").hide();
+	$("#error-perusahaan").hide();
+	$("#error-saldo").hide();
+	$("#error-jenis").hide();
+	$("#error-kodep").hide();
 }
 
 function get_data() {
@@ -43,21 +57,22 @@ function get_data() {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				scrollY: 320,
-				scrollX: 320,
 				data: data,
 				responsive: true,
 				columns: [
-					{ data: "kodep" },
-					{ data: "namap" },
-					{ data: "alamat" },
+					{ data: "kodec" },
+					{ data: "kodec1" },
+					{ data: "namac" },
+					{ data: "kota" },
+					{ data: "telp" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
+								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
 								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
@@ -79,11 +94,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Calon Buyer");
+		$("[name='title']").text("Tambah Data Customer");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Calon Buyer");
+		$("[name='title']").text("Edit Data Customer");
 
 		$.ajax({
 			type: "POST",
@@ -92,12 +107,19 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name='kodep']").val(hasil[0].kodep);
-				$("[name='namap']").val(hasil[0].namap);
+				$("[name='kodec']").val(hasil[0].kodec);
+				$("[name='kodec1']").val(hasil[0].kodec1);
+				$("[name='namac']").val(hasil[0].namac);
+				$("[name='ktp']").val(hasil[0].ktp);
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='tglp']").val(hasil[0].tglp);
+				$("[name='tgl']").val(hasil[0].tgl);
+				$("[name='pekerjaan']").val(hasil[0].pekerjaan);
+				$("[name='perusahaan']").val(hasil[0].perusahaan);
+				$("[name='saldo']").val(hasil[0].saldo);
+				$("[name='jenis']").val(hasil[0].jenis);
+				$("[name='kodep']").val(hasil[0].kodep);
 			},
 		});
 	}
@@ -107,12 +129,19 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append("kodep", $("[name='kodep']").val());
-	formData.append("namap", $("[name='namap']").val());
+	formData.append("kodec", $("[name='kodec']").val());
+	formData.append("kodec1", $("[name='kodec1']").val());
+	formData.append("namac", $("[name='namac']").val());
+	formData.append("ktp", $("[name='ktp']").val());
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	formData.append("tglp", $("[name='tglp']").val());
+	formData.append("tgl", $("[name='tgl']").val());
+	formData.append("pekerjaan", $("[name='pekerjaan']").val());
+	formData.append("perusahaan", $("[name='perusahaan']").val());
+	formData.append("saldo", $("[name='saldo']").val());
+	formData.append("jenis", $("[name='jenis']").val());
+	formData.append("kodep", $("[name='kodep']").val());
 
 	$.ajax({
 		type: "POST",
@@ -143,12 +172,19 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("kodep", $("[name='kodep']").val());
-	formData.append("namap", $("[name='namap']").val());
+	formData.append("kodec", $("[name='kodec']").val());
+	formData.append("kodec1", $("[name='kodec1']").val());
+	formData.append("namac", $("[name='namac']").val());
+	formData.append("ktp", $("[name='ktp']").val());
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	formData.append("tglp", $("[name='tglp']").val());
+	formData.append("tgl", $("[name='tgl']").val());
+	formData.append("pekerjaan", $("[name='pekerjaan']").val());
+	formData.append("perusahaan", $("[name='perusahaan']").val());
+	formData.append("saldo", $("[name='saldo']").val());
+	formData.append("jenis", $("[name='jenis']").val());
+	formData.append("kodep", $("[name='kodep']").val());
 
 	$.ajax({
 		type: "POST",

@@ -13,14 +13,14 @@
 
                                 <li class="list-inline-item dropdown notification-list">
                                     <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                        <img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                        <img src="<?= base_url('assets/img/testimonials/testimonials-1.jpg'); ?>" alt="user" class="rounded-circle">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
                                         <div class="dropdown-item noti-title">
                                             <h5>Welcome</h5>
                                         </div>
-                                        <a class="dropdown-item" href="<?= base_url('Profil') ?>"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                                        <a class="dropdown-item" href="<?= base_url('Profil') ?>"><i class="mdi mdi-account-circle m-r-5 text-muted"></i><?= $this->session->userdata('username'); ?></a>
                                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                                     </div>
                                 </li>
@@ -31,28 +31,19 @@
                         </nav>
 
                     </div>
-                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
+                    <!-- Top Bar End -->
+                    <!-- Top Bar End -->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title center" id="exampleModalLabel"><i class="mdi mdi-alert"></i> Alert</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <h5 class="modal-title" id="exampleModalLabel">Yakin untuk keluar?</h5>
                                 </div>
-                                <div class="modal-body">
-                                    <h5>Apakah Anda yakin ingin keluar?</h5>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-start">
-                                    <div class="col-lg-6">
-                                        <a href="<?= base_url('Auth/logout') ?>" class="btn btn-outline-primary btn-block">Ya!</a>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <button type="button" id="btn-cancel" data-dismiss="modal" class="btn btn-outline-danger btn-block">Tidak</button>
-                                    </div>
+                                <div class="modal-body">Klik yakin jika anda ingin keluar</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                                    <a class="btn btn-primary" href="<?php echo base_url('auth/logout') ?>">Yakin</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Top Bar End -->
-                    <!-- Top Bar End -->

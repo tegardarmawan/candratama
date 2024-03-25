@@ -27,7 +27,6 @@ function delete_form() {
 	$("[name='ket']").val("");
 	$("[name='kodek']").val("");
 	$("[name='namak']").val("");
-	
 }
 
 function delete_error() {
@@ -42,7 +41,6 @@ function delete_error() {
 	$("#error-ket").hide();
 	$("#error-kodek").hide();
 	$("#error-namak").hide();
-	
 }
 
 function get_data() {
@@ -52,25 +50,17 @@ function get_data() {
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-            var table = $("#datatable-buttons").DataTable({
+			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-                scrollY:320,
-				scrollX:320,
+				scrollY: 320,
+				scrollX: 320,
 				responsive: true,
 				columns: [
-					{ data: "no" },
 					{ data: "kodeal" },
 					{ data: "namaal" },
 					{ data: "merk" },
 					{ data: "stock" },
-					{ data: "namast" },
-					{ data: "tglbeli" },
-					{ data: "hbeli" },
-					{ data: "ket" },
-					{ data: "kodek" },
-					{ data: "namak" },
-					
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -78,9 +68,12 @@ function get_data() {
 								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
+								'<button class="btn btn-outline-danger" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="ion-trash-b"></i></button> '
+								'"><i class="fas fa-trash"></i></button> ' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								row.id +
+								')"><i class="ion-eye"></i></button>'
 							);
 						},
 					},
@@ -141,7 +134,6 @@ function insert_data() {
 	formData.append("ket", $("[name='ket']").val());
 	formData.append("kodek", $("[name='kodek']").val());
 	formData.append("namak", $("[name='namak']").val());
-	
 
 	$.ajax({
 		type: "POST",

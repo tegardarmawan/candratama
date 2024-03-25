@@ -24,19 +24,12 @@
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
-                        
+
                         <tr>
-                            <th>No</th>
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Kota</th>
                             <th>Telepon</th>
-                            <th>Tanggal Project</th>
-                            <th>Tipe</th>
-                            <th>Src</th>
-                            <th>Jenis</th>
-                            <th>Keterangan</th>
-                            <th>Cek</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -87,7 +80,7 @@
                         <div class="form-group row">
                             <label for="status1" class="col-sm-3 col-form-label">Tanggal Project</label>
                             <div class="col-sm-9">
-                                <input type="date" name="tglp" id="tglp" class="form-control" placeholder="Masukkan Tanggal Project"  >
+                                <input type="date" name="tglp" id="tglp" class="form-control" placeholder="Masukkan Tanggal Project">
                                 <small class="text-danger pl-1" id="error-tglp"></small>
                             </div>
                         </div>
@@ -99,28 +92,28 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label for="status1" class="col-sm-3 col-form-label">Source Project</label>
+                            <label for="status1" class="col-sm-3 col-form-label">Source Project</label>
                             <div class="col-sm-9">
                                 <input type="text" name="src" class="form-control" id="src" placeholder="Masukkan Source Project">
                                 <small class="text-danger pl-1" id="error-src"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Jenis Project</label>
+                            <label for="" class="col-sm-3 col-form-label">Jenis Project</label>
                             <div class="col-sm-9">
                                 <input type="text" name="jenis" class="form-control" id="jenis" placeholder="Masukkan Jenis Project">
                                 <small class="text-danger pl-1" id="error-jenis"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Keterangan</label>
+                            <label for="" class="col-sm-3 col-form-label">Keterangan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="ket" class="form-control" id="ket" placeholder="Masukkan Keterangan Project">
                                 <small class="text-danger pl-1" id="error-ket"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">Cek</label>
+                            <label for="" class="col-sm-3 col-form-label">Cek</label>
                             <div class="col-sm-9">
                                 <input type="text" name="cek" class="form-control" id="cek" placeholder="Masukkan Cek Project">
                                 <small class="text-danger pl-1" id="error-cek"></small>

@@ -4,7 +4,7 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + id + ")"); 
+	modalButton.attr("onclick", "delete_data(" + id + ")");
 });
 
 function showAlertifySuccess(message) {
@@ -38,8 +38,9 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
-					{ data: null,
-						render: function(data,type,row,meta){
+					{
+						data: null,
+						render: function (data, type, row, meta) {
 							return meta.row + 1;
 						},
 					},
@@ -54,7 +55,7 @@ function get_data() {
 								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="ion-trash-b"></i></button> '
+								'"><i class="fas fa-trash"></i></button> '
 							);
 						},
 					},
@@ -80,7 +81,7 @@ function submit(x) {
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
-			url: base_url + "/" + _controller +  "/get_data_id",
+			url: base_url + "/" + _controller + "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
 				$("[name='id']").val(hasil[0].id);
@@ -100,7 +101,7 @@ function insert_data() {
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller +"/insert_data",
+		url: base_url + _controller + "/insert_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -161,7 +162,7 @@ function delete_data(x) {
 		type: "POST",
 		data: "id=" + x,
 		dataType: "json",
-		url: base_url  + "/" + _controller + "/delete_data",
+		url: base_url + "/" + _controller + "/delete_data",
 		success: function (response) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");

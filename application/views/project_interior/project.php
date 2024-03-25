@@ -6,10 +6,10 @@
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Candratama</a></li>
-                            <li class="breadcrumb-item active">Kelola Data Customer</li>
+                            <li class="breadcrumb-item active">Kelola Data Project</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Customer</h4>
+                    <h4 class="page-title">Data Project</h4>
                 </div>
             </div>
         </div>
@@ -24,11 +24,9 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Kode Customer</th>
-                            <th>Kode C1</th>
+                            <th>ID</th>
                             <th>Nama Customer</th>
-                            <th>Kota</th>
-                            <th>Telp</th>
+                            <th>Nama Project</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,18 +44,22 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Nota Project</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input class="form-control" type="text" id="kodec" name="kodec" placeholder="Masukkan kode customer">
+                                    <input class="form-control" type="text" id="nota" name="nota" placeholder="Masukkan nota">
                                     <small class="text-danger pl-1" id="error-kodec"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Kode C1</label>
+                                <label for="" class="col-sm-3 col-form-label">Kode Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan kode C1" name="kodec1" id="kodec1">
-                                    <small class="text-danger pl-1" id="error-kodec1"></small>
+                                    <select name="kodec" id="kodec" class="select2 form-control select-custom" style="width: 100%;">
+                                        <option value="">Pilih Kode Customer</option>
+                                        <?php foreach ($kdc as $kode) : ?>
+                                            <option value="<?= $kode->kodec ?>"><?= $kode->kodec ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -68,79 +70,68 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">NIK</label>
+                                <label for="" class="col-sm-3 col-form-label">Project</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan NIK customer" name="ktp" id="ktp">
-                                    <small class="text-danger pl-1" id="error-ktp"></small>
+                                    <input type="text" class="form-control" placeholder="Masukkan nama project" name="project" id="project">
+                                    <small class="text-danger pl-1" id="error-project"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Alamat</label>
+                                <label for="" class="col-sm-3 col-form-label">Kontrak</label>
                                 <div class="col-sm-9">
-                                    <input type="text-area" class="form-control" placeholder="Masukkan alamat customer" name="alamat" id="alamat">
-                                    <small class="text-danger pl-1" id="error-alamat"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Kota</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan kota customer" name="kota" id="kota">
-                                    <small class="text-danger pl-1" id="error-kota"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Telepon</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan telp customer" name="telp" id="telp">
-                                    <small class="text-danger pl-1" id="error-telp"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Tanggal Order</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="Masukkan tgl customer" name="tgl" id="tgl">
-                                    <small class="text-danger pl-1" id="error-tgl"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Pekerjaan Customer</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan pekerjaan customer" name="pekerjaan" id="pekerjaan">
-                                    <small class="text-danger pl-1" id="error-pekerjaan"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Perusahaan Customer</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan perusahaan customer" name="perusahaan" id="perusahaan">
-                                    <small class="text-danger pl-1" id="error-perusahaan"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Saldo Customer</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan spending money customer" name="saldo" id="saldo">
-                                    <small class="text-danger pl-1" id="error-saldo"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Jenis Customer</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan jenis customer" name="jenis" id="jenis">
-                                    <small class="text-danger pl-1" id="error-jenis"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Kodep</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan kodep" name="kodep" id="kodep">
-                                    <small class="text-danger pl-1" id="error-kodep"></small>
+                                    <input type="text-area" class="form-control" placeholder="Masukkan kode kontrak" name="kontrak" id="kontrak">
+                                    <small class="text-danger pl-1" id="error-kontrak"></small>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary">Tambah Data</button>
                             <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary">Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal lihat detail -->
+            <div class="modal fade bs-example-modal-lg" id="lihat" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0" id="myLargeModalLabel">Project >> Detail</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Nota Project</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="hidden" id="id" name="id" readonly>
+                                    <input class="form-control" type="text" id="nota" name="nota" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode Customer</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" id="kodec" name="kodec" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Nama Customer</label>
+                                <div class="col-sm-9">
+                                    <textarea required class="form-control" rows="5" id="namac" name="namac" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Project</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" id="project" name="project" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Kontrak</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" id="kontrak" name="kontrak" readonly>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,6 @@ function delete_form() {
 	$("[name='stockmin']").val("");
 	$("[name='namat']").val("");
 	$("[name='projectt']").val("");
-	
 }
 function delete_error() {
 	$("#error-kodeh").hide();
@@ -45,7 +44,6 @@ function delete_error() {
 	$("#error-stockmin").hide();
 	$("#error-namat").hide();
 	$("#error-projectt").hide();
-		
 }
 
 function get_data() {
@@ -55,36 +53,30 @@ function get_data() {
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-            var table = $("#datatable-buttons").DataTable({
+			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-                scrollY:320,
-				scrollX:320,
+				scrollY: 320,
+				scrollX: 320,
 				responsive: true,
 				columns: [
-					{data: 'kodeg'},
-					{data: "kodeh"},
-					{data: "namah"},
-					{data: "stock"},
-					{data: "namast"},
-					{data: "ket"},
-					{data: "hbeli"},
-					{data: "hpokok"},
-					{data: "hjual"},
-					{data: "status"},
-					{data: "stockmin"},
-					{data: "namat"},
-					{data: "projectt"},
+					{ data: "kodeh" },
+					{ data: "namah" },
+					{ data: "stock" },
+					{ data: "status" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
+								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="ion-trash-b"></i></button> '
+								'"><i class="fas fa-trash"></i></button> ' +
+								'<button class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								row.id +
+								')"><i class="ion-eye"></i></button>'
 							);
 						},
 					},
@@ -106,7 +98,7 @@ function submit(x) {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
 		$("[name='title']").text("Edit Data Granit&HPL");
-//id kodef namaf satuan ket hjual => database
+		//id kodef namaf satuan ket hjual => database
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
@@ -127,7 +119,6 @@ function submit(x) {
 				$("[name= 'stockmin']").val(hasil[0].stockmin);
 				$("[name= 'namat']").val(hasil[0].namat);
 				$("[name= 'projectt']").val(hasil[0].projectt);
-				
 			},
 		});
 	}
@@ -150,7 +141,7 @@ function insert_data() {
 	formData.append("stockmin", $("[name='stockmin']").val());
 	formData.append("namat", $("[name='namat']").val());
 	formData.append("projectt", $("[name='projectt']").val());
-		
+
 	$.ajax({
 		type: "POST",
 		url: base_url + _controller + "/insert_data",

@@ -26,13 +26,10 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="10%">Kode Pemesanan</th>
-                            <th width="10%">Nama Pemesan</th>
-                            <th width="20%">Alamat</th>
-                            <th width="10%">Kota Pemesan</th>
-                            <th width="20%">Telepon</th>
-                            <th width="10%">Tanggal Pesan</th>
-                            <th width="20%">Aksi</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>
@@ -54,45 +51,45 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 form-label">Kode Pemesanan</label>
-                                <input type="hidden" class="form-control" name="id" id="id" >
+                                <input type="hidden" class="form-control" name="id" id="id">
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="kodep" id="kodep" placeholder="Masukkan kode pemesanan">
-                                    <small class="text-danger pl-1" id="error-kodep" ></small>
+                                    <small class="text-danger pl-1" id="error-kodep"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 form-label">Nama Pemesan</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" name="namap" id="namap" placeholder="Masukkan kode pemesanan">
-                                    <small class="text-danger pl-1" id="error-namap" ></small>
+                                    <small class="text-danger pl-1" id="error-namap"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label" >Alamat</label>
+                                <label for="" class="col-sm-3 form-label">Alamat</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" placeholder="Masukkan alamat pemesan" name="alamat" id="alamat">
-                                    <small class="text-danger pl-1" id="error-alamat" ></small>
+                                    <small class="text-danger pl-1" id="error-alamat"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label" >Kota</label>
+                                <label for="" class="col-sm-3 form-label">Kota</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan kota pemesan" name="kota" id="kota" >
-                                    <small class="text-danger pl-1" id="error-kota" ></small>
+                                    <input type="text" class="form-control" placeholder="Masukkan kota pemesan" name="kota" id="kota">
+                                    <small class="text-danger pl-1" id="error-kota"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label" >Telepon Pemesan</label>
+                                <label for="" class="col-sm-3 form-label">Telepon Pemesan</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" placeholder="Masukkan telepon pemesan" name="telp" id="telp">
-                                    <small class="text-danger pl-1" id="error-telp" ></small>
+                                    <small class="text-danger pl-1" id="error-telp"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 form-label" >Tanggal Pesan</label>
+                                <label for="" class="col-sm-3 form-label">Tanggal Pesan</label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" placeholder="Masukkan tanggal pesan" name="tglp" id="tglp">
-                                    <small class="text-danger pl-1" id="error-tglp" ></small>
+                                    <small class="text-danger pl-1" id="error-tglp"></small>
                                 </div>
                             </div>
                         </div>

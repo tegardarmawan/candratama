@@ -94,10 +94,36 @@
 <script src="<?= base_url() ?>assets/vendor/swiper/swiper-bundle.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/waypoints/noframework.waypoints.js"></script>
 <script src="<?= base_url() ?>assets/vendor/php-email-form/validate.js"></script>
+<script>
+    $("#recipeCarousel").carousel({
+        interval: 10000,
+    });
+
+    $(".carousel .carousel-item").each(function() {
+        var minPerSlide = 3;
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(":first");
+        }
+        next.children(":first-child").clone().appendTo($(this));
+
+        for (var i = 0; i < minPerSlide; i++) {
+            next = next.next();
+            if (!next.length) {
+                next = $(this).siblings(":first");
+            }
+
+            next.children(":first-child").clone().appendTo($(this));
+        }
+    });
+</script>
 
 <!-- Template Main JS File -->
 <script src="<?= base_url() ?>assets/js/main.js"></script>
-
+<script>
+    var base_url = '<?php echo base_url() ?>';
+    var _controller = '<?= $this->router->fetch_class() ?>';
+</script>
 </body>
 
 </html>

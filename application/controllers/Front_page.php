@@ -17,6 +17,12 @@ class Front_page extends CI_Controller
 
     public function index()
     {
+        $welcome = [
+            'select' => 'a.title, a.sub_title, b.file_name',
+            'from' => 'web_content a',
+            'join' => ['web_content_has_image b, b.id_web_content = a.id'],
+        ];
+        $this->app_data['welcome'] = $this->data->get($welcome)->result();
         $this->load->view('front_page/header');
         $this->load->view('front_page/index');
         $this->load->view('front_page/footer');

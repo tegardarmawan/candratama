@@ -26,18 +26,11 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                        <th width="5%">No</th>
-                            <th width="10%">Kode Alat</th>
-                            <th width="10%">Nama</th>
-                            <th width="10%">Merk</th>
-                            <th width="5%">Stock</th>
-                            <th width="5%">Satuan</th>
-                            <th width="10%">Tanggal Beli</th>
-                            <th width="5%">Harga</th>
-                            <th width="10%">Ket</th>
-                            <th width="10%">Kode Karyawan</th>
-                            <th width="10%">Nama Karyawan</th>
-                            <th width="10%">Aksi</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Merk</th>
+                            <th>Stock</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>

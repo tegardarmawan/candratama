@@ -25,20 +25,12 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th width="5%">No</th>
-                            <th width="10%">Kode Group</th>
-                            <th width="10%">Kode Barang</th>
-                            <th width="5%">Nama Barang</th>
-                            <th width="5%">Stock Barang</th>
-                            <th width="5%">Satuan Barang</th>
-                            <th width="10%">Harga Beli</th>
-                            <th width="10%">Harga Pokok</th>
-                            <th width="10%">Harga Jual</th>
-                            <th width="5%">Status</th>
-                            <th width="5%">Stock Minimal</th>
-                            <th width="5%">Nama Tukang</th>
-                            <th width="5%">Project</th>
-                            <th width="10%">Aksi</th>
+                            <th>Id</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 </table>

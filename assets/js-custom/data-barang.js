@@ -52,38 +52,33 @@ function get_data() {
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
-            var table = $("#datatable-buttons").DataTable({
+			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-                scrollY:320,
-				scrollX:320,
+				scrollY: 320,
+				scrollX: 320,
 				responsive: true,
 				columns: [
 					{
-						data: "id"
+						data: "id",
 					},
-					{ data: "kodeg" },
 					{ data: "kodeb" },
 					{ data: "namab" },
 					{ data: "stock" },
-					{ data: "namast" },
-					{ data: "hbeli" },
-					{ data: "hpokok" },
-					{ data: "hjual" },
 					{ data: "status" },
-					{ data: "stockmin" },
-					{ data: "namat" },
-					{ data: "projectt" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
+								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="ion-trash-b"></i></button> '
+								'"><i class="fas fa-trash"></i></button> ' +
+								'<button class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								row.id +
+								')"><i class="ion-eye"></i></button>'
 							);
 						},
 					},

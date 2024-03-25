@@ -49,7 +49,7 @@ function get_data() {
 								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
-								'"><i class="ion-trash-b"></i></button> '
+								'"><i class="fas fa-trash"></i></button> '
 							);
 						},
 					},
