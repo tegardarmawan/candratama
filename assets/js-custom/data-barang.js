@@ -70,15 +70,15 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" data-action-type="edit" data-id="' +
 								row.id +
-								')"><i class="ion-edit"></i></button> ' +
+								'"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
-								'<button class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								'<button class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#detail" title="lihat" data-id="' +
 								row.id +
-								')"><i class="ion-eye"></i></button>'
+								'"><i class="ion-eye"></i></button>'
 							);
 						},
 					},
@@ -91,15 +91,17 @@ function get_data() {
 	});
 }
 
-function submit(x) {
+function submit(button) {
+	var x = $(button).data("action-type");
+	var id = $(button).data("id");
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
-	} else {
+		$("[name='title']").text("Tambah Data Barang");
+	} else if (x == "edit") {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Edit Data Barang");
 
 		$.ajax({
 			type: "POST",
@@ -112,7 +114,31 @@ function submit(x) {
 				$("[name='kodeb']").val(hasil[0].kodeb);
 				$("[name='nama']").val(hasil[0].namab);
 				$("[name='stock']").val(hasil[0].stock);
-				$("#kodest").val(hasil[0].satuan);
+				$("[name='kodest']").val(hasil[0].namast);
+				$("[name='hargabeli']").val(hasil[0].hbeli);
+				$("[name='hargapokok']").val(hasil[0].hpokok);
+				$("[name='hargajual']").val(hasil[0].hjual);
+				$("[name='status1']").val(hasil[0].status);
+				$("[name='stockmin']").val(hasil[0].stockmin);
+				$("[name='namat']").val(hasil[0].namat);
+				$("[name='project']").val(hasil[0].projectt);
+			},
+		});
+	} else {
+		$("[name='title']").text("Detail Data Barang");
+
+		$.ajax({
+			type: "POST",
+			data: "id=" + x,
+			url: base_url + "/" + _controller + "/get_data_id",
+			dataType: "json",
+			success: function (hasil) {
+				$("[name= 'id']").val(hasil[0].id);
+				$("[name='kodeg']").val(hasil[0].kodeg);
+				$("[name='kodeb']").val(hasil[0].kodeb);
+				$("[name='nama']").val(hasil[0].namab);
+				$("[name='stock']").val(hasil[0].stock);
+				$("[name='kodest']").val(hasil[0].namast);
 				$("[name='hargabeli']").val(hasil[0].hbeli);
 				$("[name='hargapokok']").val(hasil[0].hpokok);
 				$("[name='hargajual']").val(hasil[0].hjual);

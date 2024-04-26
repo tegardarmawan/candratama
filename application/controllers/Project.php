@@ -84,7 +84,7 @@ class Project extends CI_Controller
     {
         $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tcust.nota]');
         $this->form_validation->set_rules('project', 'Nama Project', 'trim|required');
-        $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim|required');
+        $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();

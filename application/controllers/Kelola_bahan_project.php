@@ -23,7 +23,12 @@ class Kelola_bahan_project extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('templates/sidebar');
+		//load helper
+		$this->load->helper('menu_helper');
+		$data['menus'] = generate_sidebar_menu();
+		$data['title'] = 'Kelola Bahan Project';
+
+		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('project_interior/data_bahan_project');
 		$this->load->view('templates/footer');

@@ -3,10 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kelola_alat_tukang extends CI_Controller
 {
-
 	var $module_js = ['alat-tukang'];
 	var $app_data = [];
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -15,7 +13,6 @@ class Kelola_alat_tukang extends CI_Controller
 			redirect('Auth');
 		}
 	}
-
 	public function is_logged_in()
 	{
 		return $this->session->userdata('logged_in') === TRUE;

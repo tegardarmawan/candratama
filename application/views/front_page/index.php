@@ -2,7 +2,7 @@
 <section id="hero" class="d-flex align-items-center">
     <div class="container" data-aos="zoom-out" data-aos-delay="100">
         <h1>Welcome to <span>Candratama Granites</span></h1>
-        <h2>We are team of talented designers making your interior design</h2>
+        <h2>We are team of talented contractior making your interior wonderful</h2>
         <div class="d-flex">
             <a href="https://youtu.be/QqLOI9BZsxU" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
         </div>
@@ -59,7 +59,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card" style="width: 18rem;" onclick="window.location.href = '<?= base_url('') ?>'" data-href="<?= base_url() ?>">
+                        <img class="card-img-top" src="<?= base_url('assets/img/portfolio-details-1.jpg') ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Some Title </h5>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <?= $this->pagination->create_links(); ?>
         </div>
     </section>
     <!-- End Featured Services Section -->

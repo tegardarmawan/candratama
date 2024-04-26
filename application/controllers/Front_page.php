@@ -22,9 +22,26 @@ class Front_page extends CI_Controller
             'from' => 'web_content a',
             'join' => ['web_content_has_image b, b.id_web_content = a.id'],
         ];
+
+        $project = [
+            'select' => 'a.title, a.sub_title, a.content, b.file_name',
+            'from' => 'web_content a',
+            'join' => ['web_content_has_image b, b.id_web_content = a.id'],
+            'where' => [
+                'a.id_menu' => '39'
+            ]
+        ];
         $this->app_data['welcome'] = $this->data->get($welcome)->result();
         $this->load->view('front_page/header');
         $this->load->view('front_page/index');
         $this->load->view('front_page/footer');
+
+        //pagination config
+        $this->load->library('pagination');
+        $config['base_url'] = 'http://localhost/Candratama/Front_page/index';
+        $config['total_rows'] = 6;
+        $config['per_page'] = 3;
+        //initialize
+        $this->pagination->initialize($config);
     }
 }

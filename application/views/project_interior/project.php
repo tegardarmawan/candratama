@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Nama Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan customer" name="namac" id="namac">
+                                    <input type="text" class="form-control" placeholder="Pilih kode customer" name="namac" id="namac" readonly>
                                     <small class="text-danger pl-1" id="error-namac"></small>
                                 </div>
                             </div>
