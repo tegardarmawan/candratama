@@ -47,27 +47,27 @@ class Kelola_data_buyer extends CI_Controller
 	}
 	public function insert_data()
 	{
-		$this->form_validation->set_rules('kodec', 'kodec', 'trim|required|is_unique[tcust.kodec]');
-		$this->form_validation->set_rules('kodec1', 'kodec1', 'trim|required');
+		$this->form_validation->set_rules('kodec', 'kodec', 'required|is_unique[tcust.kodec]|trim');
+		$this->form_validation->set_rules('kodec1', 'kodec1', 'trim|required|numeric|is_unique[tcust.kodec1]');
 		$this->form_validation->set_rules('namac', 'namac', 'trim|required');
 		$this->form_validation->set_rules('kota', 'kota', 'trim|required');
-		$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
-		$this->form_validation->set_rules('ktp', 'ktp', 'trim|required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'trim');
+		$this->form_validation->set_rules('ktp', 'ktp', 'trim');
 		$this->form_validation->set_rules('telp', 'telp', 'trim|required');
 		$this->form_validation->set_rules('tgl', 'tgl', 'trim|required');
-		$this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim|required');
-		$this->form_validation->set_rules('perusahaan', 'perusahaan', 'trim|required');
-		$this->form_validation->set_rules('saldo', 'saldo', 'trim|required');
+		$this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim');
+		$this->form_validation->set_rules('perusahaan', 'perusahaan', 'trim');
+		$this->form_validation->set_rules('saldo', 'saldo', 'trim');
 		$this->form_validation->set_rules('jenis', 'jenis', 'trim|required');
-		$this->form_validation->set_rules('kodep', 'kodep', 'trim|required');
+		$this->form_validation->set_rules('kodep', 'kodep', 'trim');
 
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kodec = $this->input->post('kodec');
+			$kodec = strtoupper($this->input->post('kodec'));
 			$kodec1 = $this->input->post('kodec1');
-			$namac = $this->input->post('namac');
+			$namac = strtoupper($this->input->post('namac'));
 			$ktp = $this->input->post('ktp');
 			$alamat = $this->input->post('alamat');
 			$kota = $this->input->post('kota');
@@ -102,7 +102,7 @@ class Kelola_data_buyer extends CI_Controller
 	public function edit_data()
 	{
 		$this->form_validation->set_rules('kodec', 'kodec', 'trim|required|is_unique[tcust.kodec]');
-		$this->form_validation->set_rules('kodec1', 'kodec1', 'trim|required');
+		$this->form_validation->set_rules('kodec1', 'kodec1', 'trim|required|numeric');
 		$this->form_validation->set_rules('namac', 'namac', 'trim|required');
 		$this->form_validation->set_rules('kota', 'kota', 'trim|required');
 		$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');

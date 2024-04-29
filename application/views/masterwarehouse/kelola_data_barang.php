@@ -17,8 +17,8 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinup" data-action-type="tambah" ">
-                    <i class=" mdi mdi-plus"></i>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinup" onclick="submit('tambah')">
+                    <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
                 <hr>
@@ -53,11 +53,11 @@
                                 <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
                                 <input type="hidden" name="id" class="form-control" id="id">
                                 <div class="col-sm-9">
-                                    <select name="kodeg" id="kodeg" class="select2 form-control mb-3 custom-select">
+                                    <select name="kodeg" id="kodeg" class="select2 form-control custom-select" style="width: 100%; height: 50px;" data-placeholder="Pilih Group Barang">
                                         <option value="">Pilih Kode Group</option>
                                         <?php foreach ($kodegroup as $row) : ?>
                                             <option value="<?php echo $row->kodeg; ?>">
-                                                <?php echo $row->kodeg; ?>
+                                                <?php echo $row->namag; ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -88,7 +88,7 @@
                             <div class="form-group row">
                                 <label for="kodest" class="col-sm-3 col-form-label">Kode Satuan Barang</label>
                                 <div class="col-sm-9">
-                                    <select name="kodest" id="kodest" class="select2 form-control mb-3 custom-select">
+                                    <select name="kodest" id="kodest" class="select2 form-control mb-3 custom-select" data-placeholder="Pilih Kode Barang">
                                         <option value="">Pilih Kode Satuan</option>
                                         <?php foreach ($kodesatuan as $kodest) : ?>
                                             <option value="<?php echo $kodest->namast; ?>">
@@ -123,7 +123,7 @@
                             <div class="form-group row">
                                 <label for="status1" class="col-sm-3 col-form-label">Status Barang</label>
                                 <div class="col-sm-9">
-                                    <select name="status1" id="status1" class="select2 form-control mb-3 custom-select">
+                                    <select name="status1" id="status1" class="form-control mb-3">
                                         <option value="">Pilih Status</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -139,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="namat" class="col-sm-3 col-form-label">Nama Tukang</label>
+                                <label for="namat" class="col-sm-3 col-form-label">Nama Terang</label>
                                 <div class="col-sm-9">
                                     <input required type="text" name="namat" id="namat" class="form-control" placeholder="Masukkan Nama Terang">
                                     <small class="text-danger pl-1" id="error-namat"></small>
@@ -260,7 +260,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="namat" class="col-sm-3 col-form-label">Nama Tukang</label>
+                            <label for="namat" class="col-sm-3 col-form-label">Nama Terang</label>
                             <div class="col-sm-9">
                                 <input required type="text" name="namat" id="namat" class="form-control" readonly>
                             </div>

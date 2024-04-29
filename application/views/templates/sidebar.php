@@ -9,11 +9,16 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <!-- plugins css -->
+    <link href="<?= base_url() ?>assets/plugins/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url() ?>assets/plugins/alertify/css/alertify.css" rel="stylesheet">
+    <link href="<?= base_url() ?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" type="text/css">
+
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,8 +30,8 @@
     <link href="<?= base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <!-- sweetAlert -->
     <link href="<?= base_url() ?>assets/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
-    <!-- jquery -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 
 </head>
 
@@ -62,8 +67,8 @@
                     <ul>
                         <li class="menu-title">Main</li>
                         <?php foreach ($menus as $menu) : ?>
-                            <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2' || $this->session->userdata('id_credential') == '3' || $this->session->userdata('id_credential') == '4') : ?>
-                                <?php if ($menu['is_devider'] == '2') : ?>
+                            <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '3' || $this->session->userdata('id_credential') == '4') : ?>
+                                <?php if ($menu['is_has_sub'] == '2') : ?>
                                     <li>
                                         <?php if ($menu['id_menu_role'] == '4' || $menu['id_menu_role'] == '0') : ?>
                                             <a href="<?= base_url($menu['link']) ?>">
@@ -73,8 +78,8 @@
                                         <?php endif; ?>
                                     </li>
                                 <?php endif; ?>
-                                <?php if ($menu['id_menu_role'] == '2' || $menu['id_menu_role'] == '3') : ?>
-                                    <?php if ($menu['is_devider'] == '1') : ?>
+                                <?php if ($menu['id_menu_role'] == '2') : ?>
+                                    <?php if ($menu['is_has_sub'] == '1') : ?>
                                         <li class="has_sub">
                                             <a href="javascript:void(0);" class="waves-effect">
                                                 <i><?= $menu['icon'] ?> </i>
@@ -95,7 +100,7 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                             <?php elseif ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '5') : ?>
-                                <?php if ($menu['is_devider'] == '2') : ?>
+                                <?php if ($menu['is_has_sub'] == '2') : ?>
                                     <li>
                                         <?php if ($menu['id_menu_role'] == '0') : ?>
                                             <a href="<?= base_url($menu['link']) ?>">
@@ -105,7 +110,7 @@
                                         <?php endif; ?>
                                     </li>
                                 <?php endif; ?>
-                                <?php if ($menu['is_devider'] == '1') : ?>
+                                <?php if ($menu['is_has_sub'] == '1') : ?>
                                     <?php if ($menu['id_menu_role'] == '1') : ?>
                                         <li class="has_sub">
                                             <a href="javascript:void(0);" class="waves-effect">
@@ -125,6 +130,34 @@
                                             </a>
                                         </li>
                                     <?php endif; ?>
+                                <?php endif; ?>
+                            <?php elseif ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2') : ?>
+                                <li>
+                                    <?php if ($menu['id_menu_role'] == '4' || $menu['id_menu_role'] == '0') : ?>
+                                        <a href="<?= base_url($menu['link']) ?>">
+                                            <i><?= $menu['icon'] ?></i>
+                                            <span><?= $menu['name'] ?></span>
+                                        </a>
+                                    <?php endif; ?>
+                                </li>
+                                <?php if ($menu['is_has_sub'] == '1') : ?>
+                                    <li class="has_sub">
+                                        <a href="javascript:void(0);" class="waves-effect">
+                                            <i><?= $menu['icon'] ?> </i>
+                                            <span><?= $menu['name'] ?></span>
+                                            <span class="float-right"><i class="mdi mdi-chevron-right"></i></span>
+                                        </a>
+                                        <ul class="list-unstyled">
+                                            <?php foreach ($menus as $sub_menu) : ?>
+                                                <li>
+                                                    <?php if ($sub_menu['type'] == '2' && $sub_menu['id_parent'] == $menu['id_parent']) : ?>
+                                                        <a href="<?= base_url($sub_menu['link']) ?>"><?= $sub_menu['name'] ?></a>
+                                                    <?php endif; ?>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                        </a>
+                                    </li>
                                 <?php endif; ?>
                             <?php endif; ?>
                         <?php endforeach; ?>

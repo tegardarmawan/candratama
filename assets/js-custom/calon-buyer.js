@@ -60,7 +60,7 @@ function get_data() {
 								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
-								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#detail" title="lihat" onclick="submit(' +
 								row.id +
 								')"><i class="ion-eye"></i></button>'
 							);
@@ -83,7 +83,7 @@ function submit(x) {
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Calon Buyer");
+		$("[name='title']").text("Calon Buyer");
 
 		$.ajax({
 			type: "POST",

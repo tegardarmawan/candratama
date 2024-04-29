@@ -98,8 +98,11 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Tanggal Order</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="Masukkan tgl customer" name="tgl" id="tgl">
-                                    <small class="text-danger pl-1" id="error-tgl"></small>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Masukkan Tanggal Pesan Customer" name="tgl" id="tgl">
+                                        <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                        <small class="text-danger pl-1" id="error-tgl"></small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -165,6 +168,100 @@
                             </div>
                             <div class="col-lg-6">
                                 <button type="button" id="btn-cancel" data-dismiss="modal" class="btn btn-outline-danger btn-block">Tidak</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal detail data -->
+            <div class="modal fade bs-example-modal-lg" id="lihat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="id" class="form-control" value="">
+                                    <input class="form-control" type="text" id="kodec" name="kodec" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Kode C1</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="kodec1" id="kodec1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Nama Customer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="namac" id="namac">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">NIK</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="ktp" id="ktp">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Alamat</label>
+                                <div class="col-sm-9">
+                                    <input type="text-area" class="form-control" readonly name="alamat" id="alamat">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Kota</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="kota" id="kota">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Telepon</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="telp" id="telp">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" readonly name="tgl" id="tgl">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Pekerjaan Customer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="pekerjaan" id="pekerjaan">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Perusahaan Customer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="perusahaan" id="perusahaan">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Saldo Customer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="saldo" id="saldo">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Jenis Customer</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="jenis" id="jenis">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Kodep</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly name="kodep" id="kodep">
+                                </div>
                             </div>
                         </div>
                     </div>

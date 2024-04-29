@@ -13,7 +13,6 @@
 
 <!-- jQuery  -->
 <script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
 <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>assets/js/modernizr.min.js"></script>
@@ -24,7 +23,12 @@
 <script src="<?= base_url() ?>assets/js/waves.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.scrollTo.min.js"></script>
-
+<!-- plugins js -->
+<script src="<?= base_url() ?>assets/plugins/timepicker/moment.js"></script>
+<script src="<?= base_url() ?>assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
+<script src="<?= base_url() ?>assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="<?= base_url() ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/plugins/alertify/js/alertify.js"></script>
 
 <!-- App js -->
@@ -34,6 +38,12 @@
 <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 
+<!-- select2 -->
+<script>
+    $(".select2").select2({
+        width: "100%",
+    });
+</script>
 
 <!-- Responsive examples -->
 <script src="<?= base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
@@ -50,6 +60,7 @@
         responsive: true,
     });
 </script>
+<!-- plugins init js -->
 
 <!-- Sweet-Alert  -->
 <script src="<?= base_url() ?>assets/plugins/sweet-alert2/sweetalert2.min.js"></script>

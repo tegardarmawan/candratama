@@ -70,15 +70,15 @@ class Kelola_data_prospek extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kodep = $this->input->post('kodep');
-			$namap = $this->input->post('namap');
-			$kota = $this->input->post('kota');
+			$kodep = ucfirst($this->input->post('kodep'));
+			$namap = ucfirst($this->input->post('namap'));
+			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			$type = $this->input->post('type');
-			$src = $this->input->post('src');
-			$jenis = $this->input->post('jenis');
-			$ket = $this->input->post('ket');
+			$src = ucfirst($this->input->post('src'));
+			$jenis = ucfirst($this->input->post('jenis'));
+			$ket = ucfirst($this->input->post('ket'));
 			$cek = $this->input->post('cek');
 
 			$data = array(
@@ -117,15 +117,15 @@ class Kelola_data_prospek extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kodep = $this->input->post('kodep');
-			$namap = $this->input->post('namap');
-			$kota = $this->input->post('kota');
+			$kodep = ucfirst($this->input->post('kodep'));
+			$namap = ucfirst($this->input->post('namap'));
+			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			$type = $this->input->post('type');
-			$src = $this->input->post('src');
-			$jenis = $this->input->post('jenis');
-			$ket = $this->input->post('ket');
+			$src = ucfirst($this->input->post('src'));
+			$jenis = ucfirst($this->input->post('jenis'));
+			$ket = ucfirst($this->input->post('ket'));
 			$cek = $this->input->post('cek');
 
 			$data = array(

@@ -32,6 +32,7 @@ function delete_error() {
 	$("#error-kontrak").hide();
 	$("#error-user").hide();
 }
+//select 2
 $(document).ready(function () {
 	// Inisialisasi select2
 	$("#kodec").select2({

@@ -49,6 +49,9 @@ body {
   margin: 0;
   font-size: 15px;
 }
+.form-control {
+    text-transform: capitalize;
+}
 
 html {
   overflow-x: hidden;
@@ -226,6 +229,7 @@ code {
   -moz-animation: spin 3.45s infinite;
 }
 
+
 .spinner:after {
   content: '';
   position: absolute;
@@ -401,6 +405,7 @@ code {
 /* ==============
   Bootstrap-custom
 ===================*/
+
 .breadcrumb {
   background-color: transparent;
   margin-bottom: 15px;

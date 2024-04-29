@@ -129,6 +129,59 @@
     </div>
 </div>
 
+<!-- modal lihat detail -->
+<div class="modal fade bs-example-modal-lg" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Kode Pemesanan</label>
+                    <input type="hidden" class="form-control" name="id" id="id">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="kodep" id="kodep" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Nama Pemesan</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="namap" id="namap" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Alamat</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly name="alamat" id="alamat">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Kota</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly name="kota" id="kota">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Telepon Pemesan</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" readonly name="telp" id="telp">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-3 form-label">Tanggal Pesan</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" readonly name="tglp" id="tglp">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var base_url = '<?php echo base_url() ?>';
     var _controller = '<?= $this->router->fetch_class() ?>';

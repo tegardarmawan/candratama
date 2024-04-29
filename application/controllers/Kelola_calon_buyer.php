@@ -62,11 +62,12 @@ class Kelola_calon_buyer extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$kodep = $this->input->post('kodep');
-			$namap = $this->input->post('namap');
+			$namap = ucfirst($this->input->post('namap'));
 			$alamat = $this->input->post('alamat');
-			$kota = $this->input->post('kota');
+			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			$alamat = ucfirst($alamat);
 
 			$data = array(
 				'kodep' => $kodep,
@@ -95,12 +96,13 @@ class Kelola_calon_buyer extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kodep = $this->input->post('kodep');
-			$namap = $this->input->post('namap');
+			$kodep = ucfirst($this->input->post('kodep'));
+			$namap = ucfirst($this->input->post('namap'));
 			$alamat = $this->input->post('alamat');
-			$kota = $this->input->post('kota');
+			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			$alamat = ucfirst($alamat);
 
 			$data = array(
 				'kodep' => $kodep,

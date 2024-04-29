@@ -14,7 +14,15 @@ function showAlertifySuccess(message) {
 function showAlertifyError(message) {
 	$("body").append(alertify.error(message));
 }
-
+//datepicker
+$(document).ready(function () {
+	jQuery("#tgl").datepicker({
+		format: "dd/mm/yyyy",
+		autoclose: true,
+		todayHighlight: true,
+		startDate: "01/01/2013",
+	});
+});
 function delete_form() {
 	$("[name='kodec']").val("");
 	$("[name='kodec1']").val("");
@@ -98,7 +106,7 @@ function submit(x) {
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Customer");
+		$("[name='title']").text("Data Customer");
 
 		$.ajax({
 			type: "POST",

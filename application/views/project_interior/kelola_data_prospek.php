@@ -151,5 +151,82 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal lihat detail -->
+        <div class="modal fade bs-example-modal-lg" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="kodep" class="col-sm-3 col-form-label">Kode Project</label>
+                            <input type="hidden" name="id" class="form-control" value="">
+                            <div class="col-sm-9">
+                                <input type="text" name="kodep" class="form-control" id="kodep" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="induk" class="col-sm-3 col-form-label">Nama Project</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="namap" class="form-control" id="namap" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nama" class="col-sm-3 col-form-label">Kota</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="kota" class="form-control" id="kota" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telp" class="col-sm-3 col-form-label">Telp</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="telp" class="form-control" id="telp" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="status1" class="col-sm-3 col-form-label">Tanggal Project</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tglp" id="tglp" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jabatan" class="col-sm-3 col-form-label">Tipe Project</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="type" class="form-control" id="type" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="status1" class="col-sm-3 col-form-label">Source Project</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="src" class="form-control" id="src" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Jenis Project</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="jenis" class="form-control" id="jenis" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Keterangan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="ket" class="form-control" id="ket" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">Cek</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="cek" class="form-control" id="cek" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

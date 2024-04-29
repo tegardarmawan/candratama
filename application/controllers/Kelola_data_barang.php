@@ -46,13 +46,12 @@ class Kelola_data_barang extends CI_Controller
 	{
 		// <!-- id, no, kodeal, namaal, merk, stock, satuan, tglbeli, hbeli, ket, kodek, namak -->
 		$query = [
-			'select' => 'a.id, b.kodeg, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
+			'select' => 'a.id, b.kodeg, b.namag, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
 			'join' => [
 				'tgroup b, b.kodeg = a.kodeg',
 				'tsatuan c, c.namast = a.satuan'
 			],
-			'group_by' => 'a.id'
 		];
 		$result = $this->data->get($query)->result();
 		echo json_encode($result);
