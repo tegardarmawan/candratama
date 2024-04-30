@@ -56,7 +56,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Kode C1</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan kode C1" name="kodec1" id="kodec1">
+                                    <input type="number" class="form-control" placeholder="Masukkan kode C1" name="kodec1" id="kodec1">
                                     <small class="text-danger pl-1" id="error-kodec1"></small>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">NIK</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan NIK customer" name="ktp" id="ktp">
+                                    <input type="number" class="form-control" placeholder="Masukkan NIK customer" name="ktp" id="ktp">
                                     <small class="text-danger pl-1" id="error-ktp"></small>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Telepon</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan telp customer" name="telp" id="telp">
+                                    <input type="number" class="form-control" placeholder="Masukkan telp customer" name="telp" id="telp">
                                     <small class="text-danger pl-1" id="error-telp"></small>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Saldo Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan spending money customer" name="saldo" id="saldo">
+                                    <input type="text" pattern="^Rp\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" class="form-control" placeholder="Masukkan spending money customer" name="saldo" id="saldo">
                                     <small class="text-danger pl-1" id="error-saldo"></small>
                                 </div>
                             </div>
