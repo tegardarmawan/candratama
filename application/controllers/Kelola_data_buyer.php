@@ -75,6 +75,9 @@ class Kelola_data_buyer extends CI_Controller
 			$kota = strtoupper($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tgl = $this->input->post('tgl');
+			if (!empty($tgl)) {
+				$tgl = date('Y-m-d', strtotime($tgl)); // Mengonversi format tanggal
+			}
 			$pekerjaan = $this->input->post('pekerjaan');
 			$perusahaan = $this->input->post('perusahaan');
 			$saldo = $this->input->post('saldo');
@@ -131,6 +134,9 @@ class Kelola_data_buyer extends CI_Controller
 			$kota = strtoupper($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tgl = $this->input->post('tgl');
+			if (!empty($tgl)) {
+				$tgl = date('Y-m-d', strtotime($tgl)); // Mengonversi format tanggal
+			}
 			$pekerjaan = $this->input->post('pekerjaan');
 			$perusahaan = $this->input->post('perusahaan');
 			$saldo = $this->input->post('saldo');
