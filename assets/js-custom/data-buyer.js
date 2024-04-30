@@ -84,7 +84,6 @@ function showAlertifyError(message) {
 //datepicker
 $(document).ready(function () {
 	jQuery("#tgl").datepicker({
-		format: "dd/mm/yyyy",
 		autoclose: true,
 		todayHighlight: true,
 	});

@@ -96,10 +96,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                <label for="" class="col-sm-3 col-form-label">Tanggal Lahir Customer</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Masukkan Tanggal Pesan Customer" name="tgl" id="tgl">
+                                        <input type="text" class="form-control" placeholder="Masukkan Tanggal Lahir Customer" name="tgl" id="tgl">
                                         <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
                                         <small class="text-danger pl-1" id="error-tgl"></small>
                                     </div>
@@ -228,9 +228,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Tanggal Order</label>
+                                <label for="" class="col-sm-3 col-form-label">Tanggal Lahir Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" readonly name="tgl" id="tgl">
+                                    <input type="text" class="form-control" readonly name="tgl" id="tgl">
                                 </div>
                             </div>
                             <div class="form-group row">
