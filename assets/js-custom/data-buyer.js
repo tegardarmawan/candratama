@@ -86,6 +86,7 @@ $(document).ready(function () {
 	jQuery("#tgl").datepicker({
 		autoclose: true,
 		todayHighlight: true,
+		format: "yyyy-mm-dd", // Menambahkan format tanggal
 	});
 });
 
