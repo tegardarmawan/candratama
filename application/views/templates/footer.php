@@ -37,6 +37,9 @@
 <!-- Required datatable js -->
 <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- jss fixed header tabel -->
+<script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+
 
 <!-- select2 -->
 <script>
@@ -60,6 +63,7 @@
         responsive: true,
     });
 </script>
+
 <!-- plugins init js -->
 
 <!-- Sweet-Alert  -->

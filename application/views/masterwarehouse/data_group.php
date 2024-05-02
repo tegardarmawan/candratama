@@ -5,7 +5,7 @@
                 <div class="page-title-box">
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="<?= base_url('dashboard')?>">Candratama</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Candratama</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
@@ -100,6 +100,7 @@
         </div>
     </div>
 </div>
+<br>
 
 <script>
     var base_url = '<?php echo base_url() ?>';

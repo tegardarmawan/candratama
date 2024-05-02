@@ -34,7 +34,6 @@ function get_data() {
 		success: function (data) {
 			var table = $("#example").DataTable({
 				destroy: true,
-				scrollY: 320,
 				data: data,
 				responsive: true,
 				columns: [

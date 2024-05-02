@@ -4,7 +4,7 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
 	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data(" + id + ")"); 
+	modalButton.attr("onclick", "delete_data(" + id + ")");
 });
 
 function showAlertifySuccess(message) {
@@ -43,7 +43,7 @@ function delete_error() {
 function get_data() {
 	delete_error();
 	$.ajax({
-		url: base_url + _controller +  "/get_data",
+		url: base_url + _controller + "/get_data",
 		method: "GET",
 		dataType: "json",
 		success: function (data) {
@@ -54,8 +54,9 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
-					{ data: null,
-						render: function(data,type,row,meta){
+					{
+						data: null,
+						render: function (data, type, row, meta) {
 							return meta.row + 1;
 						},
 					},
@@ -73,7 +74,7 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
@@ -104,7 +105,7 @@ function submit(x) {
 		$.ajax({
 			type: "POST",
 			data: "id=" + x,
-			url: base_url + "/" + _controller +  "/get_data_id",
+			url: base_url + "/" + _controller + "/get_data_id",
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
@@ -127,20 +128,20 @@ function submit(x) {
 
 function insert_data() {
 	var formData = new FormData();
-	formData.append('kode', $("[name='kode']").val());
-	formData.append('induk', $("[name='induk']").val());
-	formData.append('nama', $("[name='nama']").val());
-	formData.append('tempat', $("[name='tempat']").val());
-	formData.append('tanggal', $("[name='tanggal']").val());
-	formData.append('alamat', $("[name='alamat']").val());
-	formData.append('kota', $("[name='kota']").val());
-	formData.append('telp', $("[name='telp']").val());
-	formData.append('status1', $("[name='status1']").val());
-	formData.append('jabatan', $("[name='jabatan']").val());
+	formData.append("kode", $("[name='kode']").val());
+	formData.append("induk", $("[name='induk']").val());
+	formData.append("nama", $("[name='nama']").val());
+	formData.append("tempat", $("[name='tempat']").val());
+	formData.append("tanggal", $("[name='tanggal']").val());
+	formData.append("alamat", $("[name='alamat']").val());
+	formData.append("kota", $("[name='kota']").val());
+	formData.append("telp", $("[name='telp']").val());
+	formData.append("status1", $("[name='status1']").val());
+	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({
 		type: "POST",
-		url: base_url + _controller +"/insert_data",
+		url: base_url + _controller + "/insert_data",
 		data: formData,
 		dataType: "json",
 		processData: false,
@@ -167,16 +168,16 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append('kode', $("[name='kode']").val());
-	formData.append('induk', $("[name='induk']").val());
-	formData.append('nama', $("[name='nama']").val());
-	formData.append('tempat', $("[name='tempat']").val());
-	formData.append('tanggal', $("[name='tanggal']").val());
-	formData.append('alamat', $("[name='alamat']").val());
-	formData.append('kota', $("[name='kota']").val());
-	formData.append('telp', $("[name='telp']").val());
-	formData.append('status1', $("[name='status1']").val());
-	formData.append('jabatan', $("[name='jabatan']").val());
+	formData.append("kode", $("[name='kode']").val());
+	formData.append("induk", $("[name='induk']").val());
+	formData.append("nama", $("[name='nama']").val());
+	formData.append("tempat", $("[name='tempat']").val());
+	formData.append("tanggal", $("[name='tanggal']").val());
+	formData.append("alamat", $("[name='alamat']").val());
+	formData.append("kota", $("[name='kota']").val());
+	formData.append("telp", $("[name='telp']").val());
+	formData.append("status1", $("[name='status1']").val());
+	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({
 		type: "POST",
@@ -209,7 +210,7 @@ function delete_data(x) {
 		type: "POST",
 		data: "id=" + x,
 		dataType: "json",
-		url: base_url  + "/" + _controller + "/delete_data",
+		url: base_url + "/" + _controller + "/delete_data",
 		success: function (response) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");

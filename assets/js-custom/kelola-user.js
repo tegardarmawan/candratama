@@ -57,12 +57,10 @@ function get_data() {
 		url: base_url + _controller + "/get_data",
 		method: "GET",
 		dataType: "json",
-		scrollY: 320,
 		scrollX: true,
 		responsive: true,
 		success: function (data) {
 			var table = $("#datatable-buttons").DataTable({
-				destroy: true,
 				scrollY: 400,
 				data: data,
 				responsive: true,

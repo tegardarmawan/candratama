@@ -33,8 +33,6 @@ function get_data() {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-				scrollY: 320,
-				scrollX: 320,
 				responsive: true,
 				columns: [
 					{ data: "id" },

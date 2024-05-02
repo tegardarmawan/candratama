@@ -44,16 +44,6 @@ function delete_error() {
 	$("#error-namat").hide();
 	$("#error-project").hide();
 }
-//select 2
-// $(document).ready(function () {
-// 	//inisialisasi select2
-// 	$("#kodeg").select2({
-// 		placeholder: "Pilih Group Barang",
-// 	});
-// 	$("#kodest").select2({
-// 		placeholder: "Pilih Satuan",
-// 	});
-// });
 
 function get_data() {
 	delete_error();
@@ -65,8 +55,6 @@ function get_data() {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-				scrollY: 320,
-				scrollX: 320,
 				responsive: true,
 				columns: [
 					{

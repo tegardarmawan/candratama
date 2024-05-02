@@ -40,8 +40,6 @@ function get_data() {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
 				data: data,
-				scrollY: 320,
-				scrollX: 320,
 				responsive: true,
 				columns: [
 					{
@@ -59,7 +57,7 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
+								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
 								row.id +
 								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
