@@ -120,21 +120,21 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="jabatan" class="col-sm-3 col-form-label">Kode Karyawan</label>
+                                <label for="" class="col-sm-3 col-form-label">Nama Karyawan</label>
                                 <div class="col-sm-9">
-                                    <select name="kodek" id="kodek" class="select2 form-control select-custom">
+                                    <select name="namak" id="namak" class="select2 form-control select-custom" style="width: 100%">
                                         <option value="">Pilih Kode Karyawan</option>
                                         <?php foreach ($kr as $karyawan) : ?>
-                                            <option value="<?= $karyawan->kodek ?>"><?= $karyawan->kodek ?></option>
+                                            <option value="<?= $karyawan->namak ?>"><?= $karyawan->namak ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <small class="text-danger pl-1" id="error-kodek"></small>
+                                    <small class="text-danger pl-1" id="error-namak"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Nama Karyawan</label>
+                                <label for="" class="col-sm-3 col-form-label">Kode Karyawan</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="namak" class="form-control" id="namak" placeholder="Nama Karyawan">
+                                    <input type="text" name="kodek" class="form-control" id="kodek" placeholder="Kode Karyawan">
                                 </div>
                             </div>
                         </div>
@@ -237,15 +237,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="jabatan" class="col-sm-3 col-form-label">Kode Karyawan</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="kodek" id="kodek" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Nama Karyawan</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="namak" class="form-control" id="namak" placeholder="Nama Karyawan" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="jabatan" class="col-sm-3 col-form-label">Kode Karyawan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="kodek" id="kodek" readonly class="form-control">
                                 </div>
                             </div>
                         </div>

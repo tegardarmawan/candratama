@@ -141,8 +141,8 @@ function submit(x) {
 				$("[name='hbeli']").val(hasil[0].hbeli);
 				$("[name='tglbeli']").val(hasil[0].tglbeli);
 				$("[name='ket']").val(hasil[0].ket);
-				$("[name='namak']").val(hasil[0].namak);
-				$("[name='kodek']").val(hasil[0].kodek).trigger("change");
+				$("[name='namak']").val(hasil[0].namak).trigger("change");
+				$("[name='kodek']").val(hasil[0].kodek);
 			},
 		});
 	}

@@ -36,6 +36,25 @@ class Kelola_alat_tukang extends CI_Controller
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
+	public function get_kode_karyawan($nama_karyawan)
+	{
+		$nama_karyawan = urldecode($nama_karyawan);
+		$query = [
+			'select' => 'kodek',
+			'from' => 'tkaryawan',
+			'where' => ['namak' => $nama_karyawan]
+		];
+
+		$result = $this->data->get($query)->row();
+		if ($result) {
+			//jika data ditermukan, maka kirimkan respon JSON
+			//kode_customer merupakan variabel yang akan dipanggil pada js
+			echo json_encode(['kode_karyawan' => $result->kodek]);
+		} else {
+			//jika data tidak ditemukan, maka kirimkan respon error
+			echo json_encode(['error' => 'Kode Karyawan Tidak Ditemukan']);
+		}
+	}
 
 	public function get_data()
 	{
