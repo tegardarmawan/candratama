@@ -46,6 +46,9 @@ class Kelola_alat_tukang extends CI_Controller
 				'tsatuan b, b.namast = a.satuan',
 				'tkaryawan c, c.kodek = a.kodek'
 			],
+			'where' => [
+				'a.jenis' => '1'
+			],
 
 		];
 		$result = $this->data->get($query)->result();
@@ -63,7 +66,8 @@ class Kelola_alat_tukang extends CI_Controller
 				'tkaryawan c, c.kodek = a.kodek'
 			],
 			'where' => [
-				'a.id' => $id
+				'a.id' => $id,
+				'a.jenis' => '1'
 			],
 		];
 		$result = $this->data->get($query)->result();
@@ -107,6 +111,7 @@ class Kelola_alat_tukang extends CI_Controller
 			$ket = $this->input->post('ket');
 			$kodek = $this->input->post('kodek');
 			$namak = $this->input->post('namak');
+			$jenis = '1';
 			if (empty($kodek)) {
 				$response['errors']['kodek'] = 'Kode karyawan harus dipilih';
 			}
@@ -125,6 +130,7 @@ class Kelola_alat_tukang extends CI_Controller
 				'ket' => $ket,
 				'kodek' => $kodek,
 				'namak' => $namak,
+				'jenis' => $jenis,
 			);
 			$this->data->insert('talat', $data);
 			$response['success'] = 'Data ditambahkan';
@@ -165,6 +171,7 @@ class Kelola_alat_tukang extends CI_Controller
 			$ket = $this->input->post('ket');
 			$kodek = $this->input->post('kodek');
 			$namak = $this->input->post('namak');
+			$jenis = '1';
 			if (empty($kodek)) {
 				$response['errors']['kodek'] = 'Kode karyawan harus dipilih';
 			}
@@ -183,6 +190,7 @@ class Kelola_alat_tukang extends CI_Controller
 				'ket' => $ket,
 				'kodek' => $kodek,
 				'namak' => $namak,
+				'jenis' => $jenis,
 			);
 			$where = array('id' => $id);
 			$this->data->update('talat', $where, $data);

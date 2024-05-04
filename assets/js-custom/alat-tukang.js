@@ -69,7 +69,7 @@ function get_data() {
 								'<button class="btn btn-outline-danger" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
-								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#detail" title="detail" onclick="submit(' +
 								row.id +
 								')"><i class="ion-eye"></i></button>'
 							);
@@ -88,11 +88,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Alat Tukang");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Alat Tukang");
 
 		$.ajax({
 			type: "POST",
@@ -106,11 +106,11 @@ function submit(x) {
 				$("[name='namaal']").val(hasil[0].namaal);
 				$("[name='merk']").val(hasil[0].merk);
 				$("[name='stock']").val(hasil[0].stock);
-				$("[name='satuan']").val(hasil[0].satuan);
+				$("[name='satuan']").val(hasil[0].namast).trigger("change");
 				$("[name='hbeli']").val(hasil[0].hbeli);
 				$("[name='tglbeli']").val(hasil[0].tglbeli);
 				$("[name='ket']").val(hasil[0].ket);
-				$("[name='kodek']").val(hasil[0].kodek);
+				$("[name='kodek']").val(hasil[0].kodek).trigger("change");
 				$("[name='namak']").val(hasil[0].namak);
 			},
 		});

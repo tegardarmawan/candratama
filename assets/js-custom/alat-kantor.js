@@ -42,6 +42,37 @@ function delete_error() {
 	$("#error-kodek").hide();
 	$("#error-namak").hide();
 }
+$(document).ready(function () {
+	$("#namak").select2({
+		placeholder: "Pilih Nama Karyawan",
+	});
+	$("#namak").on("change", function () {
+		var selectedNamaKaryawan = $(this).val(); //mengambil nilai nama karyawan yang dipilih pada field
+
+		//melakukan request ajax untuk mendapatkan data kode karyawan dari controller fungsi get_kode_karyawan
+		$.ajax({
+			type: "POST",
+			data: { nama_karyawan: encodeURIComponent(selectedNamaKaryawan) }, // mengirim nama_karyawan sebagai parameter
+			url:
+				base_url +
+				"/" +
+				_controller +
+				"/get_kode_karyawan/" +
+				selectedNamaKaryawan,
+			dataType: "json",
+			success: function (response) {
+				//set nilai form kode karyawan sesuai dengan data yang diperoleh dari ajax
+				var decodedKode = decodeURIComponent(response.kode_karyawan);
+				$("#kodek").val(decodedKode);
+				// $("#kodek").val(response.kode_karyawan);
+			},
+			error: function () {
+				//handle untuk error
+				console.error("Error fetching customer data");
+			},
+		});
+	});
+});
 
 function get_data() {
 	delete_error();
@@ -69,7 +100,7 @@ function get_data() {
 								'<button class="btn btn-outline-danger" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
-								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#detail" title="detail" onclick="submit(' +
 								row.id +
 								')"><i class="ion-eye"></i></button>'
 							);
@@ -88,11 +119,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Group");
+		$("[name='title']").text("Tambah Alat Tukang");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Group");
+		$("[name='title']").text("Alat Tukang");
 
 		$.ajax({
 			type: "POST",
@@ -106,12 +137,12 @@ function submit(x) {
 				$("[name='namaal']").val(hasil[0].namaal);
 				$("[name='merk']").val(hasil[0].merk);
 				$("[name='stock']").val(hasil[0].stock);
-				$("[name='satuan']").val(hasil[0].satuan);
+				$("[name='satuan']").val(hasil[0].namast).trigger("change");
 				$("[name='hbeli']").val(hasil[0].hbeli);
 				$("[name='tglbeli']").val(hasil[0].tglbeli);
 				$("[name='ket']").val(hasil[0].ket);
-				$("[name='kodek']").val(hasil[0].kodek);
 				$("[name='namak']").val(hasil[0].namak);
+				$("[name='kodek']").val(hasil[0].kodek).trigger("change");
 			},
 		});
 	}

@@ -9,7 +9,7 @@
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Group</h4>
+                    <h4 class="page-title">Alat Tukang</h4>
                 </div>
             </div>
         </div>
@@ -164,6 +164,89 @@
                             </div>
                             <div class="col-lg-6">
                                 <button type="button" id="btn-cancel" data-dismiss="modal" class="btn btn-outline-danger btn-block">Tidak</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal lihat detail -->
+            <div class="modal fade bs-example-modal-lg" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" name="title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="kode" class="col-sm-3 col-form-label">Nomor Alat</label>
+                                <input type="hidden" name="id" id="id" class="form-control" value="">
+                                <div class="col-sm-9">
+                                    <input type="text" name="no" class="form-control" id="no" placeholder="Masukkan Nomor Alat" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="induk" class="col-sm-3 col-form-label">Kode Alat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="kodeal" class="form-control" id="kodeal" readonly placeholder="Masukkan Kode Alat">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nama" class="col-sm-3 col-form-label">Nama Alat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="namaal" class="form-control" id="namaal" readonly placeholder="Masukkan Nama Alat">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tempat" class="col-sm-3 col-form-label">Merk</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="merk" class="form-control" id="merk" placeholder="Masukkan Merk Alat" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tanggal" class="col-sm-3 col-form-label">stock</label>
+                                <div class="col-sm-9">
+                                    <input type="tet" name="stock" class="form-control" id="stock" placeholder="Masukkan Stock Alat" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="alamat" class="col-sm-3 col-form-label">Satuan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="satuan" id="satuan" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="kota" class="col-sm-3 col-form-label">Tanggal Beli</label>
+                                <div class="col-sm-9">
+                                    <input type="date" name="tglbeli" class="form-control" id="tglbeli" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="telp" class="col-sm-3 col-form-label">Harga Beli</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="hbeli" class="form-control" id="hbeli" placeholder="Masukkan Harga Beli" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="status1" class="col-sm-3 col-form-label">Keterangan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="ket" id="ket" class="form-control" placeholder="Masukkan Keterangan" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="jabatan" class="col-sm-3 col-form-label">Kode Karyawan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="kodek" id="kodek" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Nama Karyawan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="namak" class="form-control" id="namak" placeholder="Nama Karyawan" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>

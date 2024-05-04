@@ -129,7 +129,11 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Jenis Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Masukkan jenis customer" name="jenis" id="jenis">
+                                    <select name="jenis" id="jenis" class="form-control">
+                                        <option value="">Pilih Jenis Customer</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
                                     <small class="text-danger pl-1" id="error-jenis"></small>
                                 </div>
                             </div>

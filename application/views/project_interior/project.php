@@ -52,21 +52,21 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Kode Customer</label>
+                                <label for="" class="col-sm-3 col-form-label">Nama Customer</label>
                                 <div class="col-sm-9">
-                                    <select name="kodec" id="kodec" class="select2 form-control select-custom" style="width: 100%;">
-                                        <option value="">Pilih Kode Customer</option>
-                                        <?php foreach ($kdc as $kode) : ?>
-                                            <option value="<?= $kode->kodec ?>"><?= $kode->kodec ?></option>
+                                    <select name="namac" id="namac" class="select2 form-control select-custom" style="width: 100%;">
+                                        <option value="">Pilih Nama Customer</option>
+                                        <?php foreach ($namacust as $nama) : ?>
+                                            <option value="<?= $nama->namac ?>"><?= $nama->namac ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">Nama Customer</label>
+                                <label for="" class="col-sm-3 col-form-label">Kode Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Pilih kode customer" name="namac" id="namac" readonly>
-                                    <small class="text-danger pl-1" id="error-namac"></small>
+                                    <input type="text" class="form-control" name="kodec" id="kodec" readonly>
+                                    <small class="text-danger pl-1" id="error-kodec"></small>
                                 </div>
                             </div>
                             <div class="form-group row">

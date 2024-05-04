@@ -35,28 +35,28 @@ function delete_error() {
 //select 2
 $(document).ready(function () {
 	// Inisialisasi select2
-	$("#kodec").select2({
-		placeholder: "Pilih kode customer",
+	$("#namac").select2({
+		placeholder: "Pilih nama customer",
 	});
 
 	// Event change pada select2
-	$("#kodec").on("change", function () {
-		var selectedKodeCustomer = $(this).val(); // Ambil nilai kode customer yang dipilih
+	$("#namac").on("change", function () {
+		var selectedNamaCustomer = $(this).val(); // Ambil nilai nama customer yang dipilih
 
 		// Lakukan request AJAX untuk mendapatkan data nama customer
 		$.ajax({
 			type: "POST",
-			data: { kode_customer: selectedKodeCustomer }, // Mengirim kode_customer sebagai parameter
+			data: { nama_customer: selectedNamaCustomer }, // Mengirim nama_customer sebagai parameter
 			url:
 				base_url +
 				"/" +
 				_controller +
-				"/get_nama_customer/" +
-				selectedKodeCustomer, // Menambahkan kode_customer ke URL
+				"/get_kode_customer/" +
+				selectedNamaCustomer, // Menambahkan kode_customer ke URL
 			dataType: "json",
 			success: function (response) {
 				// Set nilai form nama customer sesuai dengan data yang diperoleh dari AJAX
-				$("#namac").val(response.nama_customer);
+				$("#kodec").val(response.kode_customer);
 			},
 			error: function () {
 				// Handle error jika terjadi
@@ -124,8 +124,8 @@ function submit(x) {
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
 				$("[name= 'nota']").val(hasil[0].nota);
-				$("[name='kodec']").val(hasil[0].kodec).trigger("change");
-				$("[name= 'namac']").val(hasil[0].namac);
+				$("[name='kodec']").val(hasil[0].kodec);
+				$("[name= 'namac']").val(hasil[0].namac).trigger("change");
 				$("[name= 'project']").val(hasil[0].project);
 				$("[name= 'kontrak']").val(hasil[0].kontrak);
 			},

@@ -23,7 +23,7 @@ class Project extends CI_Controller
     }
     public function index()
     {
-        $this->app_data['kdc'] = $this->data->get_all('tcust')->result();
+        $this->app_data['namacust'] = $this->data->get_all('tcust')->result();
         $this->load->helper('menu_helper');
         $data['menus'] = generate_sidebar_menu();
 
@@ -35,22 +35,22 @@ class Project extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
     }
-    public function get_nama_customer($kode_customer)
+    public function get_kode_customer($nama_customer)
     {
         $query = [
-            'select' => 'namac',
+            'select' => 'kodec',
             'from' => 'tcust',
-            'where' => ['kodec' => $kode_customer]
+            'where' => ['namac' => $nama_customer]
         ];
 
         $result = $this->data->get($query)->row();
-
         if ($result) {
-            // Jika data ditemukan, kirimkan respons JSON
-            echo json_encode(['nama_customer' => $result->namac]);
+            //jika data ditermukan, maka kirimkan respon JSON
+            //kode_customer merupakan variabel yang akan dipanggil pada js
+            echo json_encode(['kode_customer' => $result->kodec]);
         } else {
-            // Jika data tidak ditemukan, kirimkan respons JSON kosong atau pesan error sesuai kebutuhan
-            echo json_encode(['error' => 'Nama customer tidak ditemukan']);
+            //jika data tidak ditemukan, maka kirimkan respon error
+            echo json_encode(['error' => 'Kode Customer Tidak Ditemukan']);
         }
     }
 

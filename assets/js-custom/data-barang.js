@@ -110,7 +110,7 @@ function submit(x) {
 				$("[name='kodeb']").val(hasil[0].kodeb);
 				$("[name='nama']").val(hasil[0].namab);
 				$("[name='stock']").val(hasil[0].stock);
-				$("[name='kodest']").val(hasil[0].namast);
+				$("[name='kodest']").val(hasil[0].namast).trigger("change");
 				$("[name='hargabeli']").val(hasil[0].hbeli);
 				$("[name='hargapokok']").val(hasil[0].hpokok);
 				$("[name='hargajual']").val(hasil[0].hjual);
