@@ -103,7 +103,14 @@ function submit(x) {
 				$("[name='namap']").val(hasil[0].namap);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='tglp']").val(hasil[0].tglp);
+				var date = new Date(hasil[0].tglp);
+				var formattedDate =
+					(date.getDate() + 1).toString().padStart(2, "0") +
+					"/" +
+					date.getMonth().toString().padStart(2, "0") +
+					"/" +
+					date.getFullYear();
+				$("[name='tglp']").val(formattedDate);
 				$("[name='type']").val(hasil[0].type);
 				$("[name='src']").val(hasil[0].src);
 				$("[name='jenis']").val(hasil[0].jenis);

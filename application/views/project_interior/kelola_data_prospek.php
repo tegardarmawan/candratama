@@ -80,8 +80,11 @@
                         <div class="form-group row">
                             <label for="status1" class="col-sm-3 col-form-label">Tanggal Project</label>
                             <div class="col-sm-9">
-                                <input type="date" name="tglp" id="tglp" class="form-control" placeholder="Masukkan Tanggal Project">
-                                <small class="text-danger pl-1" id="error-tglp"></small>
+                                <div class="input-group">
+                                    <input type="text" name="tglp" id="tglp" class="form-control datepicker" placeholder="Masukkan Tanggal Project">
+                                    <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                    <small class="text-danger pl-1" id="error-tglp"></small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -191,7 +194,10 @@
                         <div class="form-group row">
                             <label for="status1" class="col-sm-3 col-form-label">Tanggal Project</label>
                             <div class="col-sm-9">
-                                <input type="date" name="tglp" id="tglp" class="form-control" readonly>
+                                <div class="input-group">
+                                    <input type="text" name="tglp" id="tglp" class="form-control" readonly>
+                                    <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">

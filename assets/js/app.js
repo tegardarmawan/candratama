@@ -4,7 +4,12 @@
  Website: www.mannatthemes.com
  File: Main js
  */
-
+$(document).ready(function () {
+	jQuery(".datepicker").datepicker({
+		autoclose: true,
+		format: "dd/mm/yyyy",
+	});
+});
 !(function ($) {
 	"use strict";
 

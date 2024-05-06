@@ -75,6 +75,9 @@ class Kelola_data_prospek extends CI_Controller
 			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			if (!empty($tglp)) {
+				$tglp = date('d-m-Y', strtotime($tglp));
+			}
 			$type = $this->input->post('type');
 			$src = ucfirst($this->input->post('src'));
 			$jenis = ucfirst($this->input->post('jenis'));
@@ -117,11 +120,14 @@ class Kelola_data_prospek extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kodep = ucfirst($this->input->post('kodep'));
-			$namap = ucfirst($this->input->post('namap'));
-			$kota = ucfirst($this->input->post('kota'));
+			$kodep = ucwords($this->input->post('kodep'));
+			$namap = ucwords($this->input->post('namap'));
+			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			if (!empty($tglp)) {
+				$tglp = date('Y-m-d', strtotime($tglp)); // Mengonversi format tanggal
+			}
 			$type = $this->input->post('type');
 			$src = ucfirst($this->input->post('src'));
 			$jenis = ucfirst($this->input->post('jenis'));
