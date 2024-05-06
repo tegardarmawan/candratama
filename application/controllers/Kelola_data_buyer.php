@@ -52,7 +52,7 @@ class Kelola_data_buyer extends CI_Controller
 		$this->form_validation->set_rules('namac', 'namac', 'trim|required');
 		$this->form_validation->set_rules('kota', 'kota', 'trim|required');
 		$this->form_validation->set_rules('alamat', 'alamat', 'trim');
-		$this->form_validation->set_rules('ktp', 'ktp', 'trim|numeric|max_length[16]');
+		$this->form_validation->set_rules('ktp', 'ktp', 'trim|numeric|max_length[16]|min_length[16]');
 		$this->form_validation->set_rules('telp', 'telp', 'trim|required|numeric|max_length[13]');
 		$this->form_validation->set_rules('tgl', 'tgl', 'trim|required');
 		$this->form_validation->set_rules('pekerjaan', 'pekerjaan', 'trim');
@@ -76,7 +76,7 @@ class Kelola_data_buyer extends CI_Controller
 			$telp = $this->input->post('telp');
 			$tgl = $this->input->post('tgl');
 			if (!empty($tgl)) {
-				$tgl = date('Y-m-d', strtotime($tgl)); // Mengonversi format tanggal
+				$tgl = date('d-m-Y', strtotime($tgl)); // Mengonversi format tanggal
 			}
 			$pekerjaan = $this->input->post('pekerjaan');
 			$perusahaan = $this->input->post('perusahaan');

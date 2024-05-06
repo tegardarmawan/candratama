@@ -3414,6 +3414,12 @@ File: Responsive
   }
 }
 
+
+.dataTables_wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
 @media (max-width: 620px) {
   .page-header-title {
     text-align: center;

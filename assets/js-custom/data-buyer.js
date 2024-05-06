@@ -86,7 +86,7 @@ $(document).ready(function () {
 	jQuery("#tgl").datepicker({
 		autoclose: true,
 		todayHighlight: true,
-		format: "yyyy-mm-dd", // Menambahkan format tanggal
+		format: "dd/mm/yyyy",
 	});
 });
 
@@ -188,7 +188,14 @@ function submit(x) {
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='tgl']").val(hasil[0].tgl);
+				var date = new Date(hasil[0].tgl);
+				var formattedDate =
+					(date.getDate() + 1).toString().padStart(2, "0") +
+					"/" +
+					date.getMonth().toString().padStart(2, "0") +
+					"/" +
+					date.getFullYear();
+				$("[name='tgl']").val(formattedDate);
 				$("[name='pekerjaan']").val(hasil[0].pekerjaan);
 				$("[name='perusahaan']").val(hasil[0].perusahaan);
 				$("[name='saldo']").val(hasil[0].saldo);
