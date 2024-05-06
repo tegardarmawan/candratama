@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer d-flex justify-content-start">
+                        <div class="modal-footer">
                             <div class="col-lg-2">
                                 <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary btn-block">Simpan</button>
                                 <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary btn-block">Ubah</button>

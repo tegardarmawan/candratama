@@ -51,7 +51,7 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="kode" class="col-sm-3 col-form-label">Kode Furniture</label>
-                                <input type="hidden" class="form-control" name="id" id="id" >
+                                <input type="hidden" class="form-control" name="id" id="id">
                                 <div class="col-sm-9">
                                     <input required class="form-control" name="kode" id="kode" placeholder="Masukkan Kode Furniture" type="text">
                                     <small class="text-danger pl-1" id="error-kode"></small>
@@ -73,7 +73,7 @@
                                             <option value="<?= $satuan->namast; ?>"><?= $satuan->namast; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <small class="text-danger pl-1" id="error-satuan" ></small>
+                                    <small class="text-danger pl-1" id="error-satuan"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer d-flex justify-content-start">
+                        <div class="modal-footer">
                             <div class="col-lg-2">
                                 <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary">Tambah Data</button>
                                 <button type="button" id="btn-update" onclick="edit_data()" class="btn btn-outline-primary btn-block">Simpan</button>
