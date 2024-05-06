@@ -81,14 +81,6 @@ function showAlertifySuccess(message) {
 function showAlertifyError(message) {
 	$("body").append(alertify.error(message));
 }
-//datepicker
-$(document).ready(function () {
-	jQuery("#tgl").datepicker({
-		autoclose: true,
-		todayHighlight: true,
-		format: "dd/mm/yyyy",
-	});
-});
 
 function delete_form() {
 	$("[name='kodec']").val("");

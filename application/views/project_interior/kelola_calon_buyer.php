@@ -88,8 +88,11 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 form-label">Tanggal Pesan</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" placeholder="Masukkan tanggal pesan" name="tglp" id="tglp">
-                                    <small class="text-danger pl-1" id="error-tglp"></small>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" placeholder="Masukkan tanggal pesan" name="tglp" id="tglp">
+                                        <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                        <small class="text-danger pl-1" id="error-tglp"></small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +177,7 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-3 form-label">Tanggal Pesan</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control" readonly name="tglp" id="tglp">
+                        <input type="text" class="form-control" readonly name="tglp" id="tglp">
                     </div>
                 </div>
             </div>

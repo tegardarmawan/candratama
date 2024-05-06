@@ -95,7 +95,14 @@ function submit(x) {
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='tglp']").val(hasil[0].tglp);
+				var date = new Date(hasil[0].tglp);
+				var formattedDate =
+					(date.getDate() + 1).toString().padStart(2, "0") +
+					"/" +
+					date.getMonth().toString().padStart(2, "0") +
+					"/" +
+					date.getFullYear();
+				$("[name='tglp']").val(formattedDate);
 			},
 		});
 	}

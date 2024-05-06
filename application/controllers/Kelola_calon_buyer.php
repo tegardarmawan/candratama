@@ -67,6 +67,9 @@ class Kelola_calon_buyer extends CI_Controller
 			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			if (!empty($tglp)) {
+				$tglp = date('Y-m-d', strtotime($tglp));
+			}
 			$alamat = ucfirst($alamat);
 
 			$data = array(
@@ -102,6 +105,9 @@ class Kelola_calon_buyer extends CI_Controller
 			$kota = ucfirst($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
+			if (!empty($tglp)) {
+				$tglp = date('Y-m-d', strtotime($tglp));
+			}
 			$alamat = ucfirst($alamat);
 
 			$data = array(
