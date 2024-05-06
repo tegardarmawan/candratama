@@ -46,7 +46,7 @@ $(document).ready(function () {
 		// Lakukan request AJAX untuk mendapatkan data nama customer
 		$.ajax({
 			type: "POST",
-			data: { nama_customer: selectedNamaCustomer }, // Mengirim nama_customer sebagai parameter
+			data: { nama_customer: encodeURIComponent(selectedNamaCustomer) }, // Mengirim nama_customer sebagai parameter
 			url:
 				base_url +
 				"/" +
@@ -56,7 +56,8 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (response) {
 				// Set nilai form nama customer sesuai dengan data yang diperoleh dari AJAX
-				$("#kodec").val(response.kode_customer);
+				var decodekode = decodeURIComponent(response.kode_customer);
+				$("#kodec").val(decodekode);
 			},
 			error: function () {
 				// Handle error jika terjadi

@@ -121,14 +121,14 @@ class Kelola_alat_kantor extends CI_Controller
 			}
 		} else {
 			$no = $this->input->post('no');
-			$kodeal = $this->input->post('kodeal');
-			$namaal = $this->input->post('namaal');
-			$merk = $this->input->post('merk');
+			$kodeal = strtoupper($this->input->post('kodeal'));
+			$namaal = ucwords($this->input->post('namaal'));
+			$merk = ucwords($this->input->post('merk'));
 			$stock = $this->input->post('stock');
 			$satuan = $this->input->post('satuan');
 			$tglbeli = $this->input->post('tglbeli');
 			$hbeli = $this->input->post('hbeli');
-			$ket = $this->input->post('ket');
+			$ket = ucwords($this->input->post('ket'));
 			$kodek = $this->input->post('kodek');
 			$namak = $this->input->post('namak');
 			$jenis = '2';
@@ -181,14 +181,14 @@ class Kelola_alat_kantor extends CI_Controller
 		} else {
 			$id = $this->input->post('id');
 			$no = $this->input->post('no');
-			$kodeal = $this->input->post('kodeal');
-			$namaal = $this->input->post('namaal');
-			$merk = $this->input->post('merk');
+			$kodeal = strtoupper($this->input->post('kodeal'));
+			$namaal = ucwords($this->input->post('namaal'));
+			$merk = ucwords($this->input->post('merk'));
 			$stock = $this->input->post('stock');
 			$satuan = $this->input->post('satuan');
 			$tglbeli = $this->input->post('tglbeli');
 			$hbeli = $this->input->post('hbeli');
-			$ket = $this->input->post('ket');
+			$ket = ucwords($this->input->post('ket'));
 			$kodek = $this->input->post('kodek');
 			$namak = $this->input->post('namak');
 			$jenis = '2';

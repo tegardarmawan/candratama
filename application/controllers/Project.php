@@ -37,6 +37,7 @@ class Project extends CI_Controller
     }
     public function get_kode_customer($nama_customer)
     {
+        $nama_customer = urldecode($nama_customer);
         $query = [
             'select' => 'kodec',
             'from' => 'tcust',

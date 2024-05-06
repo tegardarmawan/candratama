@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="tanggal" class="col-sm-3 col-form-label">stock</label>
+                                <label for="tanggal" class="col-sm-3 col-form-label">Stock</label>
                                 <div class="col-sm-9">
                                     <input type="tet" name="stock" class="form-control" id="stock" placeholder="Masukkan Stock Alat">
                                     <small class="text-danger pl-1" id="error-stock"></small>
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="tanggal" class="col-sm-3 col-form-label">stock</label>
+                                <label for="tanggal" class="col-sm-3 col-form-label">Stock</label>
                                 <div class="col-sm-9">
                                     <input type="tet" name="stock" class="form-control" id="stock" placeholder="Masukkan Stock Alat" readonly>
                                 </div>
