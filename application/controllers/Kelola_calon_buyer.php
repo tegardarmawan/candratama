@@ -62,15 +62,16 @@ class Kelola_calon_buyer extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$kodep = $this->input->post('kodep');
-			$namap = ucfirst($this->input->post('namap'));
+			$namap = strtoupper($this->input->post('namap'));
 			$alamat = $this->input->post('alamat');
-			$kota = ucfirst($this->input->post('kota'));
+			$kota = strtoupper($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			if (!empty($tglp)) {
-				$tglp = date('Y-m-d', strtotime($tglp));
+				$tgl_parts = explode('/', $tglp);
+				$tglp = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
 			}
-			$alamat = ucfirst($alamat);
+			$alamat = strtoupper($alamat);
 
 			$data = array(
 				'kodep' => $kodep,
@@ -99,16 +100,17 @@ class Kelola_calon_buyer extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kodep = ucfirst($this->input->post('kodep'));
-			$namap = ucfirst($this->input->post('namap'));
+			$kodep = strtoupper($this->input->post('kodep'));
+			$namap = strtoupper($this->input->post('namap'));
 			$alamat = $this->input->post('alamat');
-			$kota = ucfirst($this->input->post('kota'));
+			$kota = strtoupper($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			if (!empty($tglp)) {
-				$tglp = date('Y-m-d', strtotime($tglp));
+				$tgl_parts = explode('/', $tglp);
+				$tglp = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
 			}
-			$alamat = ucfirst($alamat);
+			$alamat = strtoupper($alamat);
 
 			$data = array(
 				'kodep' => $kodep,
