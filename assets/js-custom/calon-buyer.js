@@ -97,9 +97,9 @@ function submit(x) {
 				$("[name='telp']").val(hasil[0].telp);
 				var date = new Date(hasil[0].tglp);
 				var formattedDate =
-					(date.getDate() + 1).toString().padStart(2, "0") +
+					date.getDate().toString().padStart(2, "0") +
 					"/" +
-					date.getMonth().toString().padStart(2, "0") +
+					(date.getMonth() + 1).toString().padStart(2, "0") +
 					"/" +
 					date.getFullYear();
 				$("[name='tglp']").val(formattedDate);

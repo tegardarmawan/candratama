@@ -76,7 +76,8 @@ class Kelola_data_buyer extends CI_Controller
 			$telp = $this->input->post('telp');
 			$tgl = $this->input->post('tgl');
 			if (!empty($tgl)) {
-				$tgl = date('d-m-Y', strtotime($tgl)); // Mengonversi format tanggal
+				$tgl_parts = explode('/', $tgl);
+				$tgl = $tgl_parts['2'] . '-' . $tgl_parts['1'] . '-' . $tgl_parts['0'];
 			}
 			$pekerjaan = $this->input->post('pekerjaan');
 			$perusahaan = $this->input->post('perusahaan');
@@ -135,7 +136,8 @@ class Kelola_data_buyer extends CI_Controller
 			$telp = $this->input->post('telp');
 			$tgl = $this->input->post('tgl');
 			if (!empty($tgl)) {
-				$tgl = date('Y-m-d', strtotime($tgl)); // Mengonversi format tanggal
+				$tgl_parts = explode('/', $tgl);
+				$tgl = $tgl_parts['2'] . '-' . $tgl_parts['1'] . '-' . $tgl_parts['0'];
 			}
 			$pekerjaan = $this->input->post('pekerjaan');
 			$perusahaan = $this->input->post('perusahaan');

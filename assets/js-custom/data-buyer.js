@@ -182,9 +182,9 @@ function submit(x) {
 				$("[name='telp']").val(hasil[0].telp);
 				var date = new Date(hasil[0].tgl);
 				var formattedDate =
-					(date.getDate() + 1).toString().padStart(2, "0") +
+					date.getDate().toString().padStart(2, "0") +
 					"/" +
-					date.getMonth().toString().padStart(2, "0") +
+					(date.getMonth() + 1).toString().padStart(2, "0") +
 					"/" +
 					date.getFullYear();
 				$("[name='tgl']").val(formattedDate);
@@ -209,7 +209,14 @@ function insert_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	formData.append("tgl", $("[name='tgl']").val());
+	var date = new Date(hasil[0].tgl);
+	var formattedDate =
+		date.getDate().toString().padStart(2, "0") +
+		"/" +
+		(date.getMonth() + 1).toString().padStart(2, "0") +
+		"/" +
+		date.getFullYear();
+	formData.append("tgl", $("[name='tgl']").val(formattedDate));
 	formData.append("pekerjaan", $("[name='pekerjaan']").val());
 	formData.append("perusahaan", $("[name='perusahaan']").val());
 	formData.append("saldo", $("[name='saldo']").val());
