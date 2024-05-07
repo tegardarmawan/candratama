@@ -70,13 +70,14 @@ class Kelola_data_prospek extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kodep = ucfirst($this->input->post('kodep'));
-			$namap = ucfirst($this->input->post('namap'));
-			$kota = ucfirst($this->input->post('kota'));
+			$kodep = ucwords($this->input->post('kodep'));
+			$namap = ucwords($this->input->post('namap'));
+			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			if (!empty($tglp)) {
-				$tglp = date('d-m-Y', strtotime($tglp));
+				$tgl_parts = explode('/', $tglp);
+				$tglp = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
 			}
 			$type = $this->input->post('type');
 			$src = ucfirst($this->input->post('src'));
@@ -126,7 +127,8 @@ class Kelola_data_prospek extends CI_Controller
 			$telp = $this->input->post('telp');
 			$tglp = $this->input->post('tglp');
 			if (!empty($tglp)) {
-				$tglp = date('Y-m-d', strtotime($tglp)); // Mengonversi format tanggal
+				$tgl_parts = explode('/', $tglp);
+				$tglp = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
 			}
 			$type = $this->input->post('type');
 			$src = ucfirst($this->input->post('src'));

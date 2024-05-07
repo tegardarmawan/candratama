@@ -156,7 +156,7 @@ function insert_data() {
 				get_data();
 			}
 		},
-		error: function (xhr, status1, error) {
+		error: function (xhr, status, error) {
 			console.error("AJAX Error: " + error);
 		},
 	});

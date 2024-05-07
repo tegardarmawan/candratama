@@ -117,14 +117,14 @@ function insert_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	var date = new Date(hasil[0].tglp);
-	var formattedDate =
-		date.getDate().toString().padStart(2, "0") +
-		"/" +
-		(date.getMonth() + 1).toString().padStart(2, "0") +
-		"/" +
-		date.getFullYear();
-	formData.append("tglp", $("[name='tglp']").val(formattedDate));
+	// var date = new Date($("[name='tglp']").val());
+	// var formattedDate =
+	// 	date.getDate().toString().padStart(2, "0") +
+	// 	"/" +
+	// 	(date.getMonth() + 1).toString().padStart(2, "0") +
+	// 	"/" +
+	// 	date.getFullYear();
+	formData.append("tglp", $("[name='tglp']").val());
 
 	$.ajax({
 		type: "POST",

@@ -151,14 +151,7 @@ function insert_data() {
 	formData.append("induk", $("[name='induk']").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("tempat", $("[name='tempat']").val());
-	var date = new Date(hasil[0].tgl);
-	var formattedDate =
-		date.getDate().toString().padStart(2, "0") +
-		"/" +
-		(date.getMonth() + 1).toString().padStart(2, "0") +
-		"/" +
-		date.getFullYear();
-	formData.append("tanggal", $("[name='tanggal']").val(formattedDate));
+	formData.append("tanggal", $("[name='tanggal']").val());
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
