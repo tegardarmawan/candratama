@@ -140,6 +140,12 @@ function submit(x) {
 				$("[name='stock']").val(hasil[0].stock);
 				$("[name='satuan']").val(hasil[0].namast).trigger("change");
 				$("[name='hbeli']").val(hasil[0].hbeli);
+				var date = new Date(hasil[0].tglbeli);
+				var formattedDate =
+					date.getDate().toString().padStart(2, "0") +
+					"/" +
+					(date.getMonth() + 1).toString().padStart(2, "0") +
+					date.getFullYear();
 				$("[name='tglbeli']").val(hasil[0].tglbeli);
 				$("[name='ket']").val(hasil[0].ket);
 				$("[name='kodek']").val(hasil[0].kodek);

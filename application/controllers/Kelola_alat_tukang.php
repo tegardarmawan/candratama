@@ -126,6 +126,10 @@ class Kelola_alat_tukang extends CI_Controller
 			$stock = $this->input->post('stock');
 			$satuan = $this->input->post('satuan');
 			$tglbeli = $this->input->post('tglbeli');
+			if (!empty($tglbeli)) {
+				$tglparts = explode('/', $tglbeli);
+				$tglbeli = $tglparts[2] . '-' . $tglparts[1] . '-' . $tglparts[0];
+			}
 			$hbeli = $this->input->post('hbeli');
 			$ket = ucwords($this->input->post('ket'));
 			$kodek = $this->input->post('kodek');
@@ -186,6 +190,10 @@ class Kelola_alat_tukang extends CI_Controller
 			$stock = $this->input->post('stock');
 			$satuan = $this->input->post('satuan');
 			$tglbeli = $this->input->post('tglbeli');
+			if (!empty($tglbeli)) {
+				$tglparts = explode('/', $tglbeli);
+				$tglbeli = $tglparts[2] . '-' . $tglparts[1] . '-' . $tglparts[0];
+			}
 			$hbeli = $this->input->post('hbeli');
 			$ket = ucwords($this->input->post('ket'));
 			$kodek = $this->input->post('kodek');

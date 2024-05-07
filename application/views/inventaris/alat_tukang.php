@@ -101,8 +101,11 @@
                             <div class="form-group row">
                                 <label for="kota" class="col-sm-3 col-form-label">Tanggal Beli</label>
                                 <div class="col-sm-9">
-                                    <input type="date" name="tglbeli" class="form-control" id="tglbeli" placeholder="Masukkan Tanggal Beli">
-                                    <small class="text-danger pl-1" id="error-tglbeli"></small>
+                                    <div class="input-group">
+                                        <input type="text" name="tglbeli" class="form-control datepicker" id="tglbeli" placeholder="Pilih Tanggal Beli">
+                                        <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                        <small class="text-danger pl-1" id="error-tglbeli"></small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
