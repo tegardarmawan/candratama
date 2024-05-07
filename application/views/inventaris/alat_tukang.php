@@ -54,7 +54,7 @@
                                 <label for="kode" class="col-sm-3 col-form-label">Nomor Alat</label>
                                 <input type="hidden" name="id" id="id" class="form-control" value="">
                                 <div class="col-sm-9">
-                                    <input type="text" name="no" class="form-control" id="no" placeholder="Masukkan Nomor Alat">
+                                    <input type="text" name="no" class="form-control" id="no" placeholder="ex.123">
                                     <small class="text-danger pl-1" id="error-no"></small>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                             <div class="form-group row">
                                 <label for="tanggal" class="col-sm-3 col-form-label">Stock</label>
                                 <div class="col-sm-9">
-                                    <input type="tet" name="stock" class="form-control" id="stock" placeholder="Masukkan Stock Alat">
+                                    <input type="tet" name="stock" class="form-control" id="stock" placeholder="ex.30">
                                     <small class="text-danger pl-1" id="error-stock"></small>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="kota" class="col-sm-3 col-form-label">Tanggal Beli</label>
+                                <label for="" class="col-sm-3 col-form-label">Tanggal Beli</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
                                         <input type="text" name="tglbeli" class="form-control datepicker" id="tglbeli" placeholder="Pilih Tanggal Beli">
@@ -111,7 +111,7 @@
                             <div class="form-group row">
                                 <label for="telp" class="col-sm-3 col-form-label">Harga Beli</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="hbeli" class="form-control" id="hbeli" placeholder="Masukkan Harga Beli">
+                                    <input type="text" name="hbeli" class="form-control" id="hbeli" placeholder="Rp 100,000">
                                     <small class="text-danger pl-1" id="error-hbeli"></small>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                                 <label for="kode" class="col-sm-3 col-form-label">Nomor Alat</label>
                                 <input type="hidden" name="id" id="id" class="form-control" value="">
                                 <div class="col-sm-9">
-                                    <input type="text" name="no" class="form-control" id="no" placeholder="Masukkan Nomor Alat" readonly>
+                                    <input type="text" name="no" class="form-control" id="no" placeholder="ex.123" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -212,7 +212,7 @@
                             <div class="form-group row">
                                 <label for="tanggal" class="col-sm-3 col-form-label">Stock</label>
                                 <div class="col-sm-9">
-                                    <input type="tet" name="stock" class="form-control" id="stock" placeholder="Masukkan Stock Alat" readonly>
+                                    <input type="tet" name="stock" class="form-control" id="stock" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -222,15 +222,19 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="kota" class="col-sm-3 col-form-label">Tanggal Beli</label>
+                                <label for="" class="col-sm-3 col-form-label">Tanggal Beli</label>
                                 <div class="col-sm-9">
-                                    <input type="date" name="tglbeli" class="form-control" id="tglbeli" readonly>
+                                    <div class="input-group">
+                                        <input type="text" name="tglbeli" class="form-control datepicker" id="tglbeli" readonly>
+                                        <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                        <small class="text-danger pl-1" id="error-tglbeli"></small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="telp" class="col-sm-3 col-form-label">Harga Beli</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="hbeli" class="form-control" id="hbeli" placeholder="Masukkan Harga Beli" readonly>
+                                    <input type="text" name="hbeli" class="form-control datepicker" id="hbeli" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
