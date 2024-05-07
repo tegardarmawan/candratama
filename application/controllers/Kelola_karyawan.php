@@ -71,16 +71,20 @@ class Kelola_karyawan extends CI_Controller
 				$response['errors']['status1'] = 'Status karyawan harus dipilih';
 			}
 		} else {
-			$kode = $this->input->post('kode');
+			$kode = strtoupper($this->input->post('kode'));
 			$induk = $this->input->post('induk');
-			$nama = $this->input->post('nama');
-			$tempat = $this->input->post('tempat');
+			$nama = ucwords($this->input->post('nama'));
+			$tempat = ucwords($this->input->post('tempat'));
 			$tanggal = $this->input->post('tanggal');
-			$alamat = $this->input->post('alamat');
-			$kota = $this->input->post('kota');
+			if (!empty($tanggal)) {
+				$tgl_parts = explode('/', $tanggal);
+				$tanggal = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
+			}
+			$alamat = ucwords($this->input->post('alamat'));
+			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$status = $this->input->post('status1');
-			$jabatan = $this->input->post('jabatan');
+			$jabatan = ucwords($this->input->post('jabatan'));
 			if (empty($status)) {
 				$response['errors']['status'] = 'Status jabatan harus dipilih';
 			}
@@ -104,8 +108,8 @@ class Kelola_karyawan extends CI_Controller
 
 	public function edit_data()
 	{
-		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tkaryawan.kodek]');
-		$this->form_validation->set_rules('induk', 'Induk', 'trim|is_unique[tkaryawan.no_induk]');
+		$this->form_validation->set_rules('kode', 'Kode', 'trim|required');
+		$this->form_validation->set_rules('induk', 'Induk', 'trim');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('tempat', 'Tempat Lahir', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'Tanggal Lahir', 'trim|required');
@@ -118,21 +122,25 @@ class Kelola_karyawan extends CI_Controller
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if (empty($this->post->input('status1'))) {
+			if (empty($this->input->post('status1'))) {
 				$response['errors']['status1'] = 'Status karyawan harus dipilih';
 			}
 		} else {
 			$id = $this->input->post('id');
-			$kode = $this->input->post('kode');
+			$kode = strtoupper($this->input->post('kode'));
 			$induk = $this->input->post('induk');
-			$nama = $this->input->post('nama');
-			$tempat = $this->input->post('tempat');
+			$nama = ucwords($this->input->post('nama'));
+			$tempat = ucwords($this->input->post('tempat'));
 			$tanggal = $this->input->post('tanggal');
-			$alamat = $this->input->post('alamat');
-			$kota = $this->input->post('kota');
+			if (!empty($tanggal)) {
+				$tgl_parts = explode('/', $tanggal);
+				$tanggal = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
+			}
+			$alamat = ucwords($this->input->post('alamat'));
+			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$status = $this->input->post('status1');
-			$jabatan = $this->input->post('jabatan');
+			$jabatan = ucwords($this->input->post('jabatan'));
 			if (empty($status)) {
 				$response['errors']['status'] = 'Status jabatan harus dipilih';
 			}

@@ -64,7 +64,19 @@ function get_data() {
 					{ data: "no_induk" },
 					{ data: "namak" },
 					{ data: "tempat" },
-					{ data: "tgl" },
+					{
+						data: "tgl",
+						render: function (data, type, row, meta) {
+							var date = new Date(data);
+							var formattedDate =
+								date.getDate().toString().padStart(2, "0") +
+								"-" +
+								(date.getMonth() + 1).toString().padStart(2, "0") +
+								"-" +
+								date.getFullYear();
+							return formattedDate;
+						},
+					},
 					{ data: "alamat" },
 					{ data: "kota" },
 					{ data: "telp" },
@@ -113,11 +125,18 @@ function submit(x) {
 				$("[name='induk']").val(hasil[0].no_induk);
 				$("[name='nama']").val(hasil[0].namak);
 				$("[name='tempat']").val(hasil[0].tempat);
-				$("[name='tanggal']").val(hasil[0].tgl);
+				var date = new Date(hasil[0].tgl);
+				var formattedDate =
+					date.getDate().toString().padStart(2, "0") +
+					"/" +
+					(date.getMonth() + 1).toString().padStart(2, "0") +
+					"/" +
+					date.getFullYear();
+				$("[name='tanggal']").val(formattedDate);
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='status1']").val(hasil[0].status1);
+				$("[name='status1']").val(hasil[0].status);
 				$("[name='jabatan']").val(hasil[0].jabatan);
 			},
 		});
@@ -132,7 +151,14 @@ function insert_data() {
 	formData.append("induk", $("[name='induk']").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("tempat", $("[name='tempat']").val());
-	formData.append("tanggal", $("[name='tanggal']").val());
+	var date = new Date(hasil[0].tgl);
+	var formattedDate =
+		date.getDate().toString().padStart(2, "0") +
+		"/" +
+		(date.getMonth() + 1).toString().padStart(2, "0") +
+		"/" +
+		date.getFullYear();
+	formData.append("tanggal", $("[name='tanggal']").val(formattedDate));
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());

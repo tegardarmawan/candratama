@@ -87,8 +87,11 @@
                         <div class="form-group row">
                             <label for="tanggal" class="col-sm-3 col-form-label">Tanggal Lahir</label>
                             <div class="col-sm-9">
-                                <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="Masukkan Tanggal Lahir Karyawan">
-                                <small class="text-danger pl-1" id="error-tanggal"></small>
+                                <div class="input-group">
+                                    <input type="text" name="tanggal" class="form-control datepicker" id="tanggal" placeholder="Masukkan Tanggal Lahir Karyawan">
+                                    <div class="input-group-append bg-custom b-0"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                    <small class="text-danger pl-1" id="error-tanggal"></small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -115,7 +118,7 @@
                         <div class="form-group row">
                             <label for="status1" class="col-sm-3 col-form-label">Status</label>
                             <div class="col-sm-9">
-                                <select name="status1" id="status1" class="select2 form-control select-custom" >
+                                <select name="status1" id="status1" class="select2 form-control select-custom">
                                     <option value="">Pilih Status</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
