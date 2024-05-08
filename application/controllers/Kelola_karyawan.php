@@ -61,7 +61,6 @@ class Kelola_karyawan extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
-		$this->form_validation->set_rules('status1', 'Status', 'trim|required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
 
 
@@ -83,10 +82,10 @@ class Kelola_karyawan extends CI_Controller
 			$alamat = ucwords($this->input->post('alamat'));
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
-			$status = $this->input->post('status1');
+			$status1 = $this->input->post('status1');
 			$jabatan = ucwords($this->input->post('jabatan'));
-			if (empty($status)) {
-				$response['errors']['status'] = 'Status jabatan harus dipilih';
+			if (empty($status1)) {
+				$response['errors']['status1'] = 'Status jabatan harus dipilih';
 			}
 			$data = array(
 				'kodek' => $kode,
@@ -97,7 +96,7 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
-				'status' => $status,
+				'status' => $status1,
 				'jabatan' => $jabatan,
 			);
 			$this->data->insert('tkaryawan', $data);
@@ -139,10 +138,10 @@ class Kelola_karyawan extends CI_Controller
 			$alamat = ucwords($this->input->post('alamat'));
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
-			$status = $this->input->post('status1');
+			$status1 = $this->input->post('status1');
 			$jabatan = ucwords($this->input->post('jabatan'));
-			if (empty($status)) {
-				$response['errors']['status'] = 'Status jabatan harus dipilih';
+			if (empty($status1)) {
+				$response['errors']['status1'] = 'Status jabatan harus dipilih';
 			}
 			$data = array(
 				'kodek' => $kode,
@@ -153,7 +152,7 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
-				'status' => $status,
+				'status' => $status1,
 				'jabatan' => $jabatan,
 			);
 			$where = array('id' => $id);

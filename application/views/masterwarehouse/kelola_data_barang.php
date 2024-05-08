@@ -128,7 +128,7 @@
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                     </select>
-                                    <small class="text-danger pl-1" id="error-project"></small>
+                                    <small class="text-danger pl-1" id="error-status1"></small>
                                 </div>
                             </div>
                             <div class="form-group row">

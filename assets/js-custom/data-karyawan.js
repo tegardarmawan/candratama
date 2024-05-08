@@ -136,7 +136,7 @@ function submit(x) {
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='status1']").val(hasil[0].status);
+				$("[name='status1']").val(hasil[0].status).trigger("change");
 				$("[name='jabatan']").val(hasil[0].jabatan);
 			},
 		});

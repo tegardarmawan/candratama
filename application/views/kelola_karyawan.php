@@ -123,6 +123,7 @@
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                                 <small class="text-danger pl-1" id="error-status1"></small>
                             </div>

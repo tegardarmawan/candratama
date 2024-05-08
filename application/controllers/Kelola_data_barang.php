@@ -97,10 +97,10 @@ class Kelola_data_barang extends CI_Controller
 				$response['errors']['kodest'] = "Kode satuan harus dipilih";
 			}
 			if (empty($this->input->post('status1'))) {
-				$response['errors']['status1'] = "Kode satuan harus dipilih";
+				$response['errors']['status1'] = "Status harus dipilih";
 			}
 			if (empty($this->input->post('project'))) {
-				$response['errors']['project'] = "Kode satuan harus dipilih";
+				$response['errors']['project'] = "Project harus dipilih";
 			}
 		} else {
 			$kodeg = $this->input->post('kodeg');
