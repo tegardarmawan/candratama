@@ -122,7 +122,7 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Saldo Customer</label>
                                 <div class="col-sm-9">
-                                    <input type="text" pattern="^Rp\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" class="form-control" placeholder="Masukkan spending money customer" name="saldo" id="saldo">
+                                    <input type="text" class="form-control" placeholder="Masukkan spending money customer" name="saldo" id="saldo">
                                     <small class="text-danger pl-1" id="error-saldo"></small>
                                 </div>
                             </div>

@@ -1,72 +1,5 @@
 get_data();
 
-// auto formatting currency
-$("input[data-type='currency']").on({
-	keyup: function () {
-		formatCurrency($(this));
-	},
-	blur: function () {
-		formatCurrency($(this), "blur");
-	},
-});
-function formatNumber(n) {
-	//format number 1000000 menjadi 1,000,000
-	return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-function formatCurrency(input, blur) {
-	//appends Rp. to value, validates decimal side and puts cursor back in right position
-
-	//mengambil nilai input
-	var input_val = input.val();
-	//jangan melakukan validasi pada input yang kosong
-	if (input_val === "") {
-		return;
-	}
-	//panjang karakter dari input
-	var original_len = input_val.length;
-
-	//inisialisasi posisi kursor
-	var caret_pos = input.prop("selectionStart");
-
-	//pengecekan desimal
-	if (input_val.indexOf(".") >= 0) {
-		//mengambil posisi untuk desimal pertama, digunakan untuk mencegah penggunaan desimal
-		var decimal_pos = input_val.indexOf(".");
-
-		//memisah nomor dengan titik desimal
-		var left_side = input_val.substring(0, decimal_pos);
-		var right_side = input_val.substring(decimal_pos);
-
-		//menambahkan koma pada sisi kiri nomor
-		left_side = formatNumber(left_side);
-		//validasi sisi kanan
-		right_side = formatNumber(right_side);
-
-		//on blur make sure 2 numbers after
-		if (blur === "blur") {
-			right_side += "00";
-		}
-		//batasi desimal untuk hanya dua digit
-		right_side = right_side.substring(0, 2);
-
-		//join number by
-		input_val = "Rp" + left_side + "." + right_side;
-	} else {
-		input_val = formatNumber(input_val);
-		input_val = "Rp" + input_val;
-
-		//final formatting
-		if (blur === "blur") {
-			input_val += ".00";
-		}
-	}
-	input.val(input_val);
-	var updated_len = input_val.length;
-	caret_pos = updated_len - original_len + caret_pos;
-	input[0].setSelectionRange(caret_pos, caret_pos);
-}
-//end of auto formatting currency9
-
 $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
@@ -112,6 +45,21 @@ function delete_error() {
 	$("#error-saldo").hide();
 	$("#error-jenis").hide();
 	$("#error-kodep").hide();
+}
+
+//function auto formatting currency
+$(document).ready(function () {
+	$("#saldo").on("input", function () {
+		var input = $(this).val(); //mengambil nilai yang diinput pada field id saldo
+		var numericInput = input.replace(/\D/g, ""); //menghapus karakter selain digit/angka pada value yang diinput pada field id saldo
+		var formattedInput = addCommas(numericInput);
+		formattedInput = "Rp " + formattedInput;
+		$(this).val(formattedInput);
+	});
+});
+//function addCommas, untuk menambahkan koma setiap tiga digit angka
+function addCommas(input) {
+	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function get_data() {
@@ -190,7 +138,8 @@ function submit(x) {
 				$("[name='tgl']").val(formattedDate);
 				$("[name='pekerjaan']").val(hasil[0].pekerjaan);
 				$("[name='perusahaan']").val(hasil[0].perusahaan);
-				$("[name='saldo']").val(hasil[0].saldo);
+				var formattedInput = "Rp " + addCommas(hasil[0].saldo);
+				$("[name='saldo']").val(formattedInput);
 				$("[name='jenis']").val(hasil[0].jenis);
 				$("[name='kodep']").val(hasil[0].kodep);
 			},
@@ -209,17 +158,11 @@ function insert_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	var date = new Date(hasil[0].tgl);
-	var formattedDate =
-		date.getDate().toString().padStart(2, "0") +
-		"/" +
-		(date.getMonth() + 1).toString().padStart(2, "0") +
-		"/" +
-		date.getFullYear();
-	formData.append("tgl", $("[name='tgl']").val(formattedDate));
+	formData.append("tgl", $("[name='tgl']").val());
 	formData.append("pekerjaan", $("[name='pekerjaan']").val());
 	formData.append("perusahaan", $("[name='perusahaan']").val());
-	formData.append("saldo", $("[name='saldo']").val());
+	var formattedInput = $("[name='saldo']").val().replace(/\D/g, "");
+	formData.append("saldo", formattedInput);
 	formData.append("jenis", $("[name='jenis']").val());
 	formData.append("kodep", $("[name='kodep']").val());
 
@@ -262,7 +205,8 @@ function edit_data() {
 	formData.append("tgl", $("[name='tgl']").val());
 	formData.append("pekerjaan", $("[name='pekerjaan']").val());
 	formData.append("perusahaan", $("[name='perusahaan']").val());
-	formData.append("saldo", $("[name='saldo']").val());
+	var formattedInput = $("[name='saldo']").val().replace(/\D/g, "");
+	formData.append("saldo", formattedInput);
 	formData.append("jenis", $("[name='jenis']").val());
 	formData.append("kodep", $("[name='kodep']").val());
 
