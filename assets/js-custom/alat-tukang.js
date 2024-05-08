@@ -43,33 +43,6 @@ function delete_error() {
 	$("#error-namak").hide();
 }
 
-// auto formatting currency
-// Menambahkan format otomatis untuk kolom harga
-$(document).ready(function () {
-	// Mendengarkan perubahan nilai pada input harga
-	$("#hbeli").on("input", function () {
-		// Mengambil nilai yang dimasukkan pengguna
-		var input = $(this).val();
-
-		// Menghapus semua karakter selain digit
-		var numericInput = input.replace(/\D/g, "");
-
-		// Menambahkan tanda koma setiap tiga digit
-		var formattedInput = addCommas(numericInput);
-
-		// Menambahkan awalan "Rp"
-		formattedInput = "Rp " + formattedInput;
-
-		// Menetapkan nilai yang sudah diformat ke input
-		$(this).val(formattedInput);
-	});
-});
-
-// Fungsi untuk menambahkan tanda koma setiap tiga digit
-function addCommas(input) {
-	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 $(document).ready(function () {
 	$("#namak").select2({
 		placeholder: "Pilih Nama Karyawan",
@@ -237,13 +210,6 @@ function edit_data() {
 	formData.append("merk", $("[name='merk']").val());
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("satuan", $("[name='satuan']").val());
-	// var date = new Date($("[name='tglbeli']").val());
-	// var formattedDate =
-	// 	date.getDate().toString().padStart(2, "0") +
-	// 	"/" +
-	// 	(date.getMonth() + 1).toString().padStart(2, "0") +
-	// 	date.getFullYear();
-	// formData.append("tglbeli", formattedDate);
 	formData.append("tglbeli", $("[name='tglbeli']").val());
 	var hbeli = $("[name='hbeli']").val().replace(/\D/g, "");
 	formData.append("hbeli", hbeli);
@@ -295,4 +261,30 @@ function delete_data(x) {
 			}
 		},
 	});
+}
+// auto formatting currency
+// Menambahkan format otomatis untuk kolom harga
+$(document).ready(function () {
+	// Mendengarkan perubahan nilai pada input harga
+	$("#hbeli").on("input", function () {
+		// Mengambil nilai yang dimasukkan pengguna
+		var input = $(this).val();
+
+		// Menghapus semua karakter selain digit
+		var numericInput = input.replace(/\D/g, "");
+
+		// Menambahkan tanda koma setiap tiga digit
+		var formattedInput = addCommas(numericInput);
+
+		// Menambahkan awalan "Rp"
+		formattedInput = "Rp " + formattedInput;
+
+		// Menetapkan nilai yang sudah diformat ke input
+		$(this).val(formattedInput);
+	});
+});
+
+// Fungsi untuk menambahkan tanda koma setiap tiga digit
+function addCommas(input) {
+	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

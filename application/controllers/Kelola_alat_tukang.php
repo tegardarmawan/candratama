@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+// defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kelola_alat_tukang extends CI_Controller
 {
@@ -101,7 +101,7 @@ class Kelola_alat_tukang extends CI_Controller
 		$this->form_validation->set_rules('merk', 'Merk Alat', 'trim|required');
 		$this->form_validation->set_rules('stock', 'Stock Alat', 'trim|required|numeric');
 		$this->form_validation->set_rules('tglbeli', 'Tanggal Beli Alat', 'trim|required');
-		$this->form_validation->set_rules('hbeli', 'harga Beli Alat', 'trim|required');
+		$this->form_validation->set_rules('hbeli', 'harga Beli Alat', 'trim|required|numeric');
 		$this->form_validation->set_rules('ket', 'Keterangan Alat', 'trim|required');
 		if (empty($this->input->post('kodek'))) {
 			$response['errors']['kodek'] = 'Kode karyawan harus dipilih';
@@ -170,7 +170,7 @@ class Kelola_alat_tukang extends CI_Controller
 		$this->form_validation->set_rules('stock', 'Stock Alat', 'trim|required');
 		$this->form_validation->set_rules('satuan', 'Satuan Alat', 'trim|required');
 		$this->form_validation->set_rules('tglbeli', 'Tanggal Beli Alat', 'trim|required');
-		$this->form_validation->set_rules('hbeli', 'harga Beli Alat', 'trim|required');
+		$this->form_validation->set_rules('hbeli', 'harga Beli Alat', 'trim|required|numeric');
 		$this->form_validation->set_rules('ket', 'Keterangan Alat', 'trim|required');
 
 		if ($this->form_validation->run() == false) {

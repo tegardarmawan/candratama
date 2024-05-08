@@ -42,6 +42,24 @@ function delete_error() {
 	$("#error-kodek").hide();
 	$("#error-namak").hide();
 }
+
+//auto formatting currency
+$(document).ready(function () {
+	$("#hbeli").on("input", function () {
+		var input = $(this).val();
+		var numericInput = input.replace(/\D/g, ""); //digunakan untuk menghilangkan seluruh karakter selain digit/angka
+		//menambahkan tanda koma pada setiap tiga digit
+		var formattedInput = addCommas(numericInput);
+		formattedInput = "Rp " + formattedInput; //digunakan untuk menambahkan "Rp" di awal
+		//menetapkan nilai yang sudah diformat ke input
+		$(this).val(formattedInput);
+	});
+});
+//function untuk menambahkan koma tiap tiga digit
+function addCommas(input) {
+	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(document).ready(function () {
 	$("#namak").select2({
 		placeholder: "Pilih Nama Karyawan",
@@ -138,8 +156,16 @@ function submit(x) {
 				$("[name='merk']").val(hasil[0].merk);
 				$("[name='stock']").val(hasil[0].stock);
 				$("[name='satuan']").val(hasil[0].namast).trigger("change");
-				$("[name='hbeli']").val(hasil[0].hbeli);
-				$("[name='tglbeli']").val(hasil[0].tglbeli);
+				var formattedHbeli = "Rp " + addCommas(hasil[0].hbeli);
+				$("[name='hbeli']").val(formattedHbeli);
+				var date = new Date(hasil[0].tglbeli);
+				var formattedDate =
+					date.getDate().toString().padStart(2, "0") +
+					"/" +
+					(date.getMonth() + 1).toString().padStart(2, "0") +
+					"/" +
+					date.getFullYear();
+				$("[name='tglbeli']").val(formattedDate);
 				$("[name='ket']").val(hasil[0].ket);
 				$("[name='namak']").val(hasil[0].namak).trigger("change");
 				$("[name='kodek']").val(hasil[0].kodek);
@@ -159,7 +185,8 @@ function insert_data() {
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("satuan", $("[name='satuan']").val());
 	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
+	var hbeli = $("[name='hbeli']").val().replace(/\D/g, "");
+	formData.append("hbeli", hbeli);
 	formData.append("ket", $("[name='ket']").val());
 	formData.append("kodek", $("[name='kodek']").val());
 	formData.append("namak", $("[name='namak']").val());
@@ -200,7 +227,8 @@ function edit_data() {
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("satuan", $("[name='satuan']").val());
 	formData.append("tglbeli", $("[name='tglbeli']").val());
-	formData.append("hbeli", $("[name='hbeli']").val());
+	var hbeli = $("[name='hbeli']").val().replace(/\D/g, "");
+	formData.append("hbeli", hbeli);
 	formData.append("ket", $("[name='ket']").val());
 	formData.append("kodek", $("[name='kodek']").val());
 	formData.append("namak", $("[name='namak']").val());
