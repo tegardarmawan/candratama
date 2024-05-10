@@ -48,9 +48,9 @@ class Kelola_data_barang extends CI_Controller
 		$query = [
 			'select' => 'a.id, b.kodeg, b.namag, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
-			'join' => [
-				'tgroup b, b.kodeg = a.kodeg',
-				'tsatuan c, c.namast = a.satuan'
+			'join_custom' => [
+				'tgroup b' => 'b.kodeg = a.kodeg',
+				'tsatuan c' => 'c.namast = a.satuan',
 			],
 		];
 		$result = $this->data->get($query)->result();
@@ -78,7 +78,7 @@ class Kelola_data_barang extends CI_Controller
 	public function insert_data()
 	{
 		// kodeg kodest status1 project => form select
-		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required|is_unique[tbarang.kodeb]');
+		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required|is_unique[tbarang.kodeb]|numeric');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('stock', 'Stock', 'trim|required');
 		$this->form_validation->set_rules('hargabeli', 'Harga Beli', 'trim|required');
@@ -105,7 +105,7 @@ class Kelola_data_barang extends CI_Controller
 		} else {
 			$kodeg = $this->input->post('kodeg');
 			$kodeb = $this->input->post('kodeb');
-			$nama = $this->input->post('nama');
+			$nama = ucwords($this->input->post('nama'));
 			$stock = $this->input->post('stock');
 			$kodest = $this->input->post('kodest');
 			$hargab = $this->input->post('hargabeli');
@@ -113,7 +113,7 @@ class Kelola_data_barang extends CI_Controller
 			$hargaj = $this->input->post('hargajual');
 			$status = $this->input->post('status1');
 			$stockmin = $this->input->post('stockmin');
-			$namat = $this->input->post('namat');
+			$namat = ucwords($this->input->post('namat'));
 			$project = $this->input->post('project');
 
 			if (empty($kodeg)) {
@@ -179,7 +179,7 @@ class Kelola_data_barang extends CI_Controller
 			$id = $this->input->post('id');
 			$kodeg = $this->input->post('kodeg');
 			$kodeb = $this->input->post('kodeb');
-			$nama = $this->input->post('nama');
+			$nama = ucwords($this->input->post('nama'));
 			$stock = $this->input->post('stock');
 			$kodest = $this->input->post('kodest');
 			$hargab = $this->input->post('hargabeli');
@@ -187,7 +187,7 @@ class Kelola_data_barang extends CI_Controller
 			$hargaj = $this->input->post('hargajual');
 			$status = $this->input->post('status1');
 			$stockmin = $this->input->post('stockmin');
-			$namat = $this->input->post('namat');
+			$namat = ucwords($this->input->post('namat'));
 			$project = $this->input->post('project');
 
 			if (empty($kodeg)) {

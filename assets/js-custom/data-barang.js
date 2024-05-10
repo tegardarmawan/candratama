@@ -45,6 +45,28 @@ function delete_error() {
 	$("#error-project").hide();
 }
 
+//fungsi untuk auto formatting currency
+$(document).ready(function () {
+	//membuat fungsi yang akan ditrigger ketika terjadi proses input pada field id hargabeli
+	$(".harga").on("input", function () {
+		//mengambil nilai dari karakter yang diinput pada field
+		var input = $(this).val();
+		//menghapus karakter selain digit pada nilai input
+		var numericInput = input.replace(/\D/g, "");
+		//menambahkan fungsi addCommas pada angka
+		var formattedInput = addCommas(numericInput);
+		//menambah awalan Rp untuk angka yang sudah diformat dengan koma
+		formattedInput = "Rp " + formattedInput;
+
+		//menetapkan nilai input menjadi formattedInput
+		$(this).val(formattedInput);
+	});
+});
+//function untuk menambahkan koma tiap tiga digit angka
+function addCommas(input) {
+	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function get_data() {
 	delete_error();
 	$.ajax({
@@ -111,9 +133,13 @@ function submit(x) {
 				$("[name='nama']").val(hasil[0].namab);
 				$("[name='stock']").val(hasil[0].stock);
 				$("[name='kodest']").val(hasil[0].namast).trigger("change");
-				$("[name='hargabeli']").val(hasil[0].hbeli);
-				$("[name='hargapokok']").val(hasil[0].hpokok);
-				$("[name='hargajual']").val(hasil[0].hjual);
+				//memberikan format yang sama pada lihat detail dan edit seperti pada input
+				var formattedInput = "Rp " + addCommas(hasil[0].hbeli);
+				var formattedInputPokok = "Rp " + addCommas(hasil[0].hpokok);
+				var formattedInputJual = "Rp " + addCommas(hasil[0].hjual);
+				$("[name='hargabeli']").val(formattedInput);
+				$("[name='hargapokok']").val(formattedInputPokok);
+				$("[name='hargajual']").val(formattedInputJual);
 				$("[name='status1']").val(hasil[0].status);
 				$("[name='stockmin']").val(hasil[0].stockmin);
 				$("[name='namat']").val(hasil[0].namat);
@@ -132,9 +158,13 @@ function insert_data() {
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("kodest", $("[name='kodest']").val());
-	formData.append("hargabeli", $("[name='hargabeli']").val());
-	formData.append("hargapokok", $("[name='hargapokok']").val());
-	formData.append("hargajual", $("[name='hargajual']").val());
+	//mengambil karakter angka saja pada nilai yang telah ada di field input
+	var formattedInput = $("[name='hargabeli']").val().replace(/\D/g, "");
+	var formattedInputPokok = $("[name='hargapokok']").val().replace(/\D/g, "");
+	var formattedInputJual = $("[name='hargajual']").val().replace(/\D/g, "");
+	formData.append("hargabeli", formattedInput);
+	formData.append("hargapokok", formattedInputPokok);
+	formData.append("hargajual", formattedInputJual);
 	formData.append("status1", $("[name='status1']").val());
 	formData.append("stockmin", $("[name='stockmin']").val());
 	formData.append("namat", $("[name='namat']").val());
@@ -174,9 +204,13 @@ function edit_data() {
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("stock", $("[name='stock']").val());
 	formData.append("kodest", $("[name='kodest']").val());
-	formData.append("hargabeli", $("[name='hargabeli']").val());
-	formData.append("hargapokok", $("[name='hargapokok']").val());
-	formData.append("hargajual", $("[name='hargajual']").val());
+	//mengambil karakter angka saja pada nilai yang telah ada di field input
+	var formattedInput = $("[name='hargabeli']").val().replace(/\D/g, "");
+	var formattedInputPokok = $("[name='hargapokok']").val().replace(/\D/g, "");
+	var formattedInputJual = $("[name='hargajual']").val().replace(/\D/g, "");
+	formData.append("hargabeli", formattedInput);
+	formData.append("hargapokok", formattedInputPokok);
+	formData.append("hargajual", formattedInputJual);
 	formData.append("status1", $("[name='status1']").val());
 	formData.append("stockmin", $("[name='stockmin']").val());
 	formData.append("namat", $("[name='namat']").val());

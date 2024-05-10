@@ -102,21 +102,21 @@
                             <div class="form-group row">
                                 <label for="hargabeli" class="col-sm-3 col-form-label">Harga Beli</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" name="hargabeli" id="hargabeli" placeholder="Rp1.000.000,00" type="text">
+                                    <input class="form-control harga" name="hargabeli" id="hargabeli" placeholder="Rp 1.000.000,00" type="text">
                                     <small class="text-danger pl-1" id="error-hargabeli"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="hargapokok" class="col-sm-3 col-form-label">Harga Pokok</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" name="hargapokok" id="hargapokok" placeholder="Rp1.000.000,00">
+                                    <input class="form-control harga" type="text" name="hargapokok" id="hargapokok" placeholder="Rp 1.000.000,00">
                                     <small class="text-danger pl-1" id="error-hargapokok"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="hargajual" class="col-sm-3 col-form-label">Harga Jual</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="text" name="hargajual" id="hargajual" placeholder="Rp1.000.000,00">
+                                    <input class="form-control harga" type="text" name="hargajual" id="hargajual" placeholder="Rp 1.000.000,00">
                                     <small class="text-danger pl-1" id="error-hargajual"></small>
                                 </div>
                             </div>
@@ -139,9 +139,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="namat" class="col-sm-3 col-form-label">Nama Terang</label>
+                                <label for="namat" class="col-sm-3 col-form-label">Nama Tukang</label>
                                 <div class="col-sm-9">
-                                    <input required type="text" name="namat" id="namat" class="form-control" placeholder="Masukkan Nama Terang">
+                                    <input required type="text" name="namat" id="namat" class="form-control" placeholder="Masukkan Nama Tukang">
                                     <small class="text-danger pl-1" id="error-namat"></small>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="namat" class="col-sm-3 col-form-label">Nama Terang</label>
+                            <label for="namat" class="col-sm-3 col-form-label">Nama Tukang</label>
                             <div class="col-sm-9">
                                 <input required type="text" name="namat" id="namat" class="form-control" readonly>
                             </div>
