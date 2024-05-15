@@ -33,6 +33,7 @@ class Kelola_data_barang extends CI_Controller
 		$data['menus'] = generate_sidebar_menu();
 
 		$data['title'] = 'Kelola Data Barang';
+
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();
 		$this->load->view('templates/sidebar', $data);
@@ -49,8 +50,8 @@ class Kelola_data_barang extends CI_Controller
 			'select' => 'a.id, b.kodeg, b.namag, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
 			'join_custom' => [
-				'tgroup b' => 'b.kodeg = a.kodeg',
-				'tsatuan c' => 'c.namast = a.satuan',
+				'tgroup b' => 'b.kodeg = a.kodeg, left',
+				'tsatuan c' => 'c.namast = a.satuan, left',
 			],
 		];
 		$result = $this->data->get($query)->result();

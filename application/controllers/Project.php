@@ -61,8 +61,9 @@ class Project extends CI_Controller
             'select' => 'a.id, a.nota, b.kodec, b.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
             'join' => [
-                'tcust b, b.kodec = a.kodec',
-            ]
+                'tcust b, b.kodec = a.kodec, left'
+            ],
+            'where' => ['a.is_deleted' => 0]
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
@@ -83,7 +84,7 @@ class Project extends CI_Controller
     }
     public function insert_data()
     {
-        $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tcust.nota]');
+        $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tproject.nota]');
         $this->form_validation->set_rules('project', 'Nama Project', 'trim|required');
         $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim');
 
