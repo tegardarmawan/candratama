@@ -1820,13 +1820,85 @@ code {
 /* ==============
   Tables
 ===================*/
+/* editable table */
+.table-responsive{
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+#editable-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 100%;
+}
+#editable-table th{
+  font-weight: 500;
+}
+#editable-table td{
+  margin-bottom: 10px;
+}
+
+
+#editable-table th {
+  border-bottom: 1px solid #303030;
+  background-color: #f0f0f0;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+#editable-table td{
+  background-color: #ffffff;
+  border-bottom: 1px solid #303030;
+  border-width: 100%;
+}
+
+#editable-table td[contenteditable="true"] {
+  background-color: #ffffff;
+}
+.editable-input{
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  padding: 8px;
+  margin: 0;
+}
+/* media query untuk menangani layar yang lebih kecil */
+@media (max-width:600px){
+  #editable-table thead{
+    display: none;
+  }
+  #editable-table tbody,
+  #editable-table tr,
+  #editable-table td{
+    display: block;
+    width: 100%;
+  }
+
+  #editable-table td{
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  #editable-table td::before{
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+}
+
 .table {
   margin-bottom: 10px;
 }
 
 th {
   font-weight: 500;
-}
+} 
 
 .table > tbody > tr > td, .table > tfoot > tr > td, .table > thead > tr > td {
   padding: 14px 12px;

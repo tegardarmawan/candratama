@@ -30,6 +30,7 @@
 <script src="<?= base_url() ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/plugins/alertify/js/alertify.js"></script>
+<script src="<?= base_url() ?>assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 
 <!-- App js -->
 <script src="<?= base_url() ?>assets/js/app.js"></script>
@@ -39,6 +40,8 @@
 <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- jss fixed header tabel -->
 <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+<!-- editable table -->
+<script src="<?= base_url() ?>assets/plugins/tabledit/jquery.tabledit.js"></script>
 
 
 <!-- select2 -->
@@ -62,6 +65,13 @@
         scrollX: 320,
         responsive: true,
     });
+</script>
+<script>
+    $('#editable-table').editableTableWidget({
+        scrollY: 270,
+        scrollX: 320,
+        responsive: true,
+    }).find('td:first').focus();
 </script>
 
 <!-- plugins init js -->

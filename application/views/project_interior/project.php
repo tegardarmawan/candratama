@@ -48,7 +48,7 @@
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
                                     <input class="form-control" type="text" id="nota" name="nota" placeholder="Masukkan nota">
-                                    <small class="text-danger pl-1" id="error-kodec"></small>
+                                    <small class="text-danger pl-1" id="error-nota"></small>
                                 </div>
                             </div>
                             <div class="form-group row">

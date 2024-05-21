@@ -75,7 +75,7 @@ class Project extends CI_Controller
             'select' => 'a.id, a.nota, b.kodec, b.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
             'join' => [
-                'tcust b, b.kodec = a.kodec',
+                'tcust b, b.kodec = a.kodec, left',
             ],
             'where' => ['a.id' => $id],
         ];
@@ -90,8 +90,8 @@ class Project extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
-            if (empty($this->input->post('kodec'))) {
-                $response['errors'] = 'Kode customer harus dipilih';
+            if (empty($this->input->post('namac'))) {
+                $response['errors'] = 'Nama customer harus dipilih';
             }
         } else {
             $nota = $this->input->post('nota');
@@ -109,21 +109,21 @@ class Project extends CI_Controller
                 'project' => $project,
                 'kontrak' => $kontrak,
             );
-            $this->data->insert('tcust', $data);
+            $this->data->insert('tproject', $data);
             $response['success'] = 'Data berhasil ditambahkan';
         }
         echo json_encode($response);
     }
     public function edit_data()
     {
-        $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tcust.nota]');
+        $this->form_validation->set_rules('nota', 'Nota', 'trim|required');
         $this->form_validation->set_rules('project', 'Nama Project', 'trim|required');
         $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
             if (empty($this->input->post('kodec'))) {
-                $response['errors'] = 'Kode customer harus dipilih';
+                $response['errors'] = 'Nama customer harus dipilih';
             }
         } else {
             $id = $this->input->post('id');
@@ -132,10 +132,8 @@ class Project extends CI_Controller
             $namac = $this->input->post('namac');
             $project = $this->input->post('project');
             $kontrak = $this->input->post('kontrak');
-            if (empty($kodec)) {
-                $response['errors'] = 'Kode customer harus dipilih';
-            }
-            $where = $id;
+
+
             $data = array(
                 'nota' => $nota,
                 'kodec' => $kodec,
@@ -143,8 +141,21 @@ class Project extends CI_Controller
                 'project' => $project,
                 'kontrak' => $kontrak,
             );
-            $this->data->update('tcust', $where, $data);
-            $response['success'] = 'Data berhasil ditambahkan';
+            $where = array('id' => $id);
+            $this->data->update('tproject', $where, $data);
+            $response['success'] = 'Data berhasil diperbarui';
+        }
+        echo json_encode($response);
+    }
+    public function delete_data()
+    {
+        $id = $this->input->post('id');
+        $where = array('id' => $id);
+        $deleted = $this->data->delete('tproject', $where);
+        if ($deleted) {
+            $response['success'] = "Data berhasil dihapus";
+        } else {
+            $response['error'] = "Data gagal dihapus";
         }
         echo json_encode($response);
     }

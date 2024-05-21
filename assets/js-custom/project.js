@@ -179,6 +179,8 @@ function edit_data() {
 	formData.append("project", $("[name='project']").val());
 	formData.append("kontrak", $("[name='kontrak']").val());
 
+	console.log("Sending data:", formData);
+
 	$.ajax({
 		type: "POST",
 		url: base_url + _controller + "/edit_data",

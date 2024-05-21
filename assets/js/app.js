@@ -5,7 +5,15 @@
  File: Main js
  */
 $(document).ready(function () {
-	jQuery(".datepicker").datepicker({
+	// Konfigurasi khusus untuk elemen dengan id #tglproject
+	$("#tglproject").datepicker({
+		todayHighlight: true,
+		endDate: new Date(),
+		autoclose: true,
+		format: "dd/mm/yyyy",
+	});
+
+	$(".datepicker").datepicker({
 		autoclose: true,
 		format: "dd/mm/yyyy",
 	});
