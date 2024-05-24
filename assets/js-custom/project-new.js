@@ -16,15 +16,6 @@ function delete_error() {
 	$("#error-namac").hide();
 	$("#error-tgl").hide();
 }
-// !function ($) {
-// 	var SweetAlert = function () {};
-
-// 	SweetAlert.prototype.init = function () {
-// 		$("#btn-add").on("click", function () {
-// 			swal("Any fool can use a computer").catch(swal.noop);
-// 		});
-// 	};
-// };
 
 $(document).ready(function () {
 	// Inisialisasi select2
@@ -90,24 +81,26 @@ $(document).ready(function () {
 
 					// Mengambil nilai dari baris yang sedang diedit
 					var row = $("#my-table tr.tabledit-edit-mode");
-
-					// value = row.find("#value-id").data("value");
-					// namab = row.find("#namab-id").data("namab");
-					// satuan = row.find("#satuan").data("satuan");
-					// stock = row.find("#stock").data("stock");
 					keluar = row.find("input[name='keluar']").val();
 					keluar1 = row.find("input[name='keluar1']").val();
 
-					// console.log("value:", value);
-					// console.log("namab:", namab);
-					// console.log("satuan:", satuan);
-					// console.log("stock:", stock);
 					console.log("keluar:", keluar);
 					console.log("keluar1:", keluar1);
 				},
+				onEdit: function (event, row) {
+					// Mendapatkan nilai dari kolom "keluar" dan "stock"
+					var keluarValue = row.find('input[name="keluar"]').val();
+					var stockValue = row.find('td[name="stock"]').text();
+
+					// Mengurangi nilai "stock" dengan nilai "keluar"
+					var newStockValue = parseFloat(stockValue) - parseFloat(keluarValue);
+
+					// Mengupdate nilai pada kolom "stock"
+					row.find('td[name="stock"]').text(newStockValue);
+				},
 			});
 		}
-
+		initializeTabledit();
 		// Loop through selected values and add rows to the table
 		$.each(selectedValues, function (index, value) {
 			// Mencari elemen <option> berdasarkan value yang dipilih
@@ -124,16 +117,16 @@ $(document).ready(function () {
 
 			// Improved Row and Tabledit Initialization (moved inside success callback)
 			var newRow = `
-	<tr>
-	<td id="value-id" name="value-name" data-value="${value}">${value}</td>
-	<td id="namab-id" name="namab-name" data-namab="${namab}">${namab}</td>	
-	<td id="stock" name="stock" data-stock="${stock}">${stock}</td>
-	<td id="satuan" name="satuan" data-satuan"${satuan}">${satuan}</td>
-	<td id="keluar" name="keluar" data-keluar="${keluar}"></td>
-	<small class="text-danger pl-1" id="error-keluar[]"></small>
-	<td id="keluar1" name="keluar1" data-keluar1="${keluar1}"></td>
-	</tr>
-	`;
+			<tr>
+			<td id="value-id" name="value-name" data-value="${value}">${value}</td>
+			<td id="namab-id" name="namab-name" data-namab="${namab}">${namab}</td>	
+			<td id="stock" name="stock" data-stock="${stock}">${stock}</td>
+			<td id="satuan" name="satuan" data-satuan"${satuan}">${satuan}</td>
+			<td id="keluar" name="keluar" data-keluar="${keluar}"></td>
+			<small class="text-danger pl-1" id="error-keluar[]"></small>
+			<td id="keluar1" name="keluar1" data-keluar1="${keluar1}"></td>
+			</tr>
+			`;
 			$("#my-table tbody").append(newRow);
 		});
 		initializeTabledit();
@@ -151,12 +144,15 @@ function insert_data() {
 	$("#my-table tbody tr").each(function () {
 		var value = $(this).find("td:eq(0)").text();
 		var namab = $(this).find("td:eq(1)").text();
-		var keluar = $(this).find("td:eq(4)").text();
+		var stock = $(this).find("td:eq(2)").text();
 		var satuan = $(this).find("td:eq(3)").text();
+		var keluar = $(this).find("td:eq(4)").text();
 		var keluar1 = $(this).find("td:eq(5)").text();
 
+		//menambahkan nilai ke formdata
 		formData.append("value[]", value);
 		formData.append("namab[]", namab);
+		formData.append("stock[]", stock);
 		formData.append("keluar[]", keluar);
 		formData.append("keluar1[]", keluar1);
 		formData.append("satuan[]", satuan);

@@ -59,57 +59,13 @@ class Project_warehouse_new extends CI_Controller
         }
     }
 
-    public function get_data_kodeb($nama_barang)
-    {
-        $nama_barang = urldecode($nama_barang);
-        $query = [
-            'select' => 'kodeb',
-            'from' => 'tbarang',
-            'where' => [
-                'namab' => $nama_barang
-            ]
-        ];
-        $result = $this->data->get($query)->row();
-        if ($result) {
-            echo json_encode(['kode_barang' => $result->kodeb]);
-        } else {
-            echo json_encode(['kode_barang' => 'barang belum memiliki kode']);
-        }
-    }
-
-    public function get_data_stock_satuan($kode_barang)
-    {
-        $kode_barang = urldecode($kode_barang);
-        $query = [
-            'select' => 'a.satuan, b.stock',
-            'from' => 'tproject_d a',
-            'where' => ['a.kodeb' => $kode_barang],
-            'join' => [
-                'tbarang b, b.kodeb = a.kodeb, left',
-            ],
-        ];
-        $result = $this->data->get($query)->row();
-        if ($result) {
-            echo json_encode(
-                [
-                    'stock' => $result->stock,
-                    'satuan' => $result->satuan
-                ]
-            );
-        } else {
-            echo json_encode([
-                'stock' => 'error',
-                'satuan' => 'error'
-            ]);
-        }
-    }
-
     public function insert_data()
     {
         $this->form_validation->set_rules('nota', 'Nota', 'trim|required');
         $this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
         $this->form_validation->set_rules('value[]', 'Kode Barang', 'trim|required');
         $this->form_validation->set_rules('namab[]', 'Nama Barang', 'trim|required');
+        $this->form_validation->set_rules('stock[]', 'Stock Barang', 'trim');
         $this->form_validation->set_rules('keluar[]', 'Barang Keluar', 'trim|required');
         $this->form_validation->set_rules('satuan[]', 'Satuan Barang', 'trim|required');
         $this->form_validation->set_rules('keluar1[]', 'Sisa Barang', 'trim');
@@ -120,6 +76,7 @@ class Project_warehouse_new extends CI_Controller
         } else {
             $value = $this->input->post('value[]');
             $namab = $this->input->post('namab[]');
+            $stock = $this->input->post('stock[]');
             $nota = $this->input->post('nota');
             $tgl = $this->input->post('tgl');
             if (!empty($tgl)) {
@@ -146,6 +103,11 @@ class Project_warehouse_new extends CI_Controller
                     'no' => $no,
                 );
                 $inserted = $this->data->insert('tproject_d', $data);
+                for ($i = 0; $i < $count; $i++) {
+                    $stock = array('stock' => $stock);
+                };
+                $where = array('kodeb' => $value);
+                $this->data->update('tbarang', $where, $stock);
             }
             if ($inserted) {
                 $response['success'] = 'Data berhasil ditambahkan';
@@ -155,51 +117,4 @@ class Project_warehouse_new extends CI_Controller
         }
         echo json_encode($response);
     }
-    // public function edit_data()
-    // {
-    //     $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tproject_d.nota]');
-    //     $this->form_validation->set_rules('tglproject', 'Tanggal', 'trim|required|');
-    //     $this->form_validation->set_rules('kodeb', 'Kode Barang', 'trim|required');
-    //     $this->form_validation->set_rules('namab', 'Nama Barang', 'trim|required');
-    //     $this->form_validation->set_rules('keluar', 'Barang Keluar', 'trim|required|numeric');
-    //     $this->form_validation->set_rules('satuan', 'Satuan Barang', 'trim|required');
-    //     $this->form_validation->set_rules('keluar1', 'Sisa Barang', 'trim|required');
-    //     $this->form_validation->set_rules('masuk', 'Barang Masuk', 'trim');
-    //     $this->form_validation->set_rules('no', 'No', 'trim');
-
-    //     if ($this->form_validation->run() == false) {
-    //         $response['errors'] = $this->form_validation->error_array();
-    //     } else {
-    //         $id = $this->input->post('id');
-    //         $nota = $this->input->post('nota');
-    //         $tglproject = $this->input->post('tglproject');
-    //         if (!empty($tglproject)) {
-    //             $tgl_parts = explode('/', $tgl);
-    //             $tglproject = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
-    //         }
-    //         $kodeb = $this->input->post('kodeb');
-    //         $namab = $this->input->post('namab');
-    //         $keluar = $this->input->post('keluar');
-    //         $satuan = $this->input->post('satuan');
-    //         $keluar1 = $this->input->post('keluar1');
-    //         $masuk = $this->input->post('masuk');
-    //         $no = $this->input->post('no');
-
-    //         $data = array(
-    //             'nota' => $nota,
-    //             'tgl' => $tglproject,
-    //             'kodeb' => $kodeb,
-    //             'namab' => $namab,
-    //             'keluar' => $keluar,
-    //             'satuan' => $satuan,
-    //             'keluar1' => $keluar1,
-    //             'masuk' => $masuk,
-    //             'no' => $no,
-    //         );
-
-    //         $this->data->update('tproject_d', $id, $data);
-    //         $response['success'] = 'Data berhasil diperbarui';
-    //     }
-    //     echo json_encode($response);
-    // }
 }

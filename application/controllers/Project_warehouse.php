@@ -37,7 +37,7 @@ class Project_warehouse extends CI_Controller
     public function get_data()
     {
         $query = [
-            'select' => 'a.id, a.nota, a.tgl, b.kodeb, b.namab, a.keluar, a.satuan, a.keluar1, a.masuk, a.no ',
+            'select' => 'a.id, a.nota, a.tgl, b.kodeb, b.namab, a.keluar, a.satuan, a.keluar1, a.no ',
             'from' => 'tproject_d a',
             'join' => [
                 'tbarang b, b.kodeb = a.kodeb, left'
@@ -50,7 +50,7 @@ class Project_warehouse extends CI_Controller
     {
         $id = $this->input->post('id');
         $query = [
-            'select' => 'a.id, a.nota, a.tgl, b.kodeb, b.namab, a.keluar, a.satuan, a.keluar1, a.masuk, a.no ',
+            'select' => 'a.id, a.nota, a.tgl, b.kodeb, b.namab, a.keluar, a.satuan, a.keluar1, a.no ',
             'from' => 'tproject_d a',
             'join' => [
                 'tbarang b, b.kodeb = a.kodeb, left'
@@ -59,5 +59,17 @@ class Project_warehouse extends CI_Controller
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
+    }
+    public function delete_data()
+    {
+        $id = $this->input->post('id');
+        $where = array('id' => $id);
+        $deleted = $this->data->delete('tproject_d', $where);
+        if ($deleted) {
+            $response['success'] = 'Data berhasil dihapus';
+        } else {
+            $response['error'] = 'Gagal menghapus data';
+        }
+        echo json_encode($response);
     }
 }

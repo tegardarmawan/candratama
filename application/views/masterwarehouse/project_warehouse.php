@@ -16,10 +16,12 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
-                    <i class="mdi mdi-plus"></i>
-                    Tambah Data
-                </button>
+                <a href="<?= base_url('Project_warehouse_new') ?>">
+                    <button type="button" class="btn btn-primary waves-effect waves-light">
+                        <i class="mdi mdi-plus"></i>
+                        Tambah Data
+                    </button>
+                </a>
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
@@ -28,8 +30,7 @@
                             <th>Nama Barang</th>
                             <th>Satuan</th>
                             <th>Jumlah Keluar</th>
-                            <th>Sisa</th>
-                            <th>Masuk</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -40,7 +41,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title mt-0" id="myLargeModalLabel">Project >> Detail</h5>
+                            <h5 class="modal-title mt-0" id="myLargeModalLabel">Nota >> Detail</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <div class="modal-body">
@@ -82,15 +83,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Sisa</label>
+                                <label for="example-text-input" class="col-sm-3 col-form-label">Keterangan</label>
                                 <div class="col-sm-9">
                                     <input class="form-control" type="text" id="keluar1" name="keluar1" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Masuk</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="masuk" name="masuk" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -65,3 +65,4 @@ $route['alat_kantor'] = 'Kelola_alat_kantor';
 $route['log_user'] = 'Data_log_user';
 $route['kontrak'] = 'Kelola_transaksi_kontrak';
 $route['project_warehouse'] = 'Project_warehouse';
+$route['tambah_project'] = 'Project_warehouse_new';

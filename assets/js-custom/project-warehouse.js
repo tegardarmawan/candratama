@@ -14,34 +14,30 @@ function showAlertifySuccess(message) {
 function showAlertifyError(message) {
 	$("body").append(alertify.error(message));
 }
+function tambah_project() {
+	window.location.href = "<?= base_url('Project_warehouse_new/index')?>";
+}
 
 function submit(x) {
-	if (x == "tambah") {
-		$("#btn-insert").show();
-		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Project");
-	} else {
-		$("[name='title']").text("Detail Data Stock");
+	$("[name='title']").text("Detail Data Stock");
 
-		$.ajax({
-			type: "POST",
-			data: "id=" + x,
-			url: base_url + "/" + _controller + "/get_data_id",
-			dataType: "json",
-			success: function (hasil) {
-				$("[name= 'id']").val(hasil[0].id);
-				$("[name= 'nota']").val(hasil[0].nota);
-				$("[name='tgl']").val(hasil[0].tgl);
-				$("[name= 'kodeb']").val(hasil[0].kodeb);
-				$("[name= 'namab']").val(hasil[0].namab);
-				$("[name= 'keluar']").val(hasil[0].keluar);
-				$("[name= 'satuan']").val(hasil[0].satuan);
-				$("[name= 'keluar1']").val(hasil[0].keluar1);
-				$("[name= 'masuk']").val(hasil[0].masuk);
-				$("[name= 'no']").val(hasil[0].no);
-			},
-		});
-	}
+	$.ajax({
+		type: "POST",
+		data: "id=" + x,
+		url: base_url + "/" + _controller + "/get_data_id",
+		dataType: "json",
+		success: function (hasil) {
+			$("[name= 'id']").val(hasil[0].id);
+			$("[name= 'nota']").val(hasil[0].nota);
+			$("[name='tgl']").val(hasil[0].tgl);
+			$("[name= 'kodeb']").val(hasil[0].kodeb);
+			$("[name= 'namab']").val(hasil[0].namab);
+			$("[name= 'keluar']").val(hasil[0].keluar);
+			$("[name= 'satuan']").val(hasil[0].satuan);
+			$("[name= 'keluar1']").val(hasil[0].keluar1);
+			$("[name= 'no']").val(hasil[0].no);
+		},
+	});
 }
 
 function get_data() {
@@ -61,14 +57,10 @@ function get_data() {
 					{ data: "satuan" },
 					{ data: "keluar" },
 					{ data: "keluar1" },
-					{ data: "masuk" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target=".bs-example-modal-lg" title="Edit Data" onclick="submit(' +
-								row.id +
-								')"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
