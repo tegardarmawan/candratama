@@ -96,7 +96,7 @@
                                 </table>
                             </div>
                             <div class="card-footer d-flex justify-content-end ">
-                                <button type="button" class="btn btn-primary btn-large" onclick="insert_data()" id="btn-add">Simpan</button>
+                                <button type="button" class="btn btn-primary btn-large waves-effect waves-light" onclick="insert_data()" id="btn-add">Simpan</button>
                             </div>
                         </div>
                     </div>

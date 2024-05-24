@@ -16,10 +16,20 @@ function delete_error() {
 	$("#error-namac").hide();
 	$("#error-tgl").hide();
 }
+// !function ($) {
+// 	var SweetAlert = function () {};
+
+// 	SweetAlert.prototype.init = function () {
+// 		$("#btn-add").on("click", function () {
+// 			swal("Any fool can use a computer").catch(swal.noop);
+// 		});
+// 	};
+// };
+
 $(document).ready(function () {
 	// Inisialisasi select2
 	$("#nota").select2({
-		placeholder: "Pilih nama customer",
+		placeholder: "Pilih nota",
 	});
 
 	$("#nota").on("change", function () {
@@ -120,6 +130,7 @@ $(document).ready(function () {
 	<td id="stock" name="stock" data-stock="${stock}">${stock}</td>
 	<td id="satuan" name="satuan" data-satuan"${satuan}">${satuan}</td>
 	<td id="keluar" name="keluar" data-keluar="${keluar}"></td>
+	<small class="text-danger pl-1" id="error-keluar[]"></small>
 	<td id="keluar1" name="keluar1" data-keluar1="${keluar1}"></td>
 	</tr>
 	`;
@@ -136,24 +147,26 @@ $(document).ready(function () {
 
 function insert_data() {
 	// Mengambil nilai dari elemen <td> berdasarkan id
-	var value = $("#value-id").data("value");
-	var namab = $("#namab-id").data("namab");
-	var keluar = $("#keluar").data("keluar");
-	var keluar1 = $("#keluar1").data("keluar1");
-	var satuan = $("#satuan").data("satuan");
 	var formData = new FormData();
+	$("#my-table tbody tr").each(function () {
+		var value = $(this).find("td:eq(0)").text();
+		var namab = $(this).find("td:eq(1)").text();
+		var keluar = $(this).find("td:eq(4)").text();
+		var satuan = $(this).find("td:eq(3)").text();
+		var keluar1 = $(this).find("td:eq(5)").text();
+
+		formData.append("value[]", value);
+		formData.append("namab[]", namab);
+		formData.append("keluar[]", keluar);
+		formData.append("keluar1[]", keluar1);
+		formData.append("satuan[]", satuan);
+	});
 
 	// Menambahkan nilai ke FormData
-	formData.append("value", value);
-	formData.append("namab", namab);
-	formData.append("keluar", keluar);
-	formData.append("keluar1", keluar1);
-	formData.append("satuan", satuan);
 	formData.append("nota", $("[name='nota']").val());
 	formData.append("namac", $("[name='namac']").val());
 	formData.append("project", $("[name='project']").val());
 	formData.append("tgl", $("[name='tgl']").val());
-	formData.append("stock", $("[name='stock']").val());
 
 	$.ajax({
 		type: "POST",
@@ -163,18 +176,19 @@ function insert_data() {
 		processData: false,
 		contentType: false,
 		success: function (response) {
-			delete_error();
-			if (response.error) {
-				for (var fieldName in response.errors) {
-					$("#error-" + fieldName).show();
-					$("#error-" + fieldName).html(response.errors[fieldName]);
-				}
+			delete_error(); // Hapus semua error sebelumnya
+			console.log("Response dari server:", response);
+
+			// Jika ada error pada validasi
+			if (response.errors) {
+				delete_error();
+				showAlertifyError(response.error);
 			} else if (response.success) {
 				showAlertifySuccess(response.success);
 			}
 		},
-		error: function (xhr, status, error) {
-			console.error("AJAX Error" + error);
+		error: function (xhr, status1, error) {
+			console.error("AJAX Error: " + error);
 		},
 	});
 }

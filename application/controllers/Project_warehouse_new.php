@@ -106,45 +106,52 @@ class Project_warehouse_new extends CI_Controller
 
     public function insert_data()
     {
-        $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tproject_d.nota]');
-        $this->form_validation->set_rules('tgl', 'Tanggal', 'trim');
-        $this->form_validation->set_rules('value', 'Kode Barang', 'trim|required');
-        $this->form_validation->set_rules('namab', 'Nama Barang', 'trim|required');
-        $this->form_validation->set_rules('keluar', 'Barang Keluar', 'trim|required');
-        $this->form_validation->set_rules('satuan', 'Satuan Barang', 'trim|required');
-        $this->form_validation->set_rules('keluar1', 'Sisa Barang', 'trim');
+        $this->form_validation->set_rules('nota', 'Nota', 'trim|required');
+        $this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
+        $this->form_validation->set_rules('value[]', 'Kode Barang', 'trim|required');
+        $this->form_validation->set_rules('namab[]', 'Nama Barang', 'trim|required');
+        $this->form_validation->set_rules('keluar[]', 'Barang Keluar', 'trim|required');
+        $this->form_validation->set_rules('satuan[]', 'Satuan Barang', 'trim|required');
+        $this->form_validation->set_rules('keluar1[]', 'Sisa Barang', 'trim');
         $this->form_validation->set_rules('no', 'No', 'trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
         } else {
-            $value = $this->input->post('value');
-            $namab = $this->input->post('namab');
+            $value = $this->input->post('value[]');
+            $namab = $this->input->post('namab[]');
             $nota = $this->input->post('nota');
             $tgl = $this->input->post('tgl');
             if (!empty($tgl)) {
                 $tgl_parts = explode('/', $tgl);
                 $tgl = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
             }
-            $keluar = $this->input->post('keluar');
-            $satuan = $this->input->post('satuan');
-            $keluar1 = $this->input->post('keluar1');
+            $keluar = $this->input->post('keluar[]');
+            $satuan = $this->input->post('satuan[]');
+            $keluar1 = $this->input->post('keluar1[]');
             $masuk = $this->input->post('masuk');
             $no = $this->input->post('no');
 
-            $data = array(
-                'nota' => $nota,
-                'tgl' => $tgl,
-                'kodeb' => $value,
-                'namab' => $namab,
-                'keluar' => $keluar,
-                'satuan' => $satuan,
-                'keluar1' => $keluar1,
-                'masuk' => $masuk,
-                'no' => $no,
-            );
-            $this->data->insert('tproject_d', $data);
-            $response['success'] = 'Data berhasil ditambahkan';
+            $count = count($value);
+            for ($i = 0; $i < $count; $i++) {
+                $data = array(
+                    'nota' => $nota,
+                    'tgl' => $tgl,
+                    'kodeb' => $value[$i],
+                    'namab' => $namab[$i],
+                    'keluar' => $keluar[$i],
+                    'satuan' => $satuan[$i],
+                    'keluar1' => $keluar1[$i],
+                    'masuk' => $masuk,
+                    'no' => $no,
+                );
+                $inserted = $this->data->insert('tproject_d', $data);
+            }
+            if ($inserted) {
+                $response['success'] = 'Data berhasil ditambahkan';
+            } else {
+                $response['error'] = 'Gagal menghapus data';
+            }
         }
         echo json_encode($response);
     }
