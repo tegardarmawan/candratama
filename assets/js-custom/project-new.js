@@ -54,8 +54,6 @@ $(document).ready(function () {
 	$("#btn-insert").on("click", function () {
 		// Get selected values from the select2
 		var selectedValues = $("#namab").val();
-		var keluar, keluar1;
-
 		// Clear previous errors
 		$("#error-namab").text("");
 
@@ -64,79 +62,68 @@ $(document).ready(function () {
 			$("#error-namab").text("Silakan pilih barang.");
 			return;
 		}
-		function initializeTabledit() {
-			$("#my-table").Tabledit({
-				columns: {
-					identifier: [0, "kode_barang"], // Change 'id' to the correct identifier name
-					editable: [
-						[4, "keluar"],
-						[5, "keluar1"],
-					],
-				},
-				onDraw: function () {
-					console.log("Tabledit has been initialized or re-initialized.");
-				},
-				onSuccess: function (data, textStatus, jqXHR) {
-					console.log("Data successfully updated:", data);
 
-					// Mengambil nilai dari baris yang sedang diedit
-					var row = $("#my-table tr.tabledit-edit-mode");
-					keluar = row.find("input[name='keluar']").val();
-					keluar1 = row.find("input[name='keluar1']").val();
-
-					console.log("keluar:", keluar);
-					console.log("keluar1:", keluar1);
-				},
-				onEdit: function (event, row) {
-					// Mendapatkan nilai dari kolom "keluar" dan "stock"
-					var keluarValue = row.find('input[name="keluar"]').val();
-					var stockValue = row.find('td[name="stock"]').text();
-
-					// Mengurangi nilai "stock" dengan nilai "keluar"
-					var newStockValue = parseFloat(stockValue) - parseFloat(keluarValue);
-
-					// Mengupdate nilai pada kolom "stock"
-					row.find('td[name="stock"]').text(newStockValue);
-				},
-			});
-		}
-		initializeTabledit();
 		// Loop through selected values and add rows to the table
 		$.each(selectedValues, function (index, value) {
 			// Mencari elemen <option> berdasarkan value yang dipilih
 			var option = $("#namab option[value='" + value + "']");
-
 			// Mengambil teks dari elemen <option>, yang merupakan nama barang
 			var namab = option.text();
-
 			// Mengambil nilai atribut data-satuan dari elemen <option>
 			var satuan = option.data("satuan");
-
 			// Mengambil nilai atribut data-stock dari elemen <option>
 			var stock = option.data("stock");
 
 			// Improved Row and Tabledit Initialization (moved inside success callback)
 			var newRow = `
-			<tr>
-			<td id="value-id" name="value-name" data-value="${value}">${value}</td>
-			<td id="namab-id" name="namab-name" data-namab="${namab}">${namab}</td>	
-			<td id="stock" name="stock" data-stock="${stock}">${stock}</td>
-			<td id="satuan" name="satuan" data-satuan"${satuan}">${satuan}</td>
-			<td id="keluar" name="keluar" data-keluar="${keluar}"></td>
-			<small class="text-danger pl-1" id="error-keluar[]"></small>
-			<td id="keluar1" name="keluar1" data-keluar1="${keluar1}"></td>
-			</tr>
+				<tr>
+					<td id="value-id" name="value" data-value="${value}">${value}</td>
+					<td id="namab-id" name="namab-name" data-namab="${namab}">${namab}</td>
+					<td id="stock" name="stock" data-stock="${stock}">${stock}</td>
+					<td id="satuan" name="satuan" data-satuan="${satuan}">${satuan}</td>
+					<td id="keluar" name="keluar" data-keluar=""></td>
+					<td id="keluar1" name="keluar1" data-keluar1=""></td>
+					<td><button class="btn btn-danger waves-effect waves-light btn-delete">Delete</button></td>
+				</tr>
 			`;
 			$("#my-table tbody").append(newRow);
 		});
-		initializeTabledit();
-
-		// **Optional:** Destroy previous Tabledit instance if needed
-		// $("#my-table").Tabledit("destroy"); // Consider removing if unnecessary
-
+		$("#my-table").on("click", ".btn-delete", function () {
+			$(this).closest("tr").remove();
+		});
 		$("#namab").val(null).trigger("change");
+		$("#my-table")
+			.editableTableWidget()
+			.numericInputExample()
+			.find("td:first")
+			.focus();
 	});
 });
+$.fn.numericInputExample = function () {
+	"use strict";
+	var element = $(this);
+
+	var updateStock = function () {
+		var stockColumnIndex = 2; // Index of 'stock' column
+
+		element.on("change", 'td[name="keluar"]', function () {
+			var cell = $(this);
+			var row = cell.closest("tr");
+			var stockCell = row.find('td[name="stock"]');
+			var keluar = parseFloat(cell.text()) || 0;
+
+			var option = $(
+				"#namab option[value='" + row.find('td[name="value"]').text() + "']"
+			);
+			var stockawal = parseFloat(option.data("stock"));
+
+			stockCell.text(stockawal - keluar); // Update stock value
+			stockCell.data("stock", stockawal - keluar);
+		});
+	};
+
+	updateStock(); // Call the function to initialize the event listener
+};
 
 function insert_data() {
 	// Mengambil nilai dari elemen <td> berdasarkan id

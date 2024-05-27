@@ -84,14 +84,14 @@
                                         <tr>
                                             <th>Kode Barang</th>
                                             <th>Nama Barang</th>
-                                            <th>Stok</th>
+                                            <th>Stock</th>
                                             <th>Satuan</th>
-                                            <th>Jumlah Keluar</th>
-                                            <th>Keterangan</th>
+                                            <th>Keluar</th>
+                                            <th>Keluar1</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <!-- Rows will be added here -->
                                     </tbody>
                                 </table>
                             </div>

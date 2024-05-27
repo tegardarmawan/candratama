@@ -71,6 +71,19 @@ function get_data() {
 						},
 					},
 				],
+				keys: {
+					columns: ":not(:first-child)",
+					editor: editor,
+				},
+				layout: {
+					topStart: {
+						buttons: [
+							{ extend: "create", editor: editor },
+							{ extend: "edit", editor: editor },
+							{ extend: "remove", editor: editor },
+						],
+					},
+				},
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {
