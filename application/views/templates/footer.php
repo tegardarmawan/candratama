@@ -12,9 +12,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- jQuery  -->
-<script src="<?= base_url() ?>assets/js/jquery.min.js"></script>
+<!-- jQuery -->
+
+<!-- Bootstrap JS -->
+
+<!-- DataTables JS -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
-<script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>assets/js/modernizr.min.js"></script>
 <script src="<?= base_url() ?>assets/js/detect.js"></script>
 <script src="<?= base_url() ?>assets/js/fastclick.js"></script>
@@ -35,7 +41,7 @@
 <script src="<?= base_url() ?>assets/js/app.js"></script>
 
 <!-- Required datatable js -->
-<script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- jss fixed header tabel -->
 <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
@@ -43,6 +49,11 @@
 <script src="<?= base_url() ?>assets/plugins/tabledit/jquery.tabledit.js"></script>
 <script src="<?= base_url() ?>assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="<?= base_url() ?>assets/plugins/tiny-editable/numeric-input-example.js"></script>
+<!-- datatable button -->
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 
 
 <!-- select2 -->

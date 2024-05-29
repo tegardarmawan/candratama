@@ -21,11 +21,16 @@ class Project_warehouse_new extends CI_Controller
     {
         $this->app_data['module_js'] = $this->module_js;
     }
-    public function index()
+    public function index($nota = null)
     {
-
         $this->load->helper('menu_helper');
         $data['menus'] = generate_sidebar_menu();
+
+        if ($nota) {
+            $data['project_details'] = $this->data->find('tproject', ['nota' => $nota])->result();
+        } else {
+            $data['project_details'] = [];
+        }
 
         $data['barang'] = $this->data->get_all('tbarang')->result();
         $data['project'] = $this->data->get_all('tproject')->result();
@@ -35,6 +40,18 @@ class Project_warehouse_new extends CI_Controller
         $this->load->view('masterwarehouse/project_warehouse_new', $data);
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
+    }
+
+    public function get_data_id()
+    {
+        $id = $this->input->post('id');
+        $query = [
+            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
+            'from' => 'tproject a',
+            'where' => ['a.id' => $id],
+        ];
+        $result = $this->data->get($query)->result();
+        echo json_encode($result);
     }
 
     public function get_customer($nota)

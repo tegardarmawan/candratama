@@ -9,7 +9,8 @@
                             <li class="breadcrumb-item active">Kelola Data Project</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Project</h4>
+                    <h2 class="page-title">Data Project</h2>
+                    <p class="text-muted mt-0"><?= $project ?> project</p>
                 </div>
             </div>
         </div>
@@ -24,7 +25,7 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Nota</th>
                             <th>Nama Customer</th>
                             <th>Nama Project</th>
                             <th>Aksi</th>

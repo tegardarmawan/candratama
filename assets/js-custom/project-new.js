@@ -18,6 +18,10 @@ function delete_error() {
 }
 
 $(document).ready(function () {
+	var date = moment();
+
+	var currentDate = date.format("D/MM/YYYY");
+	$("#tgl").val(currentDate);
 	// Inisialisasi select2
 	$("#nota").select2({
 		placeholder: "Pilih nota",
@@ -167,7 +171,10 @@ function insert_data() {
 				delete_error();
 				showAlertifyError(response.error);
 			} else if (response.success) {
-				showAlertifySuccess(response.success);
+				showAlertifySuccess(response.success); // Tampilkan pesan sukses
+				setTimeout(function () {
+					window.location.replace(base_url + "Project_warehouse"); // Redirect setelah menampilkan pesan sukses
+				}, 1000); // 1.5 detik (1500 milidetik) delay sebelum redirect
 			}
 		},
 		error: function (xhr, status1, error) {

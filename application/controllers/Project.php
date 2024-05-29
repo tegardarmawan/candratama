@@ -29,6 +29,7 @@ class Project extends CI_Controller
 
         $data['title'] = 'Project';
         $data['menus'];
+        $this->app_data['project'] = $this->data->count('tproject');
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
         $this->load->view('project_interior/project', $this->app_data);
@@ -58,11 +59,8 @@ class Project extends CI_Controller
     public function get_data()
     {
         $query = [
-            'select' => 'a.id, a.nota, b.kodec, b.namac, a.project, a.kontrak, a.user',
+            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
-            'join' => [
-                'tcust b, b.kodec = a.kodec, left'
-            ],
             'where' => ['a.is_deleted' => 0]
         ];
         $result = $this->data->get($query)->result();
@@ -72,11 +70,8 @@ class Project extends CI_Controller
     {
         $id = $this->input->post('id');
         $query = [
-            'select' => 'a.id, a.nota, b.kodec, b.namac, a.project, a.kontrak, a.user',
+            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
-            'join' => [
-                'tcust b, b.kodec = a.kodec, left',
-            ],
             'where' => ['a.id' => $id],
         ];
         $result = $this->data->get($query)->result();

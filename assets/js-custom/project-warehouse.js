@@ -29,13 +29,10 @@ function submit(x) {
 		success: function (hasil) {
 			$("[name= 'id']").val(hasil[0].id);
 			$("[name= 'nota']").val(hasil[0].nota);
-			$("[name='tgl']").val(hasil[0].tgl);
-			$("[name= 'kodeb']").val(hasil[0].kodeb);
-			$("[name= 'namab']").val(hasil[0].namab);
-			$("[name= 'keluar']").val(hasil[0].keluar);
-			$("[name= 'satuan']").val(hasil[0].satuan);
-			$("[name= 'keluar1']").val(hasil[0].keluar1);
-			$("[name= 'no']").val(hasil[0].no);
+			$("[name='kodec']").val(hasil[0].kodec);
+			$("[name= 'namac']").val(hasil[0].namac).trigger("change");
+			$("[name= 'project']").val(hasil[0].project);
+			$("[name= 'kontrak']").val(hasil[0].kontrak);
 		},
 	});
 }
@@ -52,38 +49,89 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
+					{
+						orderable: false,
+						data: null,
+						render: function (data, type, row) {
+							return (
+								'<input type="checkbox" class="select-row" value="' +
+								row.id +
+								'">'
+							);
+						},
+					},
 					{ data: "nota" },
-					{ data: "namab" },
-					{ data: "satuan" },
-					{ data: "keluar" },
-					{ data: "keluar1" },
+					{ data: "namac" },
+					{ data: "project" },
 					{
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-animation="bounce" data-target="#modalHapus" title="Hapus Data" data-id="' +
-								row.id +
-								'"><i class="fas fa-trash"></i></button> ' +
-								'<button class="btn btn-outline-success mb-1" data-toggle="modal" data-target="#lihat" title="detail" onclick="submit(' +
+								'<button class="btn btn-outline-primary" title="Edit Data" onclick="window.location.href=\'' +
+								base_url +
+								"Project_warehouse_new/index/" +
+								row.nota +
+								'\'"><i class="ion-edit"></i></button> ' +
+								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="detail" onclick="submit(' +
 								row.id +
 								')"><i class="ion-eye"></i></button>'
 							);
 						},
 					},
 				],
-				keys: {
-					columns: ":not(:first-child)",
-					editor: editor,
-				},
-				layout: {
-					topStart: {
-						buttons: [
-							{ extend: "create", editor: editor },
-							{ extend: "edit", editor: editor },
-							{ extend: "remove", editor: editor },
-						],
+				dom: "Bfrtip",
+				buttons: [
+					{
+						text: "Select All",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", true);
+						},
 					},
-				},
+					{
+						text: "Deselect All",
+						className: "btn btn-warning",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", false);
+						},
+					},
+				],
+			});
+			// Handle click on "Select all" control
+			$("#select-all").on("click", function () {
+				$(".select-row").prop("checked", this.checked);
+			});
+
+			// Handle click on bulk delete button
+			$("#bulk-delete").on("click", function () {
+				var selectedIds = [];
+				$(".select-row:checked").each(function () {
+					selectedIds.push($(this).val());
+				});
+
+				if (selectedIds.length === 0) {
+					showAlertifyError("Pilih baris untuk dihapus");
+					return;
+				}
+
+				$.ajax({
+					type: "POST",
+					url: base_url + "/" + _controller + "/bulk_delete",
+					data: { ids: selectedIds },
+					dataType: "json",
+					success: function (response) {
+						if (response.success) {
+							$(".select-row:checked").each(function () {
+								table.row($(this).closest("tr")).remove().draw();
+							});
+							showAlertifySuccess(response.success);
+							get_data();
+						} else {
+							showAlertifyError(response.error);
+							get_data();
+						}
+					},
+				});
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {

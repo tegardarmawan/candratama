@@ -79,7 +79,7 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
-					{ data: "id" },
+					{ data: "nota" },
 					{ data: "namac" },
 					{ data: "project" },
 					{
