@@ -17,7 +17,7 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         <?php if (isset($project_details) && !empty($project_details)) : ?>
                             <?php foreach ($project_details as $detail) : ?>
                                 <div class="form-group">
@@ -91,7 +91,7 @@
                                     <th>Stock</th>
                                     <th>Satuan</th>
                                     <th>Keluar</th>
-                                    <th>Keluar1</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,7 +99,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer d-flex justify-content-end ">
+                    <div class="card-footer text-right">
+                        <button class="btn btn-secondary" onclick="kembali()"><span class="iconify" data-icon="mdi-undo-variant"></span>Batal</button>
                         <button type="button" class="btn btn-primary btn-large waves-effect waves-light" onclick="insert_data()" id="btn-add">Simpan</button>
                     </div>
                 </div>

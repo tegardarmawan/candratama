@@ -16,6 +16,9 @@ function delete_error() {
 	$("#error-namac").hide();
 	$("#error-tgl").hide();
 }
+function kembali() {
+	window.location.replace(base_url + "Project_warehouse");
+}
 
 $(document).ready(function () {
 	var date = moment();

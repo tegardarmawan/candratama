@@ -36,6 +36,7 @@
 <script src="<?= base_url() ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/select2/select2.min.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/plugins/alertify/js/alertify.js"></script>
+<script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
 
 <!-- App js -->
 <script src="<?= base_url() ?>assets/js/app.js"></script>

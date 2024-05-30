@@ -72,9 +72,11 @@ function get_data() {
 								"Project_warehouse_new/index/" +
 								row.nota +
 								'\'"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-success" data-toggle="modal" data-target="#lihat" title="detail" onclick="submit(' +
-								row.id +
-								')"><i class="ion-eye"></i></button>'
+								'<button class="btn btn-outline-success" title="Detail Data" onclick="window.location.href=\'' +
+								base_url +
+								"Project_materials/index/" +
+								row.nota +
+								'\'"><i class="ion-eye"></i></button>'
 							);
 						},
 					},

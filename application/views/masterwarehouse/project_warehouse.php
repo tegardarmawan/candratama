@@ -18,21 +18,25 @@
             <div class="card-body">
                 <!-- Button trigger modal -->
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="ml-4 text-left">
+                        <button type="button" class="btn btn-primary waves-effect waves-light">
+                            <i class="mdi mdi-plus"></i>
+                            Tambah Data
+                        </button>
+                        <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
+                    </div>
+                    <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <a href="<?= base_url('Project_warehouse_new') ?>">
-                                    <button type="button" class="btn btn-primary waves-effect waves-light">
-                                        <i class="mdi mdi-plus"></i>
-                                        Tambah Data
-                                    </button>
+
                                 </a>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Delete Selected</button>
+
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
