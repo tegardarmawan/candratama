@@ -120,17 +120,17 @@ class Project_warehouse_new extends CI_Controller
                     'no' => $no,
                 );
                 $inserted = $this->data->insert('tproject_d', $data);
+                if (is_array($stock) && isset($stock[$i]) && is_array($value) && isset($value[$i])) {
+                    $stockData = array('stock' => $stock[$i]);
+                    $whereData = array('kodeb' => $value[$i]);
+                    $this->data->update('tbarang', $whereData, $stockData);
+                }
             }
             if ($inserted) {
                 $response['success'] = 'Data berhasil ditambahkan';
             } else {
-                $response['error'] = 'Gagal menghapus data';
+                $response['error'] = 'Gagal menambah data';
             }
-            for ($i = 0; $i < $count; $i++) {
-                $stock = array('stock' => $stock[$i]);
-                $where = array('kodeb' => $value[$i]);
-            };
-            $this->data->update('tbarang', $where, $stock);
         }
         echo json_encode($response);
     }

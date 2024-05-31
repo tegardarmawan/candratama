@@ -176,7 +176,9 @@ function insert_data() {
 			} else if (response.success) {
 				showAlertifySuccess(response.success); // Tampilkan pesan sukses
 				setTimeout(function () {
-					window.location.replace(base_url + "Project_warehouse"); // Redirect setelah menampilkan pesan sukses
+					window.location.replace(
+						base_url + "Project_materials/index/" + $("[name='nota']").val()
+					); // Redirect setelah menampilkan pesan sukses
 				}, 1000); // 1.5 detik (1500 milidetik) delay sebelum redirect
 			}
 		},
