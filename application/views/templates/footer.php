@@ -29,6 +29,7 @@
 <script src="<?= base_url() ?>assets/js/waves.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.scrollTo.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <!-- plugins js -->
 <script src="<?= base_url() ?>assets/plugins/timepicker/moment.js"></script>
 <script src="<?= base_url() ?>assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
@@ -55,6 +56,9 @@
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.5.2/js/dataTables.dateTime.min.js"></script>
+
 
 
 <!-- select2 -->

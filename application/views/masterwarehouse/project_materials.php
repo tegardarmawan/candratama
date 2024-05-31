@@ -61,6 +61,24 @@
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-md-6 col sm-6 d-flex flex-row-reverse">
+                                <div class="d-flex align-items-center">
+                                    <label for="min" style="min-width: 80px; margin-top: 7px; margin-right: 3px; font-weight:500;">Start Date:</label>
+                                    <input type="text" class="form-control" id="min" name="min" placeholder="Select start date" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col sm-6 d-flex flex-row">
+                                <div class="d-flex align-items-center">
+                                    <label for="max" style="min-width: 80px; margin-top: 7px; margin-right: 3px; font-weight:500;">End Date:</label>
+                                    <input type="text" class="form-control" id="max" name="max" placeholder="Select end date" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+
+
+                        </div>
                         <table class="table editable-table" id="my-table">
                             <thead>
                                 <tr>

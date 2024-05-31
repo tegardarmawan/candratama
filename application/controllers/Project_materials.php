@@ -45,16 +45,34 @@ class Project_materials extends CI_Controller
             return;
         }
 
-        $result = $this->data->find('tproject_d', ['nota' => $nota])->result();
+        $start_date = $this->input->get('start_date');
+        if (!empty($start_date)) {
+            $tgl_parts = explode('-', $start_date);
+            $start_date = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
+        }
+        $end_date = $this->input->get('end_date');
+        if (!empty($end_date)) {
+            $tgl_parts = explode('-', $end_date);
+            $end_date = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
+        }
 
-        // Jika tidak ada data yang ditemukan, kirim pesan error
+        $where = ['nota' => $nota];
+
+        if (!empty($start_date) && !empty($end_date)) {
+            $where['tgl >='] = $start_date;
+            $where['tgl <='] = $end_date;
+        }
+
+        $result = $this->data->find('tproject_d', $where)->result();
+
         if (empty($result)) {
             echo json_encode(['error' => 'No data found']);
             return;
         }
-        // Kirim data dalam format JSON
+
         echo json_encode($result);
     }
+
 
     public function save_session_data()
     {

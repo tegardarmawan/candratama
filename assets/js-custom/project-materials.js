@@ -3,42 +3,96 @@ function kembali() {
 	window.location.replace(base_url + "Project_warehouse");
 }
 function get_data() {
-	$.ajax({
-		type: "GET",
-		url: base_url + _controller + "/get_data/" + nota,
-		dataType: "json",
-		success: function (data) {
-			$("#my-table").DataTable({
-				destroy: true,
-				data: data,
-				responsive: true,
-				columns: [
-					{ data: "kodeb" },
-					{ data: "namab" },
-					{ data: "keluar" },
-					{ data: "satuan" },
-					{ data: "keluar1" },
-					{
-						data: "tgl",
-						render: function (data, type, row, meta) {
-							var date = new Date(data);
-							var formattedDate =
-								date.getDate().toString().padStart(2, "0") +
-								"/" +
-								(date.getMonth() + 1).toString().padStart(2, "0") +
-								"/" +
-								date.getFullYear();
-							return formattedDate;
+	let minDate, maxDate;
+
+	$.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+		let min = minDate.val() ? new Date(minDate.val()) : null;
+		let max = maxDate.val() ? new Date(maxDate.val()) : null;
+		let date = new Date(data[5]);
+
+		if (
+			(min === null && max === null) ||
+			(min === null && date <= max) ||
+			(min <= date && max === null) ||
+			(min <= date && date <= max)
+		) {
+			return true;
+		}
+		return false;
+	});
+
+	// Create date inputs
+	minDate = new DateTime($("#min"), { format: "DD-MM-YYYY" });
+	maxDate = new DateTime($("#max"), { format: "DD-MM-YYYY" });
+
+	let table = $("#my-table").DataTable({
+		ajax: {
+			url: base_url + _controller + "/get_data/" + nota,
+			method: "GET",
+			dataType: "json",
+			data: function (d) {
+				d.start_date = formatDate(minDate.val());
+				d.end_date = formatDate(maxDate.val());
+			},
+			dataSrc: function (json) {
+				if (json.error) {
+					console.error(json.error);
+					alert("Error: " + json.error);
+					return [];
+				}
+				return json;
+			},
+			success: function (data) {
+				$("#my-table").DataTable({
+					destroy: true,
+					data: data,
+					responsive: true,
+					columns: [
+						{ data: "kodeb" },
+						{ data: "namab" },
+						{ data: "keluar" },
+						{ data: "satuan" },
+						{ data: "keluar1" },
+						{
+							data: "tgl",
+							// render: function (data, type, row, meta) {
+							// 	var date = new Date(data);
+							// 	var formattedDate =
+							// 		date.getDate().toString().padStart(2, "0") +
+							// 		"-" +
+							// 		(date.getMonth() + 1).toString().padStart(2, "0") +
+							// 		"-" +
+							// 		date.getFullYear();
+							// 	return formattedDate;
+							// },
 						},
-					},
-				],
-			});
-		},
-		error: function (xhr, textStatus, errorThrown, error) {
-			console.error("AJAX Error: " + error);
+					],
+				});
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.error("AJAX error: " + textStatus + " - " + errorThrown);
+				alert("An error occurred while fetching data.");
+			},
 		},
 	});
+
+	$("#min, #max").on("change", function () {
+		table.ajax.reload();
+	});
+
+	function formatDate(dateStr) {
+		if (!dateStr) return "";
+		let date = new Date(dateStr);
+		return (
+			date.getDate().toString().padStart(2, "0") +
+			"-" +
+			(date.getMonth() + 1).toString().padStart(2, "0") +
+			"-" +
+			date.getFullYear()
+		);
+	}
 }
+
 function generate() {
 	var formData = new FormData();
 	formData.append("nota", document.getElementById("nota").textContent);

@@ -93,7 +93,7 @@ class Project_warehouse_new extends CI_Controller
         } else {
             $value = $this->input->post('value[]');
             $namab = $this->input->post('namab[]');
-            // $stock = $this->input->post('stock[]');
+            $stock = $this->input->post('stock[]');
             $nota = $this->input->post('nota');
             $tgl = $this->input->post('tgl');
             if (!empty($tgl)) {
@@ -126,42 +126,12 @@ class Project_warehouse_new extends CI_Controller
             } else {
                 $response['error'] = 'Gagal menghapus data';
             }
-            // for ($i = 0; $i < $count; $i++) {
-            //     $stock = array('stock' => $stock);
-            // };
-            // $where = array('kodeb' => $value);
-            // $this->data->update('tbarang', $where, $stock);
+            for ($i = 0; $i < $count; $i++) {
+                $stock = array('stock' => $stock[$i]);
+                $where = array('kodeb' => $value[$i]);
+            };
+            $this->data->update('tbarang', $where, $stock);
         }
         echo json_encode($response);
-    }
-    public function updated_stock()
-    {
-        $value = $this->input->post('value');
-        $keluar = $this->input->post('keluar');
-        $stock = $this->input->post('stock');
-
-        $updated_stocks = [];
-
-        // Mencari stok saat ini berdasarkan kode barang
-        $query = [
-            'select' => 'stock',
-            'from' => 'tbarang',
-            'where' => ['kodeb' => $value],
-        ];
-        $result = $this->data->get($query)->row();
-
-        if ($result) {
-            $current_stock = $result->stock;
-            $updated_stock = $current_stock - $keluar;
-
-            // Memperbarui stok di database
-            $data = array('stock' => $updated_stock);
-            $where = array('kodeb' => $value);
-            $this->data->update('tbarang', $data, $where);
-
-            $updated_stocks = $updated_stock;
-        }
-
-        echo json_encode(['updated_stocks' => $updated_stocks]);
     }
 }
