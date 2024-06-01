@@ -58,6 +58,11 @@ class Data_model extends CI_Model
         $query = $this->db->query("SELECT COUNT(*) as count FROM $table where $column = $id");
         return $query->row()->count;
     }
+    public function count_stock($table, $condition)
+    {
+        $query = $this->db->query("SELECT COUNT(*) as count FROM $table WHERE $condition");
+        return $query->row()->count;
+    }
 
     public function find(string $table, $where)
     {

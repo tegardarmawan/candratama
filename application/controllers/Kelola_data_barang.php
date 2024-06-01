@@ -28,6 +28,10 @@ class Kelola_data_barang extends CI_Controller
 	}
 	public function index()
 	{
+		$where = 'stock < stockmin';
+		$this->app_data['total'] = $this->data->count_stock('tbarang', $where);
+		$habis = 'stock <= 0';
+		$this->app_data['habis'] = $this->data->count_stock('tbarang', $habis);
 		//load menu helper
 		$this->load->helper('menu_helper');
 		$data['menus'] = generate_sidebar_menu();

@@ -405,6 +405,13 @@ code {
 /* ==============
   Bootstrap-custom
 ===================*/
+/* highlight row table pada table barang */
+.low-stock{
+  background-color: #e5ff00 !important;
+}
+.empty-stock{
+  background-color: red !important;
+}
 
 .breadcrumb {
   background-color: transparent;
@@ -1826,6 +1833,7 @@ code {
   overflow-y: auto;
   max-height: 400px;
 }
+
 
 #editable-table {
   border-collapse: collapse;

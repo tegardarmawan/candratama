@@ -79,12 +79,10 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
-					{
-						data: "id",
-					},
 					{ data: "kodeb" },
 					{ data: "namab" },
 					{ data: "stock" },
+					{ data: "stockmin" },
 					{ data: "status" },
 					{
 						data: null,
@@ -103,6 +101,14 @@ function get_data() {
 						},
 					},
 				],
+				createdRow: function (row, data, dataIndex) {
+					if (data.stock < data.stockmin) {
+						$(row).addClass("low-stock");
+					}
+					if (data.stock <= 0) {
+						$(row).addClass("empty-stock");
+					}
+				},
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {

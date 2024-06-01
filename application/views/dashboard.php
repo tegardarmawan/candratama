@@ -19,23 +19,25 @@
         <!-- card -->
         <div class="row">
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="col-4 align-self-center">
-                                <div class="round">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                <a href="<?= base_url('Kelola_data_barang') ?>">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="col-4 align-self-center">
+                                    <div class="round">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-8 align-self-center text-center">
-                                <div class="m-l-10">
-                                    <h5 class="mt-0 round-inner"><?= $barang; ?></h5>
-                                    <p class="mb-0 text-muted">Data Barang</p>
+                                <div class="col-8 align-self-center text-center">
+                                    <div class="m-l-10">
+                                        <h5 class="mt-0 round-inner"><?= $barang; ?></h5>
+                                        <p class="mb-0 text-muted">Data Barang</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="card m-b-30">

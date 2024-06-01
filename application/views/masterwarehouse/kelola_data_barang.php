@@ -14,6 +14,47 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-4 align-self-center">
+                                <div class="round">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                </div>
+                            </div>
+                            <div class="col-8 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner"><?= $total ?></h5>
+                                    <p class="mb-0 text-muted">Jumlah Barang Hampir Habis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xl-3">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-4 align-self-center">
+                                <div class="round">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                </div>
+                            </div>
+                            <div class="col-8 align-self-center text-center">
+                                <div class="m-l-10">
+                                    <h5 class="mt-0 round-inner"><?= $habis ?></h5>
+                                    <p class="mb-0 text-muted">Jumlah Barang Habis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="card m-b-30">
             <div class="card-body">
                 <!-- Button trigger modal -->
@@ -25,10 +66,10 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Stock</th>
+                            <th>Stock Minimal</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
