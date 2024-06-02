@@ -43,6 +43,8 @@ class Admin extends CI_Controller
 		$this->app_data['furniture'] = $this->data->count('tfurniture');
 		$this->app_data['prospek'] = $this->data->count('tprospek');
 		$this->app_data['cb'] = $this->data->count('tcust_follow');
+		$this->app_data['project'] = $this->data->count('tproject');
+		$this->app_data['customer'] = $this->data->count('tcust');
 
 		// Load view dashboard dengan data yang sudah diproses
 		$this->load->view('templates/sidebar', $data);
