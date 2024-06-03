@@ -40,27 +40,6 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-6 col-lg-6 col-xl-3">
-                    <a href="<?= base_url('Kelola_data_furniture') ?>">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-                                <div class="d-flex flex-row">
-                                    <div class="col-4 align-self-center">
-                                        <div class="round">
-                                            <i class="fas fa-couch"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-8 align-self-center text-center">
-                                        <div class="m-l-10">
-                                            <h5 class="mt-0 round-inner"><?= $furniture; ?></h5>
-                                            <p class="mb-0 text-muted">Jumlah Furniture</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
             <?php endif; ?>
             <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2' || $this->session->userdata('id_credential') == '3') : ?>
                 <div class="col-md-6 col-lg-6 col-xl-3">
@@ -117,8 +96,7 @@
                                     </div>
                                     <div class="col-8 align-self-center text-center">
                                         <div class="m-l-10">
-                                            <h5 class="mt-0 round-inner"><?= $customer; ?></h5>
-                                            <p class="mb-0 text-muted">Customer</p>
+                                            <p class="mb-0 text-muted">Customer RO</p>
                                         </div>
                                     </div>
                                 </div>
