@@ -16,42 +16,46 @@
 
         <div class="row">
             <div class="col-lg-6 col-md-6 col-xl-3">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="col-4 align-self-center">
-                                <div class="round">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                <a href="<?= base_url('Data_barang_menipis') ?>">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="col-4 align-self-center">
+                                    <div>
+                                        <span class="iconify" data-icon="mdi:alert-outline" style="font-size: 48px; color:goldenrod"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-8 align-self-center text-center">
-                                <div class="m-l-10">
-                                    <h5 class="mt-0 round-inner"><?= $total ?></h5>
-                                    <p class="mb-0 text-muted">Jumlah Barang Hampir Habis</p>
+                                <div class="col-8 align-self-center text-center">
+                                    <div class="m-l-10">
+                                        <h5 class="mt-0 round-inner"><?= $total ?></h5>
+                                        <p class="mb-0 text-muted">Hampir Habis</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-6 col-md-6 col-xl-3">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="col-4 align-self-center">
-                                <div class="round">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                <a href="<?= base_url('Data_barang_habis') ?>">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <div class="d-flex flex-row">
+                                <div class="col-4 align-self-center">
+                                    <div>
+                                        <span class="iconify" data-icon="mdi:alert-outline" style="font-size: 48px; color:red"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-8 align-self-center text-center">
-                                <div class="m-l-10">
-                                    <h5 class="mt-0 round-inner"><?= $habis ?></h5>
-                                    <p class="mb-0 text-muted">Jumlah Barang Habis</p>
+                                <div class="col-8 align-self-center text-center">
+                                    <div class="m-l-10">
+                                        <h5 class="mt-0 round-inner"><?= $habis ?></h5>
+                                        <p class="mb-0 text-muted">Barang Habis</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -76,9 +80,6 @@
                     </thead>
                 </table>
             </div>
-
-
-
             <!-- Modal tambah/edit data-->
             <div class="modal fade bs-example-modal-lg" id="modalinup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -91,7 +92,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
+                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Gro up</label>
                                 <input type="hidden" name="id" class="form-control" id="id">
                                 <div class="col-sm-9">
                                     <select name="kodeg" id="kodeg" class="select2 form-control custom-select" style="width: 100%; height: 50px;" data-placeholder="Pilih Group Barang">
@@ -120,13 +121,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="stock" class="col-sm-3 col-form-label">Jumlah Stock</label>
-                                <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Masukkan Stock Barang">
-                                    <small class="text-danger pl-1" id="error-stock"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="kodest" class="col-sm-3 col-form-label">Kode Satuan Barang</label>
                                 <div class="col-sm-9">
                                     <select name="kodest" id="kodest" class="select2 form-control mb-3 custom-select" data-placeholder="Pilih Kode Barang">
@@ -138,38 +132,6 @@
                                         <?php endforeach; ?>
                                     </select>
                                     <small class="text-danger pl-1" id="error-kodest"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="hargabeli" class="col-sm-3 col-form-label">Harga Beli</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control harga" name="hargabeli" id="hargabeli" placeholder="Rp 1.000.000,00" type="text">
-                                    <small class="text-danger pl-1" id="error-hargabeli"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="hargapokok" class="col-sm-3 col-form-label">Harga Pokok</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control harga" type="text" name="hargapokok" id="hargapokok" placeholder="Rp 1.000.000,00">
-                                    <small class="text-danger pl-1" id="error-hargapokok"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="hargajual" class="col-sm-3 col-form-label">Harga Jual</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control harga" type="text" name="hargajual" id="hargajual" placeholder="Rp 1.000.000,00">
-                                    <small class="text-danger pl-1" id="error-hargajual"></small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="status1" class="col-sm-3 col-form-label">Status Barang</label>
-                                <div class="col-sm-9">
-                                    <select name="status1" id="status1" class="form-control mb-3">
-                                        <option value="">Pilih Status</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                    </select>
-                                    <small class="text-danger pl-1" id="error-status1"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -189,7 +151,12 @@
                             <div class="form-group row">
                                 <label for="project" class="col-sm-3 col-form-label">Project</label>
                                 <div class="col-sm-9">
-                                    <input type="text" placeholder="Project" id="project" name="project" class="form-control">
+                                    <select name="project" id="project" class="select2 form-control custom-select">
+                                        <option value="-">Pilih Project</option>
+                                        <?php foreach ($project as $pro) : ?>
+                                            <option value="<?= $pro->namac; ?>"><?= $pro->namac; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>

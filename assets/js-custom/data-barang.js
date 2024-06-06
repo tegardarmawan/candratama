@@ -1,5 +1,5 @@
 get_data();
-
+get_data_low();
 $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 	var button = $(e.relatedTarget);
 	var id = button.data("id");
@@ -88,9 +88,11 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary mb-1" data-toggle="modal" data-target="#modalinup" title="Edit Data" onclick="submit(' +
-								row.id +
-								')"><i class="ion-edit"></i></button> ' +
+								'<button class="btn btn-outline-primary mb-1" title="Edit Data" onclick="window.location.href=\'' +
+								base_url +
+								"Data_barang_masuk/index/" +
+								row.kodeb +
+								'\'"><i class="ion-edit"></i></button> ' +
 								'<button class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#modalHapus" title="Hapus Data" data-id="' +
 								row.id +
 								'"><i class="fas fa-trash"></i></button> ' +
@@ -109,6 +111,44 @@ function get_data() {
 						$(row).addClass("empty-stock");
 					}
 				},
+			});
+		},
+		error: function (xhr, textStatus, errorThrown, error) {
+			console.error("AJAX Error: " + error);
+		},
+	});
+}
+function get_data_low() {
+	delete_error();
+	$.ajax({
+		url: base_url + _controller + "/get_data_low",
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			var table = $("#datatable-buttons").DataTable({
+				destroy: true,
+				data: data,
+				responsive: true,
+				columns: [{ data: "kodeg" }, { data: "kodeb" }, { data: "namab" }],
+			});
+		},
+		error: function (xhr, textStatus, errorThrown, error) {
+			console.error("AJAX Error: " + error);
+		},
+	});
+}
+function get_data_empty() {
+	delete_error();
+	$.ajax({
+		url: base_url + _controller + "/get_data_empty",
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			var table = $("#datatable-buttons").DataTable({
+				destroy: true,
+				data: data,
+				responsive: true,
+				columns: [{ data: "kodeg" }, { data: "kodeb" }, { data: "namab" }],
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {
@@ -162,16 +202,7 @@ function insert_data() {
 	formData.append("kodeg", $("[name='kodeg']").val());
 	formData.append("kodeb", $("[name='kodeb']").val());
 	formData.append("nama", $("[name='nama']").val());
-	formData.append("stock", $("[name='stock']").val());
 	formData.append("kodest", $("[name='kodest']").val());
-	//mengambil karakter angka saja pada nilai yang telah ada di field input
-	var formattedInput = $("[name='hargabeli']").val().replace(/\D/g, "");
-	var formattedInputPokok = $("[name='hargapokok']").val().replace(/\D/g, "");
-	var formattedInputJual = $("[name='hargajual']").val().replace(/\D/g, "");
-	formData.append("hargabeli", formattedInput);
-	formData.append("hargapokok", formattedInputPokok);
-	formData.append("hargajual", formattedInputJual);
-	formData.append("status1", $("[name='status1']").val());
 	formData.append("stockmin", $("[name='stockmin']").val());
 	formData.append("namat", $("[name='namat']").val());
 	formData.append("project", $("[name='project']").val());
@@ -193,53 +224,11 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
-				get_data();
-			}
-		},
-		error: function (xhr, status, error) {
-			console.error("AJAX Error: " + error);
-		},
-	});
-}
-
-function edit_data() {
-	var formData = new FormData();
-	formData.append("id", $("[name='id']").val());
-	formData.append("kodeg", $("[name='kodeg']").val());
-	formData.append("kodeb", $("[name='kodeb']").val());
-	formData.append("nama", $("[name='nama']").val());
-	formData.append("stock", $("[name='stock']").val());
-	formData.append("kodest", $("[name='kodest']").val());
-	//mengambil karakter angka saja pada nilai yang telah ada di field input
-	var formattedInput = $("[name='hargabeli']").val().replace(/\D/g, "");
-	var formattedInputPokok = $("[name='hargapokok']").val().replace(/\D/g, "");
-	var formattedInputJual = $("[name='hargajual']").val().replace(/\D/g, "");
-	formData.append("hargabeli", formattedInput);
-	formData.append("hargapokok", formattedInputPokok);
-	formData.append("hargajual", formattedInputJual);
-	formData.append("status1", $("[name='status1']").val());
-	formData.append("stockmin", $("[name='stockmin']").val());
-	formData.append("namat", $("[name='namat']").val());
-	formData.append("project", $("[name='project']").val());
-
-	$.ajax({
-		type: "POST",
-		url: base_url + _controller + "/edit_data",
-		data: formData,
-		dataType: "json",
-		processData: false,
-		contentType: false,
-		success: function (response) {
-			if (response.errors) {
-				delete_error();
-				for (var fieldName in response.errors) {
-					$("#error-" + fieldName).show();
-					$("#error-" + fieldName).html(response.errors[fieldName]);
-				}
-			} else if (response.success) {
-				$(".bs-example-modal-lg").modal("hide");
-				showAlertifySuccess(response.success);
-				get_data();
+				setTimeout(function () {
+					window.location.replace(
+						base_url + "Data_barang_masuk/index/" + $("[name='kodeb']").val()
+					);
+				}, 1000);
 			}
 		},
 		error: function (xhr, status, error) {

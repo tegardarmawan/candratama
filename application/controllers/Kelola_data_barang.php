@@ -37,7 +37,7 @@ class Kelola_data_barang extends CI_Controller
 		$data['menus'] = generate_sidebar_menu();
 
 		$data['title'] = 'Kelola Data Barang';
-
+		$this->app_data['project'] = $this->data->get_all('tproject')->result();
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();
 		$this->load->view('templates/sidebar', $data);
@@ -46,7 +46,6 @@ class Kelola_data_barang extends CI_Controller
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
-
 	public function get_data()
 	{
 		// <!-- id, no, kodeal, namaal, merk, stock, satuan, tglbeli, hbeli, ket, kodek, namak -->
@@ -85,12 +84,8 @@ class Kelola_data_barang extends CI_Controller
 		// kodeg kodest status1 project => form select
 		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required|is_unique[tbarang.kodeb]|numeric');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-		$this->form_validation->set_rules('stock', 'Stock', 'trim|required');
-		$this->form_validation->set_rules('hargabeli', 'Harga Beli', 'trim|required');
-		$this->form_validation->set_rules('hargapokok', 'Harga Pokok', 'trim|required');
-		$this->form_validation->set_rules('hargajual', 'Harga Jual', 'trim|required');
 		$this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
-		$this->form_validation->set_rules('namat', 'Nama Terang', 'trim|required');
+		$this->form_validation->set_rules('namat', 'Nama Terang', 'trim');
 
 
 		if ($this->form_validation->run() == false) {
@@ -101,22 +96,11 @@ class Kelola_data_barang extends CI_Controller
 			if (empty($this->input->post('kodest'))) {
 				$response['errors']['kodest'] = "Kode satuan harus dipilih";
 			}
-			if (empty($this->input->post('status1'))) {
-				$response['errors']['status1'] = "Status harus dipilih";
-			}
-			if (empty($this->input->post('project'))) {
-				$response['errors']['project'] = "Project harus dipilih";
-			}
 		} else {
 			$kodeg = $this->input->post('kodeg');
 			$kodeb = $this->input->post('kodeb');
 			$nama = ucwords($this->input->post('nama'));
-			$stock = $this->input->post('stock');
 			$kodest = $this->input->post('kodest');
-			$hargab = $this->input->post('hargabeli');
-			$hargap = $this->input->post('hargapokok');
-			$hargaj = $this->input->post('hargajual');
-			$status = $this->input->post('status1');
 			$stockmin = $this->input->post('stockmin');
 			$namat = ucwords($this->input->post('namat'));
 			$project = $this->input->post('project');
@@ -126,23 +110,12 @@ class Kelola_data_barang extends CI_Controller
 			}
 			if (empty($kodest)) {
 				$response['error']['kodest'] = "Kode satuan harus dipilih";
-			}
-			if (empty($status)) {
-				$response['error']['status1'] = "Status harus dipilih";
-			}
-			if (empty($project)) {
-				$response['error']['project'] = "Project harus dipilih";
 			} else {
 				$data = array(
 					'kodeg' => $kodeg,
 					'kodeb' => $kodeb,
 					'namab' => $nama,
-					'stock' => $stock,
 					'satuan' => $kodest,
-					'hbeli' => $hargab,
-					'hpokok' => $hargap,
-					'hjual' => $hargaj,
-					'status' => $status,
 					'stockmin' => $stockmin,
 					'namat' => $namat,
 					'projectt' => $project,
