@@ -21,6 +21,12 @@ class Data_model extends CI_Model
     {
         return $this->db->update($table, $data, $where);
     }
+    public function update_stock_increment($table, $where, $increment)
+    {
+        $this->db->set('stock', 'stock + ' . (int)$increment, FALSE);
+        $this->db->where($where);
+        return $this->db->update($table);
+    }
 
     public function delete(string $table, $where)
     {

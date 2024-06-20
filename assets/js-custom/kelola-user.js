@@ -57,11 +57,9 @@ function get_data() {
 		url: base_url + _controller + "/get_data",
 		method: "GET",
 		dataType: "json",
-		scrollX: true,
-		responsive: true,
 		success: function (data) {
 			var table = $("#datatable-buttons").DataTable({
-				scrollY: 400,
+				destroy: true,
 				data: data,
 				responsive: true,
 				columns: [
@@ -122,7 +120,7 @@ function submit(x) {
 			success: function (hasil) {
 				$("[name='id']").val(hasil[0].id);
 				$("[name='kode']").val(hasil[0].kode);
-				$("[name='credential']").val(hasil[0].id_credential);
+				$("[name='credential']").val(hasil[0].id_credential).trigger("change");
 				$("[name='nama']").val(hasil[0].nama);
 				$("[name='username']").val(hasil[0].username);
 				$("[name='password']").val(hasil[0].password);

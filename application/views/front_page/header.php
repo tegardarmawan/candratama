@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>BizLand Bootstrap Template - Index</title>
+    <title><?php $title ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -15,8 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nova+Mono&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="<?= base_url() ?>assets/img/favicon.png" rel="icon">
-    <link href="<?= base_url() ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="<?= base_url() ?>assets/img/logocg.png" rel="icon">
+    <link href="<?= base_url() ?>assets/img/logocg.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -40,15 +40,20 @@
     <!-- ======= Top Bar ======= -->
     <section id="topbar" class="d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-            </div>
+            <?php foreach ($company as $comp) : ?>
+                <div class="contact-info d-flex align-items-center">
+                    <i class="bi bi-envelope d-flex align-items-center">
+                        <a href="mailto:tegardarmawan0130@gmail.com"><?= $comp->email; ?></a>
+                    </i>
+                    <i class="bi bi-phone d-flex align-items-center ms-4">
+                        <span><?= $comp->phone_number; ?></span>
+                    </i>
+                </div>
+            <?php endforeach; ?>
             <div class="social-links d-none d-md-flex align-items-center">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+                <?php foreach ($social as $sosmed) : ?>
+                    <a href="<?= $sosmed->link; ?>" target="_blank" class="<?= $sosmed->name ?>"><?= $sosmed->icon ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

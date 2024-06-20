@@ -1,9 +1,12 @@
-        <section class="vh-100" style="background-color: #c29e7c;">
+        <section class="vh-100">
           <div class="container pt-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-lg-5">
-                <div class="card" style="border-radius: 1rem;">
-                  <div class="row g-0">
+              <div class="col-lg-8">
+                <div class="card formlog" style="border-radius: 1rem;">
+                  <div class="row">
+                    <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                      <img src="<?= base_url('assets/img/logoitem.png') ?>" alt="Logo" class="img-fluid" style="max-width: 80%;">
+                    </div>
                     <div class="col-lg">
                       <div class="card-body p-4 p-lg-5 text-black">
                         <form method="post" action="<?php echo base_url('Auth'); ?>">

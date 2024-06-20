@@ -156,6 +156,7 @@ code {
   text-decoration: none !important;
 }
 
+
 /* Social */
 .social-links li a {
   -webkit-border-radius: 50%;
@@ -1273,10 +1274,19 @@ code {
 /* ==============
   Card
 ===================*/
+
 .card {
   border: none;
   -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.05);
           box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.05);
+}
+.formlog{
+  background-image: image-set();
+  /* background-color:#c32d3c; */
+    box-shadow: 
+        -4px 4px 8px 0 rgba(0, 0, 0, 0.2), /* Left shadow */
+        4px 4px 8px 0 rgba(0, 0, 0, 0.2),  /* Right shadow */
+        0 15px 8px 0 rgba(0, 0, 0, 0.2);   /* Bottom shadow */
 }
 
 .card-primary {
@@ -2972,6 +2982,12 @@ File: Menu
   background-color: #da2b2be3;
   border: none;
   margin: -20px -25px 0 -25px;
+  -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.navbar-light{
+  border:none;
+  margin: 0px -25px 0px -25px;
   -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.2);
 }
