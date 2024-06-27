@@ -30,6 +30,28 @@ function delete_error() {
 	$("#error-hjual").hide();
 }
 
+//fungsi untuk auto formatting currency
+$(document).ready(function () {
+	//membuat fungsi yang akan ditrigger ketika terjadi proses input pada field id hargabeli
+	$("#hjual").on("input", function () {
+		//mengambil nilai dari karakter yang diinput pada field
+		var input = $(this).val();
+		//menghapus karakter selain digit pada nilai input
+		var numericInput = input.replace(/\D/g, "");
+		//menambahkan fungsi addCommas pada angka
+		var formattedInput = addCommas(numericInput);
+		//menambah awalan Rp untuk angka yang sudah diformat dengan koma
+		formattedInput = "Rp " + formattedInput;
+
+		//menetapkan nilai input menjadi formattedInput
+		$(this).val(formattedInput);
+	});
+});
+//function untuk menambahkan koma tiap tiga digit angka
+function addCommas(input) {
+	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function get_data() {
 	delete_error();
 	$.ajax({
@@ -52,7 +74,12 @@ function get_data() {
 					{ data: "namaf" },
 					{ data: "namast" },
 					{ data: "ket" },
-					{ data: "hjual" },
+					{
+						data: "hjual",
+						render: function (data, type, row, meta) {
+							return "Rp " + addCommas(data.toString());
+						},
+					},
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -94,9 +121,10 @@ function submit(x) {
 				$("[name= 'id']").val(hasil[0].id);
 				$("[name= 'kode']").val(hasil[0].kodef);
 				$("[name= 'nama']").val(hasil[0].namaf);
-				$("[name= 'satuan']").val(hasil[0].satuan);
+				$("[name= 'satuan']").val(hasil[0].namast).trigger("change");
 				$("[name= 'ket']").val(hasil[0].ket);
-				$("[name= 'hjual']").val(hasil[0].hjual);
+				var formattedInput = "Rp " + addCommas(hasil[0].hjual);
+				$("[name= 'hjual']").val(formattedInput);
 			},
 		});
 	}
@@ -110,7 +138,8 @@ function insert_data() {
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("satuan", $("[name='satuan']").val());
 	formData.append("ket", $("[name='ket']").val());
-	formData.append("hjual", $("[name='hjual']").val());
+	var formattedInput = $("[name = 'hjual']").val().replace(/\D/g, "");
+	formData.append("hjual", formattedInput);
 
 	$.ajax({
 		type: "POST",
@@ -145,7 +174,8 @@ function edit_data() {
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("satuan", $("[name='satuan']").val());
 	formData.append("ket", $("[name='ket']").val());
-	formData.append("hjual", $("[name='hjual']").val());
+	var formattedInput = $("[name = 'hjual']").val().replace(/\D/g, "");
+	formData.append("hjual", formattedInput);
 
 	$.ajax({
 		type: "POST",

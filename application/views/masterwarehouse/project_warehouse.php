@@ -26,7 +26,6 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="select-all"></th>
                             <th>Nota</th>
                             <th>Nama Customer</th>
                             <th>Nama Project</th>

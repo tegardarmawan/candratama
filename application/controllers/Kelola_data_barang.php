@@ -50,7 +50,7 @@ class Kelola_data_barang extends CI_Controller
 	{
 		// <!-- id, no, kodeal, namaal, merk, stock, satuan, tglbeli, hbeli, ket, kodek, namak -->
 		$query = [
-			'select' => 'a.id, b.kodeg, b.namag, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
+			'select' => 'a.id, b.kodeg, b.namag, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
 			'join_custom' => [
 				'tgroup b' => 'b.kodeg = a.kodeg, left',
@@ -65,7 +65,7 @@ class Kelola_data_barang extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$query = [
-			'select' => 'a.id, b.kodeg, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.status, a.stockmin, a.namat, a.projectt',
+			'select' => 'a.id, b.kodeg, a.kodeb, a.namab, a.stock, c.namast, a.hbeli, a.hpokok, a.hjual, a.stockmin, a.namat, a.projectt',
 			'from' => 'tbarang a',
 			'join' => [
 				'tgroup b, b.kodeg = a.kodeg',
@@ -144,9 +144,6 @@ class Kelola_data_barang extends CI_Controller
 		if (empty($this->input->post('kodest'))) {
 			$response['errors']['kodest'] = "Kode satuan harus dipilih";
 		}
-		if (empty($this->input->post('status1'))) {
-			$response['errors']['status1'] = "Kode satuan harus dipilih";
-		}
 		if (empty($this->input->post('project'))) {
 			$response['errors']['project'] = "Kode satuan harus dipilih";
 		}
@@ -163,7 +160,6 @@ class Kelola_data_barang extends CI_Controller
 			$hargab = $this->input->post('hargabeli');
 			$hargap = $this->input->post('hargapokok');
 			$hargaj = $this->input->post('hargajual');
-			$status = $this->input->post('status1');
 			$stockmin = $this->input->post('stockmin');
 			$namat = ucwords($this->input->post('namat'));
 			$project = $this->input->post('project');
@@ -173,9 +169,6 @@ class Kelola_data_barang extends CI_Controller
 			}
 			if (empty($kodest)) {
 				$response['errors']['kodest'] = "Kode satuan harus dipilih";
-			}
-			if (empty($status)) {
-				$response['errors']['status1'] = "Status harus dipilih";
 			}
 			if (empty($project)) {
 				$response['errors']['project'] = "Project harus dipilih";
@@ -189,7 +182,6 @@ class Kelola_data_barang extends CI_Controller
 					'hbeli' => $hargab,
 					'hpokok' => $hargap,
 					'hjual' => $hargaj,
-					'status' => $status,
 					'stockmin' => $stockmin,
 					'namat' => $namat,
 					'projectt' => $project,
@@ -212,6 +204,22 @@ class Kelola_data_barang extends CI_Controller
 			$response['error'] = "Gagal menghapus data";
 		} else {
 			$response['success'] = "Berhasil Menghapus Data";
+		}
+		echo json_encode($response);
+	}
+	public function bulk_delete()
+	{
+		// Ambil ID yang dikirim melalui POST
+		$ids = $this->input->post('ids');
+		$count = count($ids);
+		for ($i = 0; $i < $count; $i++) {
+			$where = array('id' => $ids[$i]);
+			$deleted = $this->data->delete('tbarang', $where);
+		}
+		if (!$deleted) {
+			$response['error'] = 'Data gagal dihapus';
+		} else {
+			$response['success'] = 'Data Dihapus';
 		}
 		echo json_encode($response);
 	}

@@ -142,4 +142,20 @@ class Data_group extends CI_Controller
 		);
 		$this->data->insert('tlog', $log_data);
 	}
+	public function bulk_delete()
+	{
+		// Ambil ID yang dikirim melalui POST
+		$ids = $this->input->post('ids');
+		$count = count($ids);
+		for ($i = 0; $i < $count; $i++) {
+			$where = array('id' => $ids[$i]);
+			$deleted = $this->data->delete('tgroup', $where);
+		}
+		if (!$deleted) {
+			$response['error'] = 'Data gagal dihapus';
+		} else {
+			$response['success'] = 'Data Dihapus';
+		}
+		echo json_encode($response);
+	}
 }

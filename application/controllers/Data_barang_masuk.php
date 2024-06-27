@@ -56,7 +56,7 @@ class Data_barang_masuk extends CI_Controller
         $this->form_validation->set_rules('hpokok', 'Harga Pokok', 'trim|required');
         $this->form_validation->set_rules('hjual', 'Harga Jual', 'trim|required');
         $this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
-        $this->form_validation->set_rules('namat', 'Nama Terang', 'trim|required');
+        $this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
         if (empty($this->input->post('kodeg'))) {
             $response['errors']['kodeg'] = "Kode group harus dipilih";
         }

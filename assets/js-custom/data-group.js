@@ -38,6 +38,17 @@ function get_data() {
 				responsive: true,
 				columns: [
 					{
+						orderable: false,
+						data: null,
+						render: function (data, type, row) {
+							return (
+								'<input type="checkbox" class="select-row" value="' +
+								row.id +
+								'">'
+							);
+						},
+					},
+					{
 						data: null,
 						render: function (data, type, row, meta) {
 							return meta.row + 1;
@@ -59,10 +70,63 @@ function get_data() {
 						},
 					},
 				],
+				dom: "Bfrtip",
+				buttons: [
+					{
+						text: "Select All",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", true);
+						},
+					},
+					{
+						text: "Deselect All",
+						className: "btn btn-warning",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", false);
+						},
+					},
+				],
+			});
+			// Handle click on "Select all" control
+			$("#select-all").on("click", function () {
+				$(".select-row").prop("checked", this.checked);
+			});
+
+			// Handle click on bulk delete button
+			$("#bulk-delete").on("click", function () {
+				var selectedIds = [];
+				$(".select-row:checked").each(function () {
+					selectedIds.push($(this).val());
+				});
+
+				if (selectedIds.length === 0) {
+					showAlertifyError("Pilih baris untuk dihapus");
+					return;
+				}
+
+				$.ajax({
+					type: "POST",
+					url: base_url + "/" + _controller + "/bulk_delete",
+					data: { ids: selectedIds },
+					dataType: "json",
+					success: function (response) {
+						if (response.success) {
+							$(".select-row:checked").each(function () {
+								table.row($(this).closest("tr")).remove().draw();
+							});
+							showAlertifySuccess(response.success);
+							get_data();
+						} else {
+							showAlertifyError(response.error);
+							get_data();
+						}
+					},
+				});
 			});
 		},
-		error: function (xhr, textStatus, errorThrown) {
-			console.log(xhr.statusText);
+		error: function (xhr, textStatus, errorThrown, error) {
+			console.error("AJAX Error : " + error);
 		},
 	});
 }

@@ -63,77 +63,7 @@ function get_data() {
 					{ data: "nota" },
 					{ data: "namac" },
 					{ data: "project" },
-					{
-						data: null,
-						render: function (data, type, row) {
-							return (
-								'<button class="btn btn-outline-primary" title="Edit Data" onclick="window.location.href=\'' +
-								base_url +
-								"Project_warehouse_new/index/" +
-								row.nota +
-								'\'"><i class="ion-edit"></i></button> ' +
-								'<button class="btn btn-outline-success" title="Detail Data" onclick="window.location.href=\'' +
-								base_url +
-								"Project_materials/index/" +
-								row.nota +
-								'\'"><i class="ion-eye"></i></button>'
-							);
-						},
-					},
 				],
-				dom: "Bfrtip",
-				buttons: [
-					{
-						text: "Select All",
-						className: "btn btn-success",
-						action: function (e, dt, node, config) {
-							$(".select-row").prop("checked", true);
-						},
-					},
-					{
-						text: "Deselect All",
-						className: "btn btn-warning",
-						action: function (e, dt, node, config) {
-							$(".select-row").prop("checked", false);
-						},
-					},
-				],
-			});
-			// Handle click on "Select all" control
-			$("#select-all").on("click", function () {
-				$(".select-row").prop("checked", this.checked);
-			});
-
-			// Handle click on bulk delete button
-			$("#bulk-delete").on("click", function () {
-				var selectedIds = [];
-				$(".select-row:checked").each(function () {
-					selectedIds.push($(this).val());
-				});
-
-				if (selectedIds.length === 0) {
-					showAlertifyError("Pilih baris untuk dihapus");
-					return;
-				}
-
-				$.ajax({
-					type: "POST",
-					url: base_url + "/" + _controller + "/bulk_delete",
-					data: { ids: selectedIds },
-					dataType: "json",
-					success: function (response) {
-						if (response.success) {
-							$(".select-row:checked").each(function () {
-								table.row($(this).closest("tr")).remove().draw();
-							});
-							showAlertifySuccess(response.success);
-							get_data();
-						} else {
-							showAlertifyError(response.error);
-							get_data();
-						}
-					},
-				});
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {

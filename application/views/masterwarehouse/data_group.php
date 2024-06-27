@@ -21,11 +21,13 @@
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
+                <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
                 <hr>
                 <!-- tabel data -->
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="select-all"></th>
                             <th>No</th>
                             <th>Kode Group</th>
                             <th>Nama Group</th>

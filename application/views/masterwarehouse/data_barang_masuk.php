@@ -9,7 +9,7 @@
                             <li class="breadcrumb-item active">Project Warehouse</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Tambah Barang Keluar</h4>
+                    <h4 class="page-title">Kelola Barang Baru</h4>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                                             <div class="pl-1 mb-1" style="font-weight: 500;">Stock Minimal<span class="text-danger me-1">*</span></div>
                                             <div class="row pl-3">
                                                 <input type="number" class="form-control" id="stockmin" name="stockmin" placeholder="Masukkan angka 1234" value="<?= $masuk->stockmin ?>">
-                                                <small class="text-danger pl-1" id="error-satuan"></small>
+                                                <small class="text-danger pl-1" id="error-stockmin"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +93,7 @@
                                             <div class="pl-1 mb-1" style="font-weight: 500;">Nama Tukang<span class="text-danger me-1">*</span></div>
                                             <div class="row pl-3">
                                                 <input type="text" class="form-control" id="namat" name="namat" value="<?= $masuk->namat ?>">
-                                                <small class="text-danger pl-1" id="error-satuan"></small>
+                                                <small class="text-danger pl-1" id="error-namat"></small>
                                             </div>
                                         </div>
                                     </div>

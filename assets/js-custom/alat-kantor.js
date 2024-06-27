@@ -137,11 +137,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Alat Tukang");
+		$("[name='title']").text("Tambah Alat Kantor");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Alat Tukang");
+		$("[name='title']").text("Alat Kantor");
 
 		$.ajax({
 			type: "POST",

@@ -79,11 +79,21 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
+					{
+						orderable: false,
+						data: null,
+						render: function (data, type, row) {
+							return (
+								'<input type="checkbox" class="select-row" value="' +
+								row.id +
+								'">'
+							);
+						},
+					},
 					{ data: "kodeb" },
 					{ data: "namab" },
 					{ data: "stock" },
 					{ data: "stockmin" },
-					{ data: "status" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -111,6 +121,59 @@ function get_data() {
 						$(row).addClass("empty-stock");
 					}
 				},
+				dom: "Bfrtip",
+				buttons: [
+					{
+						text: "Select All",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", true);
+						},
+					},
+					{
+						text: "Deselect All",
+						className: "btn btn-warning",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", false);
+						},
+					},
+				],
+			});
+			// Handle click on "Select all" control
+			$("#select-all").on("click", function () {
+				$(".select-row").prop("checked", this.checked);
+			});
+
+			// Handle click on bulk delete button
+			$("#bulk-delete").on("click", function () {
+				var selectedIds = [];
+				$(".select-row:checked").each(function () {
+					selectedIds.push($(this).val());
+				});
+
+				if (selectedIds.length === 0) {
+					showAlertifyError("Pilih baris untuk dihapus");
+					return;
+				}
+
+				$.ajax({
+					type: "POST",
+					url: base_url + "/" + _controller + "/bulk_delete",
+					data: { ids: selectedIds },
+					dataType: "json",
+					success: function (response) {
+						if (response.success) {
+							$(".select-row:checked").each(function () {
+								table.row($(this).closest("tr")).remove().draw();
+							});
+							showAlertifySuccess(response.success);
+							get_data();
+						} else {
+							showAlertifyError(response.error);
+							get_data();
+						}
+					},
+				});
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {
@@ -156,6 +219,9 @@ function get_data_empty() {
 		},
 	});
 }
+function stoking() {
+	winddow.location.href = base_url + "Stock_masuk";
+}
 
 function submit(x) {
 	if (x == "tambah") {
@@ -186,7 +252,6 @@ function submit(x) {
 				$("[name='hargabeli']").val(formattedInput);
 				$("[name='hargapokok']").val(formattedInputPokok);
 				$("[name='hargajual']").val(formattedInputJual);
-				$("[name='status1']").val(hasil[0].status);
 				$("[name='stockmin']").val(hasil[0].stockmin);
 				$("[name='namat']").val(hasil[0].namat);
 				$("[name='project']").val(hasil[0].projectt);

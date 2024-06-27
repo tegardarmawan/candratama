@@ -66,15 +66,17 @@
                     <i class="mdi mdi-plus"></i>
                     Tambah Data
                 </button>
+                <a href="<?= base_url('Stock_masuk') ?>" class="btn btn-success"> + Tambah Stock</a>
+                <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="select-all"></th>
                             <th>Kode</th>
                             <th>Nama</th>
                             <th>Stock</th>
                             <th>Stock Minimal</th>
-                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -253,12 +255,6 @@
                             <label for="hargajual" class="col-sm-3 col-form-label">Harga Jual</label>
                             <div class="col-sm-9">
                                 <input class="form-control" type="text" name="hargajual" id="hargajual" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="status1" class="col-sm-3 col-form-label">Status Barang</label>
-                            <div class="col-sm-9">
-                                <input type="text" readonly id="status1" name="status1" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
