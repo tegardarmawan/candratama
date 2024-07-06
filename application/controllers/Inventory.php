@@ -43,8 +43,11 @@ class Inventory extends CI_Controller
     {
 
         $query = [
-            'select' => 'nota, tgl, waktu, namab, masuk',
-            'from' => 'tstock',
+            'select' => 'a.nota, a.tgl, a.waktu, a.namab, a.masuk, b.hbeli',
+            'from' => 'tstock a',
+            'join' => [
+                'tbarang b, b.kodeb = a.kodeb'
+            ],
             'where' => ['tipe' => 1],
             // 'group_by' => 'nota, tgl, ket',
         ];
@@ -83,5 +86,18 @@ class Inventory extends CI_Controller
         $where = ['nota' => $nota];
         $result = $this->data->find('tstock', $where)->result();
         echo json_encode($result);
+    }
+    public function stock_keluar()
+    {
+        $this->load->helper('menu_helper');
+        $data['menus'] = generate_sidebar_menu();
+
+
+        $data['title'] = 'Stock Masuk';
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/header');
+        $this->load->view('masterwarehouse/stock_keluar', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('js-costum', $this->app_data);
     }
 }

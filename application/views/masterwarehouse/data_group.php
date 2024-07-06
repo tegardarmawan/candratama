@@ -35,10 +35,7 @@
                         </tr>
                     </thead>
                 </table>
-
             </div>
-
-
 
             <!-- Modal tambah/edit data -->
             <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,7 +71,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Modal hapus data -->
             <div class="modal fade bs-example-modal-center" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -103,7 +99,6 @@
     </div>
 </div>
 <br>
-
 <script>
     var base_url = '<?php echo base_url() ?>';
     var _controller = '<?= $this->router->fetch_class() ?>';

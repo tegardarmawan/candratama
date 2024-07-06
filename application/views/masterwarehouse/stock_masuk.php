@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-light" style="background-color: #FDFFE2;">
+<nav class="navbar navbar-light" style="background-color: #FDFFE2;">
     <ul class="navbar-nav mx-auto">
         <li class="nav-item active">
             <a class="nav-link" href="<?= base_url('Inventory/stock_masuk') ?>">Stock Masuk</span></a>
@@ -9,7 +9,7 @@
             <a href="<?= base_url('Inventory/stock_keluar') ?>" class="nav-link">Stock Keluar</a>
         </li>
     </ul>
-</nav> -->
+</nav>
 <div class="content m-b-30">
     <div class="page-content-wrapper">
         <div class="container-fluid">
@@ -45,6 +45,8 @@
                                         <th>Waktu</th>
                                         <th>Nama Barang</th>
                                         <th>Qty</th>
+                                        <th>Harga Satuan</th>
+                                        <th>Total Harga</th>
                                     </tr>
                                 </thead>
                             </table>

@@ -5,7 +5,7 @@
                 <div class="page-title-box">
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="<?= base_url('admin')?>">Candratama</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Candratama</a></li>
                             <li class="breadcrumb-item active">Kelola Data Satuan Barang</li>
                         </ol>
                     </div>

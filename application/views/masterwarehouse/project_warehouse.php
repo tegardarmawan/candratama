@@ -16,13 +16,7 @@
         </div>
         <div class="card m-b-30">
             <div class="card-body">
-                <!-- Button trigger modal -->
-                <div class="row">
-                    <div class="ml-4 text-left">
-                        <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
-                    </div>
-                </div>
-                <hr>
+
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>

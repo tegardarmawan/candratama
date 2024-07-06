@@ -49,20 +49,26 @@ function get_data() {
 				data: data,
 				responsive: true,
 				columns: [
-					{
-						orderable: false,
-						data: null,
-						render: function (data, type, row) {
-							return (
-								'<input type="checkbox" class="select-row" value="' +
-								row.id +
-								'">'
-							);
-						},
-					},
 					{ data: "nota" },
 					{ data: "namac" },
 					{ data: "project" },
+					{
+						data: null,
+						render: function (data, type, row) {
+							return (
+								'<button class="btn btn-outline-primary" title="Edit Data" onclick="window.location.href=\'' +
+								base_url +
+								"Project_warehouse_new/index/" +
+								row.nota +
+								'\'"><i class="ion-edit"></i></button> ' +
+								'<button class="btn btn-outline-success" title="Detail Data" onclick="window.location.href=\'' +
+								base_url +
+								"Project_materials/index/" +
+								row.nota +
+								'\'"><i class="ion-eye"></i></button>'
+							);
+						},
+					},
 				],
 			});
 		},

@@ -107,7 +107,7 @@
             <?php endif; ?>
         </div>
         <div class="row">
-            <div class="col-md-12 col-lg-12 col-xl-8 align-self-center">
+            <div class="col-md-6 col-lg-6 col-xl-6 align-self-center">
                 <div class="card bg-white m-b-30">
                     <div class="card-body new-user">
                         <h5 class="header-title mb-4 mt-0">Data karyawan</h5>
@@ -145,6 +145,32 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <canvas id="myChart" width="400" height="200"></canvas>
+
+                <script>
+                    const ctx = document.getElementById('myChart');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: [12, 19, 3, 5, 2, 3],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div> <!-- row -->
     </div><!-- container -->
