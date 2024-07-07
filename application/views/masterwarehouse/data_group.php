@@ -52,7 +52,7 @@
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input class="form-control" type="text" id="kodeg" name="kodeg" placeholder="Masukkan kode group">
+                                    <input class="form-control" type="text" id="kodeg" name="kodeg" placeholder="Masukkan kode group" readonly>
                                     <small class="text-danger pl-1" id="error-kodeg"></small>
                                 </div>
                             </div>

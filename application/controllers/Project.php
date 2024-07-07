@@ -92,7 +92,7 @@ class Project extends CI_Controller
             $nota = $this->input->post('nota');
             $kodec = $this->input->post('kodec');
             $namac = $this->input->post('namac');
-            $project = $this->input->post('project');
+            $project = ucwords($this->input->post('project'));
             $kontrak = $this->input->post('kontrak');
             if (empty($kodec)) {
                 $response['errors'] = 'Kode customer harus dipilih';
@@ -125,7 +125,7 @@ class Project extends CI_Controller
             $nota = $this->input->post('nota');
             $kodec = $this->input->post('kodec');
             $namac = $this->input->post('namac');
-            $project = $this->input->post('project');
+            $project = ucwords($this->input->post('project'));
             $kontrak = $this->input->post('kontrak');
 
 

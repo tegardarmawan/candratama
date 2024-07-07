@@ -49,7 +49,7 @@
                                 <label for="kode" class="col-sm-3 col-form-label">Kode Satuan</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input type="text" name="kode" class="form-control" id="kode" placeholder="Masukkan Kode Satuan">
+                                    <input type="text" name="kode" class="form-control" id="kode" placeholder="Masukkan Kode Satuan" readonly>
                                     <small class="text-danger pl-1" id="error-kode"></small>
                                 </div>
                             </div>

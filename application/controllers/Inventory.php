@@ -93,7 +93,7 @@ class Inventory extends CI_Controller
         $data['menus'] = generate_sidebar_menu();
 
 
-        $data['title'] = 'Stock Masuk';
+        $data['title'] = 'Stock Keluar';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
         $this->load->view('masterwarehouse/stock_keluar', $data);

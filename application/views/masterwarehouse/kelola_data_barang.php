@@ -156,7 +156,7 @@
                                     <select name="project" id="project" class="select2 form-control custom-select">
                                         <option value="-">Pilih Project</option>
                                         <?php foreach ($project as $pro) : ?>
-                                            <option value="<?= $pro->namac; ?>"><?= $pro->namac; ?></option>
+                                            <option value="<?= $pro->namac; ?>"><?= $pro->nota; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

@@ -63,8 +63,8 @@ class Data_satuan_barang extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
+			$kode = strtoupper($this->input->post('kode'));
+			$nama = ucwords($this->input->post('nama'));
 			$data = array(
 				'kodest' => $kode,
 				'namast' => $nama,
@@ -85,8 +85,8 @@ class Data_satuan_barang extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kode = $this->input->post('kode');
-			$nama = $this->input->post('nama');
+			$kode = strtoupper($this->input->post('kode'));
+			$nama = ucwords($this->input->post('nama'));
 
 			$data = array(
 				'kodest' => $kode,

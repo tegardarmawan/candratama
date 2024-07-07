@@ -59,8 +59,8 @@ class Data_group extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
-			$kode = $this->input->post('kodeg');
-			$nama = $this->input->post('namag');
+			$kode = strtoupper($this->input->post('kodeg'));
+			$nama = ucwords($this->input->post('namag'));
 			$data = array(
 				'kodeg' => $kode,
 				'namag' => $nama,
@@ -88,8 +88,8 @@ class Data_group extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kode = $this->input->post('kodeg');
-			$nama = $this->input->post('namag');
+			$kode = strtoupper($this->input->post('kodeg'));
+			$nama = ucwords($this->input->post('namag'));
 
 			$data = array(
 				'kodeg' => $kode,
