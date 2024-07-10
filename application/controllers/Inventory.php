@@ -42,62 +42,55 @@ class Inventory extends CI_Controller
     public function get_data_masuk()
     {
 
+        // $query = [
+        //     'select' => 'a.nota, a.tgl, a.waktu, a.namab, a.masuk, b.hbeli',
+        //     'from' => 'tstock a',
+        //     'join' => [
+        //         'tbarang b, b.kodeb = a.kodeb'
+        //     ],
+        //     'where' => ['tipe' => 1],
+        //     // 'group_by' => 'nota, tgl, ket',
+        // ];
         $query = [
-            'select' => 'a.nota, a.tgl, a.waktu, a.namab, a.masuk, b.hbeli',
-            'from' => 'tstock a',
-            'join' => [
-                'tbarang b, b.kodeb = a.kodeb'
-            ],
+            'select' => 'nota, ket',
+            'from' => 'tstock',
             'where' => ['tipe' => 1],
-            // 'group_by' => 'nota, tgl, ket',
+            'group_by' => 'nota, ket',
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
     }
-    public function stock_masuk_detail($nota = null)
-    {
-        $this->load->helper('menu_helper');
-        $data['menus'] = generate_sidebar_menu();
-        if ($nota) {
-            $query = [
-                'select' => 'nota, tgl, namat, ',
-                'from' => 'tstock',
-                'where' => ['nota' => $nota],
-                'group_by' => 'nota, tgl, namat, ket',
-            ];
-            $this->app_data['stock'] = $this->data->get($query)->result();
-        } else {
-            $this->app_data['stock'] = [];
-        }
+    // public function stock_masuk_detail($nota = null)
+    // {
+    //     $this->load->helper('menu_helper');
+    //     $data['menus'] = generate_sidebar_menu();
+    //     if ($nota) {
+    //         $query = [
+    //             'select' => 'nota, tgl, namat, ',
+    //             'from' => 'tstock',
+    //             'where' => ['nota' => $nota],
+    //             'group_by' => 'nota, tgl, namat, ket',
+    //         ];
+    //         $this->app_data['stock'] = $this->data->get($query)->result();
+    //     } else {
+    //         $this->app_data['stock'] = [];
+    //     }
 
-        $data['title'] = 'Stock Masuk';
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/header');
-        $this->load->view('masterwarehouse/stock_masuk_detail', $this->app_data);
-        $this->load->view('templates/footer');
-        $this->load->view('js-costum', $this->app_data);
-    }
-    public function get_data_detail($nota = null)
-    {
-        if ($nota == null || empty($nota)) {
-            echo json_encode(['error' => 'Nota parameter is missing']);
-            return;
-        }
-        $where = ['nota' => $nota];
-        $result = $this->data->find('tstock', $where)->result();
-        echo json_encode($result);
-    }
-    public function stock_keluar()
-    {
-        $this->load->helper('menu_helper');
-        $data['menus'] = generate_sidebar_menu();
-
-
-        $data['title'] = 'Stock Keluar';
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/header');
-        $this->load->view('masterwarehouse/stock_keluar', $data);
-        $this->load->view('templates/footer');
-        $this->load->view('js-costum', $this->app_data);
-    }
+    //     $data['title'] = 'Stock Masuk';
+    //     $this->load->view('templates/sidebar', $data);
+    //     $this->load->view('templates/header');
+    //     $this->load->view('masterwarehouse/stock_masuk_detail', $this->app_data);
+    //     $this->load->view('templates/footer');
+    //     $this->load->view('js-costum', $this->app_data);
+    // }
+    // public function get_data_detail($nota = null)
+    // {
+    //     if ($nota == null || empty($nota)) {
+    //         echo json_encode(['error' => 'Nota parameter is missing']);
+    //         return;
+    //     }
+    //     $where = ['nota' => $nota];
+    //     $result = $this->data->find('tstock', $where)->result();
+    //     echo json_encode($result);
+    // }
 }

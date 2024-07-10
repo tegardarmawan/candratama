@@ -6,10 +6,10 @@
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Candratama</a></li>
-                            <li class="breadcrumb-item active">Detail Stock Masuk</li>
+                            <li class="breadcrumb-item active">Detail Stock Keluar</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Stock Masuk</h4>
+                    <h4 class="page-title">Stock Keluar</h4>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ function get_data() {
 						{ data: "kodeb" },
 						{ data: "namab" },
 						{ data: "waktu" },
-						{ data: "masuk" },
+						{ data: "keluar" },
 					],
 				});
 			},

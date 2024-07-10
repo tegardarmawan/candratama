@@ -116,14 +116,26 @@ class Project_warehouse_new extends CI_Controller
                     'keluar' => $keluar[$i],
                     'satuan' => $satuan[$i],
                     'keluar1' => $keluar1[$i],
-                    'masuk' => $masuk,
-                    'no' => $no,
                 );
                 $inserted = $this->data->insert('tproject_d', $data);
+                //melakukan update pada stock barang
                 if (is_array($stock) && isset($stock[$i]) && is_array($value) && isset($value[$i])) {
                     $stockData = array('stock' => $stock[$i]);
                     $whereData = array('kodeb' => $value[$i]);
                     $this->data->update('tbarang', $whereData, $stockData);
+                }
+                $notakeluar = $this->data->generateNota();
+                if (is_array($stock) && isset($stock[$i]) && is_array($value) && isset($value[$i])) {
+                    $datakeluar = array(
+                        'nota' => $notakeluar,
+                        'tgl' => $tgl,
+                        'ket' => 'Barang project ' . $nota,
+                        'kodeb' => $value[$i],
+                        'namab' => $namab[$i],
+                        'keluar' => $keluar[$i],
+                        'tipe' => 2,
+                    );
+                    $this->data->insert('tstock', $datakeluar);
                 }
             }
             if ($inserted) {

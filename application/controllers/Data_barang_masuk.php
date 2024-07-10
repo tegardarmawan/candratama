@@ -52,11 +52,12 @@ class Data_barang_masuk extends CI_Controller
         // kodeg kodest status1 project => form select
         $this->form_validation->set_rules('kodeb', 'Kode', 'trim|required');
         $this->form_validation->set_rules('namab', 'Nama Barang', 'trim|required');
-        $this->form_validation->set_rules('hbeli', 'Harga Beli', 'trim|required');
-        $this->form_validation->set_rules('hpokok', 'Harga Pokok', 'trim|required');
-        $this->form_validation->set_rules('hjual', 'Harga Jual', 'trim|required');
+        $this->form_validation->set_rules('hbeli', 'Harga Beli', 'trim');
+        $this->form_validation->set_rules('hpokok', 'Harga Pokok', 'trim');
+        $this->form_validation->set_rules('hjual', 'Harga Jual', 'trim');
         $this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
         $this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
+        $this->form_validation->set_rules('project', 'Project', 'trim');
         if (empty($this->input->post('kodeg'))) {
             $response['errors']['kodeg'] = "Kode group harus dipilih";
         }

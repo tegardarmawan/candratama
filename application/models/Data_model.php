@@ -205,4 +205,22 @@ class Data_model extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
+    public function generateNota()
+    {
+        $prefix = 'SS-';
+        $date = date('Ymd'); // Format tahun, bulan, tanggal (20240710)
+
+        // Dapatkan jumlah nota hari ini
+        $this->db->like('nota', $prefix . $date, 'after');
+        $this->db->from('tstock'); // Nama tabel yang menyimpan data stok keluar
+        $count = $this->db->count_all_results();
+
+        // Tambahkan 1 untuk nomor urut hari ini
+        $nota_number = $count + 1;
+
+        // Format nomor nota lengkap
+        $nota = $prefix . $date . str_pad($nota_number, 3, '0', STR_PAD_LEFT); // Misal: SS20240710001
+
+        return $nota;
+    }
 }

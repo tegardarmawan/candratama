@@ -1,31 +1,9 @@
-get_data_masuk();
+get_data_keluar();
 
-//fungsi untuk auto formatting currency
-$(document).ready(function () {
-	//membuat fungsi yang akan ditrigger ketika terjadi proses input pada field id hargabeli
-	$("#hjual").on("input", function () {
-		//mengambil nilai dari karakter yang diinput pada field
-		var input = $(this).val();
-		//menghapus karakter selain digit pada nilai input
-		var numericInput = input.replace(/\D/g, "");
-		//menambahkan fungsi addCommas pada angka
-		var formattedInput = addCommas(numericInput);
-		//menambah awalan Rp untuk angka yang sudah diformat dengan koma
-		formattedInput = "Rp " + formattedInput;
-
-		//menetapkan nilai input menjadi formattedInput
-		$(this).val(formattedInput);
-	});
-});
-//function untuk menambahkan koma tiap tiga digit angka
-function addCommas(input) {
-	return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function get_data_masuk() {
+function get_data_keluar() {
 	$.ajax({
 		type: "GET",
-		url: base_url + _controller + "/get_data_masuk",
+		url: base_url + _controller + "/get_data_keluar",
 		dataType: "json",
 		success: function (data) {
 			var table = $("#datatable-buttons").DataTable({
@@ -55,7 +33,7 @@ function get_data_masuk() {
 							return (
 								'<button class="btn btn-outline-success" title="Detail Data" onclick="window.location.href=\'' +
 								base_url +
-								"Stock_masuk_detail/index/" +
+								"Stock_keluar_detail/index/" +
 								row.nota +
 								'\'"><i class="ion-eye"></i></button>'
 							);

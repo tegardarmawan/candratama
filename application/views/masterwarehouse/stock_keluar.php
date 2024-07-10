@@ -19,10 +19,10 @@
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="#">Candratama</a></li>
-                                <li class="breadcrumb-item active">Stock Masuk</li>
+                                <li class="breadcrumb-item active">Stock Keluar</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Stock Masuk</h4>
+                        <h4 class="page-title">Stock Keluar</h4>
                     </div>
                 </div>
             </div>
@@ -30,23 +30,19 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <div class="text-left">
+                            <!-- <div class="text-left">
                                 <a href="<?= base_url('Stock_masuk') ?>" class="btn btn-primary">
                                     + Tambah
                                 </a>
                             </div>
-                            <hr>
+                            <hr> -->
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <!-- nota tanggal waktu namab -->
                                     <tr>
                                         <th>Nota</th>
-                                        <th>Tanggal</th>
-                                        <th>Waktu</th>
-                                        <th>Nama Barang</th>
-                                        <th>Qty</th>
-                                        <th>Harga Satuan</th>
-                                        <th>Total Harga</th>
+                                        <th>Keterangan </th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                             </table>

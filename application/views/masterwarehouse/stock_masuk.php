@@ -6,7 +6,7 @@
     </ul>
     <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-            <a href="<?= base_url('Inventory/stock_keluar') ?>" class="nav-link">Stock Keluar</a>
+            <a href="<?= base_url('Stock_keluar/stock_keluar') ?>" class="nav-link">Stock Keluar</a>
         </li>
     </ul>
 </nav>
@@ -41,12 +41,8 @@
                                     <!-- nota tanggal waktu namab -->
                                     <tr>
                                         <th>Nota</th>
-                                        <th>Tanggal</th>
-                                        <th>Waktu</th>
-                                        <th>Nama Barang</th>
-                                        <th>Qty</th>
-                                        <th>Harga Satuan</th>
-                                        <th>Total Harga</th>
+                                        <th>Keterangan </th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                             </table>

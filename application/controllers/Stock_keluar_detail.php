@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Stock_masuk_detail extends CI_Controller
+class Stock_keluar_detail extends CI_Controller
 {
 
-    var $module_js = ['stock-detail-masuk'];
+    var $module_js = ['stock_keluar_detail'];
 
     var $app_data = [];
 
@@ -44,10 +44,10 @@ class Stock_masuk_detail extends CI_Controller
 
         $this->app_data['nota'] = $nota;
 
-        $data['title'] = 'Stock Masuk';
+        $data['title'] = 'Stock Keluar';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
-        $this->load->view('masterwarehouse/stock_masuk_detail', $this->app_data);
+        $this->load->view('masterwarehouse/stock_keluar_detail', $this->app_data);
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
     }

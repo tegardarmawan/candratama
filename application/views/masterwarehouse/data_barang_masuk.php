@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <div class="pl-1 mb-1" style="font-weight: 500;">Nama Tukang<span class="text-danger me-1">*</span></div>
+                                            <div class="pl-1 mb-1" style="font-weight: 500;">Nama Tukang</div>
                                             <div class="row pl-3">
                                                 <input type="text" class="form-control" id="namat" name="namat" value="<?= $masuk->namat ?>">
                                                 <small class="text-danger pl-1" id="error-namat"></small>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <div class="pl-1 mb-1" style="font-weight: 500;">Project<span class="text-danger me-1">*</span></div>
+                                            <div class="pl-1 mb-1" style="font-weight: 500;">Project</div>
                                             <div class="row pl-3">
                                                 <select name="project" id="project" class="select2 custom-select form-control">
                                                     <option value="">Pilih Project</option>
