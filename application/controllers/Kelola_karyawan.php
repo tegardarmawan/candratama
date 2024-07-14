@@ -30,24 +30,42 @@ class Kelola_karyawan extends CI_Controller
 		//load menu helper
 		$this->load->helper('menu_helper');
 		$data['menus'] = generate_sidebar_menu();
+		$data['jabatan'] = $this->data->get_all('tjabatan')->result();
+		$data['kodekaryawan'] = $this->data->generateKodeKaryawan();
+		$data['noInduk'] = $this->data->generateNoInduk();
 		// Ambil data karyawan dari model
 		$data['title'] = 'Data Karyawan';
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('kelola_karyawan');
+		$this->load->view('karyawan/kelola_karyawan', $data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
 	public function get_data()
 	{
-		$result = $this->data->get_all('tkaryawan')->result();
+		$query = [
+			'select' => 'a.*, b.nama',
+			'from' => 'tkaryawan a',
+			'join' => [
+				'tjabatan b, b.id = a.id_jabatan, left'
+			],
+			'order_by' => 'a.kodek',
+		];
+		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
 	public function get_data_id()
 	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
-		$result = $this->data->find('tkaryawan', $where)->result();
+		$query = [
+			'select' => 'a.*, b.nama',
+			'from' => 'tkaryawan a',
+			'join' => [
+				'tjabatan b, b.id = a.id_jabatan, left'
+			],
+		];
+		$result = $this->data->get($query, $where)->result();
 		echo json_encode($result);
 	}
 	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
@@ -61,16 +79,12 @@ class Kelola_karyawan extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
-		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
+		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required');
 
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if (empty($this->input->post('status1'))) {
-				$response['errors']['status1'] = 'Status karyawan harus dipilih';
-			}
 		} else {
-			$kode = strtoupper($this->input->post('kode'));
 			$induk = $this->input->post('induk');
 			$nama = ucwords($this->input->post('nama'));
 			$tempat = ucwords($this->input->post('tempat'));
@@ -82,11 +96,8 @@ class Kelola_karyawan extends CI_Controller
 			$alamat = ucwords($this->input->post('alamat'));
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
-			$status1 = $this->input->post('status1');
 			$jabatan = ucwords($this->input->post('jabatan'));
-			if (empty($status1)) {
-				$response['errors']['status1'] = 'Status jabatan harus dipilih';
-			}
+			$kode = $this->data->generateKodeKaryawan();
 			$data = array(
 				'kodek' => $kode,
 				'no_induk' => $induk,
@@ -96,8 +107,7 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
-				'status' => $status1,
-				'jabatan' => $jabatan,
+				'id_jabatan' => $jabatan,
 			);
 			$this->data->insert('tkaryawan', $data);
 			$response['success'] = 'Data ditambahkan';
@@ -115,15 +125,11 @@ class Kelola_karyawan extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
-		$this->form_validation->set_rules('status1', 'Status', 'trim|required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
 
 
 		if ($this->form_validation->run() == false) {
 			$response['errors'] = $this->form_validation->error_array();
-			if (empty($this->input->post('status1'))) {
-				$response['errors']['status1'] = 'Status karyawan harus dipilih';
-			}
 		} else {
 			$id = $this->input->post('id');
 			$kode = strtoupper($this->input->post('kode'));
@@ -138,11 +144,7 @@ class Kelola_karyawan extends CI_Controller
 			$alamat = ucwords($this->input->post('alamat'));
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
-			$status1 = $this->input->post('status1');
 			$jabatan = ucwords($this->input->post('jabatan'));
-			if (empty($status1)) {
-				$response['errors']['status1'] = 'Status jabatan harus dipilih';
-			}
 			$data = array(
 				'kodek' => $kode,
 				'no_induk' => $induk,
@@ -152,8 +154,7 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
-				'status' => $status1,
-				'jabatan' => $jabatan,
+				'id_jabatan' => $jabatan,
 			);
 			$where = array('id' => $id);
 			$this->data->update('tkaryawan', $where, $data);
@@ -171,6 +172,22 @@ class Kelola_karyawan extends CI_Controller
 			$response['success'] = 'Data dihapus';
 		} else {
 			$response['error'] = 'Gagal menghapus data';
+		}
+		echo json_encode($response);
+	}
+	public function bulk_delete()
+	{
+		// Ambil ID yang dikirim melalui POST
+		$ids = $this->input->post('ids');
+		$count = count($ids);
+		for ($i = 0; $i < $count; $i++) {
+			$where = array('id' => $ids[$i]);
+			$deleted = $this->data->delete('tkaryawan', $where);
+		}
+		if (!$deleted) {
+			$response['error'] = 'Data gagal dihapus';
+		} else {
+			$response['success'] = 'Data Dihapus';
 		}
 		echo json_encode($response);
 	}

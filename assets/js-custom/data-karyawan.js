@@ -16,15 +16,12 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kode']").val("");
-	$("[name='induk']").val("");
 	$("[name='nama']").val("");
 	$("[name='tempat']").val("");
 	$("[name='tanggal']").val("");
 	$("[name='alamat']").val("");
 	$("[name='kota']").val("");
 	$("[name='telp']").val("");
-	$("[name='status1']").val("");
 	$("[name='jabatan']").val("");
 }
 
@@ -36,7 +33,6 @@ function delete_error() {
 	$("#error-alamat").hide();
 	$("#error-kota").hide();
 	$("#error-telp").hide();
-	$("#error-status1").hide();
 	$("#error-jabatan").hide();
 }
 
@@ -49,11 +45,20 @@ function get_data() {
 		success: function (data) {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
-				scrollY: 400,
-				scrollX: 320,
 				data: data,
 				responsive: true,
 				columns: [
+					{
+						orderable: false,
+						data: null,
+						render: function (data, type, row) {
+							return (
+								'<input type="checkbox" class="select-row" value="' +
+								row.id +
+								'">'
+							);
+						},
+					},
 					{
 						data: null,
 						render: function (data, type, row, meta) {
@@ -80,8 +85,7 @@ function get_data() {
 					{ data: "alamat" },
 					{ data: "kota" },
 					{ data: "telp" },
-					{ data: "status" },
-					{ data: "jabatan" },
+					{ data: "nama" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -96,6 +100,59 @@ function get_data() {
 						},
 					},
 				],
+				dom: "Bfrtip",
+				buttons: [
+					{
+						text: "Select All",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", true);
+						},
+					},
+					{
+						text: "Deselect All",
+						className: "btn btn-warning",
+						action: function (e, dt, node, config) {
+							$(".select-row").prop("checked", false);
+						},
+					},
+				],
+			});
+			// Handle click on "Select all" control
+			$("#select-all").on("click", function () {
+				$(".select-row").prop("checked", this.checked);
+			});
+
+			// Handle click on bulk delete button
+			$("#bulk-delete").on("click", function () {
+				var selectedIds = [];
+				$(".select-row:checked").each(function () {
+					selectedIds.push($(this).val());
+				});
+
+				if (selectedIds.length === 0) {
+					showAlertifyError("Pilih baris untuk dihapus");
+					return;
+				}
+
+				$.ajax({
+					type: "POST",
+					url: base_url + "/" + _controller + "/bulk_delete",
+					data: { ids: selectedIds },
+					dataType: "json",
+					success: function (response) {
+						if (response.success) {
+							$(".select-row:checked").each(function () {
+								table.row($(this).closest("tr")).remove().draw();
+							});
+							showAlertifySuccess(response.success);
+							get_data();
+						} else {
+							showAlertifyError(response.error);
+							get_data();
+						}
+					},
+				});
 			});
 		},
 		error: function (xhr, textstatus1, errorThrown) {
@@ -136,8 +193,7 @@ function submit(x) {
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='status1']").val(hasil[0].status).trigger("change");
-				$("[name='jabatan']").val(hasil[0].jabatan);
+				$("[name='jabatan']").val(hasil[0].id_jabatan).trigger("change");
 			},
 		});
 	}
@@ -155,7 +211,6 @@ function insert_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	formData.append("status1", $("[name='status1']").val());
 	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({
@@ -175,6 +230,8 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val("");
+				$("[name='induk']").val("");
 				get_data();
 			}
 		},
@@ -195,7 +252,6 @@ function edit_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
-	formData.append("status1", $("[name='status1']").val());
 	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({

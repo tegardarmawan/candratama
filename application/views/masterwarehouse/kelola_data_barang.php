@@ -94,7 +94,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Gro up</label>
+                                <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
                                 <input type="hidden" name="id" class="form-control" id="id">
                                 <div class="col-sm-9">
                                     <select name="kodeg" id="kodeg" class="select2 form-control custom-select" style="width: 100%; height: 50px;" data-placeholder="Pilih Group Barang">
@@ -212,7 +212,7 @@
                             <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
                             <input type="hidden" name="id" class="form-control" id="id">
                             <div class="col-sm-9">
-                                <input type="text" name="kodeg" id="kodeg" readonly class="form-control">
+                                <input type="text" name="kodeg" id="kodeg" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">

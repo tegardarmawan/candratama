@@ -48,6 +48,7 @@ class Auth extends CI_Controller
                     ];
                     //simpan $data pada session
                     $this->session->set_userdata($data);
+                    $this->session->set_userdata('id', $user_id);
                     $this->session->set_userdata('logged_in', TRUE);
                     redirect('Admin');
                 } else {

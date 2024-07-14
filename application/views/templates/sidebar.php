@@ -87,9 +87,31 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li class="menu-title">Main</li>
+
+                        <!-- template dasar untuk menu yang tidak memiliki sub-menu dan menu yang memiliki sub-menu -->
+                        <!-- <li>
+                            <a href="index.html" class="waves-effect">
+                                <i class="mdi mdi-airplay"></i>
+                                <span> Dashboard <span class="badge badge-pill badge-primary float-right">7</span></span>
+                            </a>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i> <span> Advanced UI </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="advanced-highlight.html">Highlight</a></li>
+                                <li><a href="advanced-rating.html">Rating</a></li>
+                                <li><a href="advanced-alertify.html">Alertify</a></li>
+                                <li><a href="advanced-rangeslider.html">Range Slider</a></li>
+                            </ul>
+                        </li> -->
+
+                        <!-- id menu role => 1= admin gudang, 2|4|0 = admin kantor(administrasi, markteting, interior konsultan), 3 = superadmin -->
                         <?php foreach ($menus as $menu) : ?>
+                            <!-- pembagian menu untuk hak akses admin kantor  -->
                             <?php if ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '3' || $this->session->userdata('id_credential') == '4') : ?>
-                                <?php if ($menu['is_has_sub'] == '2') : ?>
+                                <?php if ($menu['is_has_sub'] == '2') : ?> <!-- menu yang tidak memiliki sub menu -->
+                                    <!-- memanggil menu dashboard -->
                                     <li>
                                         <?php if ($menu['id_menu_role'] == '4' || $menu['id_menu_role'] == '0') : ?>
                                             <a href="<?= base_url($menu['link']) ?>">
@@ -100,14 +122,14 @@
                                     </li>
                                 <?php endif; ?>
                                 <?php if ($menu['id_menu_role'] == '2') : ?>
-                                    <?php if ($menu['is_has_sub'] == '1') : ?>
+                                    <?php if ($menu['is_has_sub'] == '1') : ?> <!-- kode untuk menu yang memiliki sub-menu -->
                                         <li class="has_sub">
                                             <a href="javascript:void(0);" class="waves-effect">
                                                 <i><?= $menu['icon'] ?> </i>
                                                 <span><?= $menu['name'] ?></span>
                                                 <span class="float-right"><i class="mdi mdi-chevron-right"></i></span>
                                             </a>
-                                            <ul class="list-unstyled">
+                                            <ul class="list-unstyled"> <!-- kode untuk sub-menu -->
                                                 <?php foreach ($menus as $sub_menu) : ?>
                                                     <li>
                                                         <?php if ($sub_menu['type'] == '2' && $sub_menu['id_parent'] == $menu['id_parent']) : ?>
@@ -120,8 +142,11 @@
                                         </li>
                                     <?php endif; ?>
                                 <?php endif; ?>
+
+                                <!-- pembagian menu untuk hak akses admin gudang -->
                             <?php elseif ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '5') : ?>
                                 <?php if ($menu['is_has_sub'] == '2') : ?>
+                                    <!-- memanggil menu dashboard -->
                                     <li>
                                         <?php if ($menu['id_menu_role'] == '0') : ?>
                                             <a href="<?= base_url($menu['link']) ?>">
@@ -131,6 +156,7 @@
                                         <?php endif; ?>
                                     </li>
                                 <?php endif; ?>
+                                <!-- tidak diberikan kondisi id_menu role untuk mendapatkan akses seluruh menu -->
                                 <?php if ($menu['is_has_sub'] == '1') : ?>
                                     <?php if ($menu['id_menu_role'] == '1') : ?>
                                         <li class="has_sub">
@@ -152,6 +178,8 @@
                                         </li>
                                     <?php endif; ?>
                                 <?php endif; ?>
+
+                                <!-- pembagian menu hak akses superadmin -->
                             <?php elseif ($this->session->userdata('logged_in') && $this->session->userdata('id_credential') == '2') : ?>
                                 <li>
                                     <?php if ($menu['id_menu_role'] == '4' || $menu['id_menu_role'] == '0') : ?>

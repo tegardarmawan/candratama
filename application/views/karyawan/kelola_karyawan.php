@@ -14,33 +14,38 @@
             </div>
         </div>
 
-        <div class="card m-b-30">
-            <div class="card-body">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
-                    <i class="mdi mdi-plus"></i>
-                    Tambah Data
-                </button>
-                <hr>
-                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <!-- id kodek no_induk namak tempat tgl alamat kota telp status jabatan -->
-                        <tr>
-                            <th width="5%">No</th>
-                            <th width="10%">Kode Karyawan</th>
-                            <th width="10%">No Induk</th>
-                            <th width="10%">Nama</th>
-                            <th width="5%">Tempat Lahir</th>
-                            <th width="5%">Tanggal Lahir</th>
-                            <th width="10%">Alamat</th>
-                            <th width="5%">Kota</th>
-                            <th width="10%">Telp</th>
-                            <th width="10%">Status</th>
-                            <th width="10%">Jabatan</th>
-                            <th width="10%">Aksi</th>
-                        </tr>
-                    </thead>
-                </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
+                            <i class="mdi mdi-plus"></i>
+                            Tambah Data
+                        </button>
+                        <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
+                        <hr>
+                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <!-- id kodek no_induk namak tempat tgl alamat kota telp status jabatan -->
+                                <tr>
+                                    <th><input type="checkbox" id="select-all"></th>
+                                    <th width="5%">No</th>
+                                    <th width="10%">Kode Karyawan</th>
+                                    <th width="10%">No Induk</th>
+                                    <th width="10%">Nama</th>
+                                    <th width="5%">Tempat Lahir</th>
+                                    <th width="5%">Tanggal Lahir</th>
+                                    <th width="10%">Alamat</th>
+                                    <th width="5%">Kota</th>
+                                    <th width="10%">Telp</th>
+                                    <th width="10%">Jabatan</th>
+                                    <th width="10%">Aksi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- // id no kodeal namaal merk stock satuan tglbeli hbeli ket namak kodek -->
@@ -55,22 +60,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label for="kode" class="col-sm-3 col-form-label">Kode Karyawan</label>
+                        <div class="form-group row mb-0">
                             <input type="hidden" name="id" class="form-control" value="">
                             <div class="col-sm-9">
-                                <input type="text" name="kode" class="form-control" id="kode" placeholder="Masukkan Kode Karyawan">
+                                <input type="hidden" name="kode" class="form-control" id="kode" value="<?php echo $kodekaryawan; ?>">
                                 <small class="text-danger pl-1" id="error-kode"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="induk" class="col-sm-3 col-form-label">No Induk</label>
+                        <div class="form-group row mb-0">
                             <div class="col-sm-9">
-                                <input type="text" name="induk" class="form-control" id="induk" placeholder="Masukkan No Induk Karyawan">
+                                <input type="hidden" name="induk" class="form-control" id="induk" value="<?= $noInduk; ?>">
                                 <small class="text-danger pl-1" id="error-induk"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-0">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Karyawan">
@@ -116,22 +119,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="status1" class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
-                                <select name="status1" id="status1" class="select2 form-control select-custom">
-                                    <option value="">Pilih Status</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
-                                <small class="text-danger pl-1" id="error-status1"></small>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="jabatan" class="col-sm-3 col-form-label">Jabatan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="jabatan" class="form-control" id="jabatan" placeholder="Masukkan Jabatan Karyawan">
+                                <select name="jabatan" id="jabatan" class="select2 custom-select form-control">
+                                    <option value="">Pilih Jabatan</option>
+                                    <?php foreach ($jabatan as $jb) : ?>
+                                        <option value="<?= $jb->id; ?>"><?= $jb->nama; ?></option>
+                                    <?php endforeach ?>
+                                </select>
                                 <small class="text-danger pl-1" id="error-jabatan"></small>
                             </div>
                         </div>

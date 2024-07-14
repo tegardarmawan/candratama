@@ -223,4 +223,46 @@ class Data_model extends CI_Model
 
         return $nota;
     }
+    public function generateKodeKaryawan()
+    {
+        $prefix = 'KR-';
+        $date = date('ymd'); //mengambil format dua digit belakang tahun, bulan, tanggal (240714)
+
+        //  mendapatkan jumlah kode karyawan hari ini
+        $this->db->like('kodek', $prefix . $date, 'after');
+        $this->db->from('tkaryawan');
+        $count = $this->db->count_all_results();
+
+        $kode_karyawan = $count + 1;
+
+        //format kode karyawan
+        $kodek = $prefix . $date . str_pad($kode_karyawan, 3, '0', STR_PAD_LEFT);
+        return $kodek;
+    }
+
+    public function generateNoInduk()
+    {
+        $today = date('ymd');
+
+        // Ambil nomor terakhir untuk hari ini
+        $this->db->select_max('no_induk');
+        $this->db->like('no_induk', '.' . $today . '.', 'both');
+        $query = $this->db->get('tkaryawan');
+        $last_number = $query->row()->no_induk;
+
+        if ($last_number) {
+            // Jika sudah ada nomor untuk hari ini, tambahkan 1
+            $parts = explode('.', $last_number); //explode digunakan untuk memisah value dengan . sebagai pemisahnya
+            //$new_number untuk menyimpan dua digit pertama nomor induk
+            $new_number = str_pad((int)$parts[0] + 1, 2, '0', STR_PAD_LEFT); //str_pad dipakai untuk melakukan penambahan karakter
+        } else {
+            // Jika belum ada nomor untuk hari ini, mulai dari 01
+            $new_number = '01';
+        }
+
+        // Generate nomor baru
+        $new_nomor_induk = $new_number . '.' . $today . '.15';
+
+        return $new_nomor_induk;
+    }
 }

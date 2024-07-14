@@ -32,7 +32,9 @@
                         </tr>
                     </thead>
                 </table>
-
+            </div>
+            <div class="card-footer">
+                <p style="font-style: italic; font-size:x-small">*note = Harap hati-hati dalam melakukan pengelolaan Hak Akses karena dapat memengaruhi seluruh sistem</p>
             </div>
 
 
