@@ -44,7 +44,7 @@ class Kelola_karyawan extends CI_Controller
 	public function get_data()
 	{
 		$query = [
-			'select' => 'a.*, b.nama',
+			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp,a.id_jabatan, b.nama',
 			'from' => 'tkaryawan a',
 			'join' => [
 				'tjabatan b, b.id = a.id_jabatan, left'
@@ -57,15 +57,17 @@ class Kelola_karyawan extends CI_Controller
 	public function get_data_id()
 	{
 		$id = $this->input->post('id');
-		$where = array('id' => $id);
 		$query = [
-			'select' => 'a.*, b.nama',
+			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp, a.id_jabatan, b.nama',
 			'from' => 'tkaryawan a',
 			'join' => [
 				'tjabatan b, b.id = a.id_jabatan, left'
 			],
+			'where' => [
+				'a.id' => $id
+			],
 		];
-		$result = $this->data->get($query, $where)->result();
+		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
 	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->

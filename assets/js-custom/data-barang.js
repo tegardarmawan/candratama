@@ -16,18 +16,18 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodeg']").val("");
+	$("[name='kodeg']").val("").prop("selectedIndex", 0).trigger("change");
 	$("[name='kodeb']").val("");
 	$("[name='nama']").val("");
 	$("[name='stock']").val("");
-	$("[name='kodest']").val("");
+	$("[name='kodest']").val("").prop("selectedIndex", 0).trigger("change");
 	$("[name='hargabeli']").val("");
 	$("[name='hargapokok']").val("");
 	$("[name='hargajual']").val("");
 	$("[name='status1']").val("");
 	$("[name='stockmin']").val("");
 	$("[name='namat']").val("");
-	$("[name='project']").val("");
+	$("[name='project']").val("").prop("selectedIndex", 0).trigger("change");
 }
 
 function delete_error() {

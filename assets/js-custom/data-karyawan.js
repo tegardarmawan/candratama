@@ -22,7 +22,7 @@ function delete_form() {
 	$("[name='alamat']").val("");
 	$("[name='kota']").val("");
 	$("[name='telp']").val("");
-	$("[name='jabatan']").val("");
+	$("[name='jabatan']").val("").prop("selectedIndex", 0).trigger("change");
 }
 
 function delete_error() {
@@ -45,6 +45,8 @@ function get_data() {
 		success: function (data) {
 			var table = $("#datatable-buttons").DataTable({
 				destroy: true,
+				scrollY: 400,
+				scrollX: 350,
 				data: data,
 				responsive: true,
 				columns: [
