@@ -265,4 +265,21 @@ class Data_model extends CI_Model
 
         return $new_nomor_induk;
     }
+    public function generateKodeb()
+    {
+        $date = date('ymd');
+        // 99ymd0001
+        $prefix = '99';
+
+        //mengambil nomor terakhir kode barang hari ini
+        $this->db->like('kodeb', $prefix . $date, 'after');
+        $this->db->from('tbarang');
+        $count = $this->db->count_all_results();
+
+        $kodeb = $count + 1;
+
+        //format penuh
+        $kode_barang = $prefix . $date . str_pad($kodeb, 4, '0', STR_PAD_LEFT);
+        return $kode_barang;
+    }
 }

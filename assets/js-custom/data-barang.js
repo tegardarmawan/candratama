@@ -17,7 +17,6 @@ function showAlertifyError(message) {
 
 function delete_form() {
 	$("[name='kodeg']").val("").prop("selectedIndex", 0).trigger("change");
-	$("[name='kodeb']").val("");
 	$("[name='nama']").val("");
 	$("[name='stock']").val("");
 	$("[name='kodest']").val("").prop("selectedIndex", 0).trigger("change");
@@ -32,7 +31,6 @@ function delete_form() {
 
 function delete_error() {
 	$("#error-kodeg").hide();
-	$("#error-kodeb").hide();
 	$("#error-nama").hide();
 	$("#error-stock").hide();
 	$("#error-kodest").hide();

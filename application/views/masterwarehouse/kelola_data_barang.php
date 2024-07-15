@@ -93,7 +93,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group row">
+                            <div class="form-group row mb-0">
                                 <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
                                 <input type="hidden" name="id" class="form-control" id="id">
                                 <div class="col-sm-9">
@@ -108,10 +108,9 @@
                                     <small class="text-danger pl-1" id="error-kodeg"></small>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="kodeb" class="col-sm-3 col-form-label">Kode Barang</label>
+                            <div class="form-group row mb-0">
                                 <div class="col-sm-9">
-                                    <input required class="form-control" name="kodeb" id="kodeb" placeholder="Masukkan Kode Barang" type="text">
+                                    <input class="form-control" name="kodeb" id="kodeb" placeholder="Masukkan Kode Barang" type="hidden" value="<?= $kodebarang; ?>">
                                     <small class="text-danger pl-1" id="error-kodeb"></small>
                                 </div>
                             </div>
@@ -146,7 +145,11 @@
                             <div class="form-group row">
                                 <label for="namat" class="col-sm-3 col-form-label">Nama Tukang</label>
                                 <div class="col-sm-9">
-                                    <input required type="text" name="namat" id="namat" class="form-control" placeholder="Masukkan Nama Tukang">
+                                    <select class="select2 custom-select form-control" name="namat" id="namat">
+                                        <option value="">Pilih Nama Tukang</option>
+                                        <?php foreach($tukang as $tk):?>
+                                            <option value=""></option>
+                                    </select>
                                     <small class="text-danger pl-1" id="error-namat"></small>
                                 </div>
                             </div>

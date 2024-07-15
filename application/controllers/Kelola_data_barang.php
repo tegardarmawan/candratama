@@ -40,6 +40,9 @@ class Kelola_data_barang extends CI_Controller
 		$this->app_data['project'] = $this->data->get_all('tproject')->result();
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();
+		$this->app_data['kodebarang'] = $this->data->generateKodeb();
+		$where = array('id' => 1);
+		$this->app_data['tukang'] = $this->data->find('tkaryawan', $where);
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/kelola_data_barang', $this->app_data);
