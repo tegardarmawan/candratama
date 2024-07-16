@@ -67,3 +67,4 @@ $route['kontrak'] = 'Kelola_transaksi_kontrak';
 $route['project_warehouse'] = 'Project_warehouse';
 $route['tambah_project'] = 'Project_warehouse_new';
 $route['kelola_jabatan'] = 'Kelola_jabatan';
+$route['kelola_divisi'] = 'Kelola_divisi';

@@ -6,10 +6,10 @@
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Candratama</a></li>
-                            <li class="breadcrumb-item active">Master Jabatan</li>
+                            <li class="breadcrumb-item active">Master Divisi</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Data Master Jabatan</h4>
+                    <h4 class="page-title">Data Master Divisi</h4>
                 </div>
             </div>
         </div>
@@ -29,7 +29,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Divisi</th>
-                                    <th>Jabatan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -38,7 +37,6 @@
                 </div>
             </div>
         </div>
-        <!-- // id no kodeal namaal merk stock satuan tglbeli hbeli ket namak kodek -->
         <!-- Modal tambah/edit data -->
         <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -51,22 +49,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="kode" class="col-sm-3 col-form-label">Divisi</label>
-                            <div class="col-sm-9">
-                                <select name="divisi" id="divisi" class="form-control">
-                                    <option value="">Pilih Divisi</option>
-                                    <?php foreach ($divisi as $div) : ?>
-                                        <option value="<?= $div->id; ?>"><?= $div->nama_divisi; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <small class="text-danger pl-1" id="error-divisi"></small>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="kode" class="col-sm-3 col-form-label">Nama Jabatan</label>
+                            <label for="kode" class="col-sm-3 col-form-label">Nama Divisi</label>
                             <input type="hidden" name="id" class="form-control" value="">
                             <div class="col-sm-9">
-                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Jabatan">
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Divisi">
                                 <small class="text-danger pl-1" id="error-nama"></small>
                             </div>
                         </div>

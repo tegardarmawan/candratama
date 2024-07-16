@@ -30,15 +30,15 @@
                                 <!-- id kodek no_induk namak tempat tgl alamat kota telp status jabatan -->
                                 <tr>
                                     <th><input type="checkbox" id="select-all"></th>
-                                    <th width="5%">No</th>
                                     <th width="10%">Kode Karyawan</th>
                                     <th width="10%">No Induk</th>
                                     <th width="10%">Nama</th>
                                     <th width="5%">Tempat Lahir</th>
                                     <th width="5%">Tanggal Lahir</th>
                                     <th width="10%">Alamat</th>
-                                    <th width="5%">Kota</th>
+                                    <th width="10%">Kota</th>
                                     <th width="10%">Telp</th>
+                                    <th width="10%">Divisi</th>
                                     <th width="10%">Jabatan</th>
                                     <th width="10%">Aksi</th>
                                 </tr>
@@ -119,13 +119,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="divisi" class="col-sm-3 col-form-label">Divisi</label>
+                            <div class="col-sm-9">
+                                <select name="divisi" id="divisi" class="select2 custom-select form-control">
+                                    <option value="">Pilih Divisi</option>
+                                    <?php foreach ($divisi as $dv) : ?>
+                                        <option value="<?= $dv->id; ?>"><?= $dv->nama_divisi; ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <small class="text-danger pl-1" id="error-divisi"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="jabatan" class="col-sm-3 col-form-label">Jabatan</label>
                             <div class="col-sm-9">
                                 <select name="jabatan" id="jabatan" class="select2 custom-select form-control">
                                     <option value="">Pilih Jabatan</option>
-                                    <?php foreach ($jabatan as $jb) : ?>
-                                        <option value="<?= $jb->id; ?>"><?= $jb->nama; ?></option>
-                                    <?php endforeach ?>
                                 </select>
                                 <small class="text-danger pl-1" id="error-jabatan"></small>
                             </div>

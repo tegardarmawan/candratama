@@ -77,6 +77,13 @@ class Data_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    public function get_jabatan_by_divisi()
+    {
+        $id_divisi = $this->input->post('id_divisi');
+        $this->db->where('id_divisi', $id_divisi);
+        $result = $this->db->get('tjabatan')->result();
+        echo json_encode($result);
+    }
 
     public function get(array $data)
     {

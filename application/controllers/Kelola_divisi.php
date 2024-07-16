@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kelola_jabatan extends CI_Controller
+class Kelola_divisi extends CI_Controller
 {
 
-    var $module_js = ['kelola-jabatan'];
+    var $module_js = ['kelola-divisi'];
     var $app_data = [''];
 
     public function __construct()
@@ -32,58 +32,42 @@ class Kelola_jabatan extends CI_Controller
         //load menu helper
         $this->load->helper('menu_helper');
         $data['menus'] = generate_sidebar_menu();
-        $data['divisi'] = $this->data->get_all('tdivisi')->result();
 
         $data['title'] = 'Master Jabatan';
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
-        $this->load->view('karyawan/kelola_jabatan', $data);
+        $this->load->view('karyawan/kelola_divisi');
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
     }
     public function get_data()
     {
-        $query = [
-            'select' => 'a.id, a.nama, a.id_divisi, b.nama_divisi',
-            'from' => 'tjabatan a',
-            'join' => [
-                'tdivisi b, a.id_divisi = b.id, left'
-            ],
-        ];
-        $result = $this->data->get($query)->result();
+        $result = $this->data->get_all('tdivisi')->result();
         echo json_encode($result);
     }
     public function get_data_id()
     {
-        $id = $this->input->post('id');
-        $query = [
-            'select' => 'a.id, a.nama, a.id_divisi, b.nama_divisi',
-            'from' => 'tjabatan a',
-            'join' => [
-                'tdivisi b, a.id_divisi = b.id, left'
-            ],
-            'where' => ['a.id' => $id],
-        ];
-        $result = $this->data->get($query)->result();
+        $where = array('id' => $this->input->post('id'));
+        $result = $this->data->find('tdivisi', $where)->result();
         echo json_encode($result);
     }
     public function insert_data()
     {
-        $this->form_validation->set_rules('nama', 'Nama Jabatan', 'trim|required|is_unique[tjabatan.nama]');
-        $this->form_validation->set_rules('divisi', 'Nama Divisi', 'trim|required');
+        $this->form_validation->set_rules('nama', 'Nama Divisi', 'trim|required|is_unique[tdivisi.nama_divisi]');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
         } else {
-            $nama = ucwords($this->input->post('nama'));
-            $divisi = $this->input->post('divisi');
             $where = array('username' => $this->session->userdata('username'));
             $data['user'] = $this->data->find('tuser', $where)->row_array();
+            $timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
+            $nama = ucwords($this->input->post('nama'));
             $data = array(
-                'nama' => $nama,
-                'id_divisi' => $divisi,
+                'nama_divisi' => $nama,
+                'created_date' => $timestamp,
+                'created_by' => $data['user']['id'],
             );
-            $inserted = $this->data->insert('tjabatan', $data);
+            $inserted = $this->data->insert('tdivisi', $data);
             if ($inserted) {
                 $response['success'] = 'Data ditambahkan';
             } else {
@@ -94,23 +78,22 @@ class Kelola_jabatan extends CI_Controller
     }
     public function edit_data()
     {
-        $this->form_validation->set_rules('nama', 'Nama Jabatan', 'trim|required');
+        $this->form_validation->set_rules('nama', 'Nama Divisi', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
         } else {
+            $where = array('username' => $this->session->userdata('username'));
+            $data['user'] = $this->data->find('tuser', $where)->row_array();
+            $timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
             $nama = ucwords($this->input->post('nama'));
-            $divisi = $this->input->post('divisi');
-            $user_id = $this->user_id;
-            $time = date('Y-m-d H:i:s');
             $data = array(
-                'nama' => $nama,
-                'id_divisi' => $divisi,
-                'updated_by' => $user_id,
-                'updated_date' => $time,
+                'nama_divisi' => $nama,
+                'updated_date' => $timestamp,
+                'created_by' => $data['user']['id'],
             );
-            $where = array('id' => $this->input->post('id'));
-            $inserted = $this->data->update('tjabatan', $where, $data);
+            $id = array('id' => $this->input->post('id'));
+            $inserted = $this->data->update('tdivisi', $id, $data);
             if ($inserted) {
                 $response['success'] = 'Data diperbarui';
             } else {
@@ -122,11 +105,11 @@ class Kelola_jabatan extends CI_Controller
     public function delete_data()
     {
         $where = array('id' => $this->input->post('id'));
-        $deleted = $this->data->delete('tjabatan', $where);
+        $deleted = $this->data->delete('tdivisi', $where);
         if ($deleted) {
             $response['success'] = 'Data dihapus';
         } else {
-            $response['error'] = 'Data gagal dihapus';
+            $response['erros'] = 'Data gagal dihapus';
         }
         echo json_encode($response);
     }

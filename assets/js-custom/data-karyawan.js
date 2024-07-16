@@ -23,6 +23,7 @@ function delete_form() {
 	$("[name='kota']").val("");
 	$("[name='telp']").val("");
 	$("[name='jabatan']").val("").prop("selectedIndex", 0).trigger("change");
+	$("[name='divisi']").val("").prop("selectedIndex", 0).trigger("change");
 }
 
 function delete_error() {
@@ -61,12 +62,6 @@ function get_data() {
 							);
 						},
 					},
-					{
-						data: null,
-						render: function (data, type, row, meta) {
-							return meta.row + 1;
-						},
-					},
 					{ data: "kodek" },
 					{ data: "no_induk" },
 					{ data: "namak" },
@@ -87,7 +82,8 @@ function get_data() {
 					{ data: "alamat" },
 					{ data: "kota" },
 					{ data: "telp" },
-					{ data: "nama" },
+					{ data: "nama_divisi" },
+					{ data: "nama" }, //data jabatan
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -162,6 +158,35 @@ function get_data() {
 		},
 	});
 }
+//trigger change untuk input 'select' jabatan
+$(document).ready(function () {
+	$("#divisi").change(function () {
+		var divisi = $(this).val();
+		if (divisi != "") {
+			$.ajax({
+				type: "POST",
+				url: base_url + _controller + "/get_jabatan_by_divisi",
+				data: { divisi: divisi }, //'divisi' sebelum ':' merupakan key parameter yang ada di controller yang akan menerima nilai 'divisi' setelah ':'
+				dataType: "json",
+				success: function (data) {
+					$("#jabatan").html('<option value="">Pilih Jabatan</option>');
+					$.each(data, function (key, value) {
+						$("#jabatan").append(
+							'<option value="' + value.id + '">' + value.nama + "</option>"
+						);
+					});
+					// Setelah jabatan dimuat, atur nilai jabatan jika ada
+					var selectedJabatan = $("[name='jabatan']").data("selected");
+					if (selectedJabatan) {
+						$("[name='jabatan']").val(selectedJabatan).removeData("selected");
+					}
+				},
+			});
+		} else {
+			$("#jabatan").html('<option value="">Pilih Jabatan</option>');
+		}
+	});
+});
 
 function submit(x) {
 	if (x == "tambah") {
@@ -195,7 +220,8 @@ function submit(x) {
 				$("[name='alamat']").val(hasil[0].alamat);
 				$("[name='kota']").val(hasil[0].kota);
 				$("[name='telp']").val(hasil[0].telp);
-				$("[name='jabatan']").val(hasil[0].id_jabatan).trigger("change");
+				$("[name='divisi']").val(hasil[0].id_divisi).trigger("change");
+				$("[name='jabatan']").data("selected", hasil[0].id_jabatan);
 			},
 		});
 	}
@@ -213,6 +239,7 @@ function insert_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
+	formData.append("divisi", $("[name='divisi']").val());
 	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({
@@ -232,8 +259,6 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
-				$("[name='kode']").val("");
-				$("[name='induk']").val("");
 				get_data();
 			}
 		},
@@ -254,6 +279,7 @@ function edit_data() {
 	formData.append("alamat", $("[name='alamat']").val());
 	formData.append("kota", $("[name='kota']").val());
 	formData.append("telp", $("[name='telp']").val());
+	formData.append("divisi", $("[name='divisi']").val());
 	formData.append("jabatan", $("[name='jabatan']").val());
 
 	$.ajax({

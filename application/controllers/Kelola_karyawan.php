@@ -30,6 +30,7 @@ class Kelola_karyawan extends CI_Controller
 		//load menu helper
 		$this->load->helper('menu_helper');
 		$data['menus'] = generate_sidebar_menu();
+		$data['divisi'] = $this->data->get_all('tdivisi')->result(); //mengambil data dari tabel tdivisi
 		$data['jabatan'] = $this->data->get_all('tjabatan')->result();
 		$data['kodekaryawan'] = $this->data->generateKodeKaryawan();
 		$data['noInduk'] = $this->data->generateNoInduk();
@@ -41,13 +42,22 @@ class Kelola_karyawan extends CI_Controller
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
+	//memanggil pilihan jabatan berdasar divisi yang dipilih
+	public function get_jabatan_by_divisi()
+	{
+		$id_divisi = $this->input->post('divisi');
+		$where = array('id_divisi' => $id_divisi);
+		$result = $this->data->find('tjabatan', $where)->result();
+		echo json_encode($result);
+	}
 	public function get_data()
 	{
 		$query = [
-			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp,a.id_jabatan, b.nama',
+			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp,a.id_jabatan, b.nama, a.id_divisi, c.nama_divisi',
 			'from' => 'tkaryawan a',
 			'join' => [
-				'tjabatan b, b.id = a.id_jabatan, left'
+				'tjabatan b, b.id = a.id_jabatan, left',
+				'tdivisi c, c.id = a.id_divisi, left'
 			],
 			'order_by' => 'a.kodek',
 		];
@@ -58,9 +68,10 @@ class Kelola_karyawan extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$query = [
-			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp, a.id_jabatan, b.nama',
+			'select' => 'a.id, a.kodek, a.namak, a.no_induk, a.tempat, a.tgl, a.alamat, a.kota, a.telp, a.id_jabatan, b.nama, a.id_divisi, c.nama_divisi',
 			'from' => 'tkaryawan a',
 			'join' => [
+				'tdivisi c, c.id = a.id_divisi, left',
 				'tjabatan b, b.id = a.id_jabatan, left'
 			],
 			'where' => [
@@ -81,6 +92,7 @@ class Kelola_karyawan extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
+		$this->form_validation->set_rules('divisi', 'Divisi', 'trim|required');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required');
 
 
@@ -99,7 +111,11 @@ class Kelola_karyawan extends CI_Controller
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$jabatan = ucwords($this->input->post('jabatan'));
+			$divisi = ucwords($this->input->post('divisi'));
 			$kode = $this->data->generateKodeKaryawan();
+			$username = array('username' => $this->session->userdata('username'));
+			$data['user'] = $this->data->find('tuser', $username)->row_array();
+			$timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
 			$data = array(
 				'kodek' => $kode,
 				'no_induk' => $induk,
@@ -109,7 +125,10 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
+				'id_divisi' => $divisi,
 				'id_jabatan' => $jabatan,
+				'created_by' => $data['user']['id'],
+				'created_date' => $timestamp,
 			);
 			$this->data->insert('tkaryawan', $data);
 			$response['success'] = 'Data ditambahkan';
@@ -127,6 +146,7 @@ class Kelola_karyawan extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('telp', 'Telepon', 'trim|required');
+		$this->form_validation->set_rules('divisi', 'Divisi', 'trim');
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'trim');
 
 
@@ -147,6 +167,10 @@ class Kelola_karyawan extends CI_Controller
 			$kota = ucwords($this->input->post('kota'));
 			$telp = $this->input->post('telp');
 			$jabatan = ucwords($this->input->post('jabatan'));
+			$divisi = ucwords($this->input->post('divisi'));
+			$username = array('username' => $this->session->userdata('username'));
+			$data['user'] = $this->data->find('tuser', $username)->row_array();
+			$timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
 			$data = array(
 				'kodek' => $kode,
 				'no_induk' => $induk,
@@ -156,11 +180,18 @@ class Kelola_karyawan extends CI_Controller
 				'alamat' => $alamat,
 				'kota' => $kota,
 				'telp' => $telp,
+				'id_divisi' => $divisi,
 				'id_jabatan' => $jabatan,
+				'updated_by' => $data['user']['id'],
+				'updated_date' => $timestamp,
 			);
 			$where = array('id' => $id);
-			$this->data->update('tkaryawan', $where, $data);
-			$response['success'] = 'Data berhasil ditambahkan';
+			$updated = $this->data->update('tkaryawan', $where, $data);
+			if ($updated) {
+				$response['success'] = 'Data berhasil diperbarui';
+			} else {
+				$response['error'] = 'Data gagal diperbarui';
+			}
 		}
 		echo json_encode($response);
 	}

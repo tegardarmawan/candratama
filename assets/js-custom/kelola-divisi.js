@@ -17,8 +17,7 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='nama']").val("");
-	$("[name='divisi']").val("").prop("selectedIndex", 0).trigger("change");
+	$("[name=nama]").val("");
 }
 
 function delete_error() {
@@ -44,7 +43,6 @@ function get_data() {
 						},
 					},
 					{ data: "nama_divisi" },
-					{ data: "nama" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -71,11 +69,11 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("[name='title']").text("Tambah Data Jabatan");
+		$("[name='title']").text("Tambah Data Divisi");
 	} else {
 		$("#btn-insert").hide();
 		$("#btn-update").show();
-		$("[name='title']").text("Edit Data Jabatan");
+		$("[name='title']").text("Edit Data Divisi");
 
 		$.ajax({
 			type: "POST",
@@ -84,8 +82,7 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name='id']").val(hasil[0].id);
-				$("[name='nama']").val(hasil[0].nama);
-				$("[name='divisi']").val(hasil[0].id_divisi).trigger("change");
+				$("[name='nama']").val(hasil[0].nama_divisi);
 			},
 		});
 	}
@@ -96,7 +93,6 @@ function submit(x) {
 function insert_data() {
 	var formData = new FormData();
 	formData.append("nama", $("[name='nama']").val());
-	formData.append("divisi", $("[name='divisi']").val());
 
 	$.ajax({
 		type: "POST",
@@ -125,17 +121,16 @@ function insert_data() {
 }
 function edit_data() {
 	var formData = new FormData();
-	formData.append("id", $("[name='id']").val());
 	formData.append("nama", $("[name='nama']").val());
-	formData.append("divisi", $("[name='divisi']").val());
+	formData.append("id", $("[name='id']").val());
 
 	$.ajax({
 		type: "POST",
 		url: base_url + _controller + "/edit_data",
 		data: formData,
+		dataType: "json",
 		processData: false,
 		contentType: false,
-		dataType: "json",
 		success: function (response) {
 			delete_error();
 			if (response.errors) {
