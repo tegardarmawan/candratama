@@ -14,21 +14,24 @@
                 </div>
             </div>
         </div>
-        <div class="card m-b-30">
-            <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
 
-                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Nota</th>
-                            <th>Nama Customer</th>
-                            <th>Nama Project</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                </table>
+                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nota</th>
+                                    <th>Nama Customer</th>
+                                    <th>Nama Project</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

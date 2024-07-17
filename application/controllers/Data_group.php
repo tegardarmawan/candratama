@@ -30,16 +30,27 @@ class Data_group extends CI_Controller
 		$data['menus'] = generate_sidebar_menu();
 
 		$data['title'] = 'Data Group Barang';
+		$data['kodeGroup'] = $this->data->generateKodeg();
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('masterwarehouse/data_group');
+		$this->load->view('masterwarehouse/data_group', $data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
+	}
+	public function generate_kode_group()
+	{
+		$kodeGroup = $this->data->generateKodeg();
+		echo $kodeGroup;
 	}
 
 	public function get_data()
 	{
-		$result = $this->data->get_all('tgroup')->result();
+		$query = [
+			'select' => '*',
+			'from' => 'tgroup',
+			'order_by' => 'kodeg',
+		];
+		$result = $this->data->get($query)->result();
 		echo json_encode($result);
 	}
 
@@ -67,13 +78,11 @@ class Data_group extends CI_Controller
 			);
 			$this->data->insert('tgroup', $data);
 
-			//logging
-			$username = $this->session->userdata('username');
-			$action = "Simpan";
-			$menu = "Data Group";
-			$desc = "Menambahkan data group dengan kode: " . $kode . " dan nama: " . $nama;
-			$this->_log_action($username, $action, $menu, $desc);
-			$response['success'] = "Data Ditambahkan";
+			$kodeGroup = $this->data->generateKodeg();
+			$response = [
+				'success' => 'Data berhasil ditambahkan',
+				'kodegroup' => $kodeGroup
+			];
 		}
 		echo json_encode($response);
 	}
@@ -104,8 +113,11 @@ class Data_group extends CI_Controller
 			$action = "Ubah";
 			$desc = "Melakukan edit data group dengan kode: " . $kode;
 			$this->_log_action($username, $action, $menu, $desc);
-
-			$response['success'] = "Data Berhasil Diperbarui";
+			$kodeGroup = $this->data->generateKodeg();
+			$response = [
+				'success' => 'Data berhasil diperbarui',
+				'kodegroup' => $kodeGroup
+			];
 		}
 		echo json_encode($response);
 	}
@@ -116,6 +128,7 @@ class Data_group extends CI_Controller
 		$where = array('id' => $id);
 
 		$deleted = $this->data->delete('tgroup', $where);
+		$kodeGroup = $this->data->generateKodeg();
 		if ($deleted) {
 			//logging
 			$username = $this->session->userdata('username');
@@ -123,7 +136,10 @@ class Data_group extends CI_Controller
 			$menu = "Data Group";
 			$desc = "Melakukan hapus data group dengan Kode Group: " . $id;
 			$this->_log_action($username, $action, $menu, $desc);
-			$response['success'] = "Data Berhasil Dihapus";
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodegroup' => $kodeGroup
+			];
 		} else {
 			$response['error'] = "Gagal Menghapus Data";
 		}
@@ -151,8 +167,12 @@ class Data_group extends CI_Controller
 			$where = array('id' => $ids[$i]);
 			$deleted = $this->data->delete('tgroup', $where);
 		}
+		$kodeGroup = $this->data->generateKodeg();
 		if (!$deleted) {
-			$response['error'] = 'Data gagal dihapus';
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodegroup' => $kodeGroup
+			];
 		} else {
 			$response['success'] = 'Data Dihapus';
 		}

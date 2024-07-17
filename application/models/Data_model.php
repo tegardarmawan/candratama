@@ -289,4 +289,17 @@ class Data_model extends CI_Model
         $kode_barang = $prefix . $date . str_pad($kodeb, 4, '0', STR_PAD_LEFT);
         return $kode_barang;
     }
+    public function generateKodeg()
+    {
+        $prefix = 'GR-';
+
+        $this->db->like('kodeg', $prefix, 'after');
+        $this->db->from('tgroup');
+        $count = $this->db->count_all_results();
+
+        $kodeg = $count + 1;
+        //format kodeg penuh
+        $kode_group = $prefix . str_pad($kodeg, 2, '0', STR_PAD_LEFT);
+        return $kode_group;
+    }
 }

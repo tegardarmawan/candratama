@@ -40,7 +40,8 @@ class Project_warehouse extends CI_Controller
         $query = [
             'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
-            'where' => ['a.is_deleted' => 0]
+            'where' => ['a.is_deleted' => 0],
+            'order_by' => 'a.id DESC'
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);

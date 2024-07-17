@@ -16,7 +16,6 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodeg']").val("");
 	$("[name='namag']").val("");
 }
 
@@ -179,6 +178,7 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodeg']").val(response.kodegroup);
 				get_data();
 			}
 		},
@@ -230,6 +230,7 @@ function delete_data(x) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodeg']").val(response.kodegroup);
 				get_data();
 			} else if (response.error) {
 				$("#modalHapus").modal("hide");

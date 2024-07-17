@@ -56,7 +56,7 @@ function get_data() {
 						data: null,
 						render: function (data, type, row) {
 							return (
-								'<button class="btn btn-outline-primary" title="Edit Data" onclick="window.location.href=\'' +
+								'<button class="btn btn-outline-primary mb-1" title="Edit Data" onclick="window.location.href=\'' +
 								base_url +
 								"Project_warehouse_new/index/" +
 								row.nota +

@@ -137,15 +137,13 @@ class Kelola_karyawan extends CI_Controller
 				'created_date' => $timestamp,
 			);
 			$this->data->insert('tkaryawan', $data);
-			$response['success'] = 'Data ditambahkan';
-		}
-		$kodeKaryawan = $this->data->generateKodeKaryawan();
-		echo json_encode(
-			[
+			$kodeKaryawan = $this->data->generateKodeKaryawan();
+			$response = [
 				'success' => 'Data berhasil ditambahkan',
 				'kodekaryawan' => $kodeKaryawan
-			]
-		);
+			];
+		}
+		echo json_encode($response);
 	}
 
 	public function edit_data()
@@ -196,8 +194,12 @@ class Kelola_karyawan extends CI_Controller
 			);
 			$where = array('id' => $id);
 			$updated = $this->data->update('tkaryawan', $where, $data);
+			$kodeKaryawan = $this->data->generateKodeKaryawan();
 			if ($updated) {
-				$response['success'] = 'Data berhasil diperbarui';
+				$response = [
+					'success' => 'Data berhasil diperbarui',
+					'kodekaryawan' => $kodeKaryawan
+				];
 			} else {
 				$response['error'] = 'Data gagal diperbarui';
 			}
@@ -210,8 +212,12 @@ class Kelola_karyawan extends CI_Controller
 		$where = array('id' => $id);
 
 		$deleted = $this->data->delete('tkaryawan', $where);
+		$kodeKaryawan = $this->data->generateKodeKaryawan();
 		if ($deleted) {
-			$response['success'] = 'Data dihapus';
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodekaryawan' => $kodeKaryawan
+			];
 		} else {
 			$response['error'] = 'Gagal menghapus data';
 		}
@@ -226,8 +232,12 @@ class Kelola_karyawan extends CI_Controller
 			$where = array('id' => $ids[$i]);
 			$deleted = $this->data->delete('tkaryawan', $where);
 		}
+		$kodeKaryawan = $this->data->generateKodeKaryawan();
 		if (!$deleted) {
-			$response['error'] = 'Data gagal dihapus';
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodekaryawan' => $kodeKaryawan
+			];
 		} else {
 			$response['success'] = 'Data Dihapus';
 		}
