@@ -19,11 +19,12 @@
                 <div class="card m-b-30">
                     <div class="card-body">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
+                        <button type="button" class="btn btn-primary" id="btnAdd" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
                             <i class="mdi mdi-plus"></i>
                             Tambah Data
                         </button>
                         <button id="bulk-delete" class="btn btn-danger waves-effect waves-light">Hapus Data</button>
+                        <button class="btn btn-info" id="generateNoIndukBtn">Generate No. Induk</button>
                         <hr>
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -48,7 +49,29 @@
                 </div>
             </div>
         </div>
-        <!-- // id no kodeal namaal merk stock satuan tglbeli hbeli ket namak kodek -->
+        <!-- modal generate no_induk -->
+        <div class="modal fade" id="modalInduk" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Salin No. Induk Dibawah</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalBodyInduk">
+                        <!-- Nomor induk akan diperbarui di sini -->
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex flex-column">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <p style="font-style: italic; font-size:xx-small">*hanya gunakan untuk data yang belum memiliki No.Induk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal tambah/edit data -->
         <div class="modal fade bs-example-modal-lg" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -63,13 +86,14 @@
                         <div class="form-group row mb-0">
                             <input type="hidden" name="id" class="form-control" value="">
                             <div class="col-sm-9">
-                                <input type="hidden" name="kode" class="form-control" id="kode" value="<?php echo $kodekaryawan; ?>">
+                                <input type="hidden" name="kode" class="form-control" id="kode" value="<?= $kodekaryawan; ?>">
                                 <small class="text-danger pl-1" id="error-kode"></small>
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
+                        <div class="form-group row" id="noinduk">
+                            <label for="nama" id="indukLabel" class="col-sm-3 col-form-label" type="hidden">No Induk</label>
                             <div class="col-sm-9">
-                                <input type="hidden" name="induk" class="form-control" id="induk" value="<?= $noInduk; ?>">
+                                <input type="text" name="induk" class="form-control" id="induk" value="<?= $noInduk; ?>">
                                 <small class="text-danger pl-1" id="error-induk"></small>
                             </div>
                         </div>

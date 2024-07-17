@@ -42,6 +42,12 @@ class Kelola_karyawan extends CI_Controller
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
+
+	public function generate_no_induk()
+	{
+		$noInduk = $this->data->generateNoInduk();
+		echo $noInduk; // Mengembalikan nomor induk sebagai respons
+	}
 	//memanggil pilihan jabatan berdasar divisi yang dipilih
 	public function get_jabatan_by_divisi()
 	{
@@ -84,8 +90,8 @@ class Kelola_karyawan extends CI_Controller
 	// <!-- id kodep namap kota telp tglp type src jenis ket cek -->
 	public function insert_data()
 	{
-		$this->form_validation->set_rules('kode', 'Kode', 'trim|required|is_unique[tkaryawan.kodek]');
-		$this->form_validation->set_rules('induk', 'Induk', 'trim|is_unique[tkaryawan.no_induk]');
+		$this->form_validation->set_rules('kode', 'Kode Karyawan', 'trim|required|is_unique[tkaryawan.kodek]');
+		$this->form_validation->set_rules('induk', 'No. Induk', 'trim');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('tempat', 'Tempat Lahir', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'Tanggal Lahir', 'trim|required');
@@ -133,12 +139,17 @@ class Kelola_karyawan extends CI_Controller
 			$this->data->insert('tkaryawan', $data);
 			$response['success'] = 'Data ditambahkan';
 		}
-		echo json_encode($response);
+		$kodeKaryawan = $this->data->generateKodeKaryawan();
+		echo json_encode(
+			[
+				'success' => 'Data berhasil ditambahkan',
+				'kodekaryawan' => $kodeKaryawan
+			]
+		);
 	}
 
 	public function edit_data()
 	{
-		$this->form_validation->set_rules('kode', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('induk', 'Induk', 'trim');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('tempat', 'Tempat Lahir', 'trim|required');
@@ -154,7 +165,6 @@ class Kelola_karyawan extends CI_Controller
 			$response['errors'] = $this->form_validation->error_array();
 		} else {
 			$id = $this->input->post('id');
-			$kode = strtoupper($this->input->post('kode'));
 			$induk = $this->input->post('induk');
 			$nama = ucwords($this->input->post('nama'));
 			$tempat = ucwords($this->input->post('tempat'));
@@ -172,7 +182,6 @@ class Kelola_karyawan extends CI_Controller
 			$data['user'] = $this->data->find('tuser', $username)->row_array();
 			$timestamp = $this->db->query("SELECT NOW() as timestamp")->row()->timestamp;
 			$data = array(
-				'kodek' => $kode,
 				'no_induk' => $induk,
 				'namak' => $nama,
 				'tempat' => $tempat,

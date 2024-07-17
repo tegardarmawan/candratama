@@ -22,8 +22,8 @@ function delete_form() {
 	$("[name='alamat']").val("");
 	$("[name='kota']").val("");
 	$("[name='telp']").val("");
-	$("[name='jabatan']").val("").prop("selectedIndex", 0).trigger("change");
 	$("[name='divisi']").val("").prop("selectedIndex", 0).trigger("change");
+	$("[name='jabatan']").val("").prop("selectedIndex", 0).trigger("change");
 }
 
 function delete_error() {
@@ -34,6 +34,7 @@ function delete_error() {
 	$("#error-alamat").hide();
 	$("#error-kota").hide();
 	$("#error-telp").hide();
+	$("#error-divisi").hide();
 	$("#error-jabatan").hide();
 }
 
@@ -158,8 +159,8 @@ function get_data() {
 		},
 	});
 }
-//trigger change untuk input 'select' jabatan
 $(document).ready(function () {
+	//trigger change untuk input 'select' jabatan
 	$("#divisi").change(function () {
 		var divisi = $(this).val();
 		if (divisi != "") {
@@ -186,14 +187,34 @@ $(document).ready(function () {
 			$("#jabatan").html('<option value="">Pilih Jabatan</option>');
 		}
 	});
+
+	//refresh auto generate no induk
+	$("#generateNoIndukBtn").on("click", function () {
+		// Panggil endpoint yang menghasilkan nomor induk baru
+		$.ajax({
+			type: "GET", // Gunakan metode GET
+			url: base_url + _controller + "/generate_no_induk",
+			success: function (response) {
+				// Asumsikan response berisi nomor induk yang baru
+				$("#modalBodyInduk").text(response);
+				// Tampilkan modal
+				$("#modalInduk").modal("show");
+			},
+			error: function () {
+				alert("Gagal menghasilkan nomor induk. Silakan coba lagi.");
+			},
+		});
+	});
 });
 
 function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
+		$("#noinduk").hide();
 		$("[name='title']").text("Tambah Data Karyawan");
 	} else {
+		$("#noinduk").show();
 		$("#btn-insert").hide();
 		$("#btn-update").show();
 		$("[name='title']").text("Edit Data Karyawan");
@@ -205,7 +226,6 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
-				$("[name='kode']").val(hasil[0].kodek);
 				$("[name='induk']").val(hasil[0].no_induk);
 				$("[name='nama']").val(hasil[0].namak);
 				$("[name='tempat']").val(hasil[0].tempat);
@@ -259,6 +279,7 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val(response.kodekaryawan);
 				get_data();
 			}
 		},
@@ -271,7 +292,6 @@ function insert_data() {
 function edit_data() {
 	var formData = new FormData();
 	formData.append("id", $("[name='id']").val());
-	formData.append("kode", $("[name='kode']").val());
 	formData.append("induk", $("[name='induk']").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("tempat", $("[name='tempat']").val());
