@@ -33,11 +33,17 @@ class Data_satuan_barang extends CI_Controller
 		$data['menus'] = generate_sidebar_menu();
 
 		$data['title'] = 'Data Satuan Barang';
+		$data['kodeSatuan'] = $this->data->generateSatuan();
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('masterwarehouse/data_satuan_barang');
+		$this->load->view('masterwarehouse/data_satuan_barang', $data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
+	}
+	public function generate_satuan()
+	{
+		$kodeSatuan = $this->data->generateSatuan();
+		echo $kodeSatuan;
 	}
 
 	public function get_data()
@@ -69,8 +75,16 @@ class Data_satuan_barang extends CI_Controller
 				'kodest' => $kode,
 				'namast' => $nama,
 			);
-			$this->data->insert('tsatuan', $data);
-			$response['success'] = "Data Ditambahkan";
+			$kodesatuan = $this->data->generateSatuan();
+			$inserted = $this->data->insert('tsatuan', $data);
+			if ($inserted) {
+				$response = [
+					'success' => 'Data ditambahkan',
+					'kodesatuan' => $kodesatuan
+				];
+			} else {
+				$response['error'] = 'Data gagal ditambahkan';
+			}
 		}
 		echo json_encode($response);
 	}
@@ -94,8 +108,11 @@ class Data_satuan_barang extends CI_Controller
 			);
 			$where = array('id' => $id);
 			$this->data->update('tsatuan', $where, $data);
-
-			$response['success'] = "Data Berhasil Diperbarui";
+			$kodesatuan = $this->data->generateSatuan();
+			$response = [
+				'success' => 'Data diperbarui',
+				'kodesatuan' => $kodesatuan
+			];
 		}
 		echo json_encode($response);
 	}
@@ -106,8 +123,12 @@ class Data_satuan_barang extends CI_Controller
 		$where = array("id" => $id);
 
 		$deleted = $this->data->delete('tsatuan', $where);
+		$kodesatuan = $this->data->generateSatuan();
 		if ($deleted) {
-			$response['success'] = "Data Berhasil Dihapus";
+			$response = [
+				'success' => 'Data dihapus',
+				'kodesatuan' => $kodesatuan
+			];
 		} else {
 			$response['error'] = "Gagal menghapus Data";
 		}

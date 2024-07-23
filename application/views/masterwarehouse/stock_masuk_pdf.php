@@ -28,7 +28,8 @@
         }
 
         .nota-header .tanggal,
-        .nota-header .posted {
+        .nota-header .posted,
+        .nota-header .rekap {
             font-size: 14px;
             color: #555;
         }
@@ -70,21 +71,34 @@
         <div class="nota-header">
             <div class="tanggal">Tanggal : <?= date('d-M-Y') ?></div>
             <?php if (isset($user) && !empty($user)) : ?>
-                <div class="posted">Posted : <?= $user['username']; ?></div>
+                <div class="posted">Posted : <?= $user->username; ?></div>
             <?php endif; ?>
-        </div>
-        <div class="nota-title">
-            <?= isset($nota) ? $nota : 'Nilai nota tidak ditemukan' ?>
+            <?php
+            function formatTanggal($tanggal)
+            {
+                // Asumsi format input adalah 'dd-mm-yyyy'
+                $parts = explode('-', $tanggal);
+                if (count($parts) == 3) {
+                    return $parts[0] . '/' . $parts[1] . '/' . $parts[2]; // Format 'dd/mm/yyyy'
+                }
+                return $tanggal; // Kembalikan format asli jika tidak sesuai
+            }
+            ?>
+
+            <?php if (isset($min) && isset($max)) : ?>
+                <div class="rekap">Rekap Stock Masuk Tanggal <?= formatTanggal($min); ?> - <?= formatTanggal($max); ?></div>
+            <?php endif; ?>
         </div>
         <table class="nota-table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Nota</th>
+                    <th>Keterangan</th>
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
-                    <th>Keluar</th>
-                    <th>Satuan</th>
-                    <th>Keterangan</th>
+                    <th>Qty</th>
+                    <th>Tukang</th>
+                    <th>Project</th>
                     <th>Tanggal</th>
                 </tr>
             </thead>
@@ -92,25 +106,23 @@
                 <?php if (!empty($tableData)) : ?>
                     <?php foreach ($tableData as $index => $row) : ?>
                         <tr>
-                            <td><?= $index + 1 ?></td>
-                            <td><?= $row['kodeBarang'] ?></td>
-                            <td><?= $row['namaBarang'] ?></td>
-                            <td><?= $row['keluar'] ?></td>
-                            <td><?= $row['satuan'] ?></td>
-                            <td><?= $row['keterangan'] ?></td>
-                            <td><?= $row['tanggal'] ?></td>
+                            <td><?= $row['nota'] ?></td>
+                            <td><?= $row['ket'] ?></td>
+                            <td><?= $row['kodeb'] ?></td>
+                            <td><?= $row['namab'] ?></td>
+                            <td><?= $row['masuk'] ?></td>
+                            <td><?= $row['namat'] ?></td>
+                            <td><?= $row['projectt'] ?></td>
+                            <td><?= date('d-m-Y', strtotime($row['tgl'])) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <tr>
-                        <td colspan="3">Tidak ada data</td>
+                        <td>Tidak ada data</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="nota-footer">
-            <?= isset($nota) ? $nota : 'Nilai nota tidak ditemukan' ?>
-        </div>
     </div>
 </body>
 

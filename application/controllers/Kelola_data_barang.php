@@ -41,8 +41,8 @@ class Kelola_data_barang extends CI_Controller
 		$this->app_data['kodegroup'] = $this->data->get_all('tgroup')->result();
 		$this->app_data['kodesatuan'] = $this->data->get_all('tsatuan')->result();
 		$this->app_data['kodebarang'] = $this->data->generateKodeb();
-		$where = array('id' => 1);
-		$this->app_data['tukang'] = $this->data->find('tkaryawan', $where);
+		$where = array('id_jabatan' => 1);
+		$this->app_data['tukang'] = $this->data->find('tkaryawan', $where)->result();
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
 		$this->load->view('masterwarehouse/kelola_data_barang', $this->app_data);
@@ -59,6 +59,7 @@ class Kelola_data_barang extends CI_Controller
 				'tgroup b' => 'b.kodeg = a.kodeg, left',
 				'tsatuan c' => 'c.namast = a.satuan, left',
 			],
+			'order_by' => 'a.id'
 		];
 		$result = $this->data->get($query)->result();
 		echo json_encode($result);
@@ -88,7 +89,8 @@ class Kelola_data_barang extends CI_Controller
 		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required|is_unique[tbarang.kodeb]|numeric');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
-		$this->form_validation->set_rules('namat', 'Nama Terang', 'trim');
+		$this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
+		$this->form_validation->set_rules('project', 'Project', 'trim');
 
 
 		if ($this->form_validation->run() == false) {
@@ -124,7 +126,11 @@ class Kelola_data_barang extends CI_Controller
 					'projectt' => $project,
 				);
 				$this->data->insert('tbarang', $data);
-				$response['success'] = "Data berhasil ditambahkan";
+				$kodeb = $this->data->generateKodeb();
+				$response = [
+					'success' => 'Data berhasil ditambahkan',
+					'kodebarang' => $kodeb,
+				];
 			}
 		}
 		echo json_encode($response);
@@ -136,19 +142,17 @@ class Kelola_data_barang extends CI_Controller
 		$this->form_validation->set_rules('kodeb', 'Kode', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('stock', 'Stock', 'trim|required');
-		$this->form_validation->set_rules('hargabeli', 'Harga Beli', 'trim|required');
-		$this->form_validation->set_rules('hargapokok', 'Harga Pokok', 'trim|required');
-		$this->form_validation->set_rules('hargajual', 'Harga Jual', 'trim|required');
+		$this->form_validation->set_rules('hargabeli', 'Harga Beli', 'trim');
+		$this->form_validation->set_rules('hargapokok', 'Harga Pokok', 'trim');
+		$this->form_validation->set_rules('hargajual', 'Harga Jual', 'trim');
 		$this->form_validation->set_rules('stockmin', 'Stock Minimal', 'trim|required');
-		$this->form_validation->set_rules('namat', 'Nama Terang', 'trim|required');
+		$this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
+		$this->form_validation->set_rules('project', 'Nama Terang', 'trim');
 		if (empty($this->input->post('kodeg'))) {
 			$response['errors']['kodeg'] = "Kode group harus dipilih";
 		}
 		if (empty($this->input->post('kodest'))) {
 			$response['errors']['kodest'] = "Kode satuan harus dipilih";
-		}
-		if (empty($this->input->post('project'))) {
-			$response['errors']['project'] = "Kode satuan harus dipilih";
 		}
 
 		if ($this->form_validation->run() == false) {
@@ -191,7 +195,11 @@ class Kelola_data_barang extends CI_Controller
 				);
 				$where = array('id' => $id);
 				$this->data->update('tbarang', $where, $data);
-				$response['success'] = "Data berhasil diperbarui";
+				$kodeb = $this->data->generateKodeb();
+				$response = [
+					'success' => 'Data berhasil diperbarui',
+					'kodebarang' => $kodeb,
+				];
 			}
 		}
 		echo json_encode($response);
@@ -202,11 +210,15 @@ class Kelola_data_barang extends CI_Controller
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
 
+		$kodeb = $this->data->generateKodeb();
 		$deleted = $this->data->delete('tbarang', $where);
 		if (!$deleted) {
 			$response['error'] = "Gagal menghapus data";
 		} else {
-			$response['success'] = "Berhasil Menghapus Data";
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodebarang' => $kodeb,
+			];
 		}
 		echo json_encode($response);
 	}
@@ -219,10 +231,14 @@ class Kelola_data_barang extends CI_Controller
 			$where = array('id' => $ids[$i]);
 			$deleted = $this->data->delete('tbarang', $where);
 		}
+		$kodeb = $this->data->generateKodeb();
 		if (!$deleted) {
 			$response['error'] = 'Data gagal dihapus';
 		} else {
-			$response['success'] = 'Data Dihapus';
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodebarang' => $kodeb,
+			];
 		}
 		echo json_encode($response);
 	}

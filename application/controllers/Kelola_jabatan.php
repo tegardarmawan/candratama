@@ -49,6 +49,7 @@ class Kelola_jabatan extends CI_Controller
             'join' => [
                 'tdivisi b, a.id_divisi = b.id, left'
             ],
+            'where' => ['a.is_deleted' => 0],
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
@@ -122,7 +123,8 @@ class Kelola_jabatan extends CI_Controller
     public function delete_data()
     {
         $where = array('id' => $this->input->post('id'));
-        $deleted = $this->data->delete('tjabatan', $where);
+        $data = array('is_deleted' => 1);
+        $deleted = $this->data->update('tjabatan', $where, $data);
         if ($deleted) {
             $response['success'] = 'Data dihapus';
         } else {

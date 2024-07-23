@@ -26,7 +26,16 @@ class Project_materials extends CI_Controller
         $this->load->helper('menu_helper');
         $data['menus'] = generate_sidebar_menu();
         if ($nota) {
-            $this->app_data['project'] = $this->data->find('tproject', ['nota' => $nota])->result();
+            $query = [
+                'select' => 'a.nota, a.kodec, b.namac, a.tgl',
+                'from' => 'tproject a',
+                'where' => ['a.nota' => $nota],
+                'join' => [
+                    'tcust b, a.kodec = b.kodec, left'
+                ],
+                'group_by' => 'a.nota, a.kodec, b.namac, a.tgl',
+            ];
+            $this->app_data['project'] = $this->data->get($query)->row();
         } else {
             $this->app_data['project'] = [];
         }
@@ -37,6 +46,22 @@ class Project_materials extends CI_Controller
         $this->load->view('masterwarehouse/project_materials', $this->app_data);
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
+    }
+    public function get_project($nota = null)
+    {
+        if ($nota) {
+            $query = [
+                'select' => 'project',
+                'from' => 'tproject',
+                'where' => ['nota' => $nota],
+            ];
+            $result = $this->data->get($query)->result();
+            if (empty($result)) {
+                echo json_encode(['error' => 'No Data Found']);
+                return;
+            }
+        }
+        echo json_encode($result);
     }
     public function get_data($nota = null)
     {
@@ -84,26 +109,29 @@ class Project_materials extends CI_Controller
     public function generate_data()
     {
         $sessionData = $this->session->userdata();
-        $nota = $sessionData['nota'];
-        $namac = $sessionData['namac'];
-        $project = $sessionData['project'];
 
-        if ($nota) {
-            $data['nota'] = $nota;
-            $data['namac'] = $namac;
-            $data['project'] = $project;
-            $data['tableData'] = json_decode($sessionData['tableData'], true);
-
-            $this->load->library('pdfgenerator');
-            $data['title'] = "Nota $nota";
-            $file_pdf = $data['title'];
-            $paper = 'A4';
-            $orientation = "landscape";
-            $html = $this->load->view('project_materials_pdf', $data, true);
-            $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
-        } else {
-            // Jika tidak ada nilai nota, tampilkan error atau lakukan tindakan lain
-            echo json_encode(['status' => 'error', 'message' => 'Nilai nota tidak ditemukan.']);
+        if (!isset($sessionData['nota'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Nilai nota tidak ditemukan dalam sesi.']);
+            return;
         }
+
+        $nota = $sessionData['nota'];
+        $namac = isset($sessionData['namac']) ? $sessionData['namac'] : '';
+        $project = isset($sessionData['project']) ? $sessionData['project'] : '';
+
+        $data['nota'] = $nota;
+        $data['namac'] = $namac;
+        $data['project'] = $project;
+        $data['tableData'] = isset($sessionData['tableData']) ? json_decode($sessionData['tableData'], true) : [];
+        $username = array('username' => $this->session->userdata('username'));
+        $data['user'] = $this->data->find('tuser', $username)->row_array();
+
+        $this->load->library('pdfgenerator');
+        $data['title'] = "Nota $nota";
+        $file_pdf = $data['title'];
+        $paper = 'A4';
+        $orientation = "landscape";
+        $html = $this->load->view('project_materials_pdf', $data, true);
+        $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
     }
 }

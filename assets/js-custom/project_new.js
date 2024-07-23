@@ -9,68 +9,73 @@ $(document).ready(function () {
 
 	var currentDate = date.format("D/MM/YYYY");
 	$("#tgl").val(currentDate);
-
-	$("#project").select2({});
 });
 function kembali() {
-	window.location.replace(base_url + "Inventory/stock_masuk");
+	window.location.replace(base_url + "Project");
 }
-$("#btn-insert").on("click", function () {
-	// Get selected values from the select2
-	var selectedValues = $("#namab").val();
-	// Clear previous errors
-	$("#error-namab").text("");
+//tambah row tabel
+function addProduk() {
+	const container = document.getElementById("produk-container");
+	const newRow = document.createElement("tr");
+	newRow.classList.add("produk-item");
 
-	// Check if there are selected values
-	if (!selectedValues || selectedValues.length === 0) {
-		$("#error-namab").text("Silakan pilih barang.");
-		return;
-	}
+	newRow.innerHTML = `
+                <td>
+                    
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="removeProduk(this)">Remove</button>
+                </td>
+            `;
 
-	// Loop through selected values and add rows to the table
-	$.each(selectedValues, function (index, value) {
-		// Mencari elemen <option> berdasarkan value yang dipilih
-		var option = $("#namab option[value='" + value + "']");
-		// Mengambil teks dari elemen <option>, yang merupakan nama barang
-		var namab = option.text();
-		// Improved Row and Tabledit Initialization (moved inside success callback)
-		var newRow = `
-            <tr>
-                <td id="value-id" name="value" data-value="${value}">${value}</td>
-                <td id="namab-id" name="namab-name" data-namab="${namab}">${namab}</td>
-                <td id="masuk" name="masuk" data-masuk=""><td>
-                <td><button class="btn btn-danger waves-effect waves-light btn-delete">Delete</button></td>
-            </tr>
-        `;
-		$("#my-table tbody").append(newRow);
+	container.appendChild(newRow);
+	$("#my-table").editableTableWidget().find("td:first").focus();
+}
+//select 2
+$(document).ready(function () {
+	// Inisialisasi select2
+	$("#namac").select2({
+		placeholder: "Pilih nama customer",
 	});
-	$("#my-table").on("click", ".btn-delete", function () {
-		$(this).closest("tr").remove();
+
+	// Event change pada select2
+	$("#namac").on("change", function () {
+		var selectedNamaCustomer = $(this).val();
+
+		$.ajax({
+			type: "POST",
+			url: base_url + "/" + _controller + "/get_kode_customer",
+			data: { nama_customer: selectedNamaCustomer },
+			dataType: "json",
+			success: function (response) {
+				if (response.kode_customer) {
+					$("#kodec").val(response.kode_customer);
+				} else if (response.error) {
+					console.error(response.error);
+					$("#kodec").val("");
+				}
+			},
+			error: function (xhr, status, error) {
+				console.error("Error fetching customer data:", error);
+			},
+		});
 	});
-	$("#namab").val(null).trigger("change");
-	$("#my-table")
-		.editableTableWidget()
-		.numericInputExample()
-		.find("td:first")
-		.focus();
 });
 
 function insert_data() {
+	const notaElement = document.getElementById("nota");
+	// Mengambil nilai dari elemen nota
+	const notaValue = notaElement.textContent || notaElement.innerText;
 	var formData = new FormData();
 	$("#my-table tbody tr").each(function () {
-		var value = $(this).find("td:eq(0)").text();
-		var namab = $(this).find("td:eq(1)").text();
-		var masuk = $(this).find("td:eq(2)").text();
+		var project = $(this).find("td:eq(0)").text();
 
-		formData.append("value[]", value);
-		formData.append("namab[]", namab);
-		formData.append("masuk[]", masuk);
+		formData.append("project[]", project);
 	});
-	formData.append("nota", $("[name='nota']").val());
+	formData.append("nota", notaValue);
+	formData.append("kodec", $("[name='kodec']").val());
+	formData.append("namac", $("[name='namac']").val());
 	formData.append("tgl", $("[name='tgl']").val());
-	formData.append("namat", $("[name='namat']").val());
-	formData.append("ket", $("[name='ket']").val());
-	formData.append("project", $("[name='project']").val());
 
 	$.ajax({
 		type: "POST",
@@ -80,46 +85,30 @@ function insert_data() {
 		processData: false,
 		contentType: false,
 		success: function (response) {
-			if (response.error) {
-				showAlertifyError(response.error);
+			if (response.errors) {
+				for (var fieldName in response.errors) {
+					$("#error-" + fieldName).show();
+					$("#error-" + fieldName).html(response.errors[fieldName]);
+				}
 			} else if (response.success) {
 				showAlertifySuccess(response.success);
 				setTimeout(function () {
-					window.location.replace(base_url + "Inventory/stock_masuk");
+					window.location.replace(base_url + "Project");
 				}, 1000);
+				get_data();
 			}
 		},
-		error: function (xhr, textStatus, error) {
-			console.error("AJAX Error : " + error);
+		error: function (xhr, status, error) {
+			console.error("AJAX Error: " + error);
 		},
 	});
 }
+
+function removeProduk(button) {
+	const row = button.parentElement.parentElement;
+	row.remove();
+}
 //function untuk melakukan editable table
-$.fn.numericInputExample = function () {
-	"use strict";
-	var element = $(this);
-
-	var updateStock = function () {
-		var stockColumnIndex = 2; // Index of 'stock' column
-
-		element.on("change", 'td[name="keluar"]', function () {
-			var cell = $(this);
-			var row = cell.closest("tr");
-			var stockCell = row.find('td[name="stock"]');
-			var keluar = parseFloat(cell.text()) || 0;
-
-			var option = $(
-				"#namab option[value='" + row.find('td[name="value"]').text() + "']"
-			);
-			var stockawal = parseFloat(option.data("stock"));
-
-			stockCell.text(stockawal - keluar); // Update stock value
-			stockCell.data("stock", stockawal - keluar);
-		});
-	};
-
-	updateStock(); // Call the function to initialize the event listener
-};
 $.fn.editableTableWidget = function (options) {
 	"use strict";
 	return $(this).each(function () {
@@ -144,7 +133,7 @@ $.fn.editableTableWidget = function (options) {
 			active,
 			showEditor = function (select) {
 				active = element.find("td:focus");
-				if (active.length && active.index() === 2) {
+				if (active.length && active.index() === 0) {
 					editor
 						.val(active.text())
 						.removeClass("error")

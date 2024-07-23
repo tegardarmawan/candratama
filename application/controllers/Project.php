@@ -29,6 +29,7 @@ class Project extends CI_Controller
 
         $data['title'] = 'Project';
         $data['menus'];
+        $this->app_data['notaProject'] = $this->data->generateNotaProject();
         $this->app_data['project'] = $this->data->count('tproject');
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
@@ -36,122 +37,32 @@ class Project extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
     }
-    public function get_kode_customer($nama_customer)
-    {
-        $nama_customer = urldecode($nama_customer);
-        $query = [
-            'select' => 'kodec',
-            'from' => 'tcust',
-            'where' => ['namac' => $nama_customer]
-        ];
-
-        $result = $this->data->get($query)->row();
-        if ($result) {
-            //jika data ditermukan, maka kirimkan respon JSON
-            //kode_customer merupakan variabel yang akan dipanggil pada js
-            echo json_encode(['kode_customer' => $result->kodec]);
-        } else {
-            //jika data tidak ditemukan, maka kirimkan respon error
-            echo json_encode(['error' => 'Kode Customer Tidak Ditemukan']);
-        }
-    }
 
     public function get_data()
     {
-        $query = [
-            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
-            'from' => 'tproject a',
-            'where' => ['a.is_deleted' => 0]
-        ];
-        $result = $this->data->get($query)->result();
+        $subquery = "(SELECT MAX(id) as id FROM tproject GROUP BY nota) as sub";
+        $this->db->select('a.id, a.nota, a.kodec, b.namac, a.project');
+        $this->db->from('tproject a');
+        $this->db->join($subquery, 'a.id = sub.id', 'inner');
+        $this->db->join('tcust b', 'a.kodec = b.kodec', 'left');
+        $this->db->where('a.is_deleted', 0);
+        $this->db->order_by('a.id', 'DESC');
+        $result = $this->db->get()->result();
         echo json_encode($result);
     }
+
     public function get_data_id()
     {
         $id = $this->input->post('id');
         $query = [
-            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
+            'select' => 'a.id, a.nota, a.kodec, b.namac, a.project, a.kontrak, a.user',
             'from' => 'tproject a',
             'where' => ['a.id' => $id],
+            'join' => [
+                'tcust b, a.kodec = b.kodec, left'
+            ],
         ];
         $result = $this->data->get($query)->result();
         echo json_encode($result);
-    }
-    public function insert_data()
-    {
-        $this->form_validation->set_rules('nota', 'Nota', 'trim|required|is_unique[tproject.nota]');
-        $this->form_validation->set_rules('project', 'Nama Project', 'trim|required');
-        $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim');
-
-        if ($this->form_validation->run() == false) {
-            $response['errors'] = $this->form_validation->error_array();
-            if (empty($this->input->post('namac'))) {
-                $response['errors'] = 'Nama customer harus dipilih';
-            }
-        } else {
-            $nota = $this->input->post('nota');
-            $kodec = $this->input->post('kodec');
-            $namac = $this->input->post('namac');
-            $project = ucwords($this->input->post('project'));
-            $kontrak = $this->input->post('kontrak');
-            if (empty($kodec)) {
-                $response['errors'] = 'Kode customer harus dipilih';
-            }
-            $data = array(
-                'nota' => $nota,
-                'kodec' => $kodec,
-                'namac' => $namac,
-                'project' => $project,
-                'kontrak' => $kontrak,
-            );
-            $this->data->insert('tproject', $data);
-            $response['success'] = 'Data berhasil ditambahkan';
-        }
-        echo json_encode($response);
-    }
-    public function edit_data()
-    {
-        $this->form_validation->set_rules('nota', 'Nota', 'trim|required');
-        $this->form_validation->set_rules('project', 'Nama Project', 'trim|required');
-        $this->form_validation->set_rules('kontrak', 'Kontrak perjanjian', 'trim|required');
-
-        if ($this->form_validation->run() == false) {
-            $response['errors'] = $this->form_validation->error_array();
-            if (empty($this->input->post('kodec'))) {
-                $response['errors'] = 'Nama customer harus dipilih';
-            }
-        } else {
-            $id = $this->input->post('id');
-            $nota = $this->input->post('nota');
-            $kodec = $this->input->post('kodec');
-            $namac = $this->input->post('namac');
-            $project = ucwords($this->input->post('project'));
-            $kontrak = $this->input->post('kontrak');
-
-
-            $data = array(
-                'nota' => $nota,
-                'kodec' => $kodec,
-                'namac' => $namac,
-                'project' => $project,
-                'kontrak' => $kontrak,
-            );
-            $where = array('id' => $id);
-            $this->data->update('tproject', $where, $data);
-            $response['success'] = 'Data berhasil diperbarui';
-        }
-        echo json_encode($response);
-    }
-    public function delete_data()
-    {
-        $id = $this->input->post('id');
-        $where = array('id' => $id);
-        $deleted = $this->data->delete('tproject', $where);
-        if ($deleted) {
-            $response['success'] = "Data berhasil dihapus";
-        } else {
-            $response['error'] = "Data gagal dihapus";
-        }
-        echo json_encode($response);
     }
 }

@@ -1,6 +1,26 @@
 get_data();
+get_project();
 function kembali() {
 	window.location.replace(base_url + "Project_warehouse");
+}
+function get_project() {
+	$("#tablepro").DataTable({
+		ajax: {
+			url: base_url + _controller + "/get_project/" + nota,
+			method: "GET",
+			dataType: "json",
+			dataSrc: function (json) {
+				if (json.error) {
+					console.error(json.error);
+					alert("Error: " + json.error);
+					return [];
+				}
+				return json;
+			},
+		},
+		columns: [{ data: "project" }],
+		responsive: true,
+	});
 }
 function get_data() {
 	let minDate, maxDate;
@@ -59,12 +79,23 @@ function get_data() {
 					],
 				});
 				var formData = new FormData();
-				formData.append("nota", document.getElementById("nota").textContent);
-				formData.append("namac", document.getElementById("namac").textContent);
-				formData.append(
-					"project",
-					document.getElementById("project").textContent
-				);
+
+				// Periksa keberadaan elemen sebelum mengakses textContent
+				var notaElement = document.getElementById("nota");
+				var namacElement = document.getElementById("namac");
+				var projectElement = document.getElementById("project");
+
+				if (notaElement) {
+					formData.append("nota", notaElement.textContent);
+				} else {
+					console.error("Elemen dengan id 'nota' tidak ditemukan");
+				}
+
+				if (namacElement) {
+					formData.append("namac", namacElement.textContent);
+				} else {
+					console.error("Elemen dengan id 'namac' tidak ditemukan");
+				}
 
 				var dataTable = $("#my-table").DataTable();
 				var tableData = dataTable.rows().data();

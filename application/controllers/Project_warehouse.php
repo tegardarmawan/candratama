@@ -37,13 +37,14 @@ class Project_warehouse extends CI_Controller
     }
     public function get_data()
     {
-        $query = [
-            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
-            'from' => 'tproject a',
-            'where' => ['a.is_deleted' => 0],
-            'order_by' => 'a.id DESC'
-        ];
-        $result = $this->data->get($query)->result();
+        $subquery = "(SELECT MAX(id) as id FROM tproject GROUP BY nota) as sub";
+        $this->db->select('a.id, a.nota, a.kodec, b.namac, a.project');
+        $this->db->from('tproject a');
+        $this->db->join($subquery, 'a.id = sub.id', 'inner');
+        $this->db->join('tcust b', 'a.kodec = b.kodec', 'left');
+        $this->db->where('a.is_deleted', 0);
+        $this->db->order_by('a.id', 'DESC');
+        $result = $this->db->get()->result();
         echo json_encode($result);
     }
     public function get_data_id()

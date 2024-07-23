@@ -42,7 +42,8 @@ class Kelola_divisi extends CI_Controller
     }
     public function get_data()
     {
-        $result = $this->data->get_all('tdivisi')->result();
+        $where = array('is_deleted' => 0);
+        $result = $this->data->find('tdivisi', $where)->result();
         echo json_encode($result);
     }
     public function get_data_id()
@@ -105,7 +106,8 @@ class Kelola_divisi extends CI_Controller
     public function delete_data()
     {
         $where = array('id' => $this->input->post('id'));
-        $deleted = $this->data->delete('tdivisi', $where);
+        $data = array('is_deleted' => 1);
+        $deleted = $this->data->update('tdivisi', $where, $data);
         if ($deleted) {
             $response['success'] = 'Data dihapus';
         } else {

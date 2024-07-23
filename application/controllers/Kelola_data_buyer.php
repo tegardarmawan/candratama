@@ -25,11 +25,13 @@ class Kelola_data_buyer extends CI_Controller
 	{
 		//load menu helper
 		$this->load->helper('menu_helper');
+		$data['kodecustomer'] = $this->data->generateKodec();
+		$data['kodec1'] = $this->data->generateKodec1();
 		$data['menus'] = generate_sidebar_menu();
 		$data['title'] = 'Kelola Data Customer';
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/header');
-		$this->load->view('project_interior/data_buyer');
+		$this->load->view('project_interior/data_buyer', $data);
 		$this->load->view('templates/footer');
 		$this->load->view('js-costum', $this->app_data);
 	}
@@ -48,6 +50,7 @@ class Kelola_data_buyer extends CI_Controller
 	public function insert_data()
 	{
 		$this->form_validation->set_rules('kodec', 'kodec', 'required|is_unique[tcust.kodec]|trim');
+		//kodec1 menandakan customer tersebut adalah customer kesekian yang telah ditangani
 		$this->form_validation->set_rules('kodec1', 'kodec1', 'trim|required|numeric|is_unique[tcust.kodec1]');
 		$this->form_validation->set_rules('namac', 'namac', 'trim|required');
 		$this->form_validation->set_rules('kota', 'kota', 'trim|required');
@@ -101,8 +104,18 @@ class Kelola_data_buyer extends CI_Controller
 				'jenis' => $jenis,
 				'kodep' => $kodep,
 			];
-			$this->data->insert('tcust', $data);
-			$response['success'] = 'Data ditambahkan';
+			$inserted = $this->data->insert('tcust', $data);
+			$kodecustomer = $this->data->generateKodec();
+			$kodec1 = $this->data->generateKodec1();
+			if ($inserted) {
+				$response = [
+					'success' => 'Data berhasil ditambahkan',
+					'kodecustomer' => $kodecustomer,
+					'kodec1' => $kodec1,
+				];
+			} else {
+				$response['error'] = 'Data gagal ditambahkan';
+			}
 		}
 		echo json_encode($response);
 	}
@@ -162,8 +175,18 @@ class Kelola_data_buyer extends CI_Controller
 				'jenis' => $jenis,
 				'kodep' => $kodep,
 			];
-			$this->data->update('tcust', $where, $data);
-			$response['success'] = 'Data diperbarui';
+			$updated = $this->data->update('tcust', $where, $data);
+			$kodecustomer = $this->data->generateKodec();
+			$kodec1 = $this->data->generateKodec1();
+			if ($updated) {
+				$response = [
+					'success' => 'Data berhasil diperbarui',
+					'kodecustomer' => $kodecustomer,
+					'kodec1' => $kodec1,
+				];
+			} else {
+				$response['error'] = 'Data gagal diperbarui';
+			}
 		}
 		echo json_encode($response);
 	}
@@ -172,10 +195,16 @@ class Kelola_data_buyer extends CI_Controller
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
 		$deleted = $this->data->delete('tcust', $where);
-		if (!$deleted) {
-			$response['errors'] = 'Gagal menghapus data';
+		$kodecustomer = $this->data->generateKodec();
+		$kodec1 = $this->data->generateKodec1();
+		if ($deleted) {
+			$response = [
+				'success' => 'Data berhasil dihapus',
+				'kodecustomer' => $kodecustomer,
+				'kodec1' => $kodec1,
+			];
 		} else {
-			$response['success'] = 'Data dihapus';
+			$response['error'] = 'Data gagal dihapus';
 		}
 		echo json_encode($response);
 	}

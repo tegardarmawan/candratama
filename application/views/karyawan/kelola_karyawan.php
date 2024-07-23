@@ -83,10 +83,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb">
+                            <label for="" id="" class="col-sm-3 col-form-label" type="hidden">Kode Karyawan</label>
                             <input type="hidden" name="id" class="form-control" value="">
                             <div class="col-sm-9">
-                                <input type="hidden" name="kode" class="form-control" id="kode" value="<?= $kodekaryawan; ?>">
+                                <input type="text" name="kode" class="form-control" id="kode" value="<?= $kodekaryawan; ?>" readonly>
                                 <small class="text-danger pl-1" id="error-kode"></small>
                             </div>
                         </div>
@@ -197,3 +198,7 @@
         </div>
     </div>
 </div>
+<script>
+    var kodek = "<?php echo $kodekaryawan; ?>"; // Menginisialisasi variabel JavaScript dengan nilai PHP
+    var noInduk = "<?= $noInduk; ?>";
+</script>

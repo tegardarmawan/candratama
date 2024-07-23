@@ -93,7 +93,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group row mb-0">
+                            <div class="form-group row">
                                 <label for="kodeg" class="col-sm-3 col-form-label">Kode Group</label>
                                 <input type="hidden" name="id" class="form-control" id="id">
                                 <div class="col-sm-9">
@@ -108,9 +108,10 @@
                                     <small class="text-danger pl-1" id="error-kodeg"></small>
                                 </div>
                             </div>
-                            <div class="form-group row mb-0">
+                            <div class="form-group row mb-0"> <!-- form kode barang -->
+                                <label for="kodeb" class="col-sm-3 col-form-label">Kode Barang</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" name="kodeb" id="kodeb" placeholder="Masukkan Kode Barang" type="hidden" value="<?= $kodebarang; ?>">
+                                    <input class="form-control" name="kodeb" id="kodeb" placeholder="Masukkan Kode Barang" type="text" value="<?= $kodebarang; ?>" readonly>
                                     <small class="text-danger pl-1" id="error-kodeb"></small>
                                 </div>
                             </div>
@@ -147,8 +148,9 @@
                                 <div class="col-sm-9">
                                     <select class="select2 custom-select form-control" name="namat" id="namat">
                                         <option value="">Pilih Nama Tukang</option>
-                                        <?php foreach($tukang as $tk):?>
-                                            <option value=""></option>
+                                        <?php foreach ($tukang as $tk) : ?>
+                                            <option value=""><?= $tk->namak; ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                     <small class="text-danger pl-1" id="error-namat"></small>
                                 </div>

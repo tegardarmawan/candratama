@@ -16,6 +16,7 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
+	$("[name='kodeg']").val(kodegroup);
 	$("[name='namag']").val("");
 }
 
@@ -211,6 +212,7 @@ function edit_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodeg']").val(response.kodegroup);
 				get_data();
 			}
 		},

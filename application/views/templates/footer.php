@@ -74,17 +74,7 @@
 <script src="<?= base_url() ?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/RWD-Table-Patterns/dist/js/rwd-table.min.js" type="text/javascript"></script>
 
-<script>
-    $('#datatable-buttons').DataTable({
-        "dom": 'Bfrtip', // Hanya menampilkan tombol yang terkait dengan fitur (b = buttons)
-        "buttons": [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        scrollY: 270,
-        scrollX: 320,
-        responsive: true,
-    });
-</script>
+
 <script>
     $('#editable-table').editableTableWidget({
         scrollY: 270,

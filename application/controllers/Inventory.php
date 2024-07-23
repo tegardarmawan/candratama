@@ -33,6 +33,7 @@ class Inventory extends CI_Controller
 
 
         $data['title'] = 'Stock Masuk';
+        $data['nota'] = $this->data->generateNota();
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
         $this->load->view('masterwarehouse/stock_masuk', $data);
@@ -41,56 +42,83 @@ class Inventory extends CI_Controller
     }
     public function get_data_masuk()
     {
+        $start_date = $this->input->get('start_date');
+        $end_date = $this->input->get('end_date');
 
-        // $query = [
-        //     'select' => 'a.nota, a.tgl, a.waktu, a.namab, a.masuk, b.hbeli',
-        //     'from' => 'tstock a',
-        //     'join' => [
-        //         'tbarang b, b.kodeb = a.kodeb'
-        //     ],
-        //     'where' => ['tipe' => 1],
-        //     // 'group_by' => 'nota, tgl, ket',
-        // ];
+        // Fungsi untuk mengubah format tanggal
+        $formatDate = function ($date) {
+            if (!empty($date)) {
+                $tgl_parts = explode('-', $date);
+                return $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
+            }
+            return null;
+        };
+
+        $start_date = $formatDate($start_date);
+        $end_date = $formatDate($end_date);
+
         $query = [
-            'select' => 'nota, ket',
+            'select' => '*',
             'from' => 'tstock',
             'where' => ['tipe' => 1],
-            'group_by' => 'nota, ket',
         ];
+
+        // Menambahkan kondisi tanggal jika ada
+        if ($start_date) {
+            $query['where']['tgl >='] = $start_date;
+        }
+        if ($end_date) {
+            $query['where']['tgl <='] = $end_date;
+        }
+
         $result = $this->data->get($query)->result();
+
+        header('Content-Type: application/json');
         echo json_encode($result);
     }
-    // public function stock_masuk_detail($nota = null)
-    // {
-    //     $this->load->helper('menu_helper');
-    //     $data['menus'] = generate_sidebar_menu();
-    //     if ($nota) {
-    //         $query = [
-    //             'select' => 'nota, tgl, namat, ',
-    //             'from' => 'tstock',
-    //             'where' => ['nota' => $nota],
-    //             'group_by' => 'nota, tgl, namat, ket',
-    //         ];
-    //         $this->app_data['stock'] = $this->data->get($query)->result();
-    //     } else {
-    //         $this->app_data['stock'] = [];
-    //     }
+    public function save_session_data()
+    {
+        $formData = $this->input->post();
+        if (empty($formData)) {
+            echo json_encode(['status' => 'error', 'message' => 'No data received']);
+            return;
+        }
+        // Simpan data ke session
+        $sessionData = [
+            'tableData' => $formData['tableData'],
+            'min' => $formData['min'],
+            'max' => $formData['max']
+        ];
+        $this->session->set_userdata('pdf_data', $sessionData);
+        echo json_encode(['status' => 'success']);
+    }
+    public function generate_data()
+    {
+        $this->load->library('pdfgenerator');
+        $pdfData = $this->session->userdata('pdf_data');
+        if (empty($pdfData)) {
+            echo json_encode(['status' => 'error', 'message' => 'No PDF data found in session']);
+            return;
+        }
+        $data = [
+            'title' => "Laporan Data Masuk",
+            'tableData' => json_decode($pdfData['tableData'], true),
+            'min' => $pdfData['min'],
+            'max' => $pdfData['max'],
+        ];
+        $where = array('username' => $this->session->userdata['username']);
+        $data['user'] = $this->data->find('tuser', $where)->row();
+        try {
+            $html = $this->load->view('masterwarehouse/stock_masuk_pdf', $data, true);
+            $filename = "Laporan_Data_Masuk_" . date('YmdHis');
+            $pdfContent = $this->pdfgenerator->generate($html, $filename, 'A4', 'landscape');
 
-    //     $data['title'] = 'Stock Masuk';
-    //     $this->load->view('templates/sidebar', $data);
-    //     $this->load->view('templates/header');
-    //     $this->load->view('masterwarehouse/stock_masuk_detail', $this->app_data);
-    //     $this->load->view('templates/footer');
-    //     $this->load->view('js-costum', $this->app_data);
-    // }
-    // public function get_data_detail($nota = null)
-    // {
-    //     if ($nota == null || empty($nota)) {
-    //         echo json_encode(['error' => 'Nota parameter is missing']);
-    //         return;
-    //     }
-    //     $where = ['nota' => $nota];
-    //     $result = $this->data->find('tstock', $where)->result();
-    //     echo json_encode($result);
-    // }
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename="' . $filename . '.pdf"');
+            echo $pdfContent;
+        } catch (Exception $e) {
+            log_message('error', 'PDF generation error: ' . $e->getMessage());
+            echo json_encode(['status' => 'error', 'message' => 'Failed to generate PDF: ' . $e->getMessage()]);
+        }
+    }
 }

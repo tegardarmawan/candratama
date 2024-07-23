@@ -49,6 +49,7 @@ class Data_group extends CI_Controller
 			'select' => '*',
 			'from' => 'tgroup',
 			'order_by' => 'kodeg',
+			'where' => ['is_deleted' => 0],
 		];
 		$result = $this->data->get($query)->result();
 		echo json_encode($result);
@@ -126,8 +127,9 @@ class Data_group extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$where = array('id' => $id);
+		$data = array('is_deleted' => 0);
 
-		$deleted = $this->data->delete('tgroup', $where);
+		$deleted = $this->data->update('tgroup', $where, $data);
 		$kodeGroup = $this->data->generateKodeg();
 		if ($deleted) {
 			//logging
@@ -165,7 +167,8 @@ class Data_group extends CI_Controller
 		$count = count($ids);
 		for ($i = 0; $i < $count; $i++) {
 			$where = array('id' => $ids[$i]);
-			$deleted = $this->data->delete('tgroup', $where);
+			$data = array('is_deleted' => 0);
+			$deleted = $this->data->update('tgroup', $where, $data);
 		}
 		$kodeGroup = $this->data->generateKodeg();
 		if (!$deleted) {

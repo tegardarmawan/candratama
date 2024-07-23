@@ -25,7 +25,7 @@ function delete_form() {
 	$("[name='hargajual']").val("");
 	$("[name='status1']").val("");
 	$("[name='stockmin']").val("");
-	$("[name='namat']").val("");
+	$("[name='namat']").val("").prop("selectedIndex", 0).trigger("change");
 	$("[name='project']").val("").prop("selectedIndex", 0).trigger("change");
 }
 
@@ -310,6 +310,7 @@ function delete_data(x) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodeb']").val(response.kodebarang);
 				get_data();
 			} else if (response.error) {
 				$("#modalHapus").modal("hide");

@@ -1,3 +1,4 @@
+<!-- input untuk controller Stock_masuk -->
 <div class="content m-b-30">
     <div class="page-content-wrapper">
         <div class="container-fluid">
@@ -29,7 +30,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <input type="hidden" class="form-control" id="id" name="id">
-                                    <input type="text" class="form-control" name="nota" id="nota" placeholder="isikan nota">
+                                    <input type="text" class="form-control" name="nota" id="nota" value="<?= $nota; ?>" readonly>
                                     <small class=""></small>
                                 </li>
                             </ul>
@@ -59,7 +60,25 @@
                             <div class="form-group m-b-0">
                                 <label for="" class="col-sm-3 col-form-label">Nama Tukang</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="namat" id="namat" placeholder="isikan nama tukang">
+                                    <select name="namat" id="namat" class="form-control">
+                                        <option value="">Pilih Nama Tukang</option>
+                                        <?php foreach ($tukang as $tkg) : ?>
+                                            <option value="<?= $tkg->namak; ?>"><?= $tkg->namak; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-namat"></small>
+                                </div>
+                            </div>
+                            <div class="form-group m-b-0">
+                                <label for="" class="col-sm-3 col-form-label">Project</label>
+                                <div class="col-sm-9">
+                                    <select name="project" id="project" class="form-control select2 custom-select">
+                                        <option value="">Pilih Project</option>
+                                        <?php foreach ($project as $prj) : ?>
+                                            <option value="<?= $prj->namac; ?>"><?= $prj->nota; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <p style="font-style: italic; font-size:x-small">*pilih project jika untuk barang project</p>
                                     <small class="text-danger pl-1" id="error-namat"></small>
                                 </div>
                             </div>

@@ -1,3 +1,4 @@
+get_data();
 function showAlertifySuccess(message) {
 	$("body").append(alertify.success(message));
 }
@@ -20,36 +21,32 @@ function kembali() {
 	window.location.replace(base_url + "Project_warehouse");
 }
 
+function get_data() {
+	$("#tablepro").DataTable({
+		ajax: {
+			url: base_url + _controller + "/get_data/" + nota,
+			method: "GET",
+			dataType: "json",
+			dataSrc: function (json) {
+				if (json.error) {
+					console.error(json.error);
+					alert("Error: " + json.error);
+					return [];
+				}
+				return json;
+			},
+		},
+		columns: [{ data: "project" }],
+		responsive: true,
+	});
+}
+
 $(document).ready(function () {
 	var date = moment();
 
 	var currentDate = date.format("D/MM/YYYY");
 	$("#tgl").val(currentDate);
 	// Inisialisasi select2
-	$("#nota").select2({
-		placeholder: "Pilih nota",
-	});
-
-	$("#nota").on("change", function () {
-		var selectedNota = $(this).val();
-
-		$.ajax({
-			type: "POST",
-			data: { nota: encodeURIComponent(selectedNota) },
-			url: base_url + "/" + _controller + "/get_customer/" + selectedNota,
-			dataType: "json",
-			success: function (response) {
-				console.log(response);
-				var decodenota = decodeURIComponent(response.nama_customer);
-				$("#namac").val(decodenota);
-				var decodeproject = decodeURIComponent(response.project_customer);
-				$("#project").val(decodeproject);
-			},
-			error: function () {
-				console.error("Error fetching data");
-			},
-		});
-	});
 
 	// Auto trigger change untuk barang
 	// Initialize select2

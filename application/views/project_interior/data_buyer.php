@@ -49,14 +49,14 @@
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Kode</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input class="form-control" type="text" id="kodec" name="kodec" placeholder="Masukkan kode customer">
+                                    <input class="form-control" type="text" id="kodec" name="kodec" readonly value="<?= $kodecustomer; ?>">
                                     <small class="text-danger pl-1" id="error-kodec"></small>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="" class="col-sm-3 col-form-label">Kode C1</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" placeholder="Masukkan kode C1" name="kodec1" id="kodec1">
+                                    <input type="number" class="form-control" value="<?= $kodec1; ?>" readonly name="kodec1" id="kodec1">
                                     <small class="text-danger pl-1" id="error-kodec1"></small>
                                 </div>
                             </div>
@@ -276,3 +276,7 @@
 </div>
 </div>
 </div>
+<script>
+    var kodec1 = "<?php echo $kodec1; ?>"; // Menginisialisasi variabel JavaScript dengan nilai PHP
+    var kodec = "<?= $kodecustomer; ?>";
+</script>

@@ -33,6 +33,16 @@ class Stock_masuk extends CI_Controller
         $data['barang'] = $this->data->get_all('tbarang')->result();
 
         $data['title'] = 'Stock Masuk';
+        $data['nota'] = $this->data->generateNota();
+        $where = array('id_divisi' => 2);
+        $data['tukang'] = $this->data->find('tkaryawan', $where)->result();
+        $query = [
+            'select' => 'namac, nota',
+            'from' => 'tproject',
+            'group_by' => 'namac, nota',
+            'order_by' => 'nota desc',
+        ];
+        $data['project'] = $this->data->get($query)->result();
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/header');
         $this->load->view('masterwarehouse/stock_masuk_new', $data);
@@ -45,6 +55,7 @@ class Stock_masuk extends CI_Controller
         $this->form_validation->set_rules('tgl', 'Tanggal', 'trim|required');
         $this->form_validation->set_rules('ket', 'Keterangan', 'trim');
         $this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
+        $this->form_validation->set_rules('project', 'Nama Project', 'trim');
         $this->form_validation->set_rules('value[]', 'Kode Barang', 'trim|required');
         $this->form_validation->set_rules('namab[]', 'Nama Barang', 'trim|required');
         $this->form_validation->set_rules('masuk[]', 'Qty', 'trim|required|numeric');
@@ -61,8 +72,9 @@ class Stock_masuk extends CI_Controller
                 $tgl_parts = explode('/', $tgl);
                 $tgl = $tgl_parts[2] . '-' . $tgl_parts[1] . '-' . $tgl_parts[0];
             }
-            $ket = $this->input->post('ket');
+            $ket = ucwords($this->input->post('ket'));
             $namat = $this->input->post('namat');
+            $project = $this->input->post('project');
         }
 
         $count = count($kodeb);
@@ -72,6 +84,7 @@ class Stock_masuk extends CI_Controller
                 'tgl' => $tgl,
                 'ket' => $ket,
                 'namat' => $namat,
+                'projectt' => $project,
                 'kodeb' => $kodeb[$i],
                 'namab' => $namab[$i],
                 'masuk' => $masuk[$i],

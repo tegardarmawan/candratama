@@ -70,6 +70,7 @@ function get_data() {
 						},
 					},
 				],
+				order: [[0, "desc"]],
 			});
 		},
 		error: function (xhr, textStatus, errorThrown, error) {

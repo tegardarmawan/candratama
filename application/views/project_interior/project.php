@@ -17,10 +17,12 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="submit('tambah')">
-                    <i class="mdi mdi-plus"></i>
-                    Tambah Data
-                </button>
+                <a href="<?= base_url('Project_new'); ?>">
+                    <button type="button" class="btn btn-primary waves-effect waves-light">
+                        <i class="mdi mdi-plus"></i>
+                        Tambah Data
+                    </button>
+                </a>
                 <hr>
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
@@ -48,7 +50,7 @@
                                 <label for="example-text-input" class="col-sm-3 col-form-label">Nota Project</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" class="form-control" value="">
-                                    <input class="form-control" type="text" id="nota" name="nota" placeholder="Masukkan nota">
+                                    <input class="form-control" type="text" id="nota" name="nota" value="<?= $notaProject; ?>" readonly>
                                     <small class="text-danger pl-1" id="error-nota"></small>
                                 </div>
                             </div>
@@ -167,3 +169,6 @@
 </div>
 </div>
 </div>
+<script>
+    var notaproject = '<?= $notaProject; ?>';
+</script>

@@ -27,11 +27,22 @@ class Project_warehouse_new extends CI_Controller
         $data['menus'] = generate_sidebar_menu();
 
         if ($nota) {
-            $data['project_details'] = $this->data->find('tproject', ['nota' => $nota])->result();
+            $query = [
+                'select' => 'a.nota, a.kodec, b.namac, a.tgl',
+                'from' => 'tproject a',
+                'where' => ['a.nota' => $nota],
+                'join' => [
+                    'tcust b, a.kodec = b.kodec, left'
+                ],
+                'group_by' => 'a.nota, a.kodec, b.namac, a.tgl',
+            ];
+            $data['project_details'] = $this->data->get($query)->row();
         } else {
-            $data['project_details'] = [];
+            $data['project_details'] = null;
         }
-
+        $data['nota'] = $nota;
+        $where = array('id_divisi' => 2);
+        $data['tukang'] = $this->data->find('tkaryawan', $where)->result();
         $data['barang'] = $this->data->get_all('tbarang')->result();
         $data['project'] = $this->data->get_all('tproject')->result();
         $data['title'] = 'Project Warehouse';
@@ -41,12 +52,28 @@ class Project_warehouse_new extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('js-costum', $this->app_data);
     }
+    public function get_data($nota = null)
+    {
+        if ($nota) {
+            $query = [
+                'select' => 'project',
+                'from' => 'tproject',
+                'where' => ['nota' => $nota],
+            ];
+            $result = $this->data->get($query)->result();
+            if (empty($result)) {
+                echo json_encode(['error' => 'No Data Found']);
+                return;
+            }
+        }
+        echo json_encode($result);
+    }
 
     public function get_data_id()
     {
         $id = $this->input->post('id');
         $query = [
-            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project, a.kontrak, a.user',
+            'select' => 'a.id, a.nota, a.kodec, a.namac, a.project',
             'from' => 'tproject a',
             'where' => ['a.id' => $id],
         ];
@@ -86,7 +113,7 @@ class Project_warehouse_new extends CI_Controller
         $this->form_validation->set_rules('keluar[]', 'Barang Keluar', 'trim|required');
         $this->form_validation->set_rules('satuan[]', 'Satuan Barang', 'trim|required');
         $this->form_validation->set_rules('keluar1[]', 'Sisa Barang', 'trim');
-        $this->form_validation->set_rules('no', 'No', 'trim');
+        $this->form_validation->set_rules('namat', 'Nama Tukang', 'trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
@@ -103,8 +130,8 @@ class Project_warehouse_new extends CI_Controller
             $keluar = $this->input->post('keluar[]');
             $satuan = $this->input->post('satuan[]');
             $keluar1 = $this->input->post('keluar1[]');
-            $masuk = $this->input->post('masuk');
-            $no = $this->input->post('no');
+            $namac = $this->input->post('namac');
+            $namat = $this->input->post('namat');
 
             $count = count($value);
             for ($i = 0; $i < $count; $i++) {
@@ -133,6 +160,8 @@ class Project_warehouse_new extends CI_Controller
                         'kodeb' => $value[$i],
                         'namab' => $namab[$i],
                         'keluar' => $keluar[$i],
+                        'projectt' => $namac,
+                        'namat' => $namat,
                         'tipe' => 2,
                     );
                     $this->data->insert('tstock', $datakeluar);

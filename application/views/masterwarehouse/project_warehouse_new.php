@@ -17,50 +17,62 @@
         <div class="card m-b-30">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <?php if (isset($project_details) && !empty($project_details)) : ?>
-                            <?php foreach ($project_details as $detail) : ?>
-                                <div class="form-group">
-                                    <div class="pl-1 mb-1" style="font-weight: 500;">Nota<span class="text-danger me-1">*</span></div>
-                                    <div class="row pl-3">
-                                        <input type="hidden" name="id" id="id" class="form-control">
-                                        <select name="nota" id="nota" class="select2 custom-select">
-                                            <option value="">Pilih customer</option>
-                                            <?php foreach ($project as $row) : ?>
-                                                <option value="<?php echo $row->nota; ?>" <?= ($row->nota == $detail->nota) ? 'selected' : ''; ?>>
-                                                    <?= $row->nota; ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <small class="text-danger pl-1" id="error-nota"></small>
+                            <div class="form-group">
+                                <div class="pl-1 mb-1" style="font-weight: 500;">Nota</div>
+                                <div class="row pl-3">
+                                    <input type="hidden" name="id" id="id" class="form-control">
+                                    <input type="text" class="form-control" id="nota" name="nota" readonly value="<?= $project_details->nota; ?>">
+                                    <small class="text-danger pl-1" id="error-nota"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="pl-1 mb-1" style="font-weight: 500;">Nama Customer</div>
+                                <div class="row pl-3">
+                                    <input type="text" class="form-control" id="namac" name="namac" value="<?= $project_details->namac ?>" readonly>
+                                    <small class="text-danger pl-1" id="error-namac"></small>
+                                </div>
+                            </div>
+                            <div class="form-group" style="width: 100%;">
+                                <div class="pl-1 mb-1" style="font-weight: 500;">Nama Tukang</div>
+                                <div class="row pl-3">
+                                    <select name="namat" id="namat" class="form-control">
+                                        <option value="">Pilih Nama Tukang</option>
+                                        <?php foreach ($tukang as $tkg) : ?>
+                                            <option value="<?= $tkg->namak; ?>"><?= $tkg->namak; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <small class="text-danger pl-1" id="error-namat"></small>
+                                </div>
+                            </div>
+                            <div class="form-group" style="width: 100%;">
+                                <div class="pl-1 mb-1" style="font-weight: 500;">Tanggal</div>
+                                <div class="row pl-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" id="tgl" name="tgl">
+                                        <div class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
+                                        <small class="text-danger pl-1 error-tgl"></small>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="pl-1 mb-1" style="font-weight: 500;">Nama Customer<span class="text-danger me-1">*</span></div>
-                                    <div class="row pl-3">
-                                        <input type="text" class="form-control" id="namac" name="namac" value="<?= $detail->namac ?>">
-                                        <small class="text-danger pl-1" id="error-namac"></small>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="pl-1 mb-1" style="font-weight: 500;">Project<span class="text-danger me-1">*</span></div>
-                                    <div class="row pl-3">
-                                        <input type="text" class="form-control" id="project" name="project" value="<?= $detail->project ?>">
-                                        <small class="text-danger pl-1" id="error-project"></small>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="width: 100%;">
-                                    <div class="pl-1 mb-1" style="font-weight: 500;">Tanggal<span class="text-danger me-1">*</span></div>
-                                    <div class="row pl-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control datepicker" id="tgl" name="tgl">
-                                            <div class="input-group-append"><span class="input-group-text"><i class="mdi mdi-calendar"></i></span></div>
-                                            <small class="text-danger pl-1 error-tgl"></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
+                            </div>
                         <?php endif; ?>
+                    </div>
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="tablepro">
+                                    <thead>
+                                        <tr>
+                                            <th width="80%">Project</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="produk-container">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,3 +120,6 @@
         </div>
     </div>
 </div>
+<script>
+    var nota = '<?= $nota; ?>';
+</script>

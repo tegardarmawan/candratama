@@ -16,6 +16,8 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
+	$("[name='kode']").val(kodek);
+	$("[name='induk']").val(noInduk);
 	$("[name='nama']").val("");
 	$("[name='tempat']").val("");
 	$("[name='tanggal']").val("");
@@ -211,7 +213,7 @@ function submit(x) {
 	if (x == "tambah") {
 		$("#btn-insert").show();
 		$("#btn-update").hide();
-		$("#noinduk").hide();
+
 		$("[name='title']").text("Tambah Data Karyawan");
 	} else {
 		$("#noinduk").show();
@@ -226,6 +228,7 @@ function submit(x) {
 			dataType: "json",
 			success: function (hasil) {
 				$("[name= 'id']").val(hasil[0].id);
+				$("[name='kode']").val(hasil[0].kodek);
 				$("[name='induk']").val(hasil[0].no_induk);
 				$("[name='nama']").val(hasil[0].namak);
 				$("[name='tempat']").val(hasil[0].tempat);
@@ -318,6 +321,7 @@ function edit_data() {
 				}
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
+				$("[name='kode']").val(response.kodekaryawan);
 				showAlertifySuccess(response.success);
 				get_data();
 			}
@@ -338,6 +342,7 @@ function delete_data(x) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val(response.kodekaryawan);
 				get_data();
 			} else if (response.error) {
 				$("#modalHapus").modal("hide");

@@ -16,8 +16,8 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kodec']").val("");
-	$("[name='kodec1']").val("");
+	$("[name='kodec']").val(kodec);
+	$("[name='kodec1']").val(kodec1);
 	$("[name='namac']").val("");
 	$("[name='ktp']").val("");
 	$("[name='alamat']").val("");
@@ -183,6 +183,8 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodec']").val(response.kodecustomer);
+				$("[name='kodec1']").val(response.kodec1);
 				get_data();
 			}
 		},
@@ -227,6 +229,8 @@ function edit_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kodec']").val(response.kodecustomer);
+				$("[name='kodec1']").val(response.kodec1);
 				get_data();
 			}
 		},
@@ -250,6 +254,8 @@ function delete_data(x) {
 			} else if (response.error) {
 				$("#modalHapus").modal("hide");
 				showAlertifyError(response.error);
+				$("[name='kodec']").val(response.kodecustomer);
+				$("[name='kodec1']").val(response.kodec1);
 				get_data();
 			}
 		},

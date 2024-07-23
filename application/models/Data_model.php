@@ -212,24 +212,6 @@ class Data_model extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
-    public function generateNota()
-    {
-        $prefix = 'SS-';
-        $date = date('Ymd'); // Format tahun, bulan, tanggal (20240710)
-
-        // Dapatkan jumlah nota hari ini
-        $this->db->like('nota', $prefix . $date, 'after');
-        $this->db->from('tstock'); // Nama tabel yang menyimpan data stok keluar
-        $count = $this->db->count_all_results();
-
-        // Tambahkan 1 untuk nomor urut hari ini
-        $nota_number = $count + 1;
-
-        // Format nomor nota lengkap
-        $nota = $prefix . $date . str_pad($nota_number, 3, '0', STR_PAD_LEFT); // Misal: SS20240710001
-
-        return $nota;
-    }
     public function generateKodeKaryawan()
     {
         $prefix = 'KR-';
@@ -272,34 +254,127 @@ class Data_model extends CI_Model
 
         return $new_nomor_induk;
     }
+    public function generateNota() //generate nota stock keluar masuk
+    {
+        $prefix = 'SS-';
+        $date = date('ymd'); // Format tahun, bulan, tanggal (20240710)
+
+        // Dapatkan jumlah nota hari ini
+        $this->db->select_max('nota');
+        $this->db->like('nota', $prefix . $date, 'after');
+        $query = $this->db->get('tstock');
+        $last_nota = $query->row()->nota;
+
+        if ($last_nota === null) {
+            $new_numeric_part = '001';
+        } else {
+            $last_numeric_part = substr($last_nota, -3);
+            $new_numeric_part = str_pad(intval($last_numeric_part) + 1, 3, '0', STR_PAD_LEFT);
+        }
+
+
+        // Format nomor nota lengkap
+        $nota = $prefix . $date . $new_numeric_part;
+
+        return $nota;
+    }
+    //generate kode barang
     public function generateKodeb()
     {
         $date = date('ymd');
-        // 99ymd0001
         $prefix = '99';
-
-        //mengambil nomor terakhir kode barang hari ini
+        $this->db->select_max('kodeb');
         $this->db->like('kodeb', $prefix . $date, 'after');
-        $this->db->from('tbarang');
-        $count = $this->db->count_all_results();
+        $query = $this->db->get('tbarang');
+        $last_number = $query->row()->kodeb;
 
-        $kodeb = $count + 1;
+        // Periksa apakah $last_number null atau tidak
+        if ($last_number === null) {
+            // Jika null, berarti belum ada kode barang untuk hari ini
+            $new_numeric_part = '0001';
+        } else {
+            // Jika tidak null, lakukan proses seperti sebelumnya
+            $last_numeric_part = substr($last_number, -4);
+            $new_numeric_part = str_pad(intval($last_numeric_part) + 1, 4, '0', STR_PAD_LEFT);
+        }
 
-        //format penuh
-        $kode_barang = $prefix . $date . str_pad($kodeb, 4, '0', STR_PAD_LEFT);
+        // format kodeb
+        $kode_barang = $prefix . $date . $new_numeric_part;
+
         return $kode_barang;
     }
+    //generate kode customer
+    public function generateKodec()
+    {
+        $date = date('ymd');
+        $prefix = 'CT-';
+
+        $this->db->select_max('kodec');
+        $this->db->like('kodec', $prefix . $date, 'after');
+        $query = $this->db->get('tcust');
+        $last_kodec = $query->row()->kodec;
+
+        if ($last_kodec == null) {
+            $new_kodec_part = '001';
+        } else {
+            $last_kodec_part = substr($last_kodec, -3);
+            $new_kodec_part = str_pad(intval($last_kodec_part) + 1, 3, '0', STR_PAD_LEFT); //intval digunakan untuk mengubah karakter menjadi tipe int
+        }
+        $kodeCustomer = $prefix . $date . $new_kodec_part;
+        return $kodeCustomer;
+    }
+    // PR0000002489
+    public function generateNotaProject()
+    {
+        $prefix = 'PR';
+
+        $this->db->select_max('nota');
+        $this->db->like('nota', $prefix, 'after');
+        $query = $this->db->get('tproject');
+        $last_nota = $query->row()->nota;
+
+        $new_nota_part = str_pad(intval(substr($last_nota, -10)  + 1), 10, '0', STR_PAD_LEFT);
+
+        $new_nota = $prefix . $new_nota_part;
+        return $new_nota;
+    }
+    //generate kodec1 pelanggan
+    public function generateKodec1()
+    {
+        $this->db->select_max('kodec1');
+        $this->db->like('kodec1');
+        $query = $this->db->get('tcust');
+        $last_kodec1 = $query->row()->kodec1;
+
+        $new_kodec1 = $last_kodec1 + 1;
+        return $new_kodec1;
+    }
+    //generate kode group barang
     public function generateKodeg()
     {
         $prefix = 'GR-';
 
+        $this->db->select_max('kodeg');
         $this->db->like('kodeg', $prefix, 'after');
-        $this->db->from('tgroup');
-        $count = $this->db->count_all_results();
+        $query = $this->db->get('tgroup');
+        $last_number = $query->row()->kodeg;
 
-        $kodeg = $count + 1;
-        //format kodeg penuh
-        $kode_group = $prefix . str_pad($kodeg, 2, '0', STR_PAD_LEFT);
-        return $kode_group;
+        $parts = explode('-', $last_number);
+        $kodeg = $prefix . str_pad((int)$parts[1] + 1, 3, '0', STR_PAD_LEFT);
+        return $kodeg;
+    }
+    //generate kode satuan barang
+    public function generateSatuan()
+    {
+        $prefix = 'ST-';
+
+        $this->db->select_max('kodest');
+        $this->db->like('kodest', $prefix, 'after');
+        $query = $this->db->get('tsatuan');
+        $last_number = $query->row()->kodest;
+
+        $parts = explode('-', $last_number);
+        $kodest = $prefix . str_pad((int)$parts[1] + 1, 3, '0', STR_PAD_LEFT);
+        return $kodest;
     }
 }

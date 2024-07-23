@@ -16,7 +16,7 @@ function showAlertifyError(message) {
 }
 
 function delete_form() {
-	$("[name='kode']").val("");
+	$("[name='kode']").val(kodesatuan);
 	$("[name='nama']").val("");
 }
 
@@ -115,6 +115,7 @@ function insert_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val(response.kodesatuan);
 				get_data();
 			}
 		},
@@ -147,6 +148,7 @@ function edit_data() {
 			} else if (response.success) {
 				$(".bs-example-modal-lg").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val(response.kodesatuan);
 				get_data();
 			}
 		},
@@ -166,6 +168,7 @@ function delete_data(x) {
 			if (response.success) {
 				$("#modalHapus").modal("hide");
 				showAlertifySuccess(response.success);
+				$("[name='kode']").val(response.kodesatuan);
 				get_data();
 			} else if (response.error) {
 				$("#modalHapus").modal("hide");
